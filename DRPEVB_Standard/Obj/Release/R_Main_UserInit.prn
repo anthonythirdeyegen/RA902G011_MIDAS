@@ -1,0 +1,122 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   ..\..\Core\r_systeminit.c
+00000000                        5  #@   ..\..\PDC\smbm_ctrl.c
+00000000                        6  #@   ..\..\PDC\user_timer.c
+00000000                        7  #@   r_main.c
+00000000                        8  #@   R_Main_UserInit.c
+00000000                        9  #@   PDC\dcdc_ctrl.c
+00000000                       10  #@   PDC\led_ctrl.c
+00000000                       11  #@   PDC\sw_ctrl.c
+00000000                       12  #@   PDC\user_main.c
+00000000                       13  #@   PDC\user_main_protection.c
+00000000                       14  #@   PDC\subdev\isl95338.c
+00000000                       15  #@   PDC\subdev\subdev_ctrl.c
+00000000                       16  #@   pd_defs.c
+00000000                       17  #@   -cpu=S3
+00000000                       18  #@   -obj_path=Obj\Release
+00000000                       19  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       20  #@   -g
+00000000                       21  #@   -Osame_code
+00000000                       22  #@   -I PDC\subdev
+00000000                       23  #@   -I PDC
+00000000                       24  #@   -I .
+00000000                       25  #@   -I ..\..\Core
+00000000                       26  #@   -I ..\..\PDC
+00000000                       27  #@   -I ..\..\PDC\Lib
+00000000                       28  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       29  #@   -asm_path=Obj\Release
+00000000                       30  #@   -asmopt=-prn_path=Obj\Release
+00000000                       31  #@   -c
+00000000                       32  #@   -MAKEUD=Obj\Release
+00000000                       33  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_f77933be31b343fd93ec8db906f6b563gqip02wt.1wf
+00000000                       34  #@  compiled at Tue May 06 10:50:36 2025
+00000000                       35  
+00000000                       36  	.EXTERN _gSndMess
+00000000                       37  	.EXTERN _gRcvMess
+00000000                       38  	.PUBLIC _gusRcvMess
+00000000                       39  	.PUBLIC _gusSndMess
+00000000                       40  	.PUBLIC _R_MAIN_UserInit
+00000000                       41  	.EXTERN _pdc_set_port_conf
+00000000                       42  	.EXTERN _pdc_set_src_conf
+00000000                       43  	.EXTERN _pdc_set_snk_conf
+00000000                       44  	.EXTERN _pdc_set_sys_conf
+00000000                       45  	.EXTERN _pdc_set_dev_stat
+00000000                       46  	.EXTERN _pdc_set_pwr_stat
+00000000                       47  	.EXTERN _pd_core_init
+00000000                       48  	.EXTERN _user_init
+00000000                       49  
+00000000                       50  	.SECTION .textf,TEXTF
+00000000                       51  	.TYPE _R_MAIN_UserInit,function,.LFE1-_R_MAIN_UserInit
+00000000                       52  _R_MAIN_UserInit:
+00000000                       53  	.STACK _R_MAIN_UserInit = 6
+00000000                       54  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 17
+00000000 30013C                55  	movw ax, #0x3C01
+00000003 FC000000              56  	call !!_pdc_set_port_conf
+00000007 300300                57  	movw ax, #0x0003
+0000000A                       58  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 18
+0000000A C1                    59  	push ax
+0000000B 340400                60  	movw de, #0x0004
+0000000E F7                    61  	clrw bc
+0000000F 3060EA                62  	movw ax, #0xEA60
+00000012 FC000000              63  	call !!_pdc_set_src_conf
+00000016 C0                    64  	pop ax
+00000017                       65  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 19
+00000017 340500                66  	movw de, #0x0005
+0000001A F7                    67  	clrw bc
+0000001B 3060EA                68  	movw ax, #0xEA60
+0000001E FC000000              69  	call !!_pdc_set_snk_conf
+00000022                       70  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 20
+00000022 320300                71  	movw bc, #0x0003
+00000025 300303                72  	movw ax, #0x0303
+00000028 FC000000              73  	call !!_pdc_set_sys_conf
+0000002C                       74  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 21
+0000002C 5400                  75  	mov e, #0x00
+0000002E F7                    76  	clrw bc
+0000002F F6                    77  	clrw ax
+00000030 FC000000              78  	call !!_pdc_set_dev_stat
+00000034                       79  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 22
+00000034 F1                    80  	clrb a
+00000035 FC000000              81  	call !!_pdc_set_pwr_stat
+00000039                       82  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 23
+00000039 300000                83  	movw ax, #LOWW(_gusRcvMess)
+0000003C BF0000                84  	movw !LOWW(_gRcvMess), ax
+0000003F                       85  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 24
+0000003F 300000                86  	movw ax, #LOWW(_gusSndMess)
+00000042 BF0000                87  	movw !LOWW(_gSndMess), ax
+00000045                       88  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 25
+00000045 300001                89  	movw ax, #0x0100
+00000048 FC000000              90  	call !!_pd_core_init
+0000004C                       91  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 26
+0000004C FC000000              92  	call !!_user_init
+00000050                       93  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/R_Main_UserInit.c", 28
+00000050 717AFA                94  	ei
+00000053 D7                    95  	ret
+00000054                       96  .LFE1:
+00000000                       97  	.SECTION .bss,BSS
+00000000                       98  	.ALIGN 2
+00000000                       99  	.TYPE _gusRcvMess,object,28
+00000000                      100  _gusRcvMess:
+00000000                      101  	.DS (28)
+0000001C                      102  	.ALIGN 2
+0000001C                      103  	.TYPE _gusSndMess,object,28
+0000001C                      104  _gusSndMess:
+0000001C                      105  	.DS (28)
+
+Section List
+Attr     Size                Name
+
+TEXTF                84 (00000054) .textf
+BSS                  56 (00000038) .bss
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\R_Main_UserInit.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\Obj\Release\R_Main_UserInit.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\Obj\Release\R_Main_UserInit.asm 
+

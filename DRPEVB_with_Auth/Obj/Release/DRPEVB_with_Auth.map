@@ -1,0 +1,3697 @@
+Renesas Optimizing Linker (W3.07.00 )             06-May-2025 10:50:50
+
+*** Options ***
+
+-MAKEUD=Obj\Release\DRPEVB_with_Auth.lk.ud
+-subcommand=Obj\Release\DRPEVB_with_Auth.clnk
+-Input=Obj\Release\cstart.obj
+-Input=Obj\Release\r_systeminit.obj
+-Input=Obj\Release\stkinit.obj
+-Input=Obj\Release\smbm_ctrl.obj
+-Input=Obj\Release\user_timer.obj
+-Input=Obj\Release\r_main.obj
+-Input=Obj\Release\R_Main_UserInit.obj
+-Input=Obj\Release\dcdc_ctrl.obj
+-Input=Obj\Release\led_ctrl.obj
+-Input=Obj\Release\sw_ctrl.obj
+-Input=Obj\Release\user_main.obj
+-Input=Obj\Release\user_main_authentication.obj
+-Input=Obj\Release\user_main_protection.obj
+-Input=Obj\Release\isl95338.obj
+-Input=Obj\Release\relamcu.obj
+-Input=Obj\Release\subdev_ctrl.obj
+-Input=Obj\Release\pd_defs.obj
+-LIBrary=..\..\PDC\Lib\R9A02G011AMCU.lib
+-LIBrary=..\..\PDC\Lib\R9A02G011AUTH.lib
+-LIBrary=..\..\PDC\Lib\R9A02G011PDC.lib
+-SECURITY_ID=00000000000000000000
+-DEVICE=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+-DEBug
+-NOCOmpress
+-NOOPtimize
+-OUtput=Obj\Release\DRPEVB_with_Auth.abs
+-LIBrary=C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\lib\rl78em4s.lib
+-LIBrary=C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\lib\malloc_n.lib
+-LIBrary=C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\lib\rl78em4r.lib
+-OCDBG=04
+-USER_OPT_BYTE=7F7BE0
+-LISt=Obj\Release\DRPEVB_with_Auth.map
+-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT
+-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20
+-ROm=.data=.dataR
+-ROm=.sdata=.sdataR
+-NOMessage
+-STACk
+-NOLOgo
+-end
+
+*** Error information ***
+
+*** Mapping List ***
+
+SECTION                            START      END         SIZE   ALIGN
+.vect
+                                  00000000  0000007f        80   0
+.option_byte
+                                  000000c0  000000c3         4   1
+.security_id
+                                  000000c4  000000cd         a   1
+.jtext_AT2000
+                                  00002000  0000200d         e   1
+.const
+                                  00002010  000022ca       2bb   2
+.text
+                                  000022cb  00002436       16c   1
+.RLIB
+                                  00002437  00002446        10   1
+.SLIB
+                                  00002447  00002447         0   1
+.textf
+                                  00002447  0000d0c3      ac7d   1
+.constf
+                                  0000d0c4  0000d0c4         0   2
+.data
+                                  0000d0c4  0000d0c4         0   2
+.sdata
+                                  0000d0c4  0000d0c4         0   2
+.jtext_ATFBFC
+                                  0000fbfc  0000fbfd         2   1
+.bss_ATFF900
+                                  000ff900  000ff957        58   1
+.dataR
+                                  000ff958  000ff958         0   2
+.bss
+                                  000ff958  000ffbeb       294   2
+.stack_bss
+                                  000ffda0  000ffe1f        80   2
+.sdataR
+                                  000ffe20  000ffe20         0   2
+.sbss
+                                  000ffe20  000ffedf        c0   2
+
+*** Total Section Size ***
+
+RAMDATA SECTION:  0000042c Byte(s)
+ROMDATA SECTION:  00000349 Byte(s)
+PROGRAM SECTION:  0000ae09 Byte(s)
+
+*** Symbol List ***
+
+SECTION=
+FILE=                               START        END    SIZE
+  SYMBOL                            ADDR        SIZE    INFO      COUNTS  OPT
+    STRUCT                                      SIZE
+      MEMBER                        ADDR        SIZE    INFO
+
+SECTION=.vect
+FILE=rlink_generates_03
+                                  00000000  0000007f        80
+
+SECTION=.option_byte
+FILE=rlink_generates_01
+                                  000000c0  000000c3         4
+
+SECTION=.security_id
+FILE=rlink_generates_02
+                                  000000c4  000000cd         a
+
+SECTION=.jtext_AT2000
+FILE=Obj\Release\cstart.obj
+                                  00002000  0000200d         e
+
+SECTION=.const
+FILE=Obj\Release\user_main_protection.obj
+                                  00002010  0000202f        20
+  _temp_table_volt@2@user_func_chk_device
+                                  00002010        10   data ,l         2
+  _temp_table_temp@1@user_func_chk_device
+                                  00002020        10   data ,l         1
+FILE=Obj\Release\isl95338.obj
+                                  00002030  0000206e        3f
+FILE=Obj\Release\subdev_ctrl.obj
+                                  00002070  000020f7        88
+  _ucBitMask@1
+                                  00002070         8   data ,l         6
+  _ulSuvdevInitFunc@2
+                                  00002078        20   data ,l         2
+  _ulSuvdevAlertFunc@3
+                                  00002098        20   data ,l         0
+  _ulSubdevFunc@4
+                                  000020b8        20   data ,l         2
+  _ulSubdevResetFunc@5
+                                  000020d8        20   data ,l         2
+FILE=Obj\Release\pd_defs.obj
+                                  000020f8  00002183        8c
+  _PD_SPEC_REV
+                                  000020f8         1   data ,g         5
+  _PD_PDM_SPRT_GET_SRCCAP_E
+                                  000020f9         1   data ,g         1
+  _PD_PDM_SPRT_GET_BAT_CAP
+                                  000020fa         1   data ,g         1
+  _PD_PDM_SPRT_GET_BAT_STATUS
+                                  000020fb         1   data ,g         1
+  _PD_PDM_SPRT_GET_PPS_STATUS
+                                  000020fc         1   data ,g         1
+  _PD_PDM_SPRT_GET_MFI
+                                  000020fd         1   data ,g         1
+  _PD_PDM_SPRT_GET_SNKCAP_E
+                                  000020fe         1   data ,g         1
+  _PD_VID
+                                  00002100         2   data ,g         4
+  _PD_PID
+                                  00002102         2   data ,g         4
+  _PD_XID
+                                  00002104         4   data ,g         4
+  _PD_BCD_DEVICE
+                                  00002108         2   data ,g         1
+  _PD_FW_VER
+                                  0000210a         1   data ,g         3
+  _PD_HW_VER
+                                  0000210b         1   data ,g         4
+  _PD_USB_COMM_CAPABLE
+                                  0000210c         1   data ,g         1
+  _PD_IS_USB_HOST
+                                  0000210d         1   data ,g         1
+  _PD_IS_USB_DEVICE
+                                  0000210e         1   data ,g         1
+  _PD_USB_SUSPEND_SUPPORT
+                                  0000210f         1   data ,g         1
+  _PD_NO_USB_SUSPEND
+                                  00002110         1   data ,g         1
+  _PD_PRODUCT_TYPE_UFP
+                                  00002111         1   data ,g         1
+  _PD_PRODUCT_TYPE_DFP
+                                  00002112         1   data ,g         1
+  _PD_MODAL_OPE_SUPPORT
+                                  00002113         1   data ,g         1
+  _PD_CONNECTOR_TYPE
+                                  00002114         1   data ,g         3
+  _PD_DEVICE_CAP
+                                  00002115         1   data ,g         1
+  _PD_HOST_CAP
+                                  00002116         1   data ,g         1
+  _PD_PORT_NUM
+                                  00002117         1   data ,g         1
+  _PD_UFP_VDO
+                                  00002118         2   data ,g         1
+  _PD_SRC_PDO1_PEAK_CUR
+                                  0000211a         1   data ,g         1
+  _PD_SNK_PDO1_FR_SWAP_REQ
+                                  0000211b         1   data ,g         2
+  _PD_SRC_PDO1_MAX_CUR
+                                  0000211c         2   data ,g         1
+  _PD_SNK_PDO1_OPE_CUR
+                                  0000211e         2   data ,g         2
+  _PD_SRC_PDO2
+                                  00002120         4   data ,g         3
+  _PD_SRC_PDO3
+                                  00002124         4   data ,g         2
+  _PD_SRC_PDO4
+                                  00002128         4   data ,g         2
+  _PD_SRC_PDO5
+                                  0000212c         4   data ,g         2
+  _PD_SRC_PDO6
+                                  00002130         4   data ,g         2
+  _PD_SRC_PDO7
+                                  00002134         4   data ,g         2
+  _PD_SNK_PDO2
+                                  00002138         4   data ,g         2
+  _PD_SNK_PDO3
+                                  0000213c         4   data ,g         2
+  _PD_SNK_PDO4
+                                  00002140         4   data ,g         2
+  _PD_SNK_PDO5
+                                  00002144         4   data ,g         2
+  _PD_SNK_PDO6
+                                  00002148         4   data ,g         2
+  _PD_SNK_PDO7
+                                  0000214c         4   data ,g         2
+  _PD_SCEDB_VOLT_REG
+                                  00002150         1   data ,g         1
+  _PD_SCEDB_HOLDUP_TIME
+                                  00002151         1   data ,g         1
+  _PD_SCEDB_COMPLIANCE
+                                  00002152         1   data ,g         1
+  _PD_SCEDB_TOUCH_CUR
+                                  00002153         1   data ,g         1
+  _PD_SCEDB_PEAK_CUR1
+                                  00002154         2   data ,g         1
+  _PD_SCEDB_PEAK_CUR2
+                                  00002156         2   data ,g         1
+  _PD_SCEDB_PEAK_CUR3
+                                  00002158         2   data ,g         1
+  _PD_SCEDB_TOUCH_TEMP
+                                  0000215a         1   data ,g         1
+  _PD_SCEDB_BATTERIES
+                                  0000215b         1   data ,g         1
+  _PD_SCEDB_SRC_PDP
+                                  0000215c         1   data ,g         1
+  _PD_SKEDB_VERSION
+                                  0000215d         1   data ,g         1
+  _PD_SKEDB_LOAD_STEP
+                                  0000215e         1   data ,g         1
+  _PD_SKEDB_LOAD_CHARA
+                                  00002160         2   data ,g         1
+  _PD_SKEDB_COMPLIANCE
+                                  00002162         1   data ,g         1
+  _PD_SKEDB_TOUCH_TEMP
+                                  00002163         1   data ,g         1
+  _PD_SKEDB_BAT_INFO
+                                  00002164         1   data ,g         1
+  _PD_SKEDB_SNK_MODES
+                                  00002165         1   data ,g         1
+  _PD_SKEDB_SNK_MIN_PDP
+                                  00002166         1   data ,g         1
+  _PD_SKEDB_SNK_OPE_PDP
+                                  00002167         1   data ,g         1
+  _PD_SKEDB_SNK_MAX_PDP
+                                  00002168         1   data ,g         1
+  _PD_NUM_OF_MFI_STR
+                                  00002169         1   data ,g         1
+  _PD_MFI_STR01
+                                  0000216a         1   data ,g         1
+  _PD_MFI_STR02
+                                  0000216b         1   data ,g         1
+  _PD_MFI_STR03
+                                  0000216c         1   data ,g         1
+  _PD_MFI_STR04
+                                  0000216d         1   data ,g         1
+  _PD_MFI_STR05
+                                  0000216e         1   data ,g         1
+  _PD_MFI_STR06
+                                  0000216f         1   data ,g         1
+  _PD_MFI_STR07
+                                  00002170         1   data ,g         1
+  _PD_MFI_STR08
+                                  00002171         1   data ,g         1
+  _PD_MFI_STR09
+                                  00002172         1   data ,g         1
+  _PD_MFI_STR10
+                                  00002173         1   data ,g         1
+  _PD_MFI_STR11
+                                  00002174         1   data ,g         1
+  _PD_MFI_STR12
+                                  00002175         1   data ,g         1
+  _PD_MFI_STR13
+                                  00002176         1   data ,g         1
+  _PD_MFI_STR14
+                                  00002177         1   data ,g         1
+  _PD_MFI_STR15
+                                  00002178         1   data ,g         1
+  _PD_MFI_STR16
+                                  00002179         1   data ,g         1
+  _PD_MFI_STR17
+                                  0000217a         1   data ,g         1
+  _PD_MFI_STR18
+                                  0000217b         1   data ,g         1
+  _PD_MFI_STR19
+                                  0000217c         1   data ,g         1
+  _PD_MFI_STR20
+                                  0000217d         1   data ,g         1
+  _PD_MFI_STR21
+                                  0000217e         1   data ,g         1
+  _PD_MFI_STR22
+                                  0000217f         1   data ,g         1
+  _PD_SND_MESS_SIZE
+                                  00002180         2   data ,g         0
+  _PD_RCV_MESS_SIZE
+                                  00002182         2   data ,g         1
+FILE=amcu_ctrl
+                                  00002184  000021b3        30
+  _AMCU_VERSION_REV2
+                                  00002184         4   data ,g         1
+  _AMCU_WRITE_STATUS
+                                  00002188         4   data ,g         1
+  _AMCU_PDFU_WRITE_STATUS
+                                  0000218c         4   data ,g         1
+  _AMCU_STATUS
+                                  00002190         4   data ,g         1
+  _AMCU_STANDBY
+                                  00002194         8   data ,g         1
+  _AMCU_DP_STBY
+                                  0000219c         8   data ,g         1
+  _AMCU_ROOTMSG
+                                  000021a4         4   data ,g         2
+  _AMCU_PKEYMSG
+                                  000021a8         4   data ,g         1
+  _AMCU_CHAINMSG
+                                  000021ac         4   data ,g         1
+  _AMCU_PDFURTKEYMSG
+                                  000021b0         4   data ,g         1
+FILE=pd_core
+                                  000021b4  000021bf         c
+  _TM_VAL_PWR_CTRL
+                                  000021b4         c   data ,g         0
+FILE=pd_main
+                                  000021c0  000021ff        40
+  _DEF_VAL_TM16
+                                  000021c0        18   data ,g         b
+  _DEF_VAL_TM8
+                                  000021d8        14   data ,g        17
+  _DEF_CNT_MAX
+                                  000021ec         4   data ,g         3
+  _DEF_VAL_TM_PS
+                                  000021f0        10   data ,g         6
+FILE=sec_ctrl
+                                  00002200  00002265        66
+  _SEC_VERSION_REV2
+                                  00002200         4   data ,g         1
+  _SEC_ACD
+                                  00002204         4   data ,g         1
+  _SEC_RCVMSG
+                                  00002208         4   data ,g         1
+  _SEC_REQMSG
+                                  0000220c         4   data ,g         3
+  _SEC_REQMSGRND
+                                  00002210         4   data ,g         0
+  _SEC_CERT_REV2
+                                  00002214         8   data ,g         1
+  _SEC_AUTH_REV2
+                                  0000221c         8   data ,g         1
+  _SEC_UNSPECIFIED
+                                  00002224         6   data ,g         2
+  _SEC_INVALID_REQ
+                                  0000222a         6   data ,g         2
+  _SEC_BUSSY
+                                  00002230         6   data ,g         1
+  _SEC_REQIDMSG
+                                  00002236         4   data ,g         1
+  _SEC_CODE_A
+                                  0000223a         8   data ,g         0
+  _SEC_CODE_C
+                                  00002242         8   data ,g         1
+  _SEC_CODE_D
+                                  0000224a         8   data ,g         0
+  _SEC_CODE_F
+                                  00002252         8   data ,g         1
+  _DEV_VAL_AUTH_TM
+                                  0000225a         c   data ,g         2
+FILE=libdef_pdc
+                                  00002266  00002279        14
+FILE=pol_eng
+                                  0000227a  000022ca        51
+
+SECTION=.text
+FILE=Obj\Release\cstart.obj
+                                  000022cb  00002328        5e
+  _start
+                                  000022cb         0   none ,g         1
+  _exit
+                                  00002327         0   none ,g         1
+FILE=interrupt
+                                  00002329  00002436       10e
+  _r_INTP0_interrupt@1
+                                  00002329         d   func ,l         0
+  _r_INTP1_interrupt@1
+                                  00002336         e   func ,l         0
+  _r_INTP2_interrupt@1
+                                  00002344         e   func ,l         0
+  _r_INTP3_interrupt@1
+                                  00002352         e   func ,l         0
+  _r_INTP4_interrupt@1
+                                  00002360         e   func ,l         0
+  _r_INTP5_interrupt@1
+                                  0000236e         e   func ,l         0
+  _r_INTP6_interrupt@1
+                                  0000237c         e   func ,l         0
+  _r_INTTM00_interrupt@1
+                                  0000238a         e   func ,l         0
+  _r_INTTM01_interrupt@1
+                                  00002398         e   func ,l         0
+  _r_INTTM02_interrupt@1
+                                  000023a6         d   func ,l         0
+  _r_INTTM03_interrupt@1
+                                  000023b3         d   func ,l         0
+  _r_INTAD_interrupt@1
+                                  000023c0         d   func ,l         0
+  _r_PDCTRL_interrupt@1
+                                  000023cd         d   func ,l         0
+  _r_INTSMBMST_interrupt@1
+                                  000023da         d   func ,l         0
+  _r_INTSMBLSV_interrupt@1
+                                  000023e7         d   func ,l         0
+  _r_INTTCSCNT_interrupt@1
+                                  000023f4         d   func ,l         0
+  _r_INTP7_interrupt@1
+                                  00002401         d   func ,l         0
+  _r_INTIICA0_interrupt@1
+                                  0000240e         d   func ,l         0
+  _r_INTIT_interrupt@1
+                                  0000241b         d   func ,l         0
+  __CommonCode@0
+                                  00002428         7   func ,l        13
+  __CommonCode@1
+                                  0000242f         8   func ,l        13
+
+SECTION=.RLIB
+FILE=memcpy
+                                  00002437  00002446        10
+  _memcpy
+                                  00002437         0   none ,g         1
+
+SECTION=.textf
+FILE=Obj\Release\r_systeminit.obj
+                                  00002447  00002456        10
+  _R_Systeminit
+                                  00002447         9   func ,g         1
+  _hdwinit
+                                  00002450         7   func ,g         1
+FILE=Obj\Release\stkinit.obj
+                                  00002457  0000249a        44
+  _stkinit
+                                  00002457         0   none ,g         1
+  LSTINIT1
+                                  00002465         0   none ,l         1
+  LSTINIT2
+                                  0000248f         0   none ,l         2
+  LSTINIT3
+                                  0000249a         0   none ,l         2
+FILE=Obj\Release\smbm_ctrl.obj
+                                  0000249b  0000278b       2f1
+  _smbm_init
+                                  0000249b        32   func ,g         1
+  _smbm_ctrl
+                                  000024cd        ac   func ,g         1
+  _smbm_set_subdev
+                                  00002579         9   func ,g         2
+  _smbm_set_protocol
+                                  00002582        c4   func ,g         3
+  _smbm_clr_status
+                                  00002646        13   func ,g         3
+  _smbm_reset
+                                  00002659        2b   func ,g         1
+  _smbm_int_write_routine
+                                  00002684        65   func ,g         2
+  _smbm_int_read_routine
+                                  000026e9        7b   func ,g         2
+  _smbm_copy_word
+                                  00002764        28   func ,g         1
+FILE=Obj\Release\user_timer.obj
+                                  0000278c  0000291e       193
+  _init_tau0_channel1
+                                  0000278c        26   func ,g         1
+  _init_tau0_channel2
+                                  000027b2        24   func ,g         0
+  _init_tau0_channel3
+                                  000027d6        24   func ,g         1
+  _init_tm_12bit
+                                  000027fa         5   func ,g         1
+  _tm_12bit_start_gtimer
+                                  000027ff        20   func ,g         2
+  _tm_12tm_stop_gtimer
+                                  0000281f        15   func ,g         1
+  _tm_12bit_intr_hdlr
+                                  00002834         4   func ,g         4
+  _tm1_start_gtimer
+                                  00002838        1f   func ,g         1
+  _tm2_start_gtimer
+                                  00002857        44   func ,g         0
+  _tm1_is_start_gtimer
+                                  0000289b         9   func ,g         1
+  _tm3_start_gtimer
+                                  000028a4        1f   func ,g         0
+  _tm1_stop_gtimer
+                                  000028c3        10   func ,g         1
+  _tm2_stop_gtimer
+                                  000028d3        10   func ,g         0
+  _tm3_stop_gtimer
+                                  000028e3        10   func ,g         0
+  _tm_calc_counter
+                                  000028f3        2c   func ,g         3
+FILE=Obj\Release\r_main.obj
+                                  0000291f  000029f4        d6
+  _main
+                                  0000291f        d6   func ,g         1
+FILE=Obj\Release\R_Main_UserInit.obj
+                                  000029f5  00002a48        54
+  _R_MAIN_UserInit
+                                  000029f5        54   func ,g         1
+FILE=Obj\Release\dcdc_ctrl.obj
+                                  00002a49  00002f09       4c1
+  _dcdc_ctrl
+                                  00002a49        1c   func ,g         1
+  _dcdc_init
+                                  00002a65        13   func ,g         1
+  _isl_s0
+                                  00002a78        84   func ,g         1
+  _isl_s1
+                                  00002afc        71   func ,g         1
+  _isl_s1_off_sq
+                                  00002b6d        49   func ,g         1
+  _isl_s1_on_sq
+                                  00002bb6        ba   func ,g         1
+  _isl_s1_chg_sq
+                                  00002c70        6a   func ,g         1
+  _isl_s1_snk_off_sq
+                                  00002cda        66   func ,g         1
+  _isl_s1_snk_on_sq
+                                  00002d40        83   func ,g         1
+  _isl_s1_snk_chg_sq
+                                  00002dc3        92   func ,g         1
+  _isl_s1_clr_sq
+                                  00002e55        3c   func ,g         0
+  _isl_s1_get_info
+                                  00002e91        79   func ,g         1
+FILE=Obj\Release\led_ctrl.obj
+                                  00002f0a  00002f75        6c
+  _led_init
+                                  00002f0a         1   func ,g         1
+  _led_ctrl
+                                  00002f0b        6b   func ,g         1
+FILE=Obj\Release\sw_ctrl.obj
+                                  00002f76  00002fde        69
+  _sw_init
+                                  00002f76        22   func ,g         1
+  _sw_ctrl
+                                  00002f98        23   func ,g         1
+  _sw_func_intr_sw
+                                  00002fbb        14   func ,g         2
+  _sw_func_intr_timer_sw
+                                  00002fcf        10   func ,g         2
+FILE=Obj\Release\user_main.obj
+                                  00002fdf  0000332e       350
+  _user_init
+                                  00002fdf        9c   func ,g         1
+  _user_func_event
+                                  0000307b       2b4   func ,g         1
+FILE=Obj\Release\user_main_authentication.obj
+                                  0000332f  00003427        f9
+  _user_func_auth
+                                  0000332f        f9   func ,g         1
+FILE=Obj\Release\user_main_protection.obj
+                                  00003428  0000364c       225
+  _user_func_chk_device
+                                  00003428       170   func ,g         1
+  _user_func_snd_mess
+                                  00003598        73   func ,g         0
+  _user_func_start_timer_thermistor
+                                  0000360b        28   func ,g         1
+  _user_func_stop_timer_thermistor
+                                  00003633        10   func ,g         1
+  _user_func_intr_timer_thermistor
+                                  00003643         a   func ,g         2
+FILE=Obj\Release\isl95338.obj
+                                  0000364d  0000397a       32e
+  _init_isl95338
+                                  0000364d         7   func ,g         2
+  _isl95338_ctrl
+                                  00003654        27   func ,g         2
+  _isl95338_cmd_handler
+                                  0000367b        20   func ,g         1
+  _isl95338_cmd
+                                  0000369b       2b2   func ,g         1
+  _isl95338_end_processing
+                                  0000394d        2e   func ,g         1
+FILE=Obj\Release\relamcu.obj
+                                  0000397b  00003a56        dc
+  _init_relamcu
+                                  0000397b         7   func ,g         2
+  _relamcu_ctrl
+                                  00003982        30   func ,g         2
+  _relamcu_reset
+                                  000039b2        16   func ,g         2
+  _relamcu_cmd_handler
+                                  000039c8        39   func ,g         1
+  _relamcu_stretch_cmd_handler
+                                  00003a01        22   func ,g         1
+  _relamcu_end_processing
+                                  00003a23        2f   func ,g         1
+  _relamcu_reset_err
+                                  00003a52         5   func ,g         3
+FILE=Obj\Release\subdev_ctrl.obj
+                                  00003a57  00003b83       12d
+  _subdev_init
+                                  00003a57        44   func ,g         1
+  _subdev_ctrl
+                                  00003a9b        d8   func ,g         1
+  _subdev_get_alerthandler
+                                  00003b73         f   func ,g         1
+  _subdev_get_alert_signal
+                                  00003b82         2   func ,g         1
+FILE=amcu
+                                  00003b84  00003f2b       3a8
+  _amcu_get_version
+                                  00003b84         4   func ,g         0
+  _amcu_init
+                                  00003b88        2b   func ,g         1
+  _init_amcu
+                                  00003bb3         9   func ,g         1
+  _amcu_pd_core
+                                  00003bbc         d   func ,g         1
+  _amcu
+                                  00003bc9       1e8   func ,g         1
+  _amcu_set_err
+                                  00003db1         9   func ,g         1
+  _amcu_set_stdby
+                                  00003dba         5   func ,g         1
+  _amcu_get_status
+                                  00003dbf         4   func ,g         3
+  _init_smbs_verinfo
+                                  00003dc3        42   func ,g         1
+  _amcu_set_resp_get_fw_id
+                                  00003e05        83   func ,g         1
+  _amcu_set_resp_pdfu_initiate
+                                  00003e88        38   func ,g         1
+  _amcu_set_resp_err
+                                  00003ec0        4e   func ,g         1
+  __CommonCode@0
+                                  00003f0e         b   func ,l         2
+  __CommonCode@1
+                                  00003f19         8   func ,l         5
+  __CommonCode@2
+                                  00003f21         b   func ,l         2
+FILE=amcu_ctrl
+                                  00003f2c  00004911       9e6
+  _amcu_ctrl
+                                  00003f2c        f3   func ,g         1
+  _amcu_ctrl_init
+                                  0000401f        17   func ,g         2
+  _amcu_sq_rst
+                                  00004036        64   func ,g         1
+  _amcu_sq_hw_rst
+                                  0000409a       103   func ,g         1
+  _amcu_sq_return_from_standby
+                                  0000419d        a2   func ,g         1
+  _amcu_sq_dp_standby
+                                  0000423f        88   func ,g         1
+  _amcu_sq_get_info
+                                  000042c7        a1   func ,g         1
+  _amcu_sq_write_cert
+                                  00004368        b3   func ,g         1
+  _amcu_sq_sw_standby
+                                  0000441b        2e   func ,g         1
+  _init_amcu_sq
+                                  00004449         e   func ,g         e
+  _amcu_set_version
+                                  00004457        13   func ,g         6
+  _amcu_set_status
+                                  0000446a         f   func ,g         3
+  _amcu_err_version
+                                  00004479         d   func ,g         1
+  _amcu_set_standby
+                                  00004486        13   func ,g         2
+  _amcu_set_dp_standby
+                                  00004499        13   func ,g         2
+  _amcu_wait_standby
+                                  000044ac        1d   func ,g         2
+  _tx_cert
+                                  000044c9       144   func ,g         1
+  _chk_tx_cert
+                                  0000460d       1d4   func ,g         1
+  _clear_info
+                                  000047e1        16   func ,g         2
+  _amcu_clr_err
+                                  000047f7         f   func ,g        10
+  __CommonCode@0
+                                  00004806         8   func ,l         3
+  __CommonCode@1
+                                  0000480e        16   func ,l         2
+  __CommonCode@2
+                                  00004824         e   func ,l         3
+  __CommonCode@3
+                                  00004832        19   func ,l         3
+  __CommonCode@4
+                                  0000484b         9   func ,l         3
+  __CommonCode@5
+                                  00004854         e   func ,l         2
+  __CommonCode@6
+                                  00004862         d   func ,l         2
+  __CommonCode@7
+                                  0000486f         b   func ,l         2
+  __CommonCode@8
+                                  0000487a         8   func ,l         9
+  __CommonCode@9
+                                  00004882         b   func ,l         3
+  __CommonCode@10
+                                  0000488d         6   func ,l         d
+  __CommonCode@11
+                                  00004893         8   func ,l         3
+  __CommonCode@12
+                                  0000489b         a   func ,l         4
+  __CommonCode@13
+                                  000048a5         8   func ,l         3
+  __CommonCode@14
+                                  000048ad         a   func ,l         3
+  __CommonCode@15
+                                  000048b7         8   func ,l         5
+  __CommonCode@16
+                                  000048bf         8   func ,l         5
+  __CommonCode@17
+                                  000048c7         7   func ,l         4
+  __CommonCode@18
+                                  000048ce         7   func ,l         a
+  __CommonCode@19
+                                  000048d5         a   func ,l         2
+  __CommonCode@20
+                                  000048df         b   func ,l         2
+  __CommonCode@21
+                                  000048ea         7   func ,l         4
+  __CommonCode@22
+                                  000048f1         9   func ,l         4
+  __CommonCode@23
+                                  000048fa         a   func ,l         3
+  __CommonCode@24
+                                  00004904         e   func ,l         2
+FILE=auth
+                                  00004912  00004d38       427
+  _auth_get_version
+                                  00004912         4   func ,g         0
+  _init_auth
+                                  00004916        1a   func ,g         1
+  _auth_init
+                                  00004930        2b   func ,g         1
+  _auth_pd_core
+                                  0000495b        23   func ,g         1
+  _auth_ctrl
+                                  0000497e       2d9   func ,g         1
+  _auth_run_initiator
+                                  00004c57        4e   func ,g         1
+  _auth_cnsl_sequence
+                                  00004ca5        1a   func ,g         4
+  _auth_get_status
+                                  00004cbf         4   func ,g         3
+  _auth_get_result
+                                  00004cc3        11   func ,g         2
+  _auth_get_pid
+                                  00004cd4         d   func ,g         0
+  _auth_get_vid
+                                  00004ce1         d   func ,g         0
+  _auth_get_xid
+                                  00004cee        11   func ,g         0
+  _auth_set_conf
+                                  00004cff         c   func ,g         0
+  __CommonCode@0
+                                  00004d0b         f   func ,l         2
+  __CommonCode@1
+                                  00004d1a        14   func ,l         3
+  __CommonCode@2
+                                  00004d2e         b   func ,l         2
+FILE=analog
+                                  00004d39  00004f1b       1e3
+  _pdc_req_update_an
+                                  00004d39        33   func ,g         1
+  _pdc_get_an_volt
+                                  00004d6c        3c   func ,g         4
+  _init_an
+                                  00004da8        47   func ,g         1
+  _an_ctrl
+                                  00004def        e4   func ,g         1
+  _an_get_volt
+                                  00004ed3        10   func ,g         2
+  _an_get_vbus_volt
+                                  00004ee3        31   func ,g         1
+  __CommonCode@0
+                                  00004f14         8   func ,l         4
+FILE=interrupt
+                                  00004f1c  00004f6a        4f
+  _pdc_set_int_routine
+                                  00004f1c        18   func ,g         f
+  _interrupt_common
+                                  00004f34        23   func ,g        13
+  _init_int_routine
+                                  00004f57        14   func ,g         1
+FILE=pd_core
+                                  00004f6b  000058ba       950
+  _pdc_get_version
+                                  00004f6b         4   func ,g         1
+  _pd_core_init
+                                  00004f6f        ce   func ,g         1
+  _pd_core
+                                  0000503d        83   func ,g         1
+  _pdc_active
+                                  000050c0         b   func ,g         1
+  _pdc_run
+                                  000050cb        2d   func ,g         2
+  _pdc_stop
+                                  000050f8        26   func ,g         1
+  _pdc_enter_deep
+                                  0000511e        43   func ,g         0
+  _pdc_exit_deep
+                                  00005161        10   func ,g         0
+  _pdc_get_status
+                                  00005171         8   func ,g         9
+  _pdc_get_idle_time
+                                  00005179        40   func ,g         2
+  _pdc_set_cmd
+                                  000051b9       283   func ,g         c
+  _pdc_get_cmd_result
+                                  0000543c         8   func ,g         6
+  _set_ext_reg
+                                  00005444        2a   func ,g         1
+  _pdc_timer_active
+                                  0000546e         7   func ,g         8
+  _pdc_get_req_volt
+                                  00005475         4   func ,g         4
+  _pdc_get_req_cur
+                                  00005479         4   func ,g         4
+  _pdc_get_vrd
+                                  0000547d         4   func ,g         0
+  _pdc_set_port_conf
+                                  00005481        ee   func ,g         1
+  _pdc_set_src_conf
+                                  0000556f        48   func ,g         1
+  _pdc_set_snk_conf
+                                  000055b7        2e   func ,g         4
+  _pdc_set_sys_conf
+                                  000055e5        b3   func ,g         1
+  _pdc_set_dev_stat
+                                  00005698        65   func ,g         2
+  _pdc_set_pps_stat
+                                  000056fd        2e   func ,g         0
+  _pdc_set_custom_mode
+                                  0000572b        22   func ,g         0
+  _pdc_get_rdo
+                                  0000574d        17   func ,g         1
+  _pdc_get_pdo
+                                  00005764        49   func ,g         0
+  _pdc_get_num_of_pdos
+                                  000057ad        17   func ,g         0
+  _pd_tm_start_user_cnt
+                                  000057c4        10   func ,g         4
+  _pd_tm_stop_user_cnt
+                                  000057d4        10   func ,g         5
+  _pd_tm_chk_user_stat
+                                  000057e4         f   func ,g         4
+  _pdc_set_user_ams_mode
+                                  000057f3        30   func ,g         0
+  _pdc_get_user_ams_mode
+                                  00005823         8   func ,g         0
+  _pdc_req_snd_bat_chg_alert
+                                  0000582b        15   func ,g         0
+  _pdc_is_pps_mode
+                                  00005840         c   func ,g         3
+  _pdc_set_pwr_stat
+                                  0000584c         d   func ,g         1
+  _pdc_set_product_info
+                                  00005859        15   func ,g         1
+  _pdc_get_product_info
+                                  0000586e         8   func ,g         0
+  _pdc_set_usb_comm
+                                  00005876         8   func ,g         1
+  _pdc_get_usb_comm
+                                  0000587e         5   func ,g         1
+  __CommonCode@0
+                                  00005883        10   func ,l         2
+  __CommonCode@1
+                                  00005893         e   func ,l         2
+  __CommonCode@2
+                                  000058a1        13   func ,l         2
+  __CommonCode@3
+                                  000058b4         7   func ,l         7
+FILE=sec_ctrl
+                                  000058bb  000068e4      102a
+  _sec_update_lcgs
+                                  000058bb        36   func ,g         3
+  _sec_make_sdata
+                                  000058f1        97   func ,g         2
+  _sec_ctrl
+                                  00005988        91   func ,g         1
+  _sec_init
+                                  00005a19        2e   func ,g         3
+  _sec_sq_itr
+                                  00005a47        e0   func ,g         1
+  _sec_sq_cetr
+                                  00005b27       112   func ,g         1
+  _sec_sq_auth
+                                  00005c39       1e4   func ,g         1
+  _sec_sq_rdr
+                                  00005e1d       173   func ,g         1
+  _sec_sq_rst
+                                  00005f90         1   func ,g         0
+  _sec_sq_hw_rst
+                                  00005f91         1   func ,g         0
+  _sec_sq_return_from_standby
+                                  00005f92         1   func ,g         0
+  _sec_sq_dp_standby
+                                  00005f93         1   func ,g         0
+  _sec_sq_sw_standby
+                                  00005f94         1   func ,g         0
+  _init_sec_sq
+                                  00005f95         e   func ,g         e
+  _cmd_set_version
+                                  00005fa3        13   func ,g         1
+  _cmd_set_reqmsg
+                                  00005fb6        12   func ,g         5
+  _cmd_set_cert
+                                  00005fc8        4b   func ,g         1
+  _cmd_set_auth
+                                  00006013        38   func ,g         1
+  _cmd_set_cert_result
+                                  0000604b        12   func ,g         1
+  _cmd_set_auth_result
+                                  0000605d        12   func ,g         1
+  _cmd_get_cert_result
+                                  0000606f        b0   func ,g         1
+  _cmd_get_auth_result
+                                  0000611f        ab   func ,g         1
+  _err_version
+                                  000061ca        17   func ,g         1
+  _err_cert
+                                  000061e1         d   func ,g         1
+  _err_cert_rslt
+                                  000061ee         d   func ,g         1
+  _err_auth_rslt
+                                  000061fb         d   func ,g         1
+  _tx_rcvmsg
+                                  00006208        cc   func ,g         3
+  _chk_tx_rcvmsg
+                                  000062d4        c1   func ,g         3
+  _cmd_get_reqmsg
+                                  00006395        55   func ,g         2
+  _cmd_get_reqmsg_with_cert_data
+                                  000063ea        92   func ,g         1
+  _cmd_get_reqmsg_with_auth_data
+                                  0000647c        92   func ,g         1
+  _cmd_wait_standby
+                                  0000650e        1c   func ,g         4
+  _cmd_set_reqidmsg
+                                  0000652a        12   func ,g         1
+  _cmd_get_idmsg
+                                  0000653c        9d   func ,g         1
+  _ascii2hex
+                                  000065d9        20   func ,g         7
+  _cmd_set_acd
+                                  000065f9        12   func ,g         1
+  _cmd_get_acd
+                                  0000660b        7c   func ,g         1
+  _update_msgtype
+                                  00006687        35   func ,g         1
+  _sec_set_busy_response
+                                  000066bc        14   func ,g         2
+  _sec_update_msgrslt
+                                  000066d0        36   func ,g         3
+  _sec_update_buffer
+                                  00006706        3d   func ,g         9
+  _sec_update_chksum
+                                  00006743        15   func ,g         2
+  __CommonCode@0
+                                  00006758         8   func ,l         8
+  __CommonCode@1
+                                  00006760         6   func ,l         8
+  __CommonCode@2
+                                  00006766         8   func ,l         8
+  __CommonCode@3
+                                  0000676e         5   func ,l         7
+  __CommonCode@4
+                                  00006773         9   func ,l         8
+  __CommonCode@5
+                                  0000677c        13   func ,l         9
+  __CommonCode@6
+                                  0000678f         a   func ,l         8
+  __CommonCode@7
+                                  00006799         6   func ,l         8
+  __CommonCode@8
+                                  0000679f         6   func ,l        12
+  __CommonCode@9
+                                  000067a5         9   func ,l         5
+  __CommonCode@10
+                                  000067ae         8   func ,l         6
+  __CommonCode@11
+                                  000067b6        29   func ,l         2
+  __CommonCode@12
+                                  000067df         b   func ,l         6
+  __CommonCode@13
+                                  000067ea         9   func ,l         3
+  __CommonCode@14
+                                  000067f3        16   func ,l         3
+  __CommonCode@15
+                                  00006809         a   func ,l         a
+  __CommonCode@16
+                                  00006813         8   func ,l         3
+  __CommonCode@17
+                                  0000681b         8   func ,l         3
+  __CommonCode@18
+                                  00006823         f   func ,l         5
+  __CommonCode@19
+                                  00006832         c   func ,l         2
+  __CommonCode@20
+                                  0000683e         c   func ,l         2
+  __CommonCode@21
+                                  0000684a         f   func ,l         2
+  __CommonCode@22
+                                  00006859         9   func ,l         4
+  __CommonCode@23
+                                  00006862         7   func ,l         5
+  __CommonCode@24
+                                  00006869         7   func ,l         6
+  __CommonCode@25
+                                  00006870         b   func ,l         3
+  __CommonCode@26
+                                  0000687b        13   func ,l         2
+  __CommonCode@27
+                                  0000688e        10   func ,l         3
+  __CommonCode@28
+                                  0000689e         a   func ,l         2
+  __CommonCode@29
+                                  000068a8         8   func ,l         4
+  __CommonCode@30
+                                  000068b0        13   func ,l         4
+  __CommonCode@31
+                                  000068c3         9   func ,l         3
+  __CommonCode@32
+                                  000068cc         f   func ,l         2
+  __CommonCode@33
+                                  000068db         a   func ,l         7
+FILE=libdef_pdc
+                                  000068e5  0000692b        47
+  _pdclib_chk_id
+                                  000068e5        47   func ,g         1
+FILE=pdm
+                                  0000692c  000078fa       fcf
+  _init_pdm
+                                  0000692c        23   func ,g         1
+  _pdm_enable
+                                  0000694f        24   func ,g         2
+  _pdm_rcv_disable
+                                  00006973         a   func ,g         1
+  _pdm_disable
+                                  0000697d        1f   func ,g         1
+  _pdm_init_spec_rev
+                                  0000699c         f   func ,g         2
+  _pdm_set_spec_rev
+                                  000069ab        38   func ,g         a
+  _pdm_get_spec_rev
+                                  000069e3         b   func ,g         2
+  _pdm_set_tx_retry
+                                  000069ee        25   func ,g         2
+  _pdm_update_spec_rev
+                                  00006a13        24   func ,g         1
+  _pdm
+                                  00006a37       388   func ,g         1
+  _pdm_is_di_ack_cp
+                                  00006dbf        1c   func ,g         2
+  _pdm_is_cable_type
+                                  00006ddb        2c   func ,g         2
+  _pdm_restart
+                                  00006e07        11   func ,g         2
+  _pdm_sw_dr
+                                  00006e18        16   func ,g         1
+  _pdm_sw_pr
+                                  00006e2e        16   func ,g         2
+  _pdm_get_dr
+                                  00006e44        17   func ,g         a
+  _pdm_get_intr_mess_result
+                                  00006e5b        2e   func ,g         1
+  _pdm_tx_stat
+                                  00006e89       476   func ,g         1
+  _pdm_spec_ctrl
+                                  000072ff        3e   func ,g         1
+  _pdm_chk_resp
+                                  0000733d       1f6   func ,g         1
+  _pdm_chk_pd3_resp
+                                  00007533        47   func ,g         1
+  _pdm_set_role
+                                  0000757a        13   func ,g         2
+  _pdm_reset_protocol
+                                  0000758d        2c   func ,g         6
+  _pdm_get_state_preset
+                                  000075b9         7   func ,g         4
+  _pdm_get_state_hreset
+                                  000075c0         9   func ,g         1
+  _pdm_sw_rx_state
+                                  000075c9        20   func ,g         4
+  _pdm_physet_dis
+                                  000075e9         8   func ,g         5
+  _pdm_sw_rx_sopp
+                                  000075f1        22   func ,g         5
+  _pdm_sw_bist
+                                  00007613        17   func ,g         2
+  _pdm_chk_bist
+                                  0000762a         9   func ,g         1
+  _pdm_rom_acs_init
+                                  00007633        2b   func ,g         1
+  _pdm_chk_uvdm_resp_en
+                                  0000765e        47   func ,g         1
+  _pdm_chk_uvdm_resp
+                                  000076a5        30   func ,g         1
+  _pdm_set_epdm_chk_mess
+                                  000076d5        9d   func ,g         2
+  _pdm_set_epdm_unchk_mess
+                                  00007772        43   func ,g         1
+  _pdm_set_epdm_chk_req
+                                  000077b5        1a   func ,g         1
+  _pdm_is_rcv_mess
+                                  000077cf        1b   func ,g         6
+  __CommonCode@0
+                                  000077ea         b   func ,l         2
+  __CommonCode@1
+                                  000077f5         d   func ,l         4
+  __CommonCode@2
+                                  00007802         c   func ,l         2
+  __CommonCode@3
+                                  0000780e         a   func ,l         2
+  __CommonCode@4
+                                  00007818         8   func ,l         5
+  __CommonCode@5
+                                  00007820         b   func ,l         2
+  __CommonCode@6
+                                  0000782b        14   func ,l         2
+  __CommonCode@7
+                                  0000783f         6   func ,l         5
+  __CommonCode@8
+                                  00007845         a   func ,l         7
+  __CommonCode@9
+                                  0000784f         5   func ,l         9
+  __CommonCode@10
+                                  00007854         9   func ,l         4
+  __CommonCode@11
+                                  0000785d         b   func ,l         2
+  __CommonCode@12
+                                  00007868         8   func ,l         3
+  __CommonCode@13
+                                  00007870         8   func ,l         4
+  __CommonCode@14
+                                  00007878         6   func ,l         3
+  __CommonCode@15
+                                  0000787e        18   func ,l         2
+  __CommonCode@16
+                                  00007896         7   func ,l         4
+  __CommonCode@17
+                                  0000789d         5   func ,l         7
+  __CommonCode@18
+                                  000078a2         7   func ,l         4
+  __CommonCode@19
+                                  000078a9         f   func ,l         2
+  __CommonCode@20
+                                  000078b8         5   func ,l         4
+  __CommonCode@21
+                                  000078bd         7   func ,l         3
+  __CommonCode@22
+                                  000078c4         6   func ,l         5
+  __CommonCode@23
+                                  000078ca        11   func ,l         2
+  __CommonCode@24
+                                  000078db        14   func ,l         2
+  __CommonCode@25
+                                  000078ef         c   func ,l         2
+FILE=pol_eng
+                                  000078fb  00009a2b      2131
+  _init_pol_eng
+                                  000078fb        1c   func ,g         2
+  _pol_eng
+                                  00007917       1de   func ,g         1
+  _pe_stat_init
+                                  00007af5       1d1   func ,g         1
+  _pe_stat_snk
+                                  00007cc6       26d   func ,g         1
+  _pe_stat_src
+                                  00007f33       43f   func ,g         1
+  _pe_stat_rdy_rcvmess
+                                  00008372       345   func ,g         1
+  _pe_stat_rdy_polman
+                                  000086b7       25f   func ,g         1
+  _pe_stat_rdy_resndmess
+                                  00008916        4f   func ,g         1
+  _pe_stat_rdy
+                                  00008965       86a   func ,g         1
+  _pe_stat_bist
+                                  000091cf        1d   func ,g         1
+  _pe_stat_swap
+                                  000091ec       1d5   func ,g         1
+  _pe_snd_req_pdo
+                                  000093c1        c0   func ,g         3
+  _pe_snd_req_resp
+                                  00009481        18   func ,g         5
+  _pe_swap_comp
+                                  00009499        28   func ,g         2
+  _pe_nego_fail
+                                  000094c1         2   func ,g         0
+  _pe_snd_sr
+                                  000094c3        11   func ,g         f
+  _pe_hardreset
+                                  000094d4        41   func ,g        11
+  _pe_fail
+                                  00009515         e   func ,g         3
+  _pe_enter_Disable
+                                  00009523        13   func ,g         1
+  _pe_enter_ErrRcvr
+                                  00009536        1c   func ,g         b
+  _pe_cancel_chk_di
+                                  00009552         f   func ,g         2
+  _pe_goto_rdy_idle
+                                  00009561        29   func ,g        15
+  _pe_set_di_req
+                                  0000958a        19   func ,g         1
+  _pm_set_dfp_vdo
+                                  000095a3        37   func ,g         2
+  _pm_set_di_vdo
+                                  000095da        bb   func ,g         1
+  _pe_chk_vdm
+                                  00009695       115   func ,g         3
+  _pe_make_reqp_usvdm
+                                  000097aa        75   func ,g         1
+  _pe_make_reqp_svdm
+                                  0000981f        28   func ,g         1
+  _pe_chk_svdm_resp
+                                  00009847        4d   func ,g         2
+  __CommonCode@0
+                                  00009894         d   func ,l         2
+  __CommonCode@1
+                                  000098a1         9   func ,l         8
+  __CommonCode@2
+                                  000098aa         b   func ,l         3
+  __CommonCode@3
+                                  000098b5         7   func ,l        25
+  __CommonCode@4
+                                  000098bc         6   func ,l         5
+  __CommonCode@5
+                                  000098c2         6   func ,l         4
+  __CommonCode@6
+                                  000098c8         a   func ,l         4
+  __CommonCode@7
+                                  000098d2         7   func ,l        16
+  __CommonCode@8
+                                  000098d9         6   func ,l        18
+  __CommonCode@9
+                                  000098df         8   func ,l         3
+  __CommonCode@10
+                                  000098e7         a   func ,l         2
+  __CommonCode@11
+                                  000098f1         9   func ,l        11
+  __CommonCode@12
+                                  000098fa         7   func ,l         4
+  __CommonCode@13
+                                  00009901         8   func ,l         3
+  __CommonCode@14
+                                  00009909         8   func ,l        10
+  __CommonCode@15
+                                  00009911        1c   func ,l         2
+  __CommonCode@16
+                                  0000992d         6   func ,l         8
+  __CommonCode@17
+                                  00009933         7   func ,l         5
+  __CommonCode@18
+                                  0000993a        11   func ,l         2
+  __CommonCode@19
+                                  0000994b         7   func ,l         4
+  __CommonCode@20
+                                  00009952        13   func ,l         2
+  __CommonCode@21
+                                  00009965         7   func ,l         5
+  __CommonCode@22
+                                  0000996c         f   func ,l         2
+  __CommonCode@23
+                                  0000997b         d   func ,l         2
+  __CommonCode@24
+                                  00009988         f   func ,l         2
+  __CommonCode@25
+                                  00009997         f   func ,l         2
+  __CommonCode@26
+                                  000099a6         c   func ,l         2
+  __CommonCode@27
+                                  000099b2         b   func ,l         2
+  __CommonCode@28
+                                  000099bd         8   func ,l         3
+  __CommonCode@29
+                                  000099c5         b   func ,l         2
+  __CommonCode@30
+                                  000099d0         a   func ,l         2
+  __CommonCode@31
+                                  000099da         9   func ,l         3
+  __CommonCode@32
+                                  000099e3         8   func ,l         3
+  __CommonCode@33
+                                  000099eb        15   func ,l         2
+  __CommonCode@34
+                                  00009a00         b   func ,l         2
+  __CommonCode@35
+                                  00009a0b         7   func ,l         4
+  __CommonCode@36
+                                  00009a12        1a   func ,l         2
+FILE=pol_man
+                                  00009a2c  0000bd21      22f6
+  _pm_cmd_comp
+                                  00009a2c        1e   func ,g        43
+  _init_pol_man
+                                  00009a4a        34   func ,g         2
+  _pol_man
+                                  00009a7e        89   func ,g         1
+  _pm_stat_main
+                                  00009b07       2af   func ,g         1
+  _pm_stat_init
+                                  00009db6       1a6   func ,g         1
+  _pm_stat_snkngt
+                                  00009f5c       17a   func ,g         1
+  _pm_stat_srcngt
+                                  0000a0d6       1fe   func ,g         1
+  _pm_stat_swap_pr
+                                  0000a2d4       21f   func ,g         1
+  _pm_stat_swap_vc
+                                  0000a4f3       1bd   func ,g         1
+  _pm_chk_status
+                                  0000a6b0       2fd   func ,g         1
+  _pm_set_rdo
+                                  0000a9ad       20f   func ,g         1
+  _pm_chk_same_pdo
+                                  0000abbc        57   func ,g         1
+  _pm_make_snkpdo
+                                  0000ac13       152   func ,g         2
+  _pm_calc_srcpdo_sys
+                                  0000ad65       1d0   func ,g         2
+  _pm_make_srcpdo_cur
+                                  0000af35       110   func ,g         4
+  _pm_init_pdo
+                                  0000b045        76   func ,g         3
+  _pm_update_pdo_extpwr
+                                  0000b0bb        11   func ,g         1
+  _pm_update_pdo_role
+                                  0000b0cc        40   func ,g         0
+  _pm_eva_rdo
+                                  0000b10c        f4   func ,g         2
+  _pm_get_match_pos
+                                  0000b200        eb   func ,g         1
+  _pm_search_match_pdo_fix
+                                  0000b2eb        db   func ,g         1
+  _pm_search_match_pdo_var
+                                  0000b3c6        a6   func ,g         1
+  _pm_search_match_pdo_bat
+                                  0000b46c        d6   func ,g         1
+  _pm_set_status
+                                  0000b542        88   func ,g         1
+  _pm_get_extpwr_uc
+                                  0000b5ca         c   func ,g         1
+  _pm_update_nego_info
+                                  0000b5d6        18   func ,g         2
+  _pm_chk_vc_swap
+                                  0000b5ee        2c   func ,g         4
+  _pm_chk_resp_pr_swap
+                                  0000b61a        24   func ,g         1
+  _pm_chk_req_pr_swap
+                                  0000b63e        33   func ,g         3
+  _pm_start_auto_swap
+                                  0000b671        1a   func ,g         2
+  _pm_chk_resp_dr_swap
+                                  0000b68b        2a   func ,g         1
+  _pm_chk_req_dr_swap
+                                  0000b6b5        39   func ,g         2
+  _pm_get_stat_exit_swap
+                                  0000b6ee        14   func ,g         1
+  _pm_get_nego_stat
+                                  0000b702         6   func ,g         6
+  _pm_reset_vc
+                                  0000b708         8   func ,g         2
+  _pm_vc_on
+                                  0000b710        11   func ,g         3
+  _pm_chk_cp_info
+                                  0000b721        4d   func ,g         1
+  _pm_set_scedb
+                                  0000b76e        6d   func ,g         1
+  _pm_set_skedb
+                                  0000b7db        4b   func ,g         1
+  _pm_set_midb
+                                  0000b826        a7   func ,g         1
+  _pm_set_midb_unknown
+                                  0000b8cd        4f   func ,g         1
+  _pm_set_ppsdb
+                                  0000b91c        37   func ,g         1
+  _pm_smbs_init
+                                  0000b953        31   func ,g         1
+  _pm_snd_req_cmd
+                                  0000b984       140   func ,g         4
+  __CommonCode@0
+                                  0000bac4         9   func ,l         3
+  __CommonCode@1
+                                  0000bacd         8   func ,l         3
+  __CommonCode@2
+                                  0000bad5        28   func ,l         2
+  __CommonCode@3
+                                  0000bafd         b   func ,l         2
+  __CommonCode@4
+                                  0000bb08         8   func ,l         3
+  __CommonCode@5
+                                  0000bb10         7   func ,l         4
+  __CommonCode@6
+                                  0000bb17         9   func ,l         6
+  __CommonCode@7
+                                  0000bb20         d   func ,l         6
+  __CommonCode@8
+                                  0000bb2d         8   func ,l         a
+  __CommonCode@9
+                                  0000bb35         c   func ,l         2
+  __CommonCode@10
+                                  0000bb41         b   func ,l         2
+  __CommonCode@11
+                                  0000bb4c        1d   func ,l         2
+  __CommonCode@12
+                                  0000bb69        18   func ,l         2
+  __CommonCode@13
+                                  0000bb81         b   func ,l         4
+  __CommonCode@14
+                                  0000bb8c        1b   func ,l         2
+  __CommonCode@15
+                                  0000bba7         f   func ,l         3
+  __CommonCode@16
+                                  0000bbb6        10   func ,l         2
+  __CommonCode@17
+                                  0000bbc6         6   func ,l         4
+  __CommonCode@18
+                                  0000bbcc         7   func ,l         3
+  __CommonCode@19
+                                  0000bbd3         b   func ,l         2
+  __CommonCode@20
+                                  0000bbde         a   func ,l         3
+  __CommonCode@21
+                                  0000bbe8         e   func ,l         2
+  __CommonCode@22
+                                  0000bbf6         a   func ,l         2
+  __CommonCode@23
+                                  0000bc00        22   func ,l         2
+  __CommonCode@24
+                                  0000bc22        45   func ,l         2
+  __CommonCode@25
+                                  0000bc67        20   func ,l         2
+  __CommonCode@26
+                                  0000bc87         a   func ,l         3
+  __CommonCode@27
+                                  0000bc91         7   func ,l        10
+  __CommonCode@28
+                                  0000bc98         7   func ,l         6
+  __CommonCode@29
+                                  0000bc9f         9   func ,l         9
+  __CommonCode@30
+                                  0000bca8         7   func ,l         c
+  __CommonCode@31
+                                  0000bcaf         7   func ,l         3
+  __CommonCode@32
+                                  0000bcb6         b   func ,l         2
+  __CommonCode@33
+                                  0000bcc1         b   func ,l         2
+  __CommonCode@34
+                                  0000bccc        14   func ,l         2
+  __CommonCode@35
+                                  0000bce0        1b   func ,l         2
+  __CommonCode@36
+                                  0000bcfb         c   func ,l         2
+  __CommonCode@37
+                                  0000bd07         9   func ,l         3
+  __CommonCode@38
+                                  0000bd10        12   func ,l         2
+FILE=protection
+                                  0000bd22  0000bea0       17f
+  _init_prot
+                                  0000bd22         5   func ,g         1
+  _prot_ctrl
+                                  0000bd27       17a   func ,g         1
+FILE=ps_ctrl
+                                  0000bea1  0000c2f0       450
+  _ps_ctrl
+                                  0000bea1       3ed   func ,g         3
+  __CommonCode@0
+                                  0000c28e         5   func ,l         4
+  __CommonCode@1
+                                  0000c293         e   func ,l         6
+  __CommonCode@2
+                                  0000c2a1         c   func ,l         2
+  __CommonCode@3
+                                  0000c2ad         9   func ,l         3
+  __CommonCode@4
+                                  0000c2b6         f   func ,l         2
+  __CommonCode@5
+                                  0000c2c5         c   func ,l         3
+  __CommonCode@6
+                                  0000c2d1         b   func ,l         2
+  __CommonCode@7
+                                  0000c2dc        15   func ,l         2
+FILE=sct_ctrl
+                                  0000c2f1  0000ced1       be1
+  _init_sct_ctrl
+                                  0000c2f1        c4   func ,g         2
+  _sct_ctrl
+                                  0000c3b5       332   func ,g         1
+  _sc_stat_manual
+                                  0000c6e7       1be   func ,g         1
+  _sc_sw_pr
+                                  0000c8a5        27   func ,g         2
+  _sc_update_ipen
+                                  0000c8cc        50   func ,g         1
+  _sc_ipen_en
+                                  0000c91c         e   func ,g         2
+  _sc_vbus_deb_disable
+                                  0000c92a        13   func ,g         6
+  _sc_chk_port
+                                  0000c93d       17d   func ,g         1
+  _sc_restart_sct_en
+                                  0000caba        3d   func ,g         2
+  _sc_init_vbus_cur
+                                  0000caf7        1b   func ,g         2
+  _sc_set_pd_contract
+                                  0000cb12         8   func ,g         2
+  _sc_update_vbus
+                                  0000cb1a        38   func ,g         1
+  _sc_update_nego_vbus
+                                  0000cb52        28   func ,g         5
+  _sc_volt2th
+                                  0000cb7a        54   func ,g         1
+  _sc_reverse_try
+                                  0000cbce        3a   func ,g         2
+  _sc_int_sct
+                                  0000cc08        be   func ,g         2
+  _sc_chk_snk_open
+                                  0000ccc6        26   func ,g         1
+  _sc_chk_src_open
+                                  0000ccec        18   func ,g         1
+  _sc_con_port_reset
+                                  0000cd04        10   func ,g         4
+  _sc_set_sink_tx
+                                  0000cd14        33   func ,g         5
+  _sc_det_sink_tx
+                                  0000cd47         7   func ,g         1
+  _sc_attwait_stop_en
+                                  0000cd4e        12   func ,g         4
+  _sc_cc_sel_init
+                                  0000cd60        14   func ,g         3
+  _sc_chg_scnt_stm
+                                  0000cd74         8   func ,g         5
+  _sc_chk_stat_tgl
+                                  0000cd7c        4f   func ,g         1
+  _sc_chk_vrd_en
+                                  0000cdcb        14   func ,g         1
+  _sc_set_nonpd_cur
+                                  0000cddf        3c   func ,g         2
+  __CommonCode@0
+                                  0000ce1b         e   func ,l         2
+  __CommonCode@1
+                                  0000ce29        10   func ,l         3
+  __CommonCode@2
+                                  0000ce39         b   func ,l         2
+  __CommonCode@3
+                                  0000ce44        16   func ,l         2
+  __CommonCode@4
+                                  0000ce5a         9   func ,l         4
+  __CommonCode@5
+                                  0000ce63         7   func ,l         5
+  __CommonCode@6
+                                  0000ce6a         7   func ,l         3
+  __CommonCode@7
+                                  0000ce71         5   func ,l         4
+  __CommonCode@8
+                                  0000ce76         7   func ,l         4
+  __CommonCode@9
+                                  0000ce7d         8   func ,l         3
+  __CommonCode@10
+                                  0000ce85         7   func ,l         8
+  __CommonCode@11
+                                  0000ce8c         9   func ,l         6
+  __CommonCode@12
+                                  0000ce95         7   func ,l         6
+  __CommonCode@13
+                                  0000ce9c         a   func ,l         5
+  __CommonCode@14
+                                  0000cea6         9   func ,l         3
+  __CommonCode@15
+                                  0000ceaf        1a   func ,l         2
+  __CommonCode@16
+                                  0000cec9         9   func ,l         3
+FILE=timer_ctrl
+                                  0000ced2  0000d027       156
+  _init_tau0
+                                  0000ced2        4d   func ,g         1
+  _tm_start_gtimer
+                                  0000cf1f        35   func ,g         3
+  _tm_stop_gtimer
+                                  0000cf54        1b   func ,g         8
+  _tm_cntup_basecnt
+                                  0000cf6f         7   func ,g         2
+  _tm_start_cnt
+                                  0000cf76        29   func ,g        15
+  _tm_stop_cnt
+                                  0000cf9f        38   func ,g        15
+  _tm_check_cnt
+                                  0000cfd7        51   func ,g         f
+FILE=util
+                                  0000d028  0000d0c3        9c
+  _pd_mem_copy_byte
+                                  0000d028        22   func ,g         6
+  _pd_mem_copy_word
+                                  0000d04a        22   func ,g        10
+  _pd_mem_fill_byte
+                                  0000d06c        14   func ,g         5
+  _pd_mem_fill_word
+                                  0000d080        15   func ,g         6
+  _pd_mem_chng_byte_order
+                                  0000d095        2f   func ,g         2
+
+SECTION=.jtext_ATFBFC
+FILE=Obj\Release\cstart.obj
+                                  0000fbfc  0000fbfd         2
+
+SECTION=.bss_ATFF900
+FILE=interrupt
+                                  000ff900  000ff957        58
+  _gulIntRoutine
+                                  000ff900        58   data ,g         4
+
+SECTION=.bss
+FILE=Obj\Release\smbm_ctrl.obj
+                                  000ff958  000ff963         c
+  _gSmbmInfo
+                                  000ff958         c   data ,g        37
+    struct  {
+                                                   c
+      _gSmbmInfo.ucSmbmStatus
+                                  000ff958         1   unsigned char
+      _gSmbmInfo.ucSmbmCtrl
+                                  000ff959         1   unsigned char
+      _gSmbmInfo.ucSmbmError
+                                  000ff95a         1   unsigned char
+      _gSmbmInfo.ucAlertFlg
+                                  000ff95b         1   unsigned char
+      _gSmbmInfo.usSmbmTimeOut
+                                  000ff95c         2   unsigned short
+      _gSmbmInfo.usSmbmDataLen
+                                  000ff95e         2   unsigned short
+      _gSmbmInfo.pusSmbmData
+                                  000ff960         4   [far pointer]
+    }
+FILE=Obj\Release\R_Main_UserInit.obj
+                                  000ff964  000ff99b        38
+  _gusRcvMess
+                                  000ff964        1c   data ,g         1
+  _gusSndMess
+                                  000ff980        1c   data ,g         1
+FILE=Obj\Release\dcdc_ctrl.obj
+                                  000ff99c  000ff9ad        12
+  _gDCInfo
+                                  000ff99c        12   data ,g        be
+    struct  {
+                                                  12
+      _gDCInfo.uReq
+                                  000ff99c         2
+    union   {
+                                                   2
+      _gDCInfo.uReq.bit
+                                  000ff99c         2
+    struct  {
+                                                   2
+      _gDCInfo.uReq.bit.bSrcOff
+                                  000ff99c         2   unsigned short:1(7)
+      _gDCInfo.uReq.bit.bSrcOn
+                                  000ff99c         2   unsigned short:1(6)
+      _gDCInfo.uReq.bit.bSrcChg
+                                  000ff99c         2   unsigned short:1(5)
+      _gDCInfo.uReq.bit.bSnkOff
+                                  000ff99c         2   unsigned short:1(4)
+      _gDCInfo.uReq.bit.bReserved1
+                                  000ff99c         2   unsigned short:1(3)
+      _gDCInfo.uReq.bit.bSnkOn
+                                  000ff99c         2   unsigned short:1(2)
+      _gDCInfo.uReq.bit.bSnkChg
+                                  000ff99c         2   unsigned short:1(1)
+      _gDCInfo.uReq.bit.bPoll
+                                  000ff99c         2   unsigned short:1(0)
+      _gDCInfo.uReq.bit.bClrAlert
+                                  000ff99d         2   unsigned short:1(7)
+      _gDCInfo.uReq.bit.bReserved
+                                  000ff99d         2   unsigned short:7(0)
+    }
+      _gDCInfo.uReq.usData
+                                  000ff99c         2   unsigned short
+    }
+      _gDCInfo.uNtfy
+                                  000ff99e         2
+    union   {
+                                                   2
+      _gDCInfo.uNtfy.bit
+                                  000ff99e         2
+    struct  {
+                                                   2
+      _gDCInfo.uNtfy.bit.bOtpAlert
+                                  000ff99e         2   unsigned short:1(7)
+      _gDCInfo.uNtfy.bit.bOcpAlert
+                                  000ff99e         2   unsigned short:1(6)
+      _gDCInfo.uNtfy.bit.bOvpAlert
+                                  000ff99e         2   unsigned short:1(5)
+      _gDCInfo.uNtfy.bit.bGetInfo
+                                  000ff99e         2   unsigned short:1(4)
+      _gDCInfo.uNtfy.bit.bBatteryAlert
+                                  000ff99e         2   unsigned short:1(3)
+      _gDCInfo.uNtfy.bit.bDcdcAlert
+                                  000ff99e         2   unsigned short:1(2)
+      _gDCInfo.uNtfy.bit.bReserved2
+                                  000ff99e         2   unsigned short:5(5)
+      _gDCInfo.uNtfy.bit.bUnexpected
+                                  000ff99f         2   unsigned short:1(4)
+      _gDCInfo.uNtfy.bit.bReserved3
+                                  000ff99f         2   unsigned short:1(3)
+      _gDCInfo.uNtfy.bit.bTrickleChange
+                                  000ff99f         2   unsigned short:1(2)
+      _gDCInfo.uNtfy.bit.bFullyCharge
+                                  000ff99f         2   unsigned short:1(1)
+      _gDCInfo.uNtfy.bit.bFullyDischarge
+                                  000ff99f         2   unsigned short:1(0)
+    }
+      _gDCInfo.uNtfy.usData
+                                  000ff99e         2   unsigned short
+    }
+      _gDCInfo.uSt
+                                  000ff9a0         2
+    union   {
+                                                   2
+      _gDCInfo.uSt.bit
+                                  000ff9a0         2
+    struct  {
+                                                   2
+      _gDCInfo.uSt.bit.bSubSt
+                                  000ff9a0         2   unsigned short:8(0)
+      _gDCInfo.uSt.bit.bSt
+                                  000ff9a1         2   unsigned short:4(4)
+      _gDCInfo.uSt.bit.bDcSt
+                                  000ff9a1         2   unsigned short:4(0)
+    }
+      _gDCInfo.uSt.usData
+                                  000ff9a0         2   unsigned short
+    }
+      _gDCInfo.usRegData
+                                  000ff9a2         2   unsigned short
+      _gDCInfo.usIntRegData
+                                  000ff9a4         2   unsigned short
+      _gDCInfo.usVolt
+                                  000ff9a6         2   unsigned short
+      _gDCInfo.usCur
+                                  000ff9a8         2   unsigned short
+      _gDCInfo.ucCmd
+                                  000ff9aa         1   unsigned char
+      _gDCInfo.ucInfo
+                                  000ff9ab         1   unsigned char
+      _gDCInfo.ucTrickeBkp
+                                  000ff9ac         1   unsigned char
+      _gDCInfo.ucTrickeCnt
+                                  000ff9ad         1   unsigned char
+    }
+FILE=Obj\Release\led_ctrl.obj
+                                  000ff9ae  000ff9af         2
+  _gLed
+                                  000ff9ae         2   data ,g         b
+    struct  {
+                                                   2
+      _gLed.uReq
+                                  000ff9ae         1
+    union   {
+                                                   1
+      _gLed.uReq.bits
+                                  000ff9ae         1
+    struct  {
+                                                   1
+      _gLed.uReq.bits.bSrcEn
+                                  000ff9ae         1   unsigned char:1(7)
+      _gLed.uReq.bits.bSnkEn
+                                  000ff9ae         1   unsigned char:1(6)
+      _gLed.uReq.bits.bDis
+                                  000ff9ae         1   unsigned char:1(5)
+    }
+      _gLed.uReq.ucData
+                                  000ff9ae         1   unsigned char
+    }
+      _gLed.ucTypeCBlinkCnt
+                                  000ff9af         1   unsigned char
+    }
+FILE=Obj\Release\sw_ctrl.obj
+                                  000ff9b0  000ff9b1         2
+  _gSW
+                                  000ff9b0         2   data ,g         7
+    struct  {
+                                                   2
+      _gSW.status
+                                  000ff9b0         1   unsigned char
+      _gSW.ucPress
+                                  000ff9b1         1   unsigned char
+    }
+FILE=Obj\Release\user_main.obj
+                                  000ff9b2  000ff9b7         6
+  _gusTemp
+                                  000ff9b2         2   data ,g         4
+  _gucVdmFlg
+                                  000ff9b4         1   data ,g         a
+  _gucWaiCmp
+                                  000ff9b5         1   data ,g         8
+  _gucOmfData
+                                  000ff9b6         1   data ,g         1
+  _gucAuthFlg
+                                  000ff9b7         1   data ,g         d
+FILE=Obj\Release\isl95338.obj
+                                  000ff9b8  000ff9b9         2
+  _gIsl95338Info
+                                  000ff9b8         2   data ,g         6
+    struct  {
+                                                   2
+      _gIsl95338Info.ucSt
+                                  000ff9b8         1   unsigned char
+      _gIsl95338Info.ucAlertSt
+                                  000ff9b9         1   unsigned char
+    }
+FILE=Obj\Release\relamcu.obj
+                                  000ff9ba  000ff9bb         2
+  _gRelamcuInfo
+                                  000ff9ba         2   data ,g         a
+    struct  {
+                                                   2
+      _gRelamcuInfo.ucSt
+                                  000ff9ba         1   unsigned char
+      _gRelamcuInfo.ucReserved
+                                  000ff9bb         1   unsigned char
+    }
+FILE=Obj\Release\subdev_ctrl.obj
+                                  000ff9bc  000ff9c1         6
+  _gSubdevInfo
+                                  000ff9bc         4   data ,g        20
+    struct  {
+                                                   4
+      _gSubdevInfo.ucSubdevFlag
+                                  000ff9bc         1   unsigned char
+      _gSubdevInfo.ucSubdevHRFlag
+                                  000ff9bd         1   unsigned char
+      _gSubdevInfo.ucSubdevAlertFlag
+                                  000ff9be         1   unsigned char
+      _gSubdevInfo.ucReserved
+                                  000ff9bf         1   unsigned char
+    }
+  _gSubDevErr
+                                  000ff9c0         2   data ,g        1a
+    struct  {
+                                                   2
+      _gSubDevErr.ucSubdev
+                                  000ff9c0         1   unsigned char
+      _gSubDevErr.ucError
+                                  000ff9c1         1   unsigned char
+    }
+FILE=amcu
+                                  000ff9c2  000ff9c9         8
+  _gAmcuInfo
+                                  000ff9c2         6   data ,g        1a
+    struct  {
+                                                   6
+      _gAmcuInfo.uStat
+                                  000ff9c2         1
+    union   {
+                                                   1
+      _gAmcuInfo.uStat.bit
+                                  000ff9c2         1
+    struct  {
+                                                   1
+      _gAmcuInfo.uStat.bit.uState
+                                  000ff9c2         1   unsigned char:4(4)
+      _gAmcuInfo.uStat.bit.bAmcuErr
+                                  000ff9c2         1   unsigned char:1(3)
+      _gAmcuInfo.uStat.bit.bStdby
+                                  000ff9c2         1   unsigned char:1(2)
+      _gAmcuInfo.uStat.bit.bPdfuEn
+                                  000ff9c2         1   unsigned char:1(1)
+    }
+      _gAmcuInfo.uStat.ucData
+                                  000ff9c2         1   unsigned char
+    }
+      _gAmcuInfo.ucReserved
+                                  000ff9c3         1   unsigned char
+      _gAmcuInfo.ulAddress
+                                  000ff9c4         4   unsigned long
+    }
+  _gAmcu
+                                  000ff9c8         2   data ,g        20
+    union   {
+                                                   2
+      _gAmcu.bit
+                                  000ff9c8         2
+    struct  {
+                                                   2
+      _gAmcu.bit.bResetEn
+                                  000ff9c8         2   unsigned short:1(7)
+      _gAmcu.bit.bResetDis
+                                  000ff9c8         2   unsigned short:1(6)
+      _gAmcu.bit.bReqTx
+                                  000ff9c8         2   unsigned short:1(5)
+      _gAmcu.bit.bReqRst
+                                  000ff9c8         2   unsigned short:1(4)
+    }
+      _gAmcu.usData
+                                  000ff9c8         2   unsigned short
+    }
+FILE=amcu_ctrl
+                                  000ff9ca  000ff9fb        32
+  _gAmcuCtrlInfo
+                                  000ff9ca         6   data ,g        73
+    struct  {
+                                                   6
+      _gAmcuCtrlInfo.ucSt
+                                  000ff9ca         1   unsigned char
+      _gAmcuCtrlInfo.ucSubSt
+                                  000ff9cb         1   unsigned char
+      _gAmcuCtrlInfo.ucSecFlg
+                                  000ff9cc         1   unsigned char
+      _gAmcuCtrlInfo.ucMsgType
+                                  000ff9cd         1   unsigned char
+      _gAmcuCtrlInfo.ucErrInf
+                                  000ff9ce         1   unsigned char
+      _gAmcuCtrlInfo.ucStatus
+                                  000ff9cf         1   unsigned char
+    }
+  _gAmcuSqInfo
+                                  000ff9d0         6   data ,g        31
+    struct  {
+                                                   6
+      _gAmcuSqInfo.usPlCnt
+                                  000ff9d0         2   unsigned short
+      _gAmcuSqInfo.usRtyCnt
+                                  000ff9d2         2   unsigned short
+      _gAmcuSqInfo.usXferCnt
+                                  000ff9d4         2   unsigned short
+    }
+  _gAmcuVer
+                                  000ff9d6         2   data ,g         6
+    union   {
+                                                   2
+      _gAmcuVer.ucVer
+                                  000ff9d6         2   unsigned char
+      _gAmcuVer.usVer
+                                  000ff9d6         2   unsigned short
+    }
+  _gAmcuBuf
+                                  000ff9d8        24   data ,g        73
+    union   {
+                                                  24
+      _gAmcuBuf.ucData
+                                  000ff9d8        24   unsigned char
+      _gAmcuBuf.stTxMsg
+                                  000ff9d8        24
+    struct  {
+                                                  24
+      _gAmcuBuf.stTxMsg.ucPrtcl
+                                  000ff9d8         1   unsigned char
+      _gAmcuBuf.stTxMsg.ucCtrlFlg
+                                  000ff9d9         1   unsigned char
+      _gAmcuBuf.stTxMsg.ucLen
+                                  000ff9da         1   unsigned char
+      _gAmcuBuf.stTxMsg.ucCmd
+                                  000ff9db         1   unsigned char
+      _gAmcuBuf.stTxMsg.usData
+                                  000ff9dc        20   unsigned short
+    }
+      _gAmcuBuf.stStdTxMsg
+                                  000ff9d8        24
+    struct  {
+                                                  24
+      _gAmcuBuf.stStdTxMsg.ucPrtcl
+                                  000ff9d8         1   unsigned char
+      _gAmcuBuf.stStdTxMsg.ucCtrlFlg
+                                  000ff9d9         1   unsigned char
+      _gAmcuBuf.stStdTxMsg.ucLen
+                                  000ff9da         1   unsigned char
+      _gAmcuBuf.stStdTxMsg.ucCmd
+                                  000ff9db         1   unsigned char
+      _gAmcuBuf.stStdTxMsg.ucData
+                                  000ff9dc        20   unsigned char
+    }
+      _gAmcuBuf.stTxRevMsg
+                                  000ff9d8        24
+    struct  {
+                                                  24
+      _gAmcuBuf.stTxRevMsg.ucPrtcl
+                                  000ff9d8         1   unsigned char
+      _gAmcuBuf.stTxRevMsg.ucCtrlFlg
+                                  000ff9d9         1   unsigned char
+      _gAmcuBuf.stTxRevMsg.ucLen
+                                  000ff9da         1   unsigned char
+      _gAmcuBuf.stTxRevMsg.ucCmd
+                                  000ff9db         1   unsigned char
+      _gAmcuBuf.stTxRevMsg.usLen
+                                  000ff9dc         2   unsigned short
+      _gAmcuBuf.stTxRevMsg.ucData
+                                  000ff9de        1e   unsigned char
+    }
+      _gAmcuBuf.stStdRxMsg
+                                  000ff9d8        24
+    struct  {
+                                                  24
+      _gAmcuBuf.stStdRxMsg.ucPrtcl
+                                  000ff9d8         1   unsigned char
+      _gAmcuBuf.stStdRxMsg.ucCtrlFlg
+                                  000ff9d9         1   unsigned char
+      _gAmcuBuf.stStdRxMsg.ucLen
+                                  000ff9da         1   unsigned char
+      _gAmcuBuf.stStdRxMsg.ucCmd
+                                  000ff9db         1   unsigned char
+      _gAmcuBuf.stStdRxMsg.ucData
+                                  000ff9dc        20   unsigned char
+    }
+      _gAmcuBuf.stRxStMsg
+                                  000ff9d8        24
+    struct  {
+                                                  24
+      _gAmcuBuf.stRxStMsg.ucPrtcl
+                                  000ff9d8         1   unsigned char
+      _gAmcuBuf.stRxStMsg.ucCtrlFlg
+                                  000ff9d9         1   unsigned char
+      _gAmcuBuf.stRxStMsg.ucLen
+                                  000ff9da         1   unsigned char
+      _gAmcuBuf.stRxStMsg.ucCmd
+                                  000ff9db         1   unsigned char
+      _gAmcuBuf.stRxStMsg.usRpLen
+                                  000ff9dc         2   unsigned short
+      _gAmcuBuf.stRxStMsg.ucRpCmd
+                                  000ff9de         1   unsigned char
+      _gAmcuBuf.stRxStMsg.ucRpSt1
+                                  000ff9df         1   unsigned char
+      _gAmcuBuf.stRxStMsg.ucRpSt2
+                                  000ff9e0         1   unsigned char
+      _gAmcuBuf.stRxStMsg.ucRpSt3
+                                  000ff9e1         1   unsigned char
+      _gAmcuBuf.stRxStMsg.ucChkSum
+                                  000ff9e2         1   unsigned char
+      _gAmcuBuf.stRxStMsg.ucData
+                                  000ff9e3        19   unsigned char
+    }
+      _gAmcuBuf.stRxReqMsg
+                                  000ff9d8        24
+    struct  {
+                                                  24
+      _gAmcuBuf.stRxReqMsg.ucPrtcl
+                                  000ff9d8         1   unsigned char
+      _gAmcuBuf.stRxReqMsg.ucCtrlFlg
+                                  000ff9d9         1   unsigned char
+      _gAmcuBuf.stRxReqMsg.ucLen
+                                  000ff9da         1   unsigned char
+      _gAmcuBuf.stRxReqMsg.ucCmd
+                                  000ff9db         1   unsigned char
+      _gAmcuBuf.stRxReqMsg.usRpLen
+                                  000ff9dc         2   unsigned short
+      _gAmcuBuf.stRxReqMsg.ucRpCmd
+                                  000ff9de         1   unsigned char
+      _gAmcuBuf.stRxReqMsg.ucData
+                                  000ff9df        1d   unsigned char
+    }
+    }
+FILE=auth
+                                  000ff9fc  000ffa01         6
+  _gAuthInfo
+                                  000ff9fc         6   data ,g        3f
+    struct  {
+                                                   6
+      _gAuthInfo.usWait
+                                  000ff9fc         2   unsigned short
+      _gAuthInfo.uStat
+                                  000ff9fe         2
+    union   {
+                                                   2
+      _gAuthInfo.uStat.bit
+                                  000ff9fe         2
+    struct  {
+                                                   2
+      _gAuthInfo.uStat.bit.uState
+                                  000ff9fe         2   unsigned short:4(4)
+      _gAuthInfo.uStat.bit.bInitEn
+                                  000ff9fe         2   unsigned short:1(3)
+      _gAuthInfo.uStat.bit.bRespSnkEn
+                                  000ff9fe         2   unsigned short:1(2)
+      _gAuthInfo.uStat.bit.bRespSrcEn
+                                  000ff9fe         2   unsigned short:1(1)
+      _gAuthInfo.uStat.bit.bTarget
+                                  000ff9fe         2   unsigned short:2(7)
+      _gAuthInfo.uStat.bit.bReq
+                                  000ff9ff         2   unsigned short:1(6)
+      _gAuthInfo.uStat.bit.bOpt
+                                  000ff9ff         2   unsigned short:1(5)
+      _gAuthInfo.uStat.bit.bResult
+                                  000ff9ff         2   unsigned short:5(0)
+    }
+      _gAuthInfo.uStat.data
+                                  000ff9fe         2   unsigned short
+    }
+      _gAuthInfo.ucSearchSlots
+                                  000ffa00         1   unsigned char
+      _gAuthInfo.ucAuthState
+                                  000ffa01         1   unsigned char
+    }
+FILE=pd_main
+                                  000ffa02  000ffbc7       1c6
+  _RM_SCNT_MODE1_LW
+                                  000ffa02         2   data ,g         6
+  _RM_SCNT_MODE1_HW
+                                  000ffa04         2   data ,g        33
+  _gPmInfo
+                                  000ffa06        90   data ,g       278
+    struct  {
+                                                  90
+      _gPmInfo.uCurRdo
+                                  000ffa06         4
+    union   {
+                                                   4
+      _gPmInfo.uCurRdo.bit
+                                  000ffa06         4
+    struct  {
+                                                   4
+      _gPmInfo.uCurRdo.bit.bMinMax
+                                  000ffa06         4   unsigned long:a(6)
+      _gPmInfo.uCurRdo.bit.bOpr
+                                  000ffa07         4   unsigned long:a(4)
+      _gPmInfo.uCurRdo.bit.bUnChkSprt
+                                  000ffa08         4   unsigned long:1(0)
+      _gPmInfo.uCurRdo.bit.bNoSusp
+                                  000ffa09         4   unsigned long:1(7)
+      _gPmInfo.uCurRdo.bit.bUSBComm
+                                  000ffa09         4   unsigned long:1(6)
+      _gPmInfo.uCurRdo.bit.bMissCap
+                                  000ffa09         4   unsigned long:1(5)
+      _gPmInfo.uCurRdo.bit.bGB
+                                  000ffa09         4   unsigned long:1(4)
+      _gPmInfo.uCurRdo.bit.bObjPos
+                                  000ffa09         4   unsigned long:3(1)
+    }
+      _gPmInfo.uCurRdo.bit_pps
+                                  000ffa06         4
+    struct  {
+                                                   4
+      _gPmInfo.uCurRdo.bit_pps.bCur
+                                  000ffa06         4   unsigned long:7(1)
+      _gPmInfo.uCurRdo.bit_pps.bVolt
+                                  000ffa07         4   unsigned long:b(4)
+      _gPmInfo.uCurRdo.bit_pps.bUnChkSprt
+                                  000ffa08         4   unsigned long:1(0)
+      _gPmInfo.uCurRdo.bit_pps.bNoSusp
+                                  000ffa09         4   unsigned long:1(7)
+      _gPmInfo.uCurRdo.bit_pps.bUSBComm
+                                  000ffa09         4   unsigned long:1(6)
+      _gPmInfo.uCurRdo.bit_pps.bMissCap
+                                  000ffa09         4   unsigned long:1(5)
+      _gPmInfo.uCurRdo.bit_pps.bObjPos
+                                  000ffa09         4   unsigned long:3(1)
+    }
+      _gPmInfo.uCurRdo.ucData
+                                  000ffa06         4   unsigned char
+      _gPmInfo.uCurRdo.usData
+                                  000ffa06         4   unsigned short
+      _gPmInfo.uCurRdo.ulData
+                                  000ffa06         4   unsigned long
+    }
+      _gPmInfo.uCurPdo
+                                  000ffa0a         4
+    union   {
+                                                   4
+      _gPmInfo.uCurPdo.stFixSrc
+                                  000ffa0a         4
+    struct  {
+                                                   4
+      _gPmInfo.uCurPdo.stFixSrc.bMaxCur
+                                  000ffa0a         4   unsigned long:a(6)
+      _gPmInfo.uCurPdo.stFixSrc.bVolt
+                                  000ffa0b         4   unsigned long:a(4)
+      _gPmInfo.uCurPdo.stFixSrc.bPeakCur
+                                  000ffa0c         4   unsigned long:2(2)
+      _gPmInfo.uCurPdo.stFixSrc.bUnChkSprt
+                                  000ffa0d         4   unsigned long:1(7)
+      _gPmInfo.uCurPdo.stFixSrc.bDrSwap
+                                  000ffa0d         4   unsigned long:1(6)
+      _gPmInfo.uCurPdo.stFixSrc.bUsbComm
+                                  000ffa0d         4   unsigned long:1(5)
+      _gPmInfo.uCurPdo.stFixSrc.bExtPwr
+                                  000ffa0d         4   unsigned long:1(4)
+      _gPmInfo.uCurPdo.stFixSrc.bSuspend
+                                  000ffa0d         4   unsigned long:1(3)
+      _gPmInfo.uCurPdo.stFixSrc.bDrp
+                                  000ffa0d         4   unsigned long:1(2)
+      _gPmInfo.uCurPdo.stFixSrc.bSupply
+                                  000ffa0d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uCurPdo.stFixSnk
+                                  000ffa0a         4
+    struct  {
+                                                   4
+      _gPmInfo.uCurPdo.stFixSnk.bOpeCur
+                                  000ffa0a         4   unsigned long:a(6)
+      _gPmInfo.uCurPdo.stFixSnk.bVolt
+                                  000ffa0b         4   unsigned long:a(4)
+      _gPmInfo.uCurPdo.stFixSnk.bFrSwap
+                                  000ffa0c         4   unsigned long:2(7)
+      _gPmInfo.uCurPdo.stFixSnk.bDrSwap
+                                  000ffa0d         4   unsigned long:1(6)
+      _gPmInfo.uCurPdo.stFixSnk.bUsbComm
+                                  000ffa0d         4   unsigned long:1(5)
+      _gPmInfo.uCurPdo.stFixSnk.bExtPwr
+                                  000ffa0d         4   unsigned long:1(4)
+      _gPmInfo.uCurPdo.stFixSnk.bHiCap
+                                  000ffa0d         4   unsigned long:1(3)
+      _gPmInfo.uCurPdo.stFixSnk.bDrp
+                                  000ffa0d         4   unsigned long:1(2)
+      _gPmInfo.uCurPdo.stFixSnk.bSupply
+                                  000ffa0d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uCurPdo.stVarSrc
+                                  000ffa0a         4
+    struct  {
+                                                   4
+      _gPmInfo.uCurPdo.stVarSrc.bMaxCur
+                                  000ffa0a         4   unsigned long:a(6)
+      _gPmInfo.uCurPdo.stVarSrc.bMinVolt
+                                  000ffa0b         4   unsigned long:a(4)
+      _gPmInfo.uCurPdo.stVarSrc.bMaxVolt
+                                  000ffa0c         4   unsigned long:a(2)
+      _gPmInfo.uCurPdo.stVarSrc.bSupply
+                                  000ffa0d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uCurPdo.stVarSnk
+                                  000ffa0a         4
+    struct  {
+                                                   4
+      _gPmInfo.uCurPdo.stVarSnk.bOpeCur
+                                  000ffa0a         4   unsigned long:a(6)
+      _gPmInfo.uCurPdo.stVarSnk.bMinVolt
+                                  000ffa0b         4   unsigned long:a(4)
+      _gPmInfo.uCurPdo.stVarSnk.bMaxVolt
+                                  000ffa0c         4   unsigned long:a(2)
+      _gPmInfo.uCurPdo.stVarSnk.bSupply
+                                  000ffa0d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uCurPdo.stBatSrc
+                                  000ffa0a         4
+    struct  {
+                                                   4
+      _gPmInfo.uCurPdo.stBatSrc.bMaxPwr
+                                  000ffa0a         4   unsigned long:a(6)
+      _gPmInfo.uCurPdo.stBatSrc.bMinVolt
+                                  000ffa0b         4   unsigned long:a(4)
+      _gPmInfo.uCurPdo.stBatSrc.bMaxVolt
+                                  000ffa0c         4   unsigned long:a(2)
+      _gPmInfo.uCurPdo.stBatSrc.bSupply
+                                  000ffa0d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uCurPdo.stBatSnk
+                                  000ffa0a         4
+    struct  {
+                                                   4
+      _gPmInfo.uCurPdo.stBatSnk.bOpePwr
+                                  000ffa0a         4   unsigned long:a(6)
+      _gPmInfo.uCurPdo.stBatSnk.bMinVolt
+                                  000ffa0b         4   unsigned long:a(4)
+      _gPmInfo.uCurPdo.stBatSnk.bMaxVolt
+                                  000ffa0c         4   unsigned long:a(2)
+      _gPmInfo.uCurPdo.stBatSnk.bSupply
+                                  000ffa0d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uCurPdo.stPpsSrc
+                                  000ffa0a         4
+    struct  {
+                                                   4
+      _gPmInfo.uCurPdo.stPpsSrc.bMaxCur
+                                  000ffa0a         4   unsigned long:7(1)
+      _gPmInfo.uCurPdo.stPpsSrc.bMinVolt
+                                  000ffa0b         4   unsigned long:8(0)
+      _gPmInfo.uCurPdo.stPpsSrc.bMaxVolt
+                                  000ffa0c         4   unsigned long:8(7)
+      _gPmInfo.uCurPdo.stPpsSrc.bPps
+                                  000ffa0d         4   unsigned long:2(2)
+      _gPmInfo.uCurPdo.stPpsSrc.bSupply
+                                  000ffa0d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uCurPdo.ucData
+                                  000ffa0a         4   unsigned char
+      _gPmInfo.uCurPdo.usData
+                                  000ffa0a         4   unsigned short
+      _gPmInfo.uCurPdo.ulData
+                                  000ffa0a         4   unsigned long
+    }
+      _gPmInfo.uRdoTmp
+                                  000ffa0e         4
+    union   {
+                                                   4
+      _gPmInfo.uRdoTmp.bit
+                                  000ffa0e         4
+    struct  {
+                                                   4
+      _gPmInfo.uRdoTmp.bit.bMinMax
+                                  000ffa0e         4   unsigned long:a(6)
+      _gPmInfo.uRdoTmp.bit.bOpr
+                                  000ffa0f         4   unsigned long:a(4)
+      _gPmInfo.uRdoTmp.bit.bUnChkSprt
+                                  000ffa10         4   unsigned long:1(0)
+      _gPmInfo.uRdoTmp.bit.bNoSusp
+                                  000ffa11         4   unsigned long:1(7)
+      _gPmInfo.uRdoTmp.bit.bUSBComm
+                                  000ffa11         4   unsigned long:1(6)
+      _gPmInfo.uRdoTmp.bit.bMissCap
+                                  000ffa11         4   unsigned long:1(5)
+      _gPmInfo.uRdoTmp.bit.bGB
+                                  000ffa11         4   unsigned long:1(4)
+      _gPmInfo.uRdoTmp.bit.bObjPos
+                                  000ffa11         4   unsigned long:3(1)
+    }
+      _gPmInfo.uRdoTmp.bit_pps
+                                  000ffa0e         4
+    struct  {
+                                                   4
+      _gPmInfo.uRdoTmp.bit_pps.bCur
+                                  000ffa0e         4   unsigned long:7(1)
+      _gPmInfo.uRdoTmp.bit_pps.bVolt
+                                  000ffa0f         4   unsigned long:b(4)
+      _gPmInfo.uRdoTmp.bit_pps.bUnChkSprt
+                                  000ffa10         4   unsigned long:1(0)
+      _gPmInfo.uRdoTmp.bit_pps.bNoSusp
+                                  000ffa11         4   unsigned long:1(7)
+      _gPmInfo.uRdoTmp.bit_pps.bUSBComm
+                                  000ffa11         4   unsigned long:1(6)
+      _gPmInfo.uRdoTmp.bit_pps.bMissCap
+                                  000ffa11         4   unsigned long:1(5)
+      _gPmInfo.uRdoTmp.bit_pps.bObjPos
+                                  000ffa11         4   unsigned long:3(1)
+    }
+      _gPmInfo.uRdoTmp.ucData
+                                  000ffa0e         4   unsigned char
+      _gPmInfo.uRdoTmp.usData
+                                  000ffa0e         4   unsigned short
+      _gPmInfo.uRdoTmp.ulData
+                                  000ffa0e         4   unsigned long
+    }
+      _gPmInfo.uPDO
+                                  000ffa12        38
+    union   {
+                                                   4
+      _gPmInfo.uPDO.stFixSrc
+                                  000ffa12         4
+    struct  {
+                                                   4
+      _gPmInfo.uPDO.stFixSrc.bMaxCur
+                                  000ffa12         4   unsigned long:a(6)
+      _gPmInfo.uPDO.stFixSrc.bVolt
+                                  000ffa13         4   unsigned long:a(4)
+      _gPmInfo.uPDO.stFixSrc.bPeakCur
+                                  000ffa14         4   unsigned long:2(2)
+      _gPmInfo.uPDO.stFixSrc.bUnChkSprt
+                                  000ffa15         4   unsigned long:1(7)
+      _gPmInfo.uPDO.stFixSrc.bDrSwap
+                                  000ffa15         4   unsigned long:1(6)
+      _gPmInfo.uPDO.stFixSrc.bUsbComm
+                                  000ffa15         4   unsigned long:1(5)
+      _gPmInfo.uPDO.stFixSrc.bExtPwr
+                                  000ffa15         4   unsigned long:1(4)
+      _gPmInfo.uPDO.stFixSrc.bSuspend
+                                  000ffa15         4   unsigned long:1(3)
+      _gPmInfo.uPDO.stFixSrc.bDrp
+                                  000ffa15         4   unsigned long:1(2)
+      _gPmInfo.uPDO.stFixSrc.bSupply
+                                  000ffa15         4   unsigned long:2(0)
+    }
+      _gPmInfo.uPDO.stFixSnk
+                                  000ffa12         4
+    struct  {
+                                                   4
+      _gPmInfo.uPDO.stFixSnk.bOpeCur
+                                  000ffa12         4   unsigned long:a(6)
+      _gPmInfo.uPDO.stFixSnk.bVolt
+                                  000ffa13         4   unsigned long:a(4)
+      _gPmInfo.uPDO.stFixSnk.bFrSwap
+                                  000ffa14         4   unsigned long:2(7)
+      _gPmInfo.uPDO.stFixSnk.bDrSwap
+                                  000ffa15         4   unsigned long:1(6)
+      _gPmInfo.uPDO.stFixSnk.bUsbComm
+                                  000ffa15         4   unsigned long:1(5)
+      _gPmInfo.uPDO.stFixSnk.bExtPwr
+                                  000ffa15         4   unsigned long:1(4)
+      _gPmInfo.uPDO.stFixSnk.bHiCap
+                                  000ffa15         4   unsigned long:1(3)
+      _gPmInfo.uPDO.stFixSnk.bDrp
+                                  000ffa15         4   unsigned long:1(2)
+      _gPmInfo.uPDO.stFixSnk.bSupply
+                                  000ffa15         4   unsigned long:2(0)
+    }
+      _gPmInfo.uPDO.stVarSrc
+                                  000ffa12         4
+    struct  {
+                                                   4
+      _gPmInfo.uPDO.stVarSrc.bMaxCur
+                                  000ffa12         4   unsigned long:a(6)
+      _gPmInfo.uPDO.stVarSrc.bMinVolt
+                                  000ffa13         4   unsigned long:a(4)
+      _gPmInfo.uPDO.stVarSrc.bMaxVolt
+                                  000ffa14         4   unsigned long:a(2)
+      _gPmInfo.uPDO.stVarSrc.bSupply
+                                  000ffa15         4   unsigned long:2(0)
+    }
+      _gPmInfo.uPDO.stVarSnk
+                                  000ffa12         4
+    struct  {
+                                                   4
+      _gPmInfo.uPDO.stVarSnk.bOpeCur
+                                  000ffa12         4   unsigned long:a(6)
+      _gPmInfo.uPDO.stVarSnk.bMinVolt
+                                  000ffa13         4   unsigned long:a(4)
+      _gPmInfo.uPDO.stVarSnk.bMaxVolt
+                                  000ffa14         4   unsigned long:a(2)
+      _gPmInfo.uPDO.stVarSnk.bSupply
+                                  000ffa15         4   unsigned long:2(0)
+    }
+      _gPmInfo.uPDO.stBatSrc
+                                  000ffa12         4
+    struct  {
+                                                   4
+      _gPmInfo.uPDO.stBatSrc.bMaxPwr
+                                  000ffa12         4   unsigned long:a(6)
+      _gPmInfo.uPDO.stBatSrc.bMinVolt
+                                  000ffa13         4   unsigned long:a(4)
+      _gPmInfo.uPDO.stBatSrc.bMaxVolt
+                                  000ffa14         4   unsigned long:a(2)
+      _gPmInfo.uPDO.stBatSrc.bSupply
+                                  000ffa15         4   unsigned long:2(0)
+    }
+      _gPmInfo.uPDO.stBatSnk
+                                  000ffa12         4
+    struct  {
+                                                   4
+      _gPmInfo.uPDO.stBatSnk.bOpePwr
+                                  000ffa12         4   unsigned long:a(6)
+      _gPmInfo.uPDO.stBatSnk.bMinVolt
+                                  000ffa13         4   unsigned long:a(4)
+      _gPmInfo.uPDO.stBatSnk.bMaxVolt
+                                  000ffa14         4   unsigned long:a(2)
+      _gPmInfo.uPDO.stBatSnk.bSupply
+                                  000ffa15         4   unsigned long:2(0)
+    }
+      _gPmInfo.uPDO.stPpsSrc
+                                  000ffa12         4
+    struct  {
+                                                   4
+      _gPmInfo.uPDO.stPpsSrc.bMaxCur
+                                  000ffa12         4   unsigned long:7(1)
+      _gPmInfo.uPDO.stPpsSrc.bMinVolt
+                                  000ffa13         4   unsigned long:8(0)
+      _gPmInfo.uPDO.stPpsSrc.bMaxVolt
+                                  000ffa14         4   unsigned long:8(7)
+      _gPmInfo.uPDO.stPpsSrc.bPps
+                                  000ffa15         4   unsigned long:2(2)
+      _gPmInfo.uPDO.stPpsSrc.bSupply
+                                  000ffa15         4   unsigned long:2(0)
+    }
+      _gPmInfo.uPDO.ucData
+                                  000ffa12         4   unsigned char
+      _gPmInfo.uPDO.usData
+                                  000ffa12         4   unsigned short
+      _gPmInfo.uPDO.ulData
+                                  000ffa12         4   unsigned long
+    }
+      _gPmInfo.uFarPDO
+                                  000ffa4a        38
+    union   {
+                                                   4
+      _gPmInfo.uFarPDO.stFixSrc
+                                  000ffa4a         4
+    struct  {
+                                                   4
+      _gPmInfo.uFarPDO.stFixSrc.bMaxCur
+                                  000ffa4a         4   unsigned long:a(6)
+      _gPmInfo.uFarPDO.stFixSrc.bVolt
+                                  000ffa4b         4   unsigned long:a(4)
+      _gPmInfo.uFarPDO.stFixSrc.bPeakCur
+                                  000ffa4c         4   unsigned long:2(2)
+      _gPmInfo.uFarPDO.stFixSrc.bUnChkSprt
+                                  000ffa4d         4   unsigned long:1(7)
+      _gPmInfo.uFarPDO.stFixSrc.bDrSwap
+                                  000ffa4d         4   unsigned long:1(6)
+      _gPmInfo.uFarPDO.stFixSrc.bUsbComm
+                                  000ffa4d         4   unsigned long:1(5)
+      _gPmInfo.uFarPDO.stFixSrc.bExtPwr
+                                  000ffa4d         4   unsigned long:1(4)
+      _gPmInfo.uFarPDO.stFixSrc.bSuspend
+                                  000ffa4d         4   unsigned long:1(3)
+      _gPmInfo.uFarPDO.stFixSrc.bDrp
+                                  000ffa4d         4   unsigned long:1(2)
+      _gPmInfo.uFarPDO.stFixSrc.bSupply
+                                  000ffa4d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uFarPDO.stFixSnk
+                                  000ffa4a         4
+    struct  {
+                                                   4
+      _gPmInfo.uFarPDO.stFixSnk.bOpeCur
+                                  000ffa4a         4   unsigned long:a(6)
+      _gPmInfo.uFarPDO.stFixSnk.bVolt
+                                  000ffa4b         4   unsigned long:a(4)
+      _gPmInfo.uFarPDO.stFixSnk.bFrSwap
+                                  000ffa4c         4   unsigned long:2(7)
+      _gPmInfo.uFarPDO.stFixSnk.bDrSwap
+                                  000ffa4d         4   unsigned long:1(6)
+      _gPmInfo.uFarPDO.stFixSnk.bUsbComm
+                                  000ffa4d         4   unsigned long:1(5)
+      _gPmInfo.uFarPDO.stFixSnk.bExtPwr
+                                  000ffa4d         4   unsigned long:1(4)
+      _gPmInfo.uFarPDO.stFixSnk.bHiCap
+                                  000ffa4d         4   unsigned long:1(3)
+      _gPmInfo.uFarPDO.stFixSnk.bDrp
+                                  000ffa4d         4   unsigned long:1(2)
+      _gPmInfo.uFarPDO.stFixSnk.bSupply
+                                  000ffa4d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uFarPDO.stVarSrc
+                                  000ffa4a         4
+    struct  {
+                                                   4
+      _gPmInfo.uFarPDO.stVarSrc.bMaxCur
+                                  000ffa4a         4   unsigned long:a(6)
+      _gPmInfo.uFarPDO.stVarSrc.bMinVolt
+                                  000ffa4b         4   unsigned long:a(4)
+      _gPmInfo.uFarPDO.stVarSrc.bMaxVolt
+                                  000ffa4c         4   unsigned long:a(2)
+      _gPmInfo.uFarPDO.stVarSrc.bSupply
+                                  000ffa4d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uFarPDO.stVarSnk
+                                  000ffa4a         4
+    struct  {
+                                                   4
+      _gPmInfo.uFarPDO.stVarSnk.bOpeCur
+                                  000ffa4a         4   unsigned long:a(6)
+      _gPmInfo.uFarPDO.stVarSnk.bMinVolt
+                                  000ffa4b         4   unsigned long:a(4)
+      _gPmInfo.uFarPDO.stVarSnk.bMaxVolt
+                                  000ffa4c         4   unsigned long:a(2)
+      _gPmInfo.uFarPDO.stVarSnk.bSupply
+                                  000ffa4d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uFarPDO.stBatSrc
+                                  000ffa4a         4
+    struct  {
+                                                   4
+      _gPmInfo.uFarPDO.stBatSrc.bMaxPwr
+                                  000ffa4a         4   unsigned long:a(6)
+      _gPmInfo.uFarPDO.stBatSrc.bMinVolt
+                                  000ffa4b         4   unsigned long:a(4)
+      _gPmInfo.uFarPDO.stBatSrc.bMaxVolt
+                                  000ffa4c         4   unsigned long:a(2)
+      _gPmInfo.uFarPDO.stBatSrc.bSupply
+                                  000ffa4d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uFarPDO.stBatSnk
+                                  000ffa4a         4
+    struct  {
+                                                   4
+      _gPmInfo.uFarPDO.stBatSnk.bOpePwr
+                                  000ffa4a         4   unsigned long:a(6)
+      _gPmInfo.uFarPDO.stBatSnk.bMinVolt
+                                  000ffa4b         4   unsigned long:a(4)
+      _gPmInfo.uFarPDO.stBatSnk.bMaxVolt
+                                  000ffa4c         4   unsigned long:a(2)
+      _gPmInfo.uFarPDO.stBatSnk.bSupply
+                                  000ffa4d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uFarPDO.stPpsSrc
+                                  000ffa4a         4
+    struct  {
+                                                   4
+      _gPmInfo.uFarPDO.stPpsSrc.bMaxCur
+                                  000ffa4a         4   unsigned long:7(1)
+      _gPmInfo.uFarPDO.stPpsSrc.bMinVolt
+                                  000ffa4b         4   unsigned long:8(0)
+      _gPmInfo.uFarPDO.stPpsSrc.bMaxVolt
+                                  000ffa4c         4   unsigned long:8(7)
+      _gPmInfo.uFarPDO.stPpsSrc.bPps
+                                  000ffa4d         4   unsigned long:2(2)
+      _gPmInfo.uFarPDO.stPpsSrc.bSupply
+                                  000ffa4d         4   unsigned long:2(0)
+    }
+      _gPmInfo.uFarPDO.ucData
+                                  000ffa4a         4   unsigned char
+      _gPmInfo.uFarPDO.usData
+                                  000ffa4a         4   unsigned short
+      _gPmInfo.uFarPDO.ulData
+                                  000ffa4a         4   unsigned long
+    }
+      _gPmInfo.ucPdoNum
+                                  000ffa82         2   unsigned char
+      _gPmInfo.ucFarPdoNum
+                                  000ffa84         2   unsigned char
+      _gPmInfo.ucState
+                                  000ffa86         1   unsigned char
+      _gPmInfo.ucNegoState
+                                  000ffa87         1   unsigned char
+      _gPmInfo.uStat
+                                  000ffa88         4
+    union   {
+                                                   4
+      _gPmInfo.uStat.bit
+                                  000ffa88         4
+    struct  {
+                                                   4
+      _gPmInfo.uStat.bit.bCurObjPos
+                                  000ffa88         4   unsigned long:3(5)
+      _gPmInfo.uStat.bit.bRdoType
+                                  000ffa88         4   unsigned long:2(3)
+      _gPmInfo.uStat.bit.bSndResp
+                                  000ffa88         4   unsigned long:1(2)
+      _gPmInfo.uStat.bit.bGotoMin
+                                  000ffa88         4   unsigned long:1(1)
+      _gPmInfo.uStat.bit.bWaitRcvRdo
+                                  000ffa88         4   unsigned long:1(0)
+      _gPmInfo.uStat.bit.bAutoDrSwap
+                                  000ffa89         4   unsigned long:2(6)
+      _gPmInfo.uStat.bit.bVcOwner
+                                  000ffa89         4   unsigned long:1(5)
+      _gPmInfo.uStat.bit.bRjctSwap
+                                  000ffa89         4   unsigned long:1(4)
+      _gPmInfo.uStat.bit.bUserAms
+                                  000ffa89         4   unsigned long:1(3)
+      _gPmInfo.uStat.bit.bRdyStable
+                                  000ffa89         4   unsigned long:1(2)
+      _gPmInfo.uStat.bit.bAutoPrSwap
+                                  000ffa89         4   unsigned long:2(0)
+      _gPmInfo.uStat.bit.bResult
+                                  000ffa8a         4   unsigned long:5(0)
+      _gPmInfo.uStat.bit.bVcRjct
+                                  000ffa8b         4   unsigned long:1(7)
+      _gPmInfo.uStat.bit.bPrSwap
+                                  000ffa8b         4   unsigned long:1(6)
+      _gPmInfo.uStat.bit.bPpsHalfOver
+                                  000ffa8b         4   unsigned long:1(5)
+      _gPmInfo.uStat.bit.bGetVcOwner
+                                  000ffa8b         4   unsigned long:1(4)
+      _gPmInfo.uStat.bit.bPpsTrans
+                                  000ffa8b         4   unsigned long:1(3)
+      _gPmInfo.uStat.bit.bSndAlrt
+                                  000ffa8b         4   unsigned long:1(2)
+    }
+      _gPmInfo.uStat.ucData
+                                  000ffa88         4   unsigned char
+    }
+      _gPmInfo.ucReqPe
+                                  000ffa8c         1   unsigned char
+      _gPmInfo.ucVdmWait
+                                  000ffa8d         1   unsigned char
+      _gPmInfo.ucNonPpsCapNum
+                                  000ffa8e         1   unsigned char
+      _gPmInfo.ucLastAlert
+                                  000ffa8f         1   unsigned char
+      _gPmInfo.ucReqSct
+                                  000ffa90         1   unsigned char
+      _gPmInfo.ucAlrtChgBat
+                                  000ffa91         1   unsigned char
+      _gPmInfo.ucSndAlrtReq
+                                  000ffa92         1   unsigned char
+      _gPmInfo.ucReserved
+                                  000ffa93         1   unsigned char
+      _gPmInfo.uProduct
+                                  000ffa94         2
+    union   {
+                                                   2
+      _gPmInfo.uProduct.bit
+                                  000ffa94         2
+    struct  {
+                                                   2
+      _gPmInfo.uProduct.bit.bUSBCommCapa
+                                  000ffa94         2   unsigned short:1(7)
+      _gPmInfo.uProduct.bit.bPrdctTypeDFP
+                                  000ffa94         2   unsigned short:3(6)
+      _gPmInfo.uProduct.bit.bModalOpeSup
+                                  000ffa95         2   unsigned short:1(5)
+      _gPmInfo.uProduct.bit.bPrdctTypeUFP
+                                  000ffa95         2   unsigned short:3(2)
+      _gPmInfo.uProduct.bit.bUSBDevice
+                                  000ffa95         2   unsigned short:1(1)
+      _gPmInfo.uProduct.bit.bUSBHost
+                                  000ffa95         2   unsigned short:1(0)
+    }
+      _gPmInfo.uProduct.usData
+                                  000ffa94         2   unsigned short
+    }
+    }
+  _gPeInfo
+                                  000ffa96         a   data ,g       1b1
+    struct  {
+                                                   a
+      _gPeInfo.ucState
+                                  000ffa96         1   unsigned char
+      _gPeInfo.uStat
+                                  000ffa97         1
+    union   {
+                                                   1
+      _gPeInfo.uStat.bit
+                                  000ffa97         1
+    struct  {
+                                                   1
+      _gPeInfo.uStat.bit.bSwapMode
+                                  000ffa97         1   unsigned char:2(6)
+      _gPeInfo.uStat.bit.bSrcCapCnt
+                                  000ffa97         1   unsigned char:6(0)
+    }
+      _gPeInfo.uStat.data
+                                  000ffa97         1   unsigned char
+    }
+      _gPeInfo.ucReqPm
+                                  000ffa98         1   unsigned char
+      _gPeInfo.ucReqPdm
+                                  000ffa99         1   unsigned char
+      _gPeInfo.ucReqReSnd
+                                  000ffa9a         1   unsigned char
+      _gPeInfo.ucReq_Bak
+                                  000ffa9b         1   unsigned char
+      _gPeInfo.usReSndWait
+                                  000ffa9c         2   unsigned short
+      _gPeInfo.ucState_Bak
+                                  000ffa9e         1   unsigned char
+      _gPeInfo.uAuth
+                                  000ffa9f         1
+    union   {
+                                                   1
+      _gPeInfo.uAuth.bit
+                                  000ffa9f         1
+    struct  {
+                                                   1
+      _gPeInfo.uAuth.bit.bAuthRslt
+                                  000ffa9f         1   unsigned char:3(5)
+      _gPeInfo.uAuth.bit.bAuthLibEn
+                                  000ffa9f         1   unsigned char:1(4)
+      _gPeInfo.uAuth.bit.bAmcuLibEn
+                                  000ffa9f         1   unsigned char:1(3)
+    }
+      _gPeInfo.uAuth.data
+                                  000ffa9f         1   unsigned char
+    }
+    }
+  _gPcInfo
+                                  000ffaa0         a   data ,g        5e
+    struct  {
+                                                   a
+      _gPcInfo.usWaitCnt
+                                  000ffaa0         2   unsigned short
+      _gPcInfo.usTargetVolt
+                                  000ffaa2         2   unsigned short
+      _gPcInfo.uStat
+                                  000ffaa4         2
+    union   {
+                                                   2
+      _gPcInfo.uStat.bit
+                                  000ffaa4         2
+    struct  {
+                                                   2
+      _gPcInfo.uStat.bit.bSnkPosCur
+                                  000ffaa4         2   unsigned short:3(5)
+      _gPcInfo.uStat.bit.bSrcPosCur
+                                  000ffaa4         2   unsigned short:3(2)
+      _gPcInfo.uStat.bit.bTrans
+                                  000ffaa4         2   unsigned short:2(0)
+      _gPcInfo.uStat.bit.bState
+                                  000ffaa5         2   unsigned short:1(7)
+      _gPcInfo.uStat.bit.bStableCnt
+                                  000ffaa5         2   unsigned short:5(2)
+    }
+      _gPcInfo.uStat.usData
+                                  000ffaa4         2   unsigned short
+    }
+      _gPcInfo.ucReq
+                                  000ffaa6         1   unsigned char
+      _gPcInfo.ucReqCur
+                                  000ffaa7         1   unsigned char
+      _gPcInfo.usPpsVolt
+                                  000ffaa8         2   unsigned short
+    }
+  _gEpdmInfo
+                                  000ffaaa       106   data ,g       10d
+    struct  {
+                                                 106
+      _gEpdmInfo.uEpdmHeader
+                                  000ffaaa         2
+    union   {
+                                                   2
+      _gEpdmInfo.uEpdmHeader.bit
+                                  000ffaaa         2
+    struct  {
+                                                   2
+      _gEpdmInfo.uEpdmHeader.bit.bChk
+                                  000ffaaa         2   unsigned short:1(7)
+      _gEpdmInfo.uEpdmHeader.bit.bChkNmb
+                                  000ffaaa         2   unsigned short:4(3)
+      _gEpdmInfo.uEpdmHeader.bit.bChkReq
+                                  000ffaaa         2   unsigned short:1(2)
+      _gEpdmInfo.uEpdmHeader.bit.bDataSize
+                                  000ffaaa         2   unsigned short:9(0)
+    }
+      _gEpdmInfo.uEpdmHeader.data
+                                  000ffaaa         2   unsigned short
+    }
+      _gEpdmInfo.edb
+                                  000ffaac       104
+    union   {
+                                                 104
+      _gEpdmInfo.edb.ucData
+                                  000ffaac       104   unsigned char
+      _gEpdmInfo.edb.usData
+                                  000ffaac       104   unsigned short
+    }
+    }
+  _gAnInfo
+                                  000ffbb0         c   data ,g        2c
+    struct  {
+                                                   c
+      _gAnInfo.usBaseVolt
+                                  000ffbb0         2   unsigned short
+      _gAnInfo.usVbusVolt
+                                  000ffbb2         2   unsigned short
+      _gAnInfo.usVbusVoltDirect
+                                  000ffbb4         2   unsigned short
+      _gAnInfo.usAn09Volt
+                                  000ffbb6         2   unsigned short
+      _gAnInfo.usAn10Volt
+                                  000ffbb8         2   unsigned short
+      _gAnInfo.uAnDb
+                                  000ffbba         2
+    union   {
+                                                   2
+      _gAnInfo.uAnDb.bit
+                                  000ffbba         2
+    struct  {
+                                                   2
+      _gAnInfo.uAnDb.bit.bReq
+                                  000ffbbb         2   unsigned short:2(4)
+      _gAnInfo.uAnDb.bit.bStat
+                                  000ffbbb         2   unsigned short:2(2)
+      _gAnInfo.uAnDb.bit.bVbusEn
+                                  000ffbbb         2   unsigned short:1(1)
+      _gAnInfo.uAnDb.bit.bActive
+                                  000ffbbb         2   unsigned short:1(0)
+    }
+      _gAnInfo.uAnDb.usData
+                                  000ffbba         2   unsigned short
+    }
+    }
+  _gPdc
+                                  000ffbbc         4   data ,g        43
+    struct  {
+                                                   4
+      _gPdc.uPdReq
+                                  000ffbbc         2
+    union   {
+                                                   2
+      _gPdc.uPdReq.bit
+                                  000ffbbc         2
+    struct  {
+                                                   2
+      _gPdc.uPdReq.bit.bSrcOn
+                                  000ffbbc         2   unsigned short:1(7)
+      _gPdc.uPdReq.bit.bSrcOff
+                                  000ffbbc         2   unsigned short:1(6)
+      _gPdc.uPdReq.bit.bSrcChg
+                                  000ffbbc         2   unsigned short:1(5)
+      _gPdc.uPdReq.bit.bSnkOn
+                                  000ffbbc         2   unsigned short:1(4)
+      _gPdc.uPdReq.bit.bSnkOff
+                                  000ffbbc         2   unsigned short:1(3)
+      _gPdc.uPdReq.bit.bSnkChg
+                                  000ffbbc         2   unsigned short:1(2)
+      _gPdc.uPdReq.bit.bVconnEn
+                                  000ffbbc         2   unsigned short:1(1)
+      _gPdc.uPdReq.bit.bVconnDis
+                                  000ffbbc         2   unsigned short:1(0)
+      _gPdc.uPdReq.bit.bGotoMin
+                                  000ffbbd         2   unsigned short:1(7)
+      _gPdc.uPdReq.bit.bExitMain
+                                  000ffbbd         2   unsigned short:1(0)
+    }
+      _gPdc.uPdReq.usData
+                                  000ffbbc         2   unsigned short
+    }
+      _gPdc.uPdEvent
+                                  000ffbbe         2
+    union   {
+                                                   2
+      _gPdc.uPdEvent.bit
+                                  000ffbbe         2
+    struct  {
+                                                   2
+      _gPdc.uPdEvent.bit.bPlugChg
+                                  000ffbbe         2   unsigned short:1(7)
+      _gPdc.uPdEvent.bit.bPrChg
+                                  000ffbbe         2   unsigned short:1(6)
+      _gPdc.uPdEvent.bit.bDrChg
+                                  000ffbbe         2   unsigned short:1(5)
+      _gPdc.uPdEvent.bit.bNewContract
+                                  000ffbbe         2   unsigned short:1(4)
+      _gPdc.uPdEvent.bit.bNewSrcCap
+                                  000ffbbe         2   unsigned short:1(3)
+      _gPdc.uPdEvent.bit.bNewRequest
+                                  000ffbbe         2   unsigned short:1(2)
+      _gPdc.uPdEvent.bit.bChkRcvPDM
+                                  000ffbbe         2   unsigned short:1(1)
+      _gPdc.uPdEvent.bit.bVrdChg
+                                  000ffbbf         2   unsigned short:1(5)
+      _gPdc.uPdEvent.bit.bNonPDCon
+                                  000ffbbf         2   unsigned short:1(4)
+      _gPdc.uPdEvent.bit.bHardReset
+                                  000ffbbf         2   unsigned short:1(3)
+      _gPdc.uPdEvent.bit.bSoftReset
+                                  000ffbbf         2   unsigned short:1(2)
+      _gPdc.uPdEvent.bit.bErr
+                                  000ffbbf         2   unsigned short:1(1)
+    }
+      _gPdc.uPdEvent.usData
+                                  000ffbbe         2   unsigned short
+    }
+    }
+  _gSndMess
+                                  000ffbc0         4   data ,g        1d
+    struct  {
+                                                   4
+      _gSndMess.uspData
+                                  000ffbc0         4   [near pointer]
+      _gSndMess.uInfo
+                                  000ffbc2         2
+    union   {
+                                                   2
+      _gSndMess.uInfo.bit
+                                  000ffbc2         2
+    struct  {
+                                                   2
+      _gSndMess.uInfo.bit.bLen
+                                  000ffbc2         2   unsigned short:9(7)
+      _gSndMess.uInfo.bit.bType
+                                  000ffbc3         2   unsigned short:5(2)
+      _gSndMess.uInfo.bit.bClass
+                                  000ffbc3         2   unsigned short:2(0)
+    }
+      _gSndMess.uInfo.usData
+                                  000ffbc2         2   unsigned short
+    }
+    }
+  _gRcvMess
+                                  000ffbc4         4   data ,g        18
+    struct  {
+                                                   4
+      _gRcvMess.uspData
+                                  000ffbc4         4   [near pointer]
+      _gRcvMess.uInfo
+                                  000ffbc6         2
+    union   {
+                                                   2
+      _gRcvMess.uInfo.bit
+                                  000ffbc6         2
+    struct  {
+                                                   2
+      _gRcvMess.uInfo.bit.bLen
+                                  000ffbc6         2   unsigned short:9(7)
+      _gRcvMess.uInfo.bit.bType
+                                  000ffbc7         2   unsigned short:5(2)
+      _gRcvMess.uInfo.bit.bClass
+                                  000ffbc7         2   unsigned short:2(0)
+    }
+      _gRcvMess.uInfo.usData
+                                  000ffbc6         2   unsigned short
+    }
+    }
+FILE=sec_ctrl
+                                  000ffbc8  000ffbeb        24
+  _gulsdata
+                                  000ffbc8         4   data ,g         a
+  _gsdata
+                                  000ffbcc         8   data ,g         9
+  _gSecData
+                                  000ffbd4         4   data ,g        2d
+    union   {
+                                                   4
+      _gSecData.stSMsg
+                                  000ffbd4         4
+    struct  {
+                                                   4
+      _gSecData.stSMsg.ucExtHdr
+                                  000ffbd4         1   unsigned char
+      _gSecData.stSMsg.ucChkSum
+                                  000ffbd5         1   unsigned char
+      _gSecData.stSMsg.usLen
+                                  000ffbd6         2   unsigned short
+    }
+    }
+  _gSecInfo
+                                  000ffbd8         e   data ,g        99
+    struct  {
+                                                   e
+      _gSecInfo.ucSt
+                                  000ffbd8         1   unsigned char
+      _gSecInfo.ucSubSt
+                                  000ffbd9         1   unsigned char
+      _gSecInfo.ucSecFlg
+                                  000ffbda         1   unsigned char
+      _gSecInfo.ucAuthRslt
+                                  000ffbdb         1   unsigned char
+      _gSecInfo.uMsgInfo
+                                  000ffbdc         1
+    union   {
+                                                   1
+      _gSecInfo.uMsgInfo.bit
+                                  000ffbdc         1
+    struct  {
+                                                   1
+      _gSecInfo.uMsgInfo.bit.bMsgType
+                                  000ffbdc         1   unsigned char:2(6)
+      _gSecInfo.uMsgInfo.bit.bGetDigestRslt
+                                  000ffbdc         1   unsigned char:2(4)
+      _gSecInfo.uMsgInfo.bit.bGetCertRslt
+                                  000ffbdc         1   unsigned char:2(2)
+      _gSecInfo.uMsgInfo.bit.bGetChalRslt
+                                  000ffbdc         1   unsigned char:2(0)
+    }
+      _gSecInfo.uMsgInfo.data
+                                  000ffbdc         1   unsigned char
+    }
+      _gSecInfo.ucErrInf
+                                  000ffbdd         1   unsigned char
+      _gSecInfo.usPID
+                                  000ffbde         2   unsigned short
+      _gSecInfo.usVID
+                                  000ffbe0         2   unsigned short
+      _gSecInfo.ulXID
+                                  000ffbe2         4   unsigned long
+    }
+  _gSecSqInfo
+                                  000ffbe6         6   data ,g        38
+    struct  {
+                                                   6
+      _gSecSqInfo.usPlCnt
+                                  000ffbe6         2   unsigned short
+      _gSecSqInfo.usRtyCnt
+                                  000ffbe8         2   unsigned short
+      _gSecSqInfo.usXferCnt
+                                  000ffbea         2   unsigned short
+    }
+
+SECTION=.stack_bss
+FILE=Obj\Release\cstart.obj
+                                  000ffda0  000ffe1f        80
+  _stackend
+                                  000ffda0         0   none ,l         1
+  _stacktop
+                                  000ffe20         0   none ,l         1
+
+SECTION=.sbss
+FILE=pd_main
+                                  000ffe20  000ffedf        c0
+  _gTmInfo
+                                  000ffe20        1a   data ,g         e
+    struct  {
+                                                  1a
+      _gTmInfo.usBaseCnt
+                                  000ffe20         2   unsigned short
+      _gTmInfo.usStartCnt
+                                  000ffe22        16   unsigned short
+      _gTmInfo.uStat
+                                  000ffe38         2
+    union   {
+                                                   2
+      _gTmInfo.uStat.bit
+                                  000ffe38         2
+    struct  {
+                                                   2
+      _gTmInfo.uStat.bit.bCntState0
+                                  000ffe38         2   unsigned short:1(7)
+      _gTmInfo.uStat.bit.bCntState1
+                                  000ffe38         2   unsigned short:1(6)
+      _gTmInfo.uStat.bit.bCntState2
+                                  000ffe38         2   unsigned short:1(5)
+      _gTmInfo.uStat.bit.bCntState3
+                                  000ffe38         2   unsigned short:1(4)
+      _gTmInfo.uStat.bit.bCntState4
+                                  000ffe38         2   unsigned short:1(3)
+      _gTmInfo.uStat.bit.bCntState5
+                                  000ffe38         2   unsigned short:1(2)
+      _gTmInfo.uStat.bit.bCntState6
+                                  000ffe38         2   unsigned short:1(1)
+      _gTmInfo.uStat.bit.bCntState7
+                                  000ffe38         2   unsigned short:1(0)
+      _gTmInfo.uStat.bit.bCntState8
+                                  000ffe39         2   unsigned short:1(7)
+      _gTmInfo.uStat.bit.bCntState9
+                                  000ffe39         2   unsigned short:1(6)
+      _gTmInfo.uStat.bit.bCntState10
+                                  000ffe39         2   unsigned short:1(5)
+      _gTmInfo.uStat.bit.bCntState11
+                                  000ffe39         2   unsigned short:1(4)
+      _gTmInfo.uStat.bit.bCntState12
+                                  000ffe39         2   unsigned short:1(3)
+      _gTmInfo.uStat.bit.bCntState13
+                                  000ffe39         2   unsigned short:1(2)
+      _gTmInfo.uStat.bit.bCntState14
+                                  000ffe39         2   unsigned short:1(1)
+      _gTmInfo.uStat.bit.bCntState15
+                                  000ffe39         2   unsigned short:1(0)
+    }
+      _gTmInfo.uStat.data
+                                  000ffe38         2   unsigned short
+    }
+    }
+  _gScInfo
+                                  000ffe3a         c   data ,g        f2
+    struct  {
+                                                   c
+      _gScInfo.ucReq
+                                  000ffe3a         1   unsigned char
+      _gScInfo.ucConnect
+                                  000ffe3b         1   unsigned char
+      _gScInfo.usBaseVolt
+                                  000ffe3c         2   unsigned short
+      _gScInfo.uStat
+                                  000ffe3e         4
+    union   {
+                                                   4
+      _gScInfo.uStat.bit
+                                  000ffe3e         4
+    struct  {
+                                                   4
+      _gScInfo.uStat.bit.bCurPR
+                                  000ffe3e         4   unsigned long:1(7)
+      _gScInfo.uStat.bit.bCurVC
+                                  000ffe3e         4   unsigned long:1(6)
+      _gScInfo.uStat.bit.bCc
+                                  000ffe3e         4   unsigned long:1(5)
+      _gScInfo.uStat.bit.bVbusm
+                                  000ffe3e         4   unsigned long:1(4)
+      _gScInfo.uStat.bit.bSrCp_p
+                                  000ffe3e         4   unsigned long:1(3)
+      _gScInfo.uStat.bit.bCableChk
+                                  000ffe3e         4   unsigned long:3(0)
+      _gScInfo.uStat.bit.bSctDis
+                                  000ffe3f         4   unsigned long:1(7)
+      _gScInfo.uStat.bit.bLowBatEn
+                                  000ffe3f         4   unsigned long:1(6)
+      _gScInfo.uStat.bit.bHrCnt
+                                  000ffe3f         4   unsigned long:2(4)
+      _gScInfo.uStat.bit.bManualStat
+                                  000ffe3f         4   unsigned long:4(0)
+      _gScInfo.uStat.bit.bStat
+                                  000ffe40         4   unsigned long:5(3)
+      _gScInfo.uStat.bit.bResetEn
+                                  000ffe40         4   unsigned long:1(2)
+      _gScInfo.uStat.bit.bActive
+                                  000ffe40         4   unsigned long:1(1)
+      _gScInfo.uStat.bit.bSleepTgl
+                                  000ffe40         4   unsigned long:1(0)
+      _gScInfo.uStat.bit.bStat_bak
+                                  000ffe41         4   unsigned long:5(3)
+      _gScInfo.uStat.bit.bVcDischg
+                                  000ffe41         4   unsigned long:1(2)
+      _gScInfo.uStat.bit.bIgnoreVbus_bak
+                                  000ffe41         4   unsigned long:1(1)
+      _gScInfo.uStat.bit.bTrySnkStat
+                                  000ffe41         4   unsigned long:1(0)
+    }
+      _gScInfo.uStat.data
+                                  000ffe3e         4   unsigned long
+    }
+      _gScInfo.usVbusCur
+                                  000ffe42         2   unsigned short
+      _gScInfo.ucVrd
+                                  000ffe44         1   unsigned char
+      _gScInfo.ucDiCnt
+                                  000ffe45         1   unsigned char
+    }
+  _gPdmInfo
+                                  000ffe46        82   data ,g       1a2
+    struct  {
+                                                  82
+      _gPdmInfo.ucReq
+                                  000ffe46         1   unsigned char
+      _gPdmInfo.ucState
+                                  000ffe47         1   unsigned char
+      _gPdmInfo.usRcvMess
+                                  000ffe48         2   unsigned short
+      _gPdmInfo.usSndMess
+                                  000ffe4a         2   unsigned short
+      _gPdmInfo.usRcvMess_Bak
+                                  000ffe4c         2   unsigned short
+      _gPdmInfo.ucResult
+                                  000ffe4e         1   unsigned char
+      _gPdmInfo.uPdmStat
+                                  000ffe4f         1
+    union   {
+                                                   1
+      _gPdmInfo.uPdmStat.bit
+                                  000ffe4f         1
+    struct  {
+                                                   1
+      _gPdmInfo.uPdmStat.bit.bRdyReq
+                                  000ffe4f         1   unsigned char:1(7)
+      _gPdmInfo.uPdmStat.bit.bPdConDev
+                                  000ffe4f         1   unsigned char:1(6)
+      _gPdmInfo.uPdmStat.bit.bRcvChkPe
+                                  000ffe4f         1   unsigned char:1(5)
+      _gPdmInfo.uPdmStat.bit.bPdConnect
+                                  000ffe4f         1   unsigned char:1(4)
+      _gPdmInfo.uPdmStat.bit.bUnChkSprt
+                                  000ffe4f         1   unsigned char:1(3)
+      _gPdmInfo.uPdmStat.bit.bReqSndChk
+                                  000ffe4f         1   unsigned char:1(2)
+      _gPdmInfo.uPdmStat.bit.bRcvChkReq
+                                  000ffe4f         1   unsigned char:1(1)
+      _gPdmInfo.uPdmStat.bit.bRcvMess
+                                  000ffe4f         1   unsigned char:1(0)
+    }
+      _gPdmInfo.uPdmStat.data
+                                  000ffe4f         1   unsigned char
+    }
+      _gPdmInfo.ucRcvObjNum
+                                  000ffe50         2   unsigned char
+      _gPdmInfo.ucSndObjNum
+                                  000ffe52         2   unsigned char
+      _gPdmInfo.usRcvObj
+                                  000ffe54        38   unsigned short
+      _gPdmInfo.usSndObj
+                                  000ffe8c        38   unsigned short
+      _gPdmInfo.usProStaHw_Bak
+                                  000ffec4         2   unsigned short
+      _gPdmInfo.ucTxSpecSOP
+                                  000ffec6         1   unsigned char
+      _gPdmInfo.ucTxSpecSOPP
+                                  000ffec7         1   unsigned char
+    }
+  _gPdCore
+                                  000ffec8        16   data ,g        e7
+    struct  {
+                                                  16
+      _gPdCore.uPdSctConf
+                                  000ffec8         2
+    union   {
+                                                   2
+      _gPdCore.uPdSctConf.bit
+                                  000ffec8         2
+    struct  {
+                                                   2
+      _gPdCore.uPdSctConf.bit.bTryMode
+                                  000ffec8         2   unsigned short:1(7)
+      _gPdCore.uPdSctConf.bit.bTry
+                                  000ffec8         2   unsigned short:1(6)
+      _gPdCore.uPdSctConf.bit.bSnk
+                                  000ffec8         2   unsigned short:1(5)
+      _gPdCore.uPdSctConf.bit.bSrc
+                                  000ffec8         2   unsigned short:1(4)
+      _gPdCore.uPdSctConf.bit.bUfp
+                                  000ffec8         2   unsigned short:1(3)
+      _gPdCore.uPdSctConf.bit.bDfp
+                                  000ffec8         2   unsigned short:1(2)
+      _gPdCore.uPdSctConf.bit.bSwapEn
+                                  000ffec8         2   unsigned short:1(1)
+      _gPdCore.uPdSctConf.bit.bNonPD
+                                  000ffec8         2   unsigned short:1(0)
+      _gPdCore.uPdSctConf.bit.bVconnSprt
+                                  000ffec9         2   unsigned short:1(7)
+      _gPdCore.uPdSctConf.bit.bPwrAcs
+                                  000ffec9         2   unsigned short:1(6)
+      _gPdCore.uPdSctConf.bit.bDebugAcs
+                                  000ffec9         2   unsigned short:1(5)
+      _gPdCore.uPdSctConf.bit.bAudioAcs
+                                  000ffec9         2   unsigned short:1(4)
+      _gPdCore.uPdSctConf.bit.bDrd
+                                  000ffec9         2   unsigned short:1(2)
+      _gPdCore.uPdSctConf.bit.bDrp
+                                  000ffec9         2   unsigned short:1(1)
+      _gPdCore.uPdSctConf.bit.bToggle
+                                  000ffec9         2   unsigned short:1(0)
+    }
+      _gPdCore.uPdSctConf.usData
+                                  000ffec8         2   unsigned short
+    }
+      _gPdCore.uPdSrcConf
+                                  000ffeca         2
+    union   {
+                                                   2
+      _gPdCore.uPdSrcConf.bit
+                                  000ffeca         2
+    struct  {
+                                                   2
+      _gPdCore.uPdSrcConf.bit.bMaxPwr
+                                  000ffeca         2   unsigned short:a(6)
+      _gPdCore.uPdSrcConf.bit.bMaxPdo
+                                  000ffecb         2   unsigned short:3(3)
+      _gPdCore.uPdSrcConf.bit.bNoPdCur
+                                  000ffecb         2   unsigned short:2(1)
+      _gPdCore.uPdSrcConf.bit.bIntrusive
+                                  000ffecb         2   unsigned short:1(0)
+    }
+      _gPdCore.uPdSrcConf.usData
+                                  000ffeca         2   unsigned short
+    }
+      _gPdCore.uPdSnkConf
+                                  000ffecc         2
+    union   {
+                                                   2
+      _gPdCore.uPdSnkConf.bit
+                                  000ffecc         2
+    struct  {
+                                                   2
+      _gPdCore.uPdSnkConf.bit.bMaxPwr
+                                  000ffecc         2   unsigned short:a(6)
+      _gPdCore.uPdSnkConf.bit.bMaxPdo
+                                  000ffecd         2   unsigned short:3(3)
+      _gPdCore.uPdSnkConf.bit.bIntrusive
+                                  000ffecd         2   unsigned short:1(0)
+    }
+      _gPdCore.uPdSnkConf.usData
+                                  000ffecc         2   unsigned short
+    }
+      _gPdCore.uPdSysConf
+                                  000ffece         2
+    union   {
+                                                   2
+      _gPdCore.uPdSysConf.bit
+                                  000ffece         2
+    struct  {
+                                                   2
+      _gPdCore.uPdSysConf.bit.bAutoDrSwap
+                                  000ffece         2   unsigned short:2(6)
+      _gPdCore.uPdSysConf.bit.bAutoPrSwap
+                                  000ffece         2   unsigned short:2(4)
+      _gPdCore.uPdSysConf.bit.bFrSwap
+                                  000ffece         2   unsigned short:2(2)
+      _gPdCore.uPdSysConf.bit.bDisAutoVcSwap
+                                  000ffece         2   unsigned short:1(1)
+      _gPdCore.uPdSysConf.bit.bChkMode
+                                  000ffece         2   unsigned short:1(0)
+      _gPdCore.uPdSysConf.bit.bUnCnstPwr
+                                  000ffecf         2   unsigned short:1(7)
+      _gPdCore.uPdSysConf.bit.bExtPwr
+                                  000ffecf         2   unsigned short:1(6)
+      _gPdCore.uPdSysConf.bit.bExtPwrType
+                                  000ffecf         2   unsigned short:1(5)
+      _gPdCore.uPdSysConf.bit.bIntrPwr
+                                  000ffecf         2   unsigned short:1(4)
+      _gPdCore.uPdSysConf.bit.bIntrPwrType
+                                  000ffecf         2   unsigned short:1(3)
+      _gPdCore.uPdSysConf.bit.bOverCur
+                                  000ffecf         2   unsigned short:1(2)
+      _gPdCore.uPdSysConf.bit.bOverVolt
+                                  000ffecf         2   unsigned short:1(1)
+      _gPdCore.uPdSysConf.bit.bOverTemp
+                                  000ffecf         2   unsigned short:1(0)
+    }
+      _gPdCore.uPdSysConf.usData
+                                  000ffece         2   unsigned short
+    }
+      _gPdCore.uPdStatus
+                                  000ffed0         2
+    union   {
+                                                   2
+      _gPdCore.uPdStatus.bit
+                                  000ffed0         2
+    struct  {
+                                                   2
+      _gPdCore.uPdStatus.bit.bPlug
+                                  000ffed0         2   unsigned short:1(7)
+      _gPdCore.uPdStatus.bit.bPR
+                                  000ffed0         2   unsigned short:1(6)
+      _gPdCore.uPdStatus.bit.bDR
+                                  000ffed0         2   unsigned short:1(5)
+      _gPdCore.uPdStatus.bit.bCc
+                                  000ffed0         2   unsigned short:1(4)
+      _gPdCore.uPdStatus.bit.bSOPP
+                                  000ffed0         2   unsigned short:1(3)
+      _gPdCore.uPdStatus.bit.bSOPPP
+                                  000ffed0         2   unsigned short:1(2)
+      _gPdCore.uPdStatus.bit.bComRevPDC
+                                  000ffed0         2   unsigned short:1(1)
+      _gPdCore.uPdStatus.bit.bComRevCP
+                                  000ffed0         2   unsigned short:1(0)
+      _gPdCore.uPdStatus.bit.bNonPD
+                                  000ffed1         2   unsigned short:1(7)
+      _gPdCore.uPdStatus.bit.bMissCap
+                                  000ffed1         2   unsigned short:1(6)
+      _gPdCore.uPdStatus.bit.bRjctNego
+                                  000ffed1         2   unsigned short:1(5)
+      _gPdCore.uPdStatus.bit.bPwrAcs
+                                  000ffed1         2   unsigned short:1(4)
+      _gPdCore.uPdStatus.bit.bDebugAcs
+                                  000ffed1         2   unsigned short:1(3)
+      _gPdCore.uPdStatus.bit.bAudioAcs
+                                  000ffed1         2   unsigned short:1(2)
+      _gPdCore.uPdStatus.bit.bPwrTrans
+                                  000ffed1         2   unsigned short:1(1)
+      _gPdCore.uPdStatus.bit.bRdyIdle
+                                  000ffed1         2   unsigned short:1(0)
+    }
+      _gPdCore.uPdStatus.usData
+                                  000ffed0         2   unsigned short
+    }
+      _gPdCore.uPdCtrl
+                                  000ffed2         2
+    union   {
+                                                   2
+      _gPdCore.uPdCtrl.bit
+                                  000ffed2         2
+    struct  {
+                                                   2
+      _gPdCore.uPdCtrl.bit.bCmd
+                                  000ffed2         2   unsigned short:8(0)
+      _gPdCore.uPdCtrl.bit.bTarget
+                                  000ffed3         2   unsigned short:2(6)
+      _gPdCore.uPdCtrl.bit.bLastResult
+                                  000ffed3         2   unsigned short:4(2)
+    }
+      _gPdCore.uPdCtrl.usData
+                                  000ffed2         2   unsigned short
+    }
+      _gPdCore.uPdFlg
+                                  000ffed4         1
+    union   {
+                                                   1
+      _gPdCore.uPdFlg.bit
+                                  000ffed4         1
+    struct  {
+                                                   1
+      _gPdCore.uPdFlg.bit.bPpsRTF
+                                  000ffed4         1   unsigned char:3(5)
+      _gPdCore.uPdFlg.bit.bTemperatureStatus
+                                  000ffed4         1   unsigned char:2(3)
+    }
+      _gPdCore.uPdFlg.ucData
+                                  000ffed4         1   unsigned char
+    }
+      _gPdCore.ucActive
+                                  000ffed5         1   unsigned char
+      _gPdCore.ucPpsCur
+                                  000ffed6         1   unsigned char
+      _gPdCore.ucInputBat
+                                  000ffed7         1   unsigned char
+      _gPdCore.usReqVolt
+                                  000ffed8         2   unsigned short
+      _gPdCore.usReqCur
+                                  000ffeda         2   unsigned short
+      _gPdCore.ucTemperature
+                                  000ffedc         1   unsigned char
+      _gPdCore.ucPowerStatus
+                                  000ffedd         1   unsigned char
+    }
+  _gProtInfo
+                                  000ffede         2   data ,g        21
+    union   {
+                                                   2
+      _gProtInfo.bit
+                                  000ffede         2
+    struct  {
+                                                   2
+      _gProtInfo.bit.bOcpSetFlg
+                                  000ffede         2   unsigned short:1(7)
+      _gProtInfo.bit.bOcpClrFlg
+                                  000ffede         2   unsigned short:1(6)
+      _gProtInfo.bit.bOcpLock
+                                  000ffede         2   unsigned short:1(5)
+      _gProtInfo.bit.bOverCur_Bak
+                                  000ffede         2   unsigned short:1(4)
+      _gProtInfo.bit.bOvpSetFlg
+                                  000ffede         2   unsigned short:1(3)
+      _gProtInfo.bit.bOvpClrFlg
+                                  000ffede         2   unsigned short:1(2)
+      _gProtInfo.bit.bOvpLock
+                                  000ffede         2   unsigned short:1(1)
+      _gProtInfo.bit.bOverVolt_Bak
+                                  000ffede         2   unsigned short:1(0)
+      _gProtInfo.bit.bOtpSetFlg
+                                  000ffedf         2   unsigned short:1(7)
+      _gProtInfo.bit.bOtpClrFlg
+                                  000ffedf         2   unsigned short:1(6)
+      _gProtInfo.bit.bOtpLock
+                                  000ffedf         2   unsigned short:1(5)
+      _gProtInfo.bit.bOverTemp_Bak
+                                  000ffedf         2   unsigned short:1(4)
+      _gProtInfo.bit.bSetProt
+                                  000ffedf         2   unsigned short:1(3)
+      _gProtInfo.bit.bClrProt
+                                  000ffedf         2   unsigned short:1(2)
+      _gProtInfo.bit.bProtLock
+                                  000ffedf         2   unsigned short:1(1)
+      _gProtInfo.bit.bProtReset
+                                  000ffedf         2   unsigned short:1(0)
+    }
+      _gProtInfo.bit4
+                                  000ffede         2
+    struct  {
+                                                   2
+      _gProtInfo.bit4.bOcpFlg
+                                  000ffede         2   unsigned short:4(4)
+      _gProtInfo.bit4.bOvpFlg
+                                  000ffede         2   unsigned short:4(0)
+      _gProtInfo.bit4.bOtpFlg
+                                  000ffedf         2   unsigned short:4(4)
+      _gProtInfo.bit4.bProtFlg
+                                  000ffedf         2   unsigned short:4(0)
+    }
+      _gProtInfo.usData
+                                  000ffede         2   unsigned short
+    }
+
+Absolute value symbols
+FILE=Obj\Release\isl95338.obj
+  @$IMM_2A
+                                  0000002a         0   none ,l         1
+FILE=pol_eng
+  @$IMM_1C
+                                  0000001c         0   none ,l         1
+  @$IMM_1A
+                                  0000001a         0   none ,l         1
+FILE=rlink_generates_04
+  __s.text
+                                  000022cb         0   none ,g         0
+  __e.text
+                                  00002437         0   none ,g         0
+  __s.textf
+                                  00002447         0   none ,g         0
+  __e.textf
+                                  0000d0c4         0   none ,g         0
+  __s.const
+                                  00002010         0   none ,g         0
+  __e.const
+                                  000022cb         0   none ,g         0
+  __s.constf
+                                  0000d0c4         0   none ,g         0
+  __e.constf
+                                  0000d0c4         0   none ,g         0
+  __s.data
+                                  0000d0c4         0   none ,g         0
+  __e.data
+                                  0000d0c4         0   none ,g         0
+  __s.sdata
+                                  0000d0c4         0   none ,g         0
+  __e.sdata
+                                  0000d0c4         0   none ,g         0
+  __s.bss
+                                  000ff958         0   none ,g         0
+  __e.bss
+                                  000ffbec         0   none ,g         0
+  __s.sbss
+                                  000ffe20         0   none ,g         0
+  __e.sbss
+                                  000ffee0         0   none ,g         0
+  __s.dataR
+                                  000ff958         0   none ,g         0
+  __e.dataR
+                                  000ff958         0   none ,g         0
+  __s.sdataR
+                                  000ffe20         0   none ,g         0
+  __e.sdataR
+                                  000ffe20         0   none ,g         0
+  __s.stack_bss
+                                  000ffda0         0   none ,g         0
+  __e.stack_bss
+                                  000ffe20         0   none ,g         0
+  __s.RLIB
+                                  00002437         0   none ,g         0
+  __e.RLIB
+                                  00002447         0   none ,g         0
+  __s.SLIB
+                                  00002447         0   none ,g         0
+  __e.SLIB
+                                  00002447         0   none ,g         0
+  __s.jtext_AT2000
+                                  00002000         0   none ,g         0
+  __e.jtext_AT2000
+                                  0000200e         0   none ,g         0
+  __s.jtext_ATFBFC
+                                  0000fbfc         0   none ,g         0
+  __e.jtext_ATFBFC
+                                  0000fbfe         0   none ,g         0
+  __s.bss_ATFF900
+                                  000ff900         0   none ,g         0
+  __e.bss_ATFF900
+                                  000ff958         0   none ,g         0
+  __s.option_byte
+                                  000000c0         0   none ,g         0
+  __e.option_byte
+                                  000000c4         0   none ,g         0
+  __s.security_id
+                                  000000c4         0   none ,g         0
+  __e.security_id
+                                  000000ce         0   none ,g         0
+  __s.vect
+                                  00000000         0   none ,g         0
+  __e.vect
+                                  00000080         0   none ,g         0
+  __RAM_ADDR_START
+                                  000ff900         0   none ,g         0
+  __RAM_ADDR_END
+                                  000ffee0         0   none ,g         0
+  __STACK_ADDR_START
+                                  000ffda0         0   none ,g         0
+  __STACK_ADDR_END
+                                  000ffbec         0   none ,g         0
+
+*** Unfilled Areas ***
+
+AREA                                START    END
+
+*** Delete Symbols ***
+
+SYMBOL                                SIZE    INFO
+
+*** Variable Vector Table List ***
+
+ADDRESS  SYMBOL/ADDRESS
+00       _start
+02       
+04       
+06       
+08       _r_INTP0_interrupt@1
+0a       _r_INTP1_interrupt@1
+0c       _r_INTP2_interrupt@1
+0e       _r_INTP3_interrupt@1
+10       _r_INTP4_interrupt@1
+12       _r_INTP5_interrupt@1
+14       _r_INTP6_interrupt@1
+16       
+18       
+1a       
+1c       
+1e       
+20       _r_INTTM00_interrupt@1
+22       
+24       
+26       
+28       
+2a       _r_INTTM01_interrupt@1
+2c       _r_INTTM02_interrupt@1
+2e       _r_INTTM03_interrupt@1
+30       
+32       
+34       _r_INTAD_interrupt@1
+36       
+38       _r_INTIT_interrupt@1
+3a       
+3c       _r_PDCTRL_interrupt@1
+3e       _r_INTSMBMST_interrupt@1
+40       _r_INTSMBLSV_interrupt@1
+42       _r_INTTCSCNT_interrupt@1
+44       
+46       
+48       
+4a       
+4c       _r_INTP7_interrupt@1
+4e       _r_INTIICA0_interrupt@1
+50       
+52       
+54       
+56       
+58       
+5a       
+5c       
+5e       
+60       
+62       
+64       
+66       
+68       
+6a       
+6c       
+6e       
+70       
+72       
+74       
+76       
+78       
+7a       
+7c       
+7e       

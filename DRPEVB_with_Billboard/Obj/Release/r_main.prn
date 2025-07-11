@@ -1,0 +1,227 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   Billboard\bbc_main.c
+00000000                        5  #@   Billboard\crc16.c
+00000000                        6  #@   Billboard\swusb.c
+00000000                        7  #@   Billboard\swusb_io.c
+00000000                        8  #@   ..\..\Core\r_systeminit.c
+00000000                        9  #@   ..\..\PDC\smbm_ctrl.c
+00000000                       10  #@   ..\..\PDC\user_timer.c
+00000000                       11  #@   PDC\dcdc_ctrl.c
+00000000                       12  #@   PDC\led_ctrl.c
+00000000                       13  #@   PDC\sw_ctrl.c
+00000000                       14  #@   PDC\user_main.c
+00000000                       15  #@   PDC\user_main_protection.c
+00000000                       16  #@   pd_defs.c
+00000000                       17  #@   r_main.c
+00000000                       18  #@   R_Main_UserInit.c
+00000000                       19  #@   PDC\subdev\isl95338.c
+00000000                       20  #@   PDC\subdev\subdev_ctrl.c
+00000000                       21  #@   -cpu=S3
+00000000                       22  #@   -obj_path=Obj\Release
+00000000                       23  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       24  #@   -g
+00000000                       25  #@   -Osame_code
+00000000                       26  #@   -I Billboard
+00000000                       27  #@   -I PDC\subdev
+00000000                       28  #@   -I PDC
+00000000                       29  #@   -I .
+00000000                       30  #@   -I ..\..\PDC\Lib
+00000000                       31  #@   -I ..\..\PDC
+00000000                       32  #@   -I ..\..\Core
+00000000                       33  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       34  #@   -asm_path=Obj\Release
+00000000                       35  #@   -asmopt=-prn_path=Obj\Release
+00000000                       36  #@   -c
+00000000                       37  #@   -MAKEUD=Obj\Release
+00000000                       38  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_c0b7818164c94c2192d757ba2474eae6iiaofrot.nwu
+00000000                       39  #@  compiled at Tue May 06 10:51:15 2025
+00000000                       40  
+00000000                       41  	.EXTERN _gPdc
+00000000                       42  	.EXTERN _gDCInfo
+00000000                       43  	.EXTERN _gSubdevInfo
+00000000                       44  	.PUBLIC _led
+00000000                       45  	.PUBLIC _main
+00000000                       46  	.EXTERN _R_MAIN_UserInit
+00000000                       47  	.EXTERN _bbc_main
+00000000                       48  	.EXTERN _pdc_active
+00000000                       49  	.EXTERN _pd_core
+00000000                       50  	.EXTERN _led_ctrl
+00000000                       51  	.EXTERN _sw_ctrl
+00000000                       52  	.EXTERN _user_func_event
+00000000                       53  	.EXTERN _user_func_chk_device
+00000000                       54  	.EXTERN _tm_12bit_start_gtimer
+00000000                       55  	.EXTERN _pdc_get_idle_time
+00000000                       56  	.EXTERN _tm_12bit_intr_hdlr
+00000000                       57  	.EXTERN _tm_12tm_stop_gtimer
+00000000                       58  	.EXTERN _pdc_stop
+00000000                       59  	.EXTERN _pdc_run
+00000000                       60  	.EXTERN _dcdc_ctrl
+00000000                       61  	.EXTERN _subdev_ctrl
+00000000                       62  	.EXTERN _smbm_ctrl
+00000000                       63  	.EXTERN _swusb_proc
+00000000                       64  
+00000000                       65  	.SECTION .textf,TEXTF
+00000000                       66  	.TYPE _led,function,.LFE1-_led
+00000000                       67  _led:
+00000000                       68  	.STACK _led = 4
+00000000                       69  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/billboard.h", 12
+00000000 718C                  70  	mov1 CY, a.0
+00000002                       71  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/billboard.h", 13
+00000002 8D08                  72  	mov a, 0xFFF08
+00000004 71A9                  73  	mov1 a.2, CY
+00000006 9D08                  74  	mov 0xFFF08, a
+00000008 D7                    75  	ret
+00000009                       76  .LFE1:
+00000009                       77  	.TYPE _main,function,.LFE2-_main
+00000009                       78  _main:
+00000009                       79  	.STACK _main = 6
+00000009                       80  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 70
+00000009 C7                    81  	push hl
+0000000A                       82  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 73
+0000000A FC000000              83  	call !!_R_MAIN_UserInit
+0000000E                       84  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 74
+0000000E FC000000              85  	call !!_bbc_main
+00000012                       86  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 77
+00000012 FC000000              87  	call !!_pdc_active
+00000016 EE0000                88  	br $!.BB@LABEL@2_16
+00000019                       89  .BB@LABEL@2_1:	; if_break_bb
+00000019                       90  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 88
+00000019 AF0000                91  	movw ax, !LOWW(_gPdc)
+0000001C 6168                  92  	or a, x
+0000001E DF00                  93  	bnz $.BB@LABEL@2_7
+00000020                       94  .BB@LABEL@2_2:	; bb23
+00000020 AF0000                95  	movw ax, !LOWW(_gPdc+0x00002)
+00000023 6168                  96  	or a, x
+00000025 DF00                  97  	bnz $.BB@LABEL@2_7
+00000027                       98  .BB@LABEL@2_3:	; bb33
+00000027 AF0000                99  	movw ax, !LOWW(_gDCInfo)
+0000002A 6168                 100  	or a, x
+0000002C DF00                 101  	bnz $.BB@LABEL@2_7
+0000002E                      102  .BB@LABEL@2_4:	; bb44
+0000002E AF0000               103  	movw ax, !LOWW(_gDCInfo+0x00002)
+00000031 08                   104  	xch a, x
+00000032 5CF0                 105  	and a, #0xF0
+00000034 08                   106  	xch a, x
+00000035 6168                 107  	or a, x
+00000037 DF00                 108  	bnz $.BB@LABEL@2_7
+00000039                      109  .BB@LABEL@2_5:	; bb56
+00000039 51F0                 110  	mov a, #0xF0
+0000003B 5F0000               111  	and a, !LOWW(_gDCInfo+0x00005)
+0000003E D1                   112  	cmp0 a
+0000003F DD00                 113  	bz $.BB@LABEL@2_7
+00000041                      114  .BB@LABEL@2_6:	; bb69
+00000041 D50000               115  	cmp0 !LOWW(_gSubdevInfo+0x00002)
+00000044 DD00                 116  	bz $.BB@LABEL@2_8
+00000046                      117  .BB@LABEL@2_7:	; if_then_bb82
+00000046                      118  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 94
+00000046 FC000000             119  	call !!_user_func_event
+0000004A EF00                 120  	br $.BB@LABEL@2_15
+0000004C                      121  .BB@LABEL@2_8:	; if_else_bb
+0000004C                      122  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 97
+0000004C FC000000             123  	call !!_user_func_chk_device
+00000050 70                   124  	mov x, a
+00000051 8800                 125  	mov a, [sp+0x00]
+00000053 6158                 126  	and a, x
+00000055                      127  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 102
+00000055 91                   128  	dec a
+00000056 D1                   129  	cmp0 a
+00000057 DD00                 130  	bz $.BB@LABEL@2_12
+00000059                      131  .BB@LABEL@2_9:	; if_else_bb
+00000059 0CFE                 132  	add a, #0xFE
+0000005B D1                   133  	cmp0 a
+0000005C DD00                 134  	bz $.BB@LABEL@2_13
+0000005E                      135  .BB@LABEL@2_10:	; if_else_bb
+0000005E 4C04                 136  	cmp a, #0x04
+00000060 DF00                 137  	bnz $.BB@LABEL@2_15
+00000062                      138  .BB@LABEL@2_11:	; switch_clause_bb97
+00000062                      139  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 112
+00000062 FC000000             140  	call !!_pdc_stop
+00000066                      141  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 113
+00000066 FC000000             142  	call !!_pdc_get_idle_time
+0000006A 12                   143  	movw bc, ax
+0000006B 5100                 144  	mov a, #LOW(HIGHW(_tm_12bit_intr_hdlr))
+0000006D 318E                 145  	shrw ax, 8+0x00000
+0000006F 14                   146  	movw de, ax
+00000070 13                   147  	movw ax, bc
+00000071 320000               148  	movw bc, #LOWW(_tm_12bit_intr_hdlr)
+00000074 FC000000             149  	call !!_tm_12bit_start_gtimer
+00000078                      150  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 114
+00000078 61FD                 151  	stop
+0000007A                      152  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 115
+0000007A FC000000             153  	call !!_pdc_run
+0000007E EF00                 154  	br $.BB@LABEL@2_14
+00000080                      155  .BB@LABEL@2_12:	; switch_clause_bb
+00000080                      156  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 104
+00000080 61ED                 157  	halt
+00000082 EF00                 158  	br $.BB@LABEL@2_15
+00000084                      159  .BB@LABEL@2_13:	; switch_clause_bb92
+00000084                      160  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 107
+00000084 FC000000             161  	call !!_pdc_get_idle_time
+00000088 12                   162  	movw bc, ax
+00000089 5100                 163  	mov a, #LOW(HIGHW(_tm_12bit_intr_hdlr))
+0000008B 318E                 164  	shrw ax, 8+0x00000
+0000008D 14                   165  	movw de, ax
+0000008E 13                   166  	movw ax, bc
+0000008F 320000               167  	movw bc, #LOWW(_tm_12bit_intr_hdlr)
+00000092 FC000000             168  	call !!_tm_12bit_start_gtimer
+00000096                      169  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 108
+00000096 61ED                 170  	halt
+00000098                      171  .BB@LABEL@2_14:	; switch_clause_bb97
+00000098 FC000000             172  	call !!_tm_12tm_stop_gtimer
+0000009C                      173  .BB@LABEL@2_15:	; if_break_bb103
+0000009C                      174  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 122
+0000009C FC000000             175  	call !!_dcdc_ctrl
+000000A0                      176  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 123
+000000A0 FC000000             177  	call !!_subdev_ctrl
+000000A4                      178  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 124
+000000A4 FC000000             179  	call !!_smbm_ctrl
+000000A8                      180  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 125
+000000A8 FC000000             181  	call !!_swusb_proc
+000000AC                      182  .BB@LABEL@2_16:	; bb104
+000000AC                      183  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 79
+000000AC FC000000             184  	call !!_pd_core
+000000B0 9801                 185  	mov [sp+0x01], a
+000000B2                      186  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 81
+000000B2 FC000000             187  	call !!_led_ctrl
+000000B6 9800                 188  	mov [sp+0x00], a
+000000B8                      189  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 82
+000000B8 FC000000             190  	call !!_sw_ctrl
+000000BC 73                   191  	mov b, a
+000000BD 8801                 192  	mov a, [sp+0x01]
+000000BF 70                   193  	mov x, a
+000000C0 8800                 194  	mov a, [sp+0x00]
+000000C2                      195  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 81
+000000C2 6150                 196  	and x, a
+000000C4 63                   197  	mov a, b
+000000C5                      198  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 82
+000000C5 6158                 199  	and a, x
+000000C7 9800                 200  	mov [sp+0x00], a
+000000C9                      201  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 84
+000000C9 8F0000               202  	mov a, !LOWW(_gPdc+0x00001)
+000000CC                      203  	.bf a.7, $!.BB@LABEL@2_1
+000000CC 317300                  	 -- Bncond	xxx.bit	,$.BR_TEMP@1
+000000CF EE0000                  	 -- br	**.target2
+000000D2                         .BR_TEMP@1:
+000000D2                      204  .BB@LABEL@2_17:	; return
+000000D2                      205  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/r_main.c", 129
+000000D2 C0                   206  	pop ax
+000000D3 D7                   207  	ret
+000000D4                      208  .LFE2:
+
+Section List
+Attr     Size                Name
+
+TEXTF               212 (000000D4) .textf
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\r_main.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Billboard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Obj\Release\r_main.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Obj\Release\r_main.asm 
+

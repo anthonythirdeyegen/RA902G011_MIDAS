@@ -1,0 +1,487 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   ..\..\Core\r_systeminit.c
+00000000                        5  #@   ..\..\PDC\smbm_ctrl.c
+00000000                        6  #@   ..\..\PDC\user_timer.c
+00000000                        7  #@   r_main.c
+00000000                        8  #@   R_Main_UserInit.c
+00000000                        9  #@   PDC\dcdc_ctrl.c
+00000000                       10  #@   PDC\led_ctrl.c
+00000000                       11  #@   PDC\sw_ctrl.c
+00000000                       12  #@   PDC\user_main.c
+00000000                       13  #@   PDC\user_main_protection.c
+00000000                       14  #@   PDC\user_main_smbs.c
+00000000                       15  #@   PDC\subdev\isl95338.c
+00000000                       16  #@   PDC\subdev\subdev_ctrl.c
+00000000                       17  #@   pd_defs.c
+00000000                       18  #@   -cpu=S3
+00000000                       19  #@   -obj_path=Obj\Release
+00000000                       20  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       21  #@   -g
+00000000                       22  #@   -Osame_code
+00000000                       23  #@   -I PDC\subdev
+00000000                       24  #@   -I PDC
+00000000                       25  #@   -I .
+00000000                       26  #@   -I ..\..\Core
+00000000                       27  #@   -I ..\..\PDC
+00000000                       28  #@   -I ..\..\PDC\Lib
+00000000                       29  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       30  #@   -asm_path=Obj\Release
+00000000                       31  #@   -asmopt=-prn_path=Obj\Release
+00000000                       32  #@   -c
+00000000                       33  #@   -MAKEUD=Obj\Release
+00000000                       34  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_e3002be62e4449b4be3cba83f694525fphcbxarf.1nx
+00000000                       35  #@  compiled at Tue May 06 10:50:51 2025
+00000000                       36  
+00000000                       37  	.EXTERN _gSndMess
+00000000                       38  	.EXTERN _gusTemp
+00000000                       39  	.EXTERN _gucVdmFlg
+00000000                       40  	.PUBLIC _user_func_chk_device
+00000000                       41  	.EXTERN _pdc_get_status
+00000000                       42  	.EXTERN _pdc_get_an_volt
+00000000                       43  	.EXTERN _pdc_is_pps_mode
+00000000                       44  	.EXTERN _pdc_get_req_volt
+00000000                       45  	.EXTERN _pdc_set_dev_stat
+00000000                       46  	.PUBLIC _user_func_snd_mess
+00000000                       47  	.EXTERN _pdc_set_cmd
+00000000                       48  	.EXTERN _pdc_get_cmd_result
+00000000                       49  	.PUBLIC _user_func_start_timer_thermistor
+00000000                       50  	.PUBLIC _user_func_stop_timer_thermistor
+00000000                       51  	.PUBLIC _user_func_intr_timer_thermistor
+00000000                       52  	.EXTERN _pdc_set_int_routine
+00000000                       53  	.EXTERN _pdc_req_update_an
+00000000                       54  	.EXTERN _pdc_timer_active
+00000000                       55  
+00000000                       56  	.SECTION .textf,TEXTF
+00000000                       57  	.TYPE _user_func_chk_device,function,.LFE1-_user_func_chk_device
+00000000                       58  _user_func_chk_device:
+00000000                       59  	.STACK _user_func_chk_device = 14
+00000000                       60  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 22
+00000000 200A                  61  	subw sp, #0x0A
+00000002                       62  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 27
+00000002 FC000000              63  	call !!_pdc_get_status
+00000006 B808                  64  	movw [sp+0x08], ax
+00000008                       65  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 28
+00000008 E1                    66  	oneb a
+00000009 FC000000              67  	call !!_pdc_get_an_volt
+0000000D B802                  68  	movw [sp+0x02], ax
+0000000F                       69  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 29
+0000000F 5104                  70  	mov a, #0x04
+00000011 FC000000              71  	call !!_pdc_get_an_volt
+00000015 B800                  72  	movw [sp+0x00], ax
+00000017                       73  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 33
+00000017 8808                  74  	mov a, [sp+0x08]
+00000019 311300                75  	bt a.1, $.BB@LABEL@1_2
+0000001C                       76  .BB@LABEL@1_1:	; entry.if_break_bb54_crit_edge
+0000001C F1                    77  	clrb a
+0000001D EF00                  78  	br $.BB@LABEL@1_8
+0000001F                       79  .BB@LABEL@1_2:	; bb
+0000001F FC000000              80  	call !!_pdc_is_pps_mode
+00000023 D1                    81  	cmp0 a
+00000024 DF00                  82  	bnz $.BB@LABEL@1_1
+00000026                       83  .BB@LABEL@1_3:	; if_then_bb
+00000026                       84  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 34
+00000026 AEF8                  85  	movw ax, sp
+00000028 040900                86  	addw ax, #0x0009
+0000002B 16                    87  	movw hl, ax
+0000002C 31F500                88  	bf [hl].7, $.BB@LABEL@1_1
+0000002F                       89  .BB@LABEL@1_4:	; if_then_bb42
+0000002F                       90  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 35
+0000002F FC000000              91  	call !!_pdc_get_req_volt
+00000033 325500                92  	movw bc, #0x0055
+00000036 CEFB01                93  	mulhu
+00000039 360000                94  	movw hl, #0x0000
+0000003C 346400                95  	movw de, #0x0064
+0000003F                       96  	divwu
+0000003F CEFB0B                  	-- div**
+00000042 00                      	-- nop
+00000043 14                    97  	movw de, ax
+00000044 A800                  98  	movw ax, [sp+0x00]
+00000046 31FF                  99  	sarw ax, 0x0F
+00000048 43                   100  	cmpw ax, bc
+00000049 A800                 101  	movw ax, [sp+0x00]
+0000004B 61F8                 102  	sknz
+0000004D                      103  .BB@LABEL@1_5:	; if_then_bb42
+0000004D 45                   104  	cmpw ax, de
+0000004E                      105  .BB@LABEL@1_6:	; if_then_bb42
+0000004E DE00                 106  	bnc $.BB@LABEL@1_1
+00000050                      107  .BB@LABEL@1_7:	; if_then_bb52
+00000050                      108  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 37
+00000050 F50000               109  	clrb !LOWW(_gucVdmFlg)
+00000053 E1                   110  	oneb a
+00000054                      111  .BB@LABEL@1_8:	; if_then_bb52
+00000054 9807                 112  	mov [sp+0x07], a
+00000056 AEF8                 113  	movw ax, sp
+00000058 040800               114  	addw ax, #0x0008
+0000005B 16                   115  	movw hl, ax
+0000005C                      116  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 42
+0000005C 318300               117  	bt [hl].0, $.BB@LABEL@1_10
+0000005F                      118  .BB@LABEL@1_9:	; if_break_bb54.if_break_bb90_crit_edge
+0000005F F1                   119  	clrb a
+00000060 EF00                 120  	br $.BB@LABEL@1_15
+00000062                      121  .BB@LABEL@1_10:	; bb64
+00000062 AEF8                 122  	movw ax, sp
+00000064 040800               123  	addw ax, #0x0008
+00000067 16                   124  	movw hl, ax
+00000068 319300               125  	bt [hl].1, $.BB@LABEL@1_9
+0000006B                      126  .BB@LABEL@1_11:	; if_then_bb82
+0000006B A800                 127  	movw ax, [sp+0x00]
+0000006D                      128  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 43
+0000006D 31FF                 129  	sarw ax, 0x0F
+0000006F 440000               130  	cmpw ax, #0x0000
+00000072 A800                 131  	movw ax, [sp+0x00]
+00000074 61F8                 132  	sknz
+00000076                      133  .BB@LABEL@1_12:	; if_then_bb82
+00000076 44D959               134  	cmpw ax, #0x59D9
+00000079                      135  .BB@LABEL@1_13:	; if_then_bb82
+00000079 DC00                 136  	bc $.BB@LABEL@1_9
+0000007B                      137  .BB@LABEL@1_14:	; if_then_bb88
+0000007B                      138  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 45
+0000007B F50000               139  	clrb !LOWW(_gucVdmFlg)
+0000007E E1                   140  	oneb a
+0000007F                      141  .BB@LABEL@1_15:	; if_then_bb88
+0000007F 9806                 142  	mov [sp+0x06], a
+00000081 A802                 143  	movw ax, [sp+0x02]
+00000083                      144  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 49
+00000083 01                   145  	addw ax, ax
+00000084 61D300               146  	bnh $.BB@LABEL@1_26
+00000087                      147  .BB@LABEL@1_16:	; if_then_bb95
+00000087 A802                 148  	movw ax, [sp+0x02]
+00000089                      149  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 50
+00000089 44ED0A               150  	cmpw ax, #0x0AED
+0000008C DC00                 151  	bc $.BB@LABEL@1_18
+0000008E                      152  .BB@LABEL@1_17:	; if_then_bb101
+0000008E 30EC0A               153  	movw ax, #0x0AEC
+00000091 EF00                 154  	br $.BB@LABEL@1_21
+00000093                      155  .BB@LABEL@1_18:	; if_else_bb
+00000093                      156  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 53
+00000093 44A700               157  	cmpw ax, #0x00A7
+00000096 DC00                 158  	bc $.BB@LABEL@1_20
+00000098                      159  .BB@LABEL@1_19:	; if_else_bb.bb164_crit_edge
+00000098 5106                 160  	mov a, #0x06
+0000009A 73                   161  	mov b, a
+0000009B EF00                 162  	br $.BB@LABEL@1_25
+0000009D                      163  .BB@LABEL@1_20:	; if_then_bb108
+0000009D F6                   164  	clrw ax
+0000009E                      165  .BB@LABEL@1_21:	; if_then_bb108
+0000009E BF0000               166  	movw !LOWW(_gusTemp), ax
+000000A1 EF00                 167  	br $.BB@LABEL@1_26
+000000A3                      168  .BB@LABEL@1_22:	; bb110
+000000A3                      169  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 59
+000000A3 318F                 170  	sarw ax, 8+0x00000
+000000A5 01                   171  	addw ax, ax
+000000A6 B800                 172  	movw [sp+0x00], ax
+000000A8 040000               173  	addw ax, #SMRLW(_temp_table_volt@2@user_func_chk_device)
+000000AB 16                   174  	movw hl, ax
+000000AC A802                 175  	movw ax, [sp+0x02]
+000000AE 614900               176  	cmpw ax, [hl+0x00]
+000000B1 61D300               177  	bnh $.BB@LABEL@1_24
+000000B4                      178  .BB@LABEL@1_23:	; if_then_bb119
+000000B4 63                   179  	mov a, b
+000000B5                      180  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 60
+000000B5 318F                 181  	sarw ax, 8+0x00000
+000000B7 01                   182  	addw ax, ax
+000000B8 040000               183  	addw ax, #SMRLW(_temp_table_temp@1@user_func_chk_device)
+000000BB 14                   184  	movw de, ax
+000000BC A9                   185  	movw ax, [de]
+000000BD B804                 186  	movw [sp+0x04], ax
+000000BF 15                   187  	movw ax, de
+000000C0 040200               188  	addw ax, #0x0002
+000000C3 16                   189  	movw hl, ax
+000000C4 A800                 190  	movw ax, [sp+0x00]
+000000C6 040000               191  	addw ax, #SMRLW(_temp_table_volt@2@user_func_chk_device)
+000000C9 B800                 192  	movw [sp+0x00], ax
+000000CB 14                   193  	movw de, ax
+000000CC A9                   194  	movw ax, [de]
+000000CD 14                   195  	movw de, ax
+000000CE AB                   196  	movw ax, [hl]
+000000CF FBF8FF               197  	movw hl, sp
+000000D2 612904               198  	subw ax, [hl+0x04]
+000000D5 12                   199  	movw bc, ax
+000000D6 A802                 200  	movw ax, [sp+0x02]
+000000D8 25                   201  	subw ax, de
+000000D9 CEFB01               202  	mulhu
+000000DC B802                 203  	movw [sp+0x02], ax
+000000DE AB                   204  	movw ax, [hl]
+000000DF 040200               205  	addw ax, #0x0002
+000000E2 16                   206  	movw hl, ax
+000000E3 AB                   207  	movw ax, [hl]
+000000E4 25                   208  	subw ax, de
+000000E5 14                   209  	movw de, ax
+000000E6 A802                 210  	movw ax, [sp+0x02]
+000000E8 360000               211  	movw hl, #0x0000
+000000EB                      212  	divwu
+000000EB CEFB0B                  	-- div**
+000000EE 00                      	-- nop
+000000EF 12                   213  	movw bc, ax
+000000F0 A804                 214  	movw ax, [sp+0x04]
+000000F2 03                   215  	addw ax, bc
+000000F3 EF00                 216  	br $.BB@LABEL@1_21
+000000F5                      217  .BB@LABEL@1_24:	; if_break_bb161
+000000F5 93                   218  	dec b
+000000F6 63                   219  	mov a, b
+000000F7                      220  .BB@LABEL@1_25:	; bb164
+000000F7                      221  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 58
+000000F7 317500               222  	bf a.7, $.BB@LABEL@1_22
+000000FA                      223  .BB@LABEL@1_26:	; if_break_bb174
+000000FA                      224  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 70
+000000FA AF0000               225  	movw ax, !LOWW(_gusTemp)
+000000FD 445100               226  	cmpw ax, #0x0051
+00000100 DC00                 227  	bc $.BB@LABEL@1_28
+00000102                      228  .BB@LABEL@1_27:	; if_then_bb179
+00000102                      229  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 73
+00000102 F50000               230  	clrb !LOWW(_gucVdmFlg)
+00000105 E1                   231  	oneb a
+00000106 9801                 232  	mov [sp+0x01], a
+00000108 C80003               233  	mov [sp+0x00], #0x03
+0000010B EF00                 234  	br $.BB@LABEL@1_31
+0000010D                      235  .BB@LABEL@1_28:	; if_else_bb180
+0000010D                      236  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 75
+0000010D 443D00               237  	cmpw ax, #0x003D
+00000110 F1                   238  	clrb a
+00000111 9801                 239  	mov [sp+0x01], a
+00000113 DE00                 240  	bnc $.BB@LABEL@1_30
+00000115                      241  .BB@LABEL@1_29:	; if_else_bb180.if_break_bb187_crit_edge
+00000115 E1                   242  	oneb a
+00000116 9800                 243  	mov [sp+0x00], a
+00000118 EF00                 244  	br $.BB@LABEL@1_31
+0000011A                      245  .BB@LABEL@1_30:	; if_then_bb185
+0000011A C80002               246  	mov [sp+0x00], #0x02
+0000011D                      247  .BB@LABEL@1_31:	; if_break_bb187
+0000011D AEF8                 248  	movw ax, sp
+0000011F 040800               249  	addw ax, #0x0008
+00000122 16                   250  	movw hl, ax
+00000123 318300               251  	bt [hl].0, $.BB@LABEL@1_34
+00000126                      252  .BB@LABEL@1_32:	; if_break_bb187
+00000126 8801                 253  	mov a, [sp+0x01]
+00000128 D1                   254  	cmp0 a
+00000129 61F8                 255  	sknz
+0000012B                      256  .BB@LABEL@1_33:	; if_then_bb210
+0000012B                      257  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 80
+0000012B FE0000               258  	call $!_user_func_stop_timer_thermistor
+0000012E                      259  .BB@LABEL@1_34:	; if_break_bb211
+0000012E                      260  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 83
+0000012E 8F0000               261  	mov a, !LOWW(_gusTemp)
+00000131 74                   262  	mov e, a
+00000132 8800                 263  	mov a, [sp+0x00]
+00000134 73                   264  	mov b, a
+00000135 8806                 265  	mov a, [sp+0x06]
+00000137 72                   266  	mov c, a
+00000138 8801                 267  	mov a, [sp+0x01]
+0000013A 70                   268  	mov x, a
+0000013B 8807                 269  	mov a, [sp+0x07]
+0000013D FC000000             270  	call !!_pdc_set_dev_stat
+00000141 AEF8                 271  	movw ax, sp
+00000143 040800               272  	addw ax, #0x0008
+00000146 16                   273  	movw hl, ax
+00000147 319500               274  	bf [hl].1, $.BB@LABEL@1_36
+0000014A                      275  .BB@LABEL@1_35:	; bb227
+0000014A AEF8                 276  	movw ax, sp
+0000014C 040900               277  	addw ax, #0x0009
+0000014F 16                   278  	movw hl, ax
+00000150 31F300               279  	bt [hl].7, $.BB@LABEL@1_39
+00000153                      280  .BB@LABEL@1_36:	; if_else_bb246
+00000153 8806                 281  	mov a, [sp+0x06]
+00000155                      282  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 120
+00000155 318E                 283  	shrw ax, 8+0x00000
+00000157 12                   284  	movw bc, ax
+00000158 F6                   285  	clrw ax
+00000159 23                   286  	subw ax, bc
+0000015A 14                   287  	movw de, ax
+0000015B 8801                 288  	mov a, [sp+0x01]
+0000015D 318E                 289  	shrw ax, 8+0x00000
+0000015F 12                   290  	movw bc, ax
+00000160 8807                 291  	mov a, [sp+0x07]
+00000162 318E                 292  	shrw ax, 8+0x00000
+00000164 03                   293  	addw ax, bc
+00000165 45                   294  	cmpw ax, de
+00000166 DF00                 295  	bnz $.BB@LABEL@1_39
+00000168                      296  .BB@LABEL@1_37:	; bb258
+00000168 5107                 297  	mov a, #0x07
+0000016A                      298  .BB@LABEL@1_38:	; bb258
+0000016A 100A                 299  	addw sp, #0x0A
+0000016C                      300  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 122
+0000016C D7                   301  	ret
+0000016D                      302  .BB@LABEL@1_39:	; bb266
+0000016D F1                   303  	clrb a
+0000016E EF00                 304  	br $.BB@LABEL@1_38
+00000170                      305  .LFE1:
+00000170                      306  	.TYPE _user_func_snd_mess,function,.LFE2-_user_func_snd_mess
+00000170                      307  _user_func_snd_mess:
+00000170                      308  	.STACK _user_func_snd_mess = 6
+00000170                      309  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 124
+00000170 C7                   310  	push hl
+00000171                      311  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 126
+00000171 FC000000             312  	call !!_pdc_get_status
+00000175 B800                 313  	movw [sp+0x00], ax
+00000177                      314  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 128
+00000177 8801                 315  	mov a, [sp+0x01]
+00000179 71FC                 316  	mov1 CY, a.7
+0000017B 8F0000               317  	mov a, !LOWW(_gucVdmFlg)
+0000017E DE00                 318  	bnc $.BB@LABEL@2_9
+00000180                      319  .BB@LABEL@2_1:	; if_then_bb
+00000180                      320  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 129
+00000180 D1                   321  	cmp0 a
+00000181 DF00                 322  	bnz $.BB@LABEL@2_12
+00000183                      323  .BB@LABEL@2_2:	; if_then_bb17
+00000183 AEF8                 324  	movw ax, sp
+00000185 16                   325  	movw hl, ax
+00000186                      326  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 131
+00000186 EB0000               327  	movw de, !LOWW(_gSndMess)
+00000189 31E500               328  	bf [hl].6, $.BB@LABEL@2_4
+0000018C                      329  .BB@LABEL@2_3:	; if_then_bb17.if_break_bb_crit_edge
+0000018C 3001A0               330  	movw ax, #0xA001
+0000018F EF00                 331  	br $.BB@LABEL@2_5
+00000191                      332  .BB@LABEL@2_4:	; if_else_bb
+00000191 300180               333  	movw ax, #0x8001
+00000194                      334  .BB@LABEL@2_5:	; if_break_bb
+00000194 B9                   335  	movw [de], ax
+00000195 AEF8                 336  	movw ax, sp
+00000197 16                   337  	movw hl, ax
+00000198 31E300               338  	bt [hl].6, $.BB@LABEL@2_8
+0000019B                      339  .BB@LABEL@2_6:	; bb
+0000019B AEF8                 340  	movw ax, sp
+0000019D 16                   341  	movw hl, ax
+0000019E 319500               342  	bf [hl].1, $.BB@LABEL@2_11
+000001A1                      343  .BB@LABEL@2_7:	; bb52
+000001A1 AEF8                 344  	movw ax, sp
+000001A3 16                   345  	movw hl, ax
+000001A4 31A500               346  	bf [hl].2, $.BB@LABEL@2_11
+000001A7                      347  .BB@LABEL@2_8:	; if_then_bb77
+000001A7                      348  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 141
+000001A7 EB0000               349  	movw de, !LOWW(_gSndMess)
+000001AA 3000FF               350  	movw ax, #0xFF00
+000001AD BA02                 351  	movw [de+0x02], ax
+000001AF                      352  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 142
+000001AF AF0000               353  	movw ax, !LOWW(_gSndMess+0x00002)
+000001B2 08                   354  	xch a, x
+000001B3 6C04                 355  	or a, #0x04
+000001B5 5C04                 356  	and a, #0x04
+000001B7 08                   357  	xch a, x
+000001B8 5CFE                 358  	and a, #0xFE
+000001BA BF0000               359  	movw !LOWW(_gSndMess+0x00002), ax
+000001BD                      360  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 143
+000001BD 30002F               361  	movw ax, #0x2F00
+000001C0 FC000000             362  	call !!_pdc_set_cmd
+000001C4                      363  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 144
+000001C4 E50000               364  	oneb !LOWW(_gucVdmFlg)
+000001C7 EF00                 365  	br $.BB@LABEL@2_12
+000001C9                      366  .BB@LABEL@2_9:	; if_else_bb86
+000001C9                      367  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 151
+000001C9 91                   368  	dec a
+000001CA DF00                 369  	bnz $.BB@LABEL@2_12
+000001CC                      370  .BB@LABEL@2_10:	; if_then_bb93
+000001CC                      371  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 152
+000001CC FC000000             372  	call !!_pdc_get_cmd_result
+000001D0 4C08                 373  	cmp a, #0x08
+000001D2 61E8                 374  	skz
+000001D4                      375  .BB@LABEL@2_11:	; if_then_bb99
+000001D4 CF000002             376  	mov !LOWW(_gucVdmFlg), #0x02
+000001D8                      377  .BB@LABEL@2_12:	; if_break_bb102
+000001D8 5107                 378  	mov a, #0x07
+000001DA                      379  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 159
+000001DA 40000001             380  	cmp !LOWW(_gucVdmFlg), #0x01
+000001DE 61F8                 381  	sknz
+000001E0                      382  .BB@LABEL@2_13:	; if_break_bb102
+000001E0 F1                   383  	clrb a
+000001E1                      384  .BB@LABEL@2_14:	; if_break_bb102
+000001E1 C2                   385  	pop bc
+000001E2 D7                   386  	ret
+000001E3                      387  .LFE2:
+000001E3                      388  	.TYPE _user_func_start_timer_thermistor,function,.LFE3-_user_func_start_timer_thermistor
+000001E3                      389  _user_func_start_timer_thermistor:
+000001E3                      390  	.STACK _user_func_start_timer_thermistor = 4
+000001E3                      391  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 169
+000001E3 5100                 392  	mov a, #LOW(HIGHW(_user_func_intr_timer_thermistor))
+000001E5 318E                 393  	shrw ax, 8+0x00000
+000001E7 14                   394  	movw de, ax
+000001E8 320000               395  	movw bc, #LOWW(_user_func_intr_timer_thermistor)
+000001EB 510D                 396  	mov a, #0x0D
+000001ED FC000000             397  	call !!_pdc_set_int_routine
+000001F1                      398  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 171
+000001F1 CB66B32D             399  	movw 0xFFF66, #0x2DB3
+000001F5 34B201               400  	movw de, #0x01B2
+000001F8                      401  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 172
+000001F8 AA04                 402  	movw ax, [de+0x04]
+000001FA 6C10                 403  	or a, #0x10
+000001FC BA04                 404  	movw [de+0x04], ax
+000001FE                      405  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 173
+000001FE 715BE2               406  	clr1 0xFFFE2.5
+00000201                      407  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 174
+00000201 715BE6               408  	clr1 0xFFFE6.5
+00000204                      409  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 175
+00000204 A9                   410  	movw ax, [de]
+00000205 08                   411  	xch a, x
+00000206 6C08                 412  	or a, #0x08
+00000208 08                   413  	xch a, x
+00000209 B9                   414  	movw [de], ax
+0000020A D7                   415  	ret
+0000020B                      416  .LFE3:
+0000020B                      417  	.TYPE _user_func_stop_timer_thermistor,function,.LFE4-_user_func_stop_timer_thermistor
+0000020B                      418  _user_func_stop_timer_thermistor:
+0000020B                      419  	.STACK _user_func_stop_timer_thermistor = 4
+0000020B                      420  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 178
+0000020B 34B401               421  	movw de, #0x01B4
+0000020E                      422  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 180
+0000020E A9                   423  	movw ax, [de]
+0000020F 08                   424  	xch a, x
+00000210 6C08                 425  	or a, #0x08
+00000212 08                   426  	xch a, x
+00000213 B9                   427  	movw [de], ax
+00000214                      428  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 181
+00000214 715BE2               429  	clr1 0xFFFE2.5
+00000217                      430  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 182
+00000217 715AE6               431  	set1 0xFFFE6.5
+0000021A D7                   432  	ret
+0000021B                      433  .LFE4:
+0000021B                      434  	.TYPE _user_func_intr_timer_thermistor,function,.LFE5-_user_func_intr_timer_thermistor
+0000021B                      435  _user_func_intr_timer_thermistor:
+0000021B                      436  	.STACK _user_func_intr_timer_thermistor = 4
+0000021B                      437  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 187
+0000021B E1                   438  	oneb a
+0000021C FC000000             439  	call !!_pdc_req_update_an
+00000220                      440  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_SMBS/PDC/user_main_protection.c", 188
+00000220 FC000000             441  	call !!_pdc_timer_active
+00000224 D7                   442  	ret
+00000225                      443  .LFE5:
+00000000                      444  	.SECTION .const,CONST
+00000000                      445  	.ALIGN 2
+00000000                      446  	.TYPE _temp_table_volt@2@user_func_chk_device,object,16
+00000000                      447  _temp_table_volt@2@user_func_chk_device:
+00000000 A700                 448  	.DB2 0x00A7,0x0175,0x0230,0x031F,0x07CD,0x08D1,0x09AC,0x0AEC
+00000002 7501            
+00000004 3002            
+00000006 1F03            
+00000008 CD07            
+0000000A D108            
+0000000C AC09            
+0000000E EC0A            
+00000010                      449  	.ALIGN 2
+00000010                      450  	.TYPE _temp_table_temp@1@user_func_chk_device,object,16
+00000010                      451  _temp_table_temp@1@user_func_chk_device:
+00000010 0300                 452  	.DB2 0x0003,0x0014,0x001E,0x0028,0x0050,0x005A,0x0064,0x0078
+00000012 1400            
+00000014 1E00            
+00000016 2800            
+00000018 5000            
+0000001A 5A00            
+0000001C 6400            
+0000001E 7800            
+
+Section List
+Attr     Size                Name
+
+TEXTF               549 (00000225) .textf
+CONST                32 (00000020) .const
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\user_main_protection.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\Obj\Release\user_main_protection.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\Obj\Release\user_main_protection.asm 
+

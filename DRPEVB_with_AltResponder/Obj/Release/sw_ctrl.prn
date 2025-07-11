@@ -1,0 +1,153 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   ..\..\Core\r_systeminit.c
+00000000                        5  #@   ..\..\PDC\smbm_ctrl.c
+00000000                        6  #@   ..\..\PDC\user_timer.c
+00000000                        7  #@   pd_defs.c
+00000000                        8  #@   r_main.c
+00000000                        9  #@   R_Main_UserInit.c
+00000000                       10  #@   PDC\dcdc_ctrl.c
+00000000                       11  #@   PDC\led_ctrl.c
+00000000                       12  #@   PDC\sw_ctrl.c
+00000000                       13  #@   PDC\user_main.c
+00000000                       14  #@   PDC\user_main_protection.c
+00000000                       15  #@   PDC\subdev\isl95338.c
+00000000                       16  #@   PDC\subdev\subdev_ctrl.c
+00000000                       17  #@   -cpu=S3
+00000000                       18  #@   -obj_path=Obj\Release
+00000000                       19  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       20  #@   -g
+00000000                       21  #@   -Osame_code
+00000000                       22  #@   -I PDC\subdev
+00000000                       23  #@   -I PDC
+00000000                       24  #@   -I .
+00000000                       25  #@   -I ..\..\PDC\Lib
+00000000                       26  #@   -I ..\..\PDC
+00000000                       27  #@   -I ..\..\Core
+00000000                       28  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       29  #@   -asm_path=Obj\Release
+00000000                       30  #@   -asmopt=-prn_path=Obj\Release
+00000000                       31  #@   -c
+00000000                       32  #@   -MAKEUD=Obj\Release
+00000000                       33  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_4c3a7638c87f40a0a08c50a18542095edbh5bdb1.u5c
+00000000                       34  #@  compiled at Tue May 06 10:51:09 2025
+00000000                       35  
+00000000                       36  	.PUBLIC _gSW
+00000000                       37  	.PUBLIC _sw_init
+00000000                       38  	.EXTERN _init_tau0_channel1
+00000000                       39  	.EXTERN _pdc_set_int_routine
+00000000                       40  	.PUBLIC _sw_ctrl
+00000000                       41  	.PUBLIC _sw_func_intr_sw
+00000000                       42  	.PUBLIC _sw_func_intr_timer_sw
+00000000                       43  	.EXTERN _tm1_is_start_gtimer
+00000000                       44  	.EXTERN _pdc_timer_active
+00000000                       45  	.EXTERN _tm1_start_gtimer
+00000000                       46  	.EXTERN _tm1_stop_gtimer
+00000000                       47  
+00000000                       48  	.SECTION .textf,TEXTF
+00000000                       49  	.TYPE _sw_init,function,.LFE1-_sw_init
+00000000                       50  _sw_init:
+00000000                       51  	.STACK _sw_init = 4
+00000000                       52  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 20
+00000000 FC000000              53  	call !!_init_tau0_channel1
+00000004                       54  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 21
+00000004 5100                  55  	mov a, #LOW(HIGHW(_sw_func_intr_sw))
+00000006 318E                  56  	shrw ax, 8+0x00000
+00000008 14                    57  	movw de, ax
+00000009 320000                58  	movw bc, #LOWW(_sw_func_intr_sw)
+0000000C 5107                  59  	mov a, #0x07
+0000000E FC000000              60  	call !!_pdc_set_int_routine
+00000012                       61  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 22
+00000012 711208                62  	set1 0xFFF08.1
+00000015 711A28                63  	set1 0xFFF28.1
+00000018 710BE5                64  	clr1 0xFFFE5.0
+0000001B                       65  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 23
+0000001B F50000                66  	clrb !LOWW(_gSW)
+0000001E                       67  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 24
+0000001E F50000                68  	clrb !LOWW(_gSW+0x00001)
+00000021 D7                    69  	ret
+00000022                       70  .LFE1:
+00000022                       71  	.TYPE _sw_ctrl,function,.LFE2-_sw_ctrl
+00000022                       72  _sw_ctrl:
+00000022                       73  	.STACK _sw_ctrl = 4
+00000022                       74  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 29
+00000022 40000001              75  	cmp !LOWW(_gSW), #0x01
+00000026 8F0000                76  	mov a, !LOWW(_gSW+0x00001)
+00000029 DF00                  77  	bnz $.BB@LABEL@2_3
+0000002B                       78  .BB@LABEL@2_1:	; switch_clause_bb
+0000002B                       79  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 31
+0000002B D1                    80  	cmp0 a
+0000002C DF00                  81  	bnz $.BB@LABEL@2_5
+0000002E                       82  .BB@LABEL@2_2:	; if_then_bb
+0000002E                       83  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 32
+0000002E F50000                84  	clrb !LOWW(_gSW)
+00000031 EF00                  85  	br $.BB@LABEL@2_5
+00000033                       86  .BB@LABEL@2_3:	; switch_clause_bb7
+00000033 D1                    87  	cmp0 a
+00000034 61E8                  88  	skz
+00000036                       89  .BB@LABEL@2_4:	; if_then_bb13
+00000036                       90  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 37
+00000036 E50000                91  	oneb !LOWW(_gSW)
+00000039                       92  .BB@LABEL@2_5:	; switch_break_bb
+00000039                       93  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 42
+00000039 FC000000              94  	call !!_tm1_is_start_gtimer
+0000003D D1                    95  	cmp0 a
+0000003E 5103                  96  	mov a, #0x03
+00000040 61F8                  97  	sknz
+00000042                       98  .BB@LABEL@2_6:	; switch_break_bb
+00000042 5107                  99  	mov a, #0x07
+00000044                      100  .BB@LABEL@2_7:	; switch_break_bb
+00000044 D7                   101  	ret
+00000045                      102  .LFE2:
+00000045                      103  	.TYPE _sw_func_intr_sw,function,.LFE3-_sw_func_intr_sw
+00000045                      104  _sw_func_intr_sw:
+00000045                      105  	.STACK _sw_func_intr_sw = 4
+00000045                      106  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 52
+00000045 FC000000             107  	call !!_pdc_timer_active
+00000049                      108  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 53
+00000049 5100                 109  	mov a, #LOW(HIGHW(_sw_func_intr_timer_sw))
+0000004B 318E                 110  	shrw ax, 8+0x00000
+0000004D 14                   111  	movw de, ax
+0000004E 320000               112  	movw bc, #LOWW(_sw_func_intr_timer_sw)
+00000051 30E803               113  	movw ax, #0x03E8
+00000054 FC000000             114  	call !!_tm1_start_gtimer
+00000058 D7                   115  	ret
+00000059                      116  .LFE3:
+00000059                      117  	.TYPE _sw_func_intr_timer_sw,function,.LFE4-_sw_func_intr_timer_sw
+00000059                      118  _sw_func_intr_timer_sw:
+00000059                      119  	.STACK _sw_func_intr_timer_sw = 4
+00000059                      120  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 58
+00000059 31140800             121  	bf 0xFFF08.1, $.BB@LABEL@4_2
+0000005D                      122  .BB@LABEL@4_1:	; entry.if_break_bb_crit_edge
+0000005D F1                   123  	clrb a
+0000005E EF00                 124  	br $.BB@LABEL@4_3
+00000060                      125  .BB@LABEL@4_2:	; if_else_bb
+00000060 E1                   126  	oneb a
+00000061                      127  .BB@LABEL@4_3:	; if_break_bb
+00000061 9F0000               128  	mov !LOWW(_gSW+0x00001), a
+00000064                      129  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/PDC/sw_ctrl.c", 64
+00000064 FC000000             130  	call !!_tm1_stop_gtimer
+00000068 D7                   131  	ret
+00000069                      132  .LFE4:
+00000000                      133  	.SECTION .bss,BSS
+00000000                      134  	.TYPE _gSW,object,2
+00000000                      135  _gSW:
+00000000                      136  	.DS (2)
+
+Section List
+Attr     Size                Name
+
+TEXTF               105 (00000069) .textf
+BSS                   2 (00000002) .bss
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\sw_ctrl.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\sw_ctrl.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\sw_ctrl.asm 
+

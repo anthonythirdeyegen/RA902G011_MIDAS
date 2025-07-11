@@ -1,0 +1,2382 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<MicomToolCommonProjectFile Version="1.00">
+  <CreatorType Name="CubeSuite+" Version="V8.13.00  [05 Dec 2024]" />
+  <Placeholders>
+    <PlaceholderPrefix>%</PlaceholderPrefix>
+    <PlaceholderPostfix>%</PlaceholderPostfix>
+  </Placeholders>
+  <Project Name="R9A02G011_251_DRPEVB" Type="Application">
+    <Files />
+    <DebugOptions>
+      <ConnectSettings>
+        <MainClock>0</MainClock>
+      </ConnectSettings>
+      <DebugToolSettings />
+    </DebugOptions>
+    <Device Series="RL78">R9A02G011</Device>
+    <BuildOptions Name="CC-RL" Version="V1.15.00">
+      <BuildMode Name="DefaultBuild" Active="False">
+        <CommonOptions />
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-g_line</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-LISt=%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-AUTO_SECTION_LAYOUT</Option>
+          <Option>-NOMessage</Option>
+          <Option>-MEMory=High</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=%BuildModeName%\%ProjectName%.mot</Option>
+          <Option>-FOrm=Stype</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>None</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+      <BuildMode Name="Release" Active="True">
+        <CommonOptions />
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-g_line</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-LISt=%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-AUTO_SECTION_LAYOUT</Option>
+          <Option>-NOMessage</Option>
+          <Option>-MEMory=High</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=%BuildModeName%\%ProjectName%.mot</Option>
+          <Option>-FOrm=Stype</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>None</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+    </BuildOptions>
+  </Project>
+  <Subproject Name="DRPEVB_Standard" Type="Application">
+    <BaseDirectory>DRPEVB_Standard</BaseDirectory>
+    <Files>
+      <Category Name="Core">
+        <Path>..\..\Core\common.h</Path>
+        <Path>..\..\Core\cstart.asm</Path>
+        <Path>..\..\Core\interrupt.h</Path>
+        <Path>..\..\Core\r_cg_macrodriver.h</Path>
+        <Path>..\..\Core\r_cg_timer.h</Path>
+        <Path>..\..\Core\r_cg_userdefine.h</Path>
+        <Path>..\..\Core\r_systeminit.c</Path>
+        <Path>..\..\Core\stkinit.asm</Path>
+        <Path>..\..\Core\typedefs.h</Path>
+      </Category>
+      <Category Name="PDC">
+        <Category Name="Lib">
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.h</Path>
+        </Category>
+        <Path>..\..\PDC\pd_defs.h</Path>
+        <Path>..\..\PDC\smbm_ctrl.c</Path>
+        <Path>..\..\PDC\smbm_ctrl.h</Path>
+        <Path>..\..\PDC\user_timer.c</Path>
+        <Path>..\..\PDC\user_timer.h</Path>
+      </Category>
+      <Category Name="DRPEVB_Standard">
+        <Path>ftable.inc</Path>
+        <Path>pd_defs.c</Path>
+        <Path>r_main.c</Path>
+        <Path>R_Main_UserInit.c</Path>
+        <Path>R_Main_UserInit.h</Path>
+        <Category Name="PDC">
+          <Path>PDC\dcdc_cmd_list.h</Path>
+          <Path>PDC\dcdc_ctrl.c</Path>
+          <Path>PDC\dcdc_ctrl.h</Path>
+          <Path>PDC\led_ctrl.c</Path>
+          <Path>PDC\led_ctrl.h</Path>
+          <Path>PDC\sw_ctrl.c</Path>
+          <Path>PDC\sw_ctrl.h</Path>
+          <Path>PDC\user_main.c</Path>
+          <Path>PDC\user_main.h</Path>
+          <Path>PDC\user_main_protection.c</Path>
+          <Category Name="subdev">
+            <Path>PDC\subdev\isl95338.c</Path>
+            <Path>PDC\subdev\isl95338.h</Path>
+            <Path>PDC\subdev\subdev_ctrl.c</Path>
+            <Path>PDC\subdev\subdev_ctrl.h</Path>
+          </Category>
+        </Category>
+      </Category>
+    </Files>
+    <DebugOptions>
+      <ConnectSettings>
+        <MainClock>0</MainClock>
+      </ConnectSettings>
+      <DebugToolSettings />
+    </DebugOptions>
+    <Device Series="RL78">R9A02G011</Device>
+    <BuildOptions Name="CC-RL" Version="V1.15.00">
+      <BuildMode Name="DefaultBuild" Active="False">
+        <LinkOrder>
+          <Path>Obj\DefaultBuild\cstart.obj</Path>
+          <Path>Obj\DefaultBuild\r_systeminit.obj</Path>
+          <Path>Obj\DefaultBuild\stkinit.obj</Path>
+          <Path>Obj\DefaultBuild\smbm_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_timer.obj</Path>
+          <Path>Obj\DefaultBuild\r_main.obj</Path>
+          <Path>Obj\DefaultBuild\R_Main_UserInit.obj</Path>
+          <Path>Obj\DefaultBuild\dcdc_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\led_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\sw_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_main.obj</Path>
+          <Path>Obj\DefaultBuild\user_main_protection.obj</Path>
+          <Path>Obj\DefaultBuild\isl95338.obj</Path>
+          <Path>Obj\DefaultBuild\subdev_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\pd_defs.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <IncludePathForAsm>..\..</IncludePathForAsm>
+          <MacroForC>DEBUG_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-D DEBUG_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=85</Option>
+          <Option>-DEBUG_MONITOR</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+      <BuildMode Name="Release" Active="True">
+        <LinkOrder>
+          <Path>Obj\Release\cstart.obj</Path>
+          <Path>Obj\Release\r_systeminit.obj</Path>
+          <Path>Obj\Release\stkinit.obj</Path>
+          <Path>Obj\Release\smbm_ctrl.obj</Path>
+          <Path>Obj\Release\user_timer.obj</Path>
+          <Path>Obj\Release\r_main.obj</Path>
+          <Path>Obj\Release\R_Main_UserInit.obj</Path>
+          <Path>Obj\Release\dcdc_ctrl.obj</Path>
+          <Path>Obj\Release\led_ctrl.obj</Path>
+          <Path>Obj\Release\sw_ctrl.obj</Path>
+          <Path>Obj\Release\user_main.obj</Path>
+          <Path>Obj\Release\user_main_protection.obj</Path>
+          <Path>Obj\Release\isl95338.obj</Path>
+          <Path>Obj\Release\subdev_ctrl.obj</Path>
+          <Path>Obj\Release\pd_defs.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <IncludePathForAsm>..\..</IncludePathForAsm>
+          <MacroForC>RELEASE_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-D RELEASE_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=04</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+    </BuildOptions>
+  </Subproject>
+  <Subproject Name="DRPEVB_with_Auth" Type="Application">
+    <BaseDirectory>DRPEVB_with_Auth</BaseDirectory>
+    <Files>
+      <Category Name="Core">
+        <Path>..\..\Core\common.h</Path>
+        <Path>..\..\Core\cstart.asm</Path>
+        <Path>..\..\Core\interrupt.h</Path>
+        <Path>..\..\Core\r_cg_macrodriver.h</Path>
+        <Path>..\..\Core\r_cg_timer.h</Path>
+        <Path>..\..\Core\r_cg_userdefine.h</Path>
+        <Path>..\..\Core\r_systeminit.c</Path>
+        <Path>..\..\Core\stkinit.asm</Path>
+        <Path>..\..\Core\typedefs.h</Path>
+      </Category>
+      <Category Name="PDC">
+        <Category Name="Lib">
+          <Path>..\..\PDC\Lib\R9A02G011AMCU.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011AMCU.h</Path>
+          <Path>..\..\PDC\Lib\R9A02G011AUTH.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011AUTH.h</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.h</Path>
+        </Category>
+        <Path>..\..\PDC\pd_defs.h</Path>
+        <Path>..\..\PDC\smbm_ctrl.c</Path>
+        <Path>..\..\PDC\smbm_ctrl.h</Path>
+        <Path>..\..\PDC\user_timer.c</Path>
+        <Path>..\..\PDC\user_timer.h</Path>
+      </Category>
+      <Category Name="DRPEVB_with_Auth">
+        <Path>ftable.inc</Path>
+        <Path>pd_defs.c</Path>
+        <Path>r_main.c</Path>
+        <Path>R_Main_UserInit.c</Path>
+        <Path>R_Main_UserInit.h</Path>
+        <Category Name="PDC">
+          <Path>PDC\dcdc_cmd_list.h</Path>
+          <Path>PDC\dcdc_ctrl.c</Path>
+          <Path>PDC\dcdc_ctrl.h</Path>
+          <Path>PDC\led_ctrl.c</Path>
+          <Path>PDC\led_ctrl.h</Path>
+          <Path>PDC\sw_ctrl.c</Path>
+          <Path>PDC\sw_ctrl.h</Path>
+          <Path>PDC\user_main.c</Path>
+          <Path>PDC\user_main.h</Path>
+          <Path>PDC\user_main_authentication.c</Path>
+          <Path>PDC\user_main_authentication.h</Path>
+          <Path>PDC\user_main_protection.c</Path>
+          <Category Name="subdev">
+            <Path>PDC\subdev\isl95338.c</Path>
+            <Path>PDC\subdev\isl95338.h</Path>
+            <Path>PDC\subdev\relamcu.c</Path>
+            <Path>PDC\subdev\relamcu.h</Path>
+            <Path>PDC\subdev\subdev_ctrl.c</Path>
+            <Path>PDC\subdev\subdev_ctrl.h</Path>
+          </Category>
+        </Category>
+      </Category>
+    </Files>
+    <DebugOptions>
+      <ConnectSettings>
+        <MainClock>0</MainClock>
+      </ConnectSettings>
+      <DebugToolSettings />
+    </DebugOptions>
+    <Device Series="RL78">R9A02G011</Device>
+    <BuildOptions Name="CC-RL" Version="V1.15.00">
+      <BuildMode Name="DefaultBuild" Active="False">
+        <LinkOrder>
+          <Path>Obj\DefaultBuild\cstart.obj</Path>
+          <Path>Obj\DefaultBuild\r_systeminit.obj</Path>
+          <Path>Obj\DefaultBuild\stkinit.obj</Path>
+          <Path>Obj\DefaultBuild\smbm_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_timer.obj</Path>
+          <Path>Obj\DefaultBuild\r_main.obj</Path>
+          <Path>Obj\DefaultBuild\R_Main_UserInit.obj</Path>
+          <Path>Obj\DefaultBuild\dcdc_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\led_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\sw_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_main.obj</Path>
+          <Path>Obj\DefaultBuild\user_main_authentication.obj</Path>
+          <Path>Obj\DefaultBuild\user_main_protection.obj</Path>
+          <Path>Obj\DefaultBuild\isl95338.obj</Path>
+          <Path>Obj\DefaultBuild\relamcu.obj</Path>
+          <Path>Obj\DefaultBuild\subdev_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\pd_defs.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011AMCU.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011AUTH.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <MacroForC>DEBUG_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-D DEBUG_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=85</Option>
+          <Option>-DEBUG_MONITOR</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=FF</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=FF</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+      <BuildMode Name="Release" Active="True">
+        <LinkOrder>
+          <Path>Obj\Release\cstart.obj</Path>
+          <Path>Obj\Release\r_systeminit.obj</Path>
+          <Path>Obj\Release\stkinit.obj</Path>
+          <Path>Obj\Release\smbm_ctrl.obj</Path>
+          <Path>Obj\Release\user_timer.obj</Path>
+          <Path>Obj\Release\r_main.obj</Path>
+          <Path>Obj\Release\R_Main_UserInit.obj</Path>
+          <Path>Obj\Release\dcdc_ctrl.obj</Path>
+          <Path>Obj\Release\led_ctrl.obj</Path>
+          <Path>Obj\Release\sw_ctrl.obj</Path>
+          <Path>Obj\Release\user_main.obj</Path>
+          <Path>Obj\Release\user_main_authentication.obj</Path>
+          <Path>Obj\Release\user_main_protection.obj</Path>
+          <Path>Obj\Release\isl95338.obj</Path>
+          <Path>Obj\Release\relamcu.obj</Path>
+          <Path>Obj\Release\subdev_ctrl.obj</Path>
+          <Path>Obj\Release\pd_defs.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011AMCU.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011AUTH.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <MacroForC>RELEASE_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-D RELEASE_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=04</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+    </BuildOptions>
+  </Subproject>
+  <Subproject Name="DRPEVB_with_SMBS" Type="Application">
+    <BaseDirectory>DRPEVB_with_SMBS</BaseDirectory>
+    <Files>
+      <Category Name="Core">
+        <Path>..\..\Core\common.h</Path>
+        <Path>..\..\Core\cstart.asm</Path>
+        <Path>..\..\Core\interrupt.h</Path>
+        <Path>..\..\Core\r_cg_macrodriver.h</Path>
+        <Path>..\..\Core\r_cg_timer.h</Path>
+        <Path>..\..\Core\r_cg_userdefine.h</Path>
+        <Path>..\..\Core\r_systeminit.c</Path>
+        <Path>..\..\Core\stkinit.asm</Path>
+        <Path>..\..\Core\typedefs.h</Path>
+      </Category>
+      <Category Name="PDC">
+        <Category Name="Lib">
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.h</Path>
+          <Path>..\..\PDC\Lib\R9A02G011SMBS.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011SMBS.h</Path>
+        </Category>
+        <Path>..\..\PDC\pd_defs.h</Path>
+        <Path>..\..\PDC\smbm_ctrl.c</Path>
+        <Path>..\..\PDC\smbm_ctrl.h</Path>
+        <Path>..\..\PDC\user_timer.c</Path>
+        <Path>..\..\PDC\user_timer.h</Path>
+      </Category>
+      <Category Name="DRPEVB_with_SMBS">
+        <Path>ftable.inc</Path>
+        <Path>pd_defs.c</Path>
+        <Path>r_main.c</Path>
+        <Path>R_Main_UserInit.c</Path>
+        <Path>R_Main_UserInit.h</Path>
+        <Category Name="PDC">
+          <Path>PDC\dcdc_cmd_list.h</Path>
+          <Path>PDC\dcdc_ctrl.c</Path>
+          <Path>PDC\dcdc_ctrl.h</Path>
+          <Path>PDC\led_ctrl.c</Path>
+          <Path>PDC\led_ctrl.h</Path>
+          <Path>PDC\sw_ctrl.c</Path>
+          <Path>PDC\sw_ctrl.h</Path>
+          <Path>PDC\user_main.c</Path>
+          <Path>PDC\user_main.h</Path>
+          <Path>PDC\user_main_protection.c</Path>
+          <Path>PDC\user_main_smbs.c</Path>
+          <Category Name="subdev">
+            <Path>PDC\subdev\isl95338.c</Path>
+            <Path>PDC\subdev\isl95338.h</Path>
+            <Path>PDC\subdev\subdev_ctrl.c</Path>
+            <Path>PDC\subdev\subdev_ctrl.h</Path>
+          </Category>
+        </Category>
+      </Category>
+    </Files>
+    <DebugOptions>
+      <ConnectSettings>
+        <MainClock>0</MainClock>
+      </ConnectSettings>
+      <DebugToolSettings />
+    </DebugOptions>
+    <Device Series="RL78">R9A02G011</Device>
+    <BuildOptions Name="CC-RL" Version="V1.15.00">
+      <BuildMode Name="DefaultBuild" Active="False">
+        <LinkOrder>
+          <Path>Obj\DefaultBuild\cstart.obj</Path>
+          <Path>Obj\DefaultBuild\r_systeminit.obj</Path>
+          <Path>Obj\DefaultBuild\stkinit.obj</Path>
+          <Path>Obj\DefaultBuild\smbm_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_timer.obj</Path>
+          <Path>Obj\DefaultBuild\r_main.obj</Path>
+          <Path>Obj\DefaultBuild\R_Main_UserInit.obj</Path>
+          <Path>Obj\DefaultBuild\dcdc_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\led_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\sw_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_main.obj</Path>
+          <Path>Obj\DefaultBuild\user_main_protection.obj</Path>
+          <Path>Obj\DefaultBuild\user_main_smbs.obj</Path>
+          <Path>Obj\DefaultBuild\isl95338.obj</Path>
+          <Path>Obj\DefaultBuild\subdev_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\pd_defs.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011SMBS.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <MacroForC>DEBUG_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-D DEBUG_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=85</Option>
+          <Option>-DEBUG_MONITOR</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+      <BuildMode Name="Release" Active="True">
+        <LinkOrder>
+          <Path>Obj\Release\cstart.obj</Path>
+          <Path>Obj\Release\r_systeminit.obj</Path>
+          <Path>Obj\Release\stkinit.obj</Path>
+          <Path>Obj\Release\smbm_ctrl.obj</Path>
+          <Path>Obj\Release\user_timer.obj</Path>
+          <Path>Obj\Release\r_main.obj</Path>
+          <Path>Obj\Release\R_Main_UserInit.obj</Path>
+          <Path>Obj\Release\dcdc_ctrl.obj</Path>
+          <Path>Obj\Release\led_ctrl.obj</Path>
+          <Path>Obj\Release\sw_ctrl.obj</Path>
+          <Path>Obj\Release\user_main.obj</Path>
+          <Path>Obj\Release\user_main_protection.obj</Path>
+          <Path>Obj\Release\user_main_smbs.obj</Path>
+          <Path>Obj\Release\isl95338.obj</Path>
+          <Path>Obj\Release\subdev_ctrl.obj</Path>
+          <Path>Obj\Release\pd_defs.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011SMBS.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <MacroForC>RELEASE_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-D RELEASE_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=04</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+    </BuildOptions>
+  </Subproject>
+  <Subproject Name="DRPEVB_ISL9241" Type="Application">
+    <BaseDirectory>DRPEVB_ISL9241</BaseDirectory>
+    <Files>
+      <Category Name="Core">
+        <Path>..\..\Core\common.h</Path>
+        <Path>..\..\Core\cstart.asm</Path>
+        <Path>..\..\Core\interrupt.h</Path>
+        <Path>..\..\Core\r_cg_macrodriver.h</Path>
+        <Path>..\..\Core\r_cg_timer.h</Path>
+        <Path>..\..\Core\r_cg_userdefine.h</Path>
+        <Path>..\..\Core\r_systeminit.c</Path>
+        <Path>..\..\Core\stkinit.asm</Path>
+        <Path>..\..\Core\typedefs.h</Path>
+      </Category>
+      <Category Name="PDC">
+        <Category Name="Lib">
+          <Path>..\..\PDC\Lib\R9A02G011PDC.h</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </Category>
+        <Path>..\..\PDC\pd_defs.h</Path>
+        <Path>..\..\PDC\smbm_ctrl.c</Path>
+        <Path>..\..\PDC\smbm_ctrl.h</Path>
+        <Path>..\..\PDC\user_timer.c</Path>
+        <Path>..\..\PDC\user_timer.h</Path>
+      </Category>
+      <Category Name="DRPEVB_ISL9241">
+        <Path>ftable.inc</Path>
+        <Path>pd_defs.c</Path>
+        <Path>r_main.c</Path>
+        <Path>R_Main_UserInit.c</Path>
+        <Path>R_Main_UserInit.h</Path>
+        <Category Name="PDC">
+          <Path>PDC\dcdc_cmd_list.h</Path>
+          <Path>PDC\dcdc_ctrl.c</Path>
+          <Path>PDC\dcdc_ctrl.h</Path>
+          <Path>PDC\led_ctrl.c</Path>
+          <Path>PDC\led_ctrl.h</Path>
+          <Path>PDC\sw_ctrl.c</Path>
+          <Path>PDC\sw_ctrl.h</Path>
+          <Path>PDC\user_main.c</Path>
+          <Path>PDC\user_main.h</Path>
+          <Path>PDC\user_main_protection.c</Path>
+          <Category Name="subdev">
+            <Path>PDC\subdev\subdev_ctrl.c</Path>
+            <Path>PDC\subdev\subdev_ctrl.h</Path>
+            <Path>PDC\subdev\isl9241.c</Path>
+            <Path>PDC\subdev\isl9241.h</Path>
+          </Category>
+        </Category>
+      </Category>
+    </Files>
+    <DebugOptions>
+      <ConnectSettings>
+        <MainClock>0</MainClock>
+      </ConnectSettings>
+      <DebugToolSettings />
+    </DebugOptions>
+    <Device Series="RL78">R9A02G011</Device>
+    <BuildOptions Name="CC-RL" Version="V1.15.00">
+      <BuildMode Name="DefaultBuild" Active="False">
+        <LinkOrder>
+          <Path>Obj\DefaultBuild\isl9241.obj</Path>
+          <Path>Obj\DefaultBuild\cstart.obj</Path>
+          <Path>Obj\DefaultBuild\r_systeminit.obj</Path>
+          <Path>Obj\DefaultBuild\stkinit.obj</Path>
+          <Path>Obj\DefaultBuild\smbm_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_timer.obj</Path>
+          <Path>Obj\DefaultBuild\pd_defs.obj</Path>
+          <Path>Obj\DefaultBuild\r_main.obj</Path>
+          <Path>Obj\DefaultBuild\R_Main_UserInit.obj</Path>
+          <Path>Obj\DefaultBuild\dcdc_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\led_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\sw_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_main.obj</Path>
+          <Path>Obj\DefaultBuild\user_main_protection.obj</Path>
+          <Path>Obj\DefaultBuild\subdev_ctrl.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <IncludePathForAsm>..\..</IncludePathForAsm>
+          <MacroForC>DEBUG_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-D DEBUG_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=85</Option>
+          <Option>-DEBUG_MONITOR</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+      <BuildMode Name="Release" Active="True">
+        <LinkOrder>
+          <Path>Obj\Release\isl9241.obj</Path>
+          <Path>Obj\Release\cstart.obj</Path>
+          <Path>Obj\Release\r_systeminit.obj</Path>
+          <Path>Obj\Release\stkinit.obj</Path>
+          <Path>Obj\Release\smbm_ctrl.obj</Path>
+          <Path>Obj\Release\user_timer.obj</Path>
+          <Path>Obj\Release\pd_defs.obj</Path>
+          <Path>Obj\Release\r_main.obj</Path>
+          <Path>Obj\Release\R_Main_UserInit.obj</Path>
+          <Path>Obj\Release\dcdc_ctrl.obj</Path>
+          <Path>Obj\Release\led_ctrl.obj</Path>
+          <Path>Obj\Release\sw_ctrl.obj</Path>
+          <Path>Obj\Release\user_main.obj</Path>
+          <Path>Obj\Release\user_main_protection.obj</Path>
+          <Path>Obj\Release\subdev_ctrl.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <IncludePathForAsm>..\..</IncludePathForAsm>
+          <MacroForC>RELEASE_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-D RELEASE_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=04</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+    </BuildOptions>
+  </Subproject>
+  <Subproject Name="DRPEVB_with_AltInitiator" Type="Application">
+    <BaseDirectory>DRPEVB_with_AltInitiator</BaseDirectory>
+    <Files>
+      <Category Name="Core">
+        <Path>..\..\Core\common.h</Path>
+        <Path>..\..\Core\cstart.asm</Path>
+        <Path>..\..\Core\interrupt.h</Path>
+        <Path>..\..\Core\r_cg_macrodriver.h</Path>
+        <Path>..\..\Core\r_cg_timer.h</Path>
+        <Path>..\..\Core\r_cg_userdefine.h</Path>
+        <Path>..\..\Core\r_systeminit.c</Path>
+        <Path>..\..\Core\stkinit.asm</Path>
+        <Path>..\..\Core\typedefs.h</Path>
+      </Category>
+      <Category Name="PDC">
+        <Category Name="Lib">
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.h</Path>
+        </Category>
+        <Path>..\..\PDC\pd_defs.h</Path>
+        <Path>..\..\PDC\smbm_ctrl.c</Path>
+        <Path>..\..\PDC\smbm_ctrl.h</Path>
+        <Path>..\..\PDC\user_timer.c</Path>
+        <Path>..\..\PDC\user_timer.h</Path>
+      </Category>
+      <Category Name="DRPEVB_with_AltInitiator">
+        <Path>ftable.inc</Path>
+        <Path>pd_defs.c</Path>
+        <Path>r_main.c</Path>
+        <Path>R_Main_UserInit.c</Path>
+        <Path>R_Main_UserInit.h</Path>
+        <Category Name="PDC">
+          <Path>PDC\dcdc_cmd_list.h</Path>
+          <Path>PDC\dcdc_ctrl.c</Path>
+          <Path>PDC\dcdc_ctrl.h</Path>
+          <Path>PDC\led_ctrl.c</Path>
+          <Path>PDC\led_ctrl.h</Path>
+          <Path>PDC\sw_ctrl.c</Path>
+          <Path>PDC\sw_ctrl.h</Path>
+          <Path>PDC\user_main.c</Path>
+          <Path>PDC\user_main.h</Path>
+          <Path>PDC\user_main_protection.c</Path>
+          <Category Name="subdev">
+            <Path>PDC\subdev\isl95338.c</Path>
+            <Path>PDC\subdev\isl95338.h</Path>
+            <Path>PDC\subdev\subdev_ctrl.c</Path>
+            <Path>PDC\subdev\subdev_ctrl.h</Path>
+          </Category>
+        </Category>
+      </Category>
+    </Files>
+    <DebugOptions>
+      <ConnectSettings>
+        <MainClock>0</MainClock>
+      </ConnectSettings>
+      <DebugToolSettings />
+    </DebugOptions>
+    <Device Series="RL78">R9A02G011</Device>
+    <BuildOptions Name="CC-RL" Version="V1.15.00">
+      <BuildMode Name="DefaultBuild" Active="False">
+        <LinkOrder>
+          <Path>Obj\DefaultBuild\cstart.obj</Path>
+          <Path>Obj\DefaultBuild\r_systeminit.obj</Path>
+          <Path>Obj\DefaultBuild\stkinit.obj</Path>
+          <Path>Obj\DefaultBuild\smbm_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_timer.obj</Path>
+          <Path>Obj\DefaultBuild\pd_defs.obj</Path>
+          <Path>Obj\DefaultBuild\r_main.obj</Path>
+          <Path>Obj\DefaultBuild\R_Main_UserInit.obj</Path>
+          <Path>Obj\DefaultBuild\dcdc_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\led_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\sw_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_main.obj</Path>
+          <Path>Obj\DefaultBuild\user_main_protection.obj</Path>
+          <Path>Obj\DefaultBuild\isl95338.obj</Path>
+          <Path>Obj\DefaultBuild\subdev_ctrl.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <MacroForC>DEBUG_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-D DEBUG_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=85</Option>
+          <Option>-DEBUG_MONITOR</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+      <BuildMode Name="Release" Active="True">
+        <LinkOrder>
+          <Path>Obj\Release\cstart.obj</Path>
+          <Path>Obj\Release\r_systeminit.obj</Path>
+          <Path>Obj\Release\stkinit.obj</Path>
+          <Path>Obj\Release\smbm_ctrl.obj</Path>
+          <Path>Obj\Release\user_timer.obj</Path>
+          <Path>Obj\Release\pd_defs.obj</Path>
+          <Path>Obj\Release\r_main.obj</Path>
+          <Path>Obj\Release\R_Main_UserInit.obj</Path>
+          <Path>Obj\Release\dcdc_ctrl.obj</Path>
+          <Path>Obj\Release\led_ctrl.obj</Path>
+          <Path>Obj\Release\sw_ctrl.obj</Path>
+          <Path>Obj\Release\user_main.obj</Path>
+          <Path>Obj\Release\user_main_protection.obj</Path>
+          <Path>Obj\Release\isl95338.obj</Path>
+          <Path>Obj\Release\subdev_ctrl.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <MacroForC>RELEASE_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-D RELEASE_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=04</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+    </BuildOptions>
+  </Subproject>
+  <Subproject Name="DRPEVB_with_AltResponder" Type="Application">
+    <BaseDirectory>DRPEVB_with_AltResponder</BaseDirectory>
+    <Files>
+      <Category Name="Core">
+        <Path>..\..\Core\common.h</Path>
+        <Path>..\..\Core\cstart.asm</Path>
+        <Path>..\..\Core\interrupt.h</Path>
+        <Path>..\..\Core\r_cg_macrodriver.h</Path>
+        <Path>..\..\Core\r_cg_timer.h</Path>
+        <Path>..\..\Core\r_cg_userdefine.h</Path>
+        <Path>..\..\Core\r_systeminit.c</Path>
+        <Path>..\..\Core\stkinit.asm</Path>
+        <Path>..\..\Core\typedefs.h</Path>
+      </Category>
+      <Category Name="PDC">
+        <Path>..\..\PDC\pd_defs.h</Path>
+        <Path>..\..\PDC\smbm_ctrl.c</Path>
+        <Path>..\..\PDC\smbm_ctrl.h</Path>
+        <Path>..\..\PDC\user_timer.c</Path>
+        <Path>..\..\PDC\user_timer.h</Path>
+        <Category Name="Lib">
+          <Path>..\..\PDC\Lib\R9A02G011PDC.h</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </Category>
+      </Category>
+      <Category Name="DRPEVB_with_AltResponder">
+        <Path>ftable.inc</Path>
+        <Path>pd_defs.c</Path>
+        <Path>r_main.c</Path>
+        <Path>R_Main_UserInit.c</Path>
+        <Path>R_Main_UserInit.h</Path>
+        <Category Name="PDC">
+          <Path>PDC\dcdc_cmd_list.h</Path>
+          <Path>PDC\dcdc_ctrl.c</Path>
+          <Path>PDC\dcdc_ctrl.h</Path>
+          <Path>PDC\led_ctrl.c</Path>
+          <Path>PDC\led_ctrl.h</Path>
+          <Path>PDC\sw_ctrl.c</Path>
+          <Path>PDC\sw_ctrl.h</Path>
+          <Path>PDC\user_main.c</Path>
+          <Path>PDC\user_main.h</Path>
+          <Path>PDC\user_main_protection.c</Path>
+          <Category Name="subdev">
+            <Path>PDC\subdev\isl95338.c</Path>
+            <Path>PDC\subdev\isl95338.h</Path>
+            <Path>PDC\subdev\subdev_ctrl.c</Path>
+            <Path>PDC\subdev\subdev_ctrl.h</Path>
+          </Category>
+        </Category>
+      </Category>
+    </Files>
+    <DebugOptions>
+      <ConnectSettings>
+        <MainClock>0</MainClock>
+      </ConnectSettings>
+      <DebugToolSettings />
+    </DebugOptions>
+    <Device Series="RL78">R9A02G011</Device>
+    <BuildOptions Name="CC-RL" Version="V1.15.00">
+      <BuildMode Name="DefaultBuild" Active="False">
+        <LinkOrder>
+          <Path>Obj\DefaultBuild\cstart.obj</Path>
+          <Path>Obj\DefaultBuild\r_systeminit.obj</Path>
+          <Path>Obj\DefaultBuild\stkinit.obj</Path>
+          <Path>Obj\DefaultBuild\smbm_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_timer.obj</Path>
+          <Path>Obj\DefaultBuild\pd_defs.obj</Path>
+          <Path>Obj\DefaultBuild\r_main.obj</Path>
+          <Path>Obj\DefaultBuild\R_Main_UserInit.obj</Path>
+          <Path>Obj\DefaultBuild\dcdc_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\led_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\sw_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_main.obj</Path>
+          <Path>Obj\DefaultBuild\user_main_protection.obj</Path>
+          <Path>Obj\DefaultBuild\isl95338.obj</Path>
+          <Path>Obj\DefaultBuild\subdev_ctrl.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <MacroForC>DEBUG_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-D DEBUG_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=85</Option>
+          <Option>-DEBUG_MONITOR</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+      <BuildMode Name="Release" Active="True">
+        <LinkOrder>
+          <Path>Obj\Release\cstart.obj</Path>
+          <Path>Obj\Release\r_systeminit.obj</Path>
+          <Path>Obj\Release\stkinit.obj</Path>
+          <Path>Obj\Release\smbm_ctrl.obj</Path>
+          <Path>Obj\Release\user_timer.obj</Path>
+          <Path>Obj\Release\pd_defs.obj</Path>
+          <Path>Obj\Release\r_main.obj</Path>
+          <Path>Obj\Release\R_Main_UserInit.obj</Path>
+          <Path>Obj\Release\dcdc_ctrl.obj</Path>
+          <Path>Obj\Release\led_ctrl.obj</Path>
+          <Path>Obj\Release\sw_ctrl.obj</Path>
+          <Path>Obj\Release\user_main.obj</Path>
+          <Path>Obj\Release\user_main_protection.obj</Path>
+          <Path>Obj\Release\isl95338.obj</Path>
+          <Path>Obj\Release\subdev_ctrl.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <MacroForC>RELEASE_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-D RELEASE_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=04</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+    </BuildOptions>
+  </Subproject>
+  <Subproject Name="DRPEVB_with_Billboard" Type="Application">
+    <BaseDirectory>DRPEVB_with_Billboard</BaseDirectory>
+    <Files>
+      <Category Name="Core">
+        <Path>..\..\Core\common.h</Path>
+        <Path>..\..\Core\cstart.asm</Path>
+        <Path>..\..\Core\interrupt.h</Path>
+        <Path>..\..\Core\r_cg_macrodriver.h</Path>
+        <Path>..\..\Core\r_cg_timer.h</Path>
+        <Path>..\..\Core\r_cg_userdefine.h</Path>
+        <Path>..\..\Core\r_systeminit.c</Path>
+        <Path>..\..\Core\stkinit.asm</Path>
+        <Path>..\..\Core\typedefs.h</Path>
+      </Category>
+      <Category Name="PDC">
+        <Category Name="Lib">
+          <Path>..\..\PDC\Lib\R9A02G011PDC.h</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </Category>
+        <Path>..\..\PDC\pd_defs.h</Path>
+        <Path>..\..\PDC\smbm_ctrl.c</Path>
+        <Path>..\..\PDC\smbm_ctrl.h</Path>
+        <Path>..\..\PDC\user_timer.c</Path>
+        <Path>..\..\PDC\user_timer.h</Path>
+      </Category>
+      <Category Name="DRPEVB_with_Billboard">
+        <Path>ftable.inc</Path>
+        <Path>pd_defs.c</Path>
+        <Path>r_main.c</Path>
+        <Path>R_Main_UserInit.c</Path>
+        <Path>R_Main_UserInit.h</Path>
+        <Category Name="PDC">
+          <Path>PDC\dcdc_cmd_list.h</Path>
+          <Path>PDC\dcdc_ctrl.c</Path>
+          <Path>PDC\dcdc_ctrl.h</Path>
+          <Path>PDC\led_ctrl.c</Path>
+          <Path>PDC\led_ctrl.h</Path>
+          <Path>PDC\sw_ctrl.c</Path>
+          <Path>PDC\sw_ctrl.h</Path>
+          <Path>PDC\user_main.c</Path>
+          <Path>PDC\user_main.h</Path>
+          <Path>PDC\user_main_protection.c</Path>
+          <Category Name="subdev">
+            <Path>PDC\subdev\isl95338.c</Path>
+            <Path>PDC\subdev\isl95338.h</Path>
+            <Path>PDC\subdev\subdev_ctrl.c</Path>
+            <Path>PDC\subdev\subdev_ctrl.h</Path>
+          </Category>
+        </Category>
+        <Category Name="Billboard">
+          <Path>Billboard\bbc_main.c</Path>
+          <Path>Billboard\billboard.h</Path>
+          <Path>Billboard\crc16.c</Path>
+          <Path>Billboard\crc16.h</Path>
+          <Path>Billboard\measure_pkt.asm</Path>
+          <Path>Billboard\measure_pkt.h</Path>
+          <Path>Billboard\pd_param.asm</Path>
+          <Path>Billboard\pd_paramdef.h</Path>
+          <Path>Billboard\recv_pkt.asm</Path>
+          <Path>Billboard\recv_pkt.h</Path>
+          <Path>Billboard\swusb.c</Path>
+          <Path>Billboard\swusb.h</Path>
+          <Path>Billboard\swusb_io.c</Path>
+          <Path>Billboard\swusb_io.h</Path>
+          <Path>Billboard\swusb_pin_config.h</Path>
+          <Path>Billboard\swusb_pin_config.inc</Path>
+          <Path>Billboard\swusb_ram.asm</Path>
+          <Path>Billboard\trace_buffer219.h</Path>
+          <Path>Billboard\xmit_pkt.asm</Path>
+          <Path>Billboard\xmit_pkt.h</Path>
+        </Category>
+      </Category>
+    </Files>
+    <DebugOptions>
+      <ConnectSettings>
+        <MainClock>0</MainClock>
+      </ConnectSettings>
+      <DebugToolSettings />
+    </DebugOptions>
+    <Device Series="RL78">R9A02G011</Device>
+    <BuildOptions Name="CC-RL" Version="V1.15.00">
+      <BuildMode Name="DefaultBuild" Active="False">
+        <LinkOrder>
+          <Path>Obj\DefaultBuild\bbc_main.obj</Path>
+          <Path>Obj\DefaultBuild\crc16.obj</Path>
+          <Path>Obj\DefaultBuild\measure_pkt.obj</Path>
+          <Path>Obj\DefaultBuild\pd_param.obj</Path>
+          <Path>Obj\DefaultBuild\recv_pkt.obj</Path>
+          <Path>Obj\DefaultBuild\swusb.obj</Path>
+          <Path>Obj\DefaultBuild\swusb_io.obj</Path>
+          <Path>Obj\DefaultBuild\swusb_ram.obj</Path>
+          <Path>Obj\DefaultBuild\xmit_pkt.obj</Path>
+          <Path>Obj\DefaultBuild\cstart.obj</Path>
+          <Path>Obj\DefaultBuild\r_systeminit.obj</Path>
+          <Path>Obj\DefaultBuild\stkinit.obj</Path>
+          <Path>Obj\DefaultBuild\smbm_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_timer.obj</Path>
+          <Path>Obj\DefaultBuild\dcdc_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\led_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\sw_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_main.obj</Path>
+          <Path>Obj\DefaultBuild\user_main_protection.obj</Path>
+          <Path>Obj\DefaultBuild\pd_defs.obj</Path>
+          <Path>Obj\DefaultBuild\r_main.obj</Path>
+          <Path>Obj\DefaultBuild\R_Main_UserInit.obj</Path>
+          <Path>Obj\DefaultBuild\isl95338.obj</Path>
+          <Path>Obj\DefaultBuild\subdev_ctrl.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>Billboard</IncludePathForC>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForAsm>Billboard</IncludePathForAsm>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <MacroForC>DEBUG_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I Billboard</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-D DEBUG_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I Billboard</Option>
+          <Option>-I .</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=85</Option>
+          <Option>-DEBUG_MONITOR</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+      <BuildMode Name="Release" Active="True">
+        <LinkOrder>
+          <Path>Obj\Release\bbc_main.obj</Path>
+          <Path>Obj\Release\crc16.obj</Path>
+          <Path>Obj\Release\measure_pkt.obj</Path>
+          <Path>Obj\Release\pd_param.obj</Path>
+          <Path>Obj\Release\recv_pkt.obj</Path>
+          <Path>Obj\Release\swusb.obj</Path>
+          <Path>Obj\Release\swusb_io.obj</Path>
+          <Path>Obj\Release\swusb_ram.obj</Path>
+          <Path>Obj\Release\xmit_pkt.obj</Path>
+          <Path>Obj\Release\cstart.obj</Path>
+          <Path>Obj\Release\r_systeminit.obj</Path>
+          <Path>Obj\Release\stkinit.obj</Path>
+          <Path>Obj\Release\smbm_ctrl.obj</Path>
+          <Path>Obj\Release\user_timer.obj</Path>
+          <Path>Obj\Release\dcdc_ctrl.obj</Path>
+          <Path>Obj\Release\led_ctrl.obj</Path>
+          <Path>Obj\Release\sw_ctrl.obj</Path>
+          <Path>Obj\Release\user_main.obj</Path>
+          <Path>Obj\Release\user_main_protection.obj</Path>
+          <Path>Obj\Release\pd_defs.obj</Path>
+          <Path>Obj\Release\r_main.obj</Path>
+          <Path>Obj\Release\R_Main_UserInit.obj</Path>
+          <Path>Obj\Release\isl95338.obj</Path>
+          <Path>Obj\Release\subdev_ctrl.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>Billboard</IncludePathForC>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForAsm>Billboard</IncludePathForAsm>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <IncludePathForAsm>..\..</IncludePathForAsm>
+          <MacroForC>RELEASE_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I Billboard</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-D RELEASE_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I Billboard</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=04</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+    </BuildOptions>
+  </Subproject>
+  <Subproject Name="DRPEVB_with_PPSsink" Type="Application">
+    <BaseDirectory>DRPEVB_with_PPSsink</BaseDirectory>
+    <Files>
+      <Category Name="Core">
+        <Path>..\..\Core\common.h</Path>
+        <Path>..\..\Core\cstart.asm</Path>
+        <Path>..\..\Core\interrupt.h</Path>
+        <Path>..\..\Core\r_cg_macrodriver.h</Path>
+        <Path>..\..\Core\r_cg_timer.h</Path>
+        <Path>..\..\Core\r_cg_userdefine.h</Path>
+        <Path>..\..\Core\r_systeminit.c</Path>
+        <Path>..\..\Core\stkinit.asm</Path>
+        <Path>..\..\Core\typedefs.h</Path>
+      </Category>
+      <Category Name="PDC">
+        <Category Name="Lib">
+          <Path>..\..\PDC\Lib\R9A02G011PDC.h</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </Category>
+        <Path>..\..\PDC\pd_defs.h</Path>
+        <Path>..\..\PDC\smbm_ctrl.c</Path>
+        <Path>..\..\PDC\smbm_ctrl.h</Path>
+        <Path>..\..\PDC\user_timer.c</Path>
+        <Path>..\..\PDC\user_timer.h</Path>
+      </Category>
+      <Category Name="DRPEVB_with_PPSsink">
+        <Category Name="PDC">
+          <Path>PDC\dcdc_cmd_list.h</Path>
+          <Path>PDC\dcdc_ctrl.c</Path>
+          <Path>PDC\dcdc_ctrl.h</Path>
+          <Path>PDC\led_ctrl.c</Path>
+          <Path>PDC\led_ctrl.h</Path>
+          <Path>PDC\sw_ctrl.c</Path>
+          <Path>PDC\sw_ctrl.h</Path>
+          <Path>PDC\user_main.c</Path>
+          <Path>PDC\user_main.h</Path>
+          <Path>PDC\user_main_protection.c</Path>
+          <Category Name="subdev">
+            <Path>PDC\subdev\isl95338.c</Path>
+            <Path>PDC\subdev\isl95338.h</Path>
+            <Path>PDC\subdev\subdev_ctrl.c</Path>
+            <Path>PDC\subdev\subdev_ctrl.h</Path>
+          </Category>
+        </Category>
+        <Path>ftable.inc</Path>
+        <Path>pd_defs.c</Path>
+        <Path>r_main.c</Path>
+        <Path>R_Main_UserInit.c</Path>
+        <Path>R_Main_UserInit.h</Path>
+      </Category>
+    </Files>
+    <DebugOptions>
+      <ConnectSettings>
+        <MainClock>0</MainClock>
+      </ConnectSettings>
+      <DebugToolSettings />
+    </DebugOptions>
+    <Device Series="RL78">R9A02G011</Device>
+    <BuildOptions Name="CC-RL" Version="V1.15.00">
+      <BuildMode Name="DefaultBuild" Active="False">
+        <LinkOrder>
+          <Path>Obj\DefaultBuild\cstart.obj</Path>
+          <Path>Obj\DefaultBuild\r_systeminit.obj</Path>
+          <Path>Obj\DefaultBuild\stkinit.obj</Path>
+          <Path>Obj\DefaultBuild\smbm_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_timer.obj</Path>
+          <Path>Obj\DefaultBuild\pd_defs.obj</Path>
+          <Path>Obj\DefaultBuild\r_main.obj</Path>
+          <Path>Obj\DefaultBuild\R_Main_UserInit.obj</Path>
+          <Path>Obj\DefaultBuild\dcdc_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\led_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\sw_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\user_main.obj</Path>
+          <Path>Obj\DefaultBuild\user_main_protection.obj</Path>
+          <Path>Obj\DefaultBuild\isl95338.obj</Path>
+          <Path>Obj\DefaultBuild\subdev_ctrl.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <IncludePathForAsm>..\..</IncludePathForAsm>
+          <MacroForC>DEBUG_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-D DEBUG_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=85</Option>
+          <Option>-DEBUG_MONITOR</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+      <BuildMode Name="Release" Active="True">
+        <LinkOrder>
+          <Path>Obj\Release\cstart.obj</Path>
+          <Path>Obj\Release\r_systeminit.obj</Path>
+          <Path>Obj\Release\stkinit.obj</Path>
+          <Path>Obj\Release\smbm_ctrl.obj</Path>
+          <Path>Obj\Release\user_timer.obj</Path>
+          <Path>Obj\Release\pd_defs.obj</Path>
+          <Path>Obj\Release\r_main.obj</Path>
+          <Path>Obj\Release\R_Main_UserInit.obj</Path>
+          <Path>Obj\Release\dcdc_ctrl.obj</Path>
+          <Path>Obj\Release\led_ctrl.obj</Path>
+          <Path>Obj\Release\sw_ctrl.obj</Path>
+          <Path>Obj\Release\user_main.obj</Path>
+          <Path>Obj\Release\user_main_protection.obj</Path>
+          <Path>Obj\Release\isl95338.obj</Path>
+          <Path>Obj\Release\subdev_ctrl.obj</Path>
+          <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
+        </LinkOrder>
+        <CommonOptions>
+          <IncludePathForC>PDC\subdev</IncludePathForC>
+          <IncludePathForC>PDC</IncludePathForC>
+          <IncludePathForC>.</IncludePathForC>
+          <IncludePathForC>..\..\PDC\Lib</IncludePathForC>
+          <IncludePathForC>..\..\PDC</IncludePathForC>
+          <IncludePathForC>..\..\Core</IncludePathForC>
+          <IncludePathForAsm>.</IncludePathForAsm>
+          <IncludePathForAsm>..\..</IncludePathForAsm>
+          <MacroForC>RELEASE_BUILD=1</MacroForC>
+          <MacroForC>PPS_SPRT=0</MacroForC>
+        </CommonOptions>
+        <GeneralOptions>
+          <SimultaneouslyBuild>True</SimultaneouslyBuild>
+        </GeneralOptions>
+        <CompileOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-Osame_code</Option>
+          <Option>-I PDC\subdev</Option>
+          <Option>-I PDC</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..\PDC\Lib</Option>
+          <Option>-I ..\..\PDC</Option>
+          <Option>-I ..\..\Core</Option>
+          <Option>-D RELEASE_BUILD=1,PPS_SPRT=0</Option>
+          <Option>-asm_path=Obj\%BuildModeName%</Option>
+          <Option>-asmopt=-prn_path=Obj\%BuildModeName%</Option>
+          <Option>-c</Option>
+        </CompileOptions>
+        <AssembleOptions>
+          <Option>-cpu=S3</Option>
+          <Option>-obj_path=Obj\%BuildModeName%</Option>
+          <Option>-dev=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-g</Option>
+          <Option>-I .</Option>
+          <Option>-I ..\..</Option>
+          <Option>-c</Option>
+        </AssembleOptions>
+        <LinkOptions>
+          <Option>-SECURITY_ID=00000000000000000000</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-DEBug</Option>
+          <Option>-NOCOmpress</Option>
+          <Option>-NOOPtimize</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4s.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
+          <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
+          <Option>-OCDBG=04</Option>
+          <Option>-USER_OPT_BYTE=7F7BE0</Option>
+          <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
+          <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>
+          <Option>-STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20</Option>
+          <Option>-ROm=.data=.dataR</Option>
+          <Option>-ROm=.sdata=.sdataR</Option>
+          <Option>-NOMessage</Option>
+          <Option>-STACk</Option>
+          <Option>-NOLOgo</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=Obj\%BuildModeName%\%ProjectName%.hex</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-END</Option>
+          <Option>-Input=Obj\%BuildModeName%\%ProjectName%.abs</Option>
+          <Option>-DEVICE=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-OUtput=..\%BuildModeName%\%ProjectName%\Main.hex=2000-FBFF</Option>
+          <Option>-FOrm=Hexadecimal</Option>
+          <Option>-SPace=00</Option>
+          <Option>-BYte_count=20</Option>
+          <Option>-CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0</Option>
+          <Option>-NOMessage</Option>
+          <Option>-EXIt</Option>
+        </LinkOptions>
+        <LibraryGenerateOptions>
+          <GenerateMode>None</GenerateMode>
+        </LibraryGenerateOptions>
+        <IOHeaderGenerationOptions>
+          <Option>-df=%MicomToolPath%\Device\RL78\Devicefile\DR9A02G011.DVF</Option>
+          <Option>-o=%ProjectDir%\iodefine.h</Option>
+          <Option>-f</Option>
+          <UpdateIOMode>All</UpdateIOMode>
+        </IOHeaderGenerationOptions>
+      </BuildMode>
+    </BuildOptions>
+  </Subproject>
+</MicomToolCommonProjectFile>

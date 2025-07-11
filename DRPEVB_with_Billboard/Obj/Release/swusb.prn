@@ -1,0 +1,2320 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   Billboard\bbc_main.c
+00000000                        5  #@   Billboard\crc16.c
+00000000                        6  #@   Billboard\swusb.c
+00000000                        7  #@   Billboard\swusb_io.c
+00000000                        8  #@   ..\..\Core\r_systeminit.c
+00000000                        9  #@   ..\..\PDC\smbm_ctrl.c
+00000000                       10  #@   ..\..\PDC\user_timer.c
+00000000                       11  #@   PDC\dcdc_ctrl.c
+00000000                       12  #@   PDC\led_ctrl.c
+00000000                       13  #@   PDC\sw_ctrl.c
+00000000                       14  #@   PDC\user_main.c
+00000000                       15  #@   PDC\user_main_protection.c
+00000000                       16  #@   pd_defs.c
+00000000                       17  #@   r_main.c
+00000000                       18  #@   R_Main_UserInit.c
+00000000                       19  #@   PDC\subdev\isl95338.c
+00000000                       20  #@   PDC\subdev\subdev_ctrl.c
+00000000                       21  #@   -cpu=S3
+00000000                       22  #@   -obj_path=Obj\Release
+00000000                       23  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       24  #@   -g
+00000000                       25  #@   -Osame_code
+00000000                       26  #@   -I Billboard
+00000000                       27  #@   -I PDC\subdev
+00000000                       28  #@   -I PDC
+00000000                       29  #@   -I .
+00000000                       30  #@   -I ..\..\PDC\Lib
+00000000                       31  #@   -I ..\..\PDC
+00000000                       32  #@   -I ..\..\Core
+00000000                       33  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       34  #@   -asm_path=Obj\Release
+00000000                       35  #@   -asmopt=-prn_path=Obj\Release
+00000000                       36  #@   -c
+00000000                       37  #@   -MAKEUD=Obj\Release
+00000000                       38  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_c0b7818164c94c2192d757ba2474eae6iiaofrot.nwu
+00000000                       39  #@  compiled at Tue May 06 10:51:15 2025
+00000000                       40  
+00000000                       41  	$mirror _g_crc_tbl_swap
+00000000                       42  	.PUBLIC _thalt
+00000000                       43  	.PUBLIC _tbp
+00000000                       44  	.PUBLIC _tbuf
+00000000                       45  	.PUBLIC _g_swusb_rate_offset
+00000000                       46  	.PUBLIC _msg
+00000000                       47  	.PUBLIC _msghalt
+00000000                       48  	.PUBLIC _msgd
+00000000                       49  	.EXTERN _swusb_measure_pkt
+00000000                       50  	.EXTERN _swusb_recv_pkt
+00000000                       51  	.EXTERN _swusb_xmit_data_pkt
+00000000                       52  	.EXTERN _swusb_xmit_handshake_pkt
+00000000                       53  	.EXTERN _memset
+00000000                       54  	.EXTERN _memcpy
+00000000                       55  	.PUBLIC _swusb_init
+00000000                       56  	.EXTERN _swusb_io_init
+00000000                       57  	.EXTERN _pdc_set_int_routine
+00000000                       58  	.PUBLIC _swusb_proc
+00000000                       59  	.PUBLIC _swusb_is_transferring
+00000000                       60  	.PUBLIC _swusb_measure_rate
+00000000                       61  	.PUBLIC _swusb_enable
+00000000                       62  	.EXTERN _swusb_io_is_enabled
+00000000                       63  	.EXTERN _swusb_io_enable
+00000000                       64  	.PUBLIC _swusb_disable
+00000000                       65  	.EXTERN _swusb_io_disable
+00000000                       66  	.PUBLIC _swusb_set_power_supply
+00000000                       67  	.PUBLIC _swusb_bb_configured
+00000000                       68  	.PUBLIC _swusb_bb_set_additional_failure_info
+00000000                       69  
+00000000                       70  	.SECTION .textf,TEXTF
+00000000                       71  	.TYPE _msg,function,.LFE1-_msg
+00000000                       72  _msg:
+00000000                       73  	.STACK _msg = 4
+00000000                       74  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 34
+00000000 40000001              75  	cmp !LOWW(_thalt), #0x01
+00000004 DD00                  76  	bz $.BB@LABEL@1_5
+00000006                       77  .BB@LABEL@1_1:	; if_then_bb
+00000006                       78  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 37
+00000006 DB0000                79  	movw bc, !LOWW(_tbp)
+00000009 480000                80  	mov LOWW(_tbuf)[bc], a
+0000000C E6                    81  	onew ax
+0000000D 020000                82  	addw ax, !LOWW(_tbp)
+00000010                       83  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 38
+00000010 441000                84  	cmpw ax, #0x0010
+00000013 61C8                  85  	skc
+00000015                       86  .BB@LABEL@1_2:	; if_then_bb15
+00000015 F6                    87  	clrw ax
+00000016                       88  .BB@LABEL@1_3:	; if_break_bb
+00000016 BF0000                89  	movw !LOWW(_tbp), ax
+00000019 12                    90  	movw bc, ax
+0000001A                       91  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 39
+0000001A 3900005F              92  	mov LOWW(_tbuf)[bc], #0x5F
+0000001E                       93  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 40
+0000001E 8F0000                94  	mov a, !LOWW(_thalt)
+00000021 73                    95  	mov b, a
+00000022 318E                  96  	shrw ax, 8+0x00000
+00000024 440200                97  	cmpw ax, #0x0002
+00000027 DC00                  98  	bc $.BB@LABEL@1_5
+00000029                       99  .BB@LABEL@1_4:	; if_then_bb24
+00000029 63                   100  	mov a, b
+0000002A 91                   101  	dec a
+0000002B 9F0000               102  	mov !LOWW(_thalt), a
+0000002E                      103  .BB@LABEL@1_5:	; return
+0000002E                      104  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 42
+0000002E D7                   105  	ret
+0000002F                      106  .LFE1:
+0000002F                      107  	.TYPE _msghalt,function,.LFE2-_msghalt
+0000002F                      108  _msghalt:
+0000002F                      109  	.STACK _msghalt = 6
+0000002F                      110  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 45
+0000002F C1                   111  	push ax
+00000030 73                   112  	mov b, a
+00000031                      113  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 49
+00000031 63                   114  	mov a, b
+00000032 FE0000               115  	call $!_msg
+00000035                      116  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 50
+00000035 D50000               117  	cmp0 !LOWW(_thalt)
+00000038 DF00                 118  	bnz $.BB@LABEL@2_2
+0000003A                      119  .BB@LABEL@2_1:	; if_then_bb
+0000003A 8800                 120  	mov a, [sp+0x00]
+0000003C 9F0000               121  	mov !LOWW(_thalt), a
+0000003F                      122  .BB@LABEL@2_2:	; return
+0000003F C0                   123  	pop ax
+00000040                      124  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 51
+00000040 D7                   125  	ret
+00000041                      126  .LFE2:
+00000041                      127  	.TYPE _msgd,function,.LFE3-_msgd
+00000041                      128  _msgd:
+00000041                      129  	.STACK _msgd = 10
+00000041                      130  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 54
+00000041 C3                   131  	push bc
+00000042 C1                   132  	push ax
+00000043 C7                   133  	push hl
+00000044                      134  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 58
+00000044 D1                   135  	cmp0 a
+00000045 DF00                 136  	bnz $.BB@LABEL@3_2
+00000047                      137  .BB@LABEL@3_1:	; entry.bb16_crit_edge
+00000047 F7                   138  	clrw bc
+00000048 13                   139  	movw ax, bc
+00000049 EF00                 140  	br $.BB@LABEL@3_4
+0000004B                      141  .BB@LABEL@3_2:	; if_then_bb
+0000004B FE0000               142  	call $!_msg
+0000004E EF00                 143  	br $.BB@LABEL@3_1
+00000050                      144  .BB@LABEL@3_3:	; bb
+00000050 A804                 145  	movw ax, [sp+0x04]
+00000052 03                   146  	addw ax, bc
+00000053 14                   147  	movw de, ax
+00000054 89                   148  	mov a, [de]
+00000055 FE0000               149  	call $!_msg
+00000058 A800                 150  	movw ax, [sp+0x00]
+0000005A A1                   151  	incw ax
+0000005B 12                   152  	movw bc, ax
+0000005C                      153  .BB@LABEL@3_4:	; bb
+0000005C B800                 154  	movw [sp+0x00], ax
+0000005E 8802                 155  	mov a, [sp+0x02]
+00000060 318E                 156  	shrw ax, 8+0x00000
+00000062 6C80                 157  	or a, #0x80
+00000064 14                   158  	movw de, ax
+00000065 13                   159  	movw ax, bc
+00000066 7C80                 160  	xor a, #0x80
+00000068 45                   161  	cmpw ax, de
+00000069 DC00                 162  	bc $.BB@LABEL@3_3
+0000006B                      163  .BB@LABEL@3_5:	; return
+0000006B                      164  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/trace_buffer219.h", 60
+0000006B 1006                 165  	addw sp, #0x06
+0000006D D7                   166  	ret
+0000006E                      167  .LFE3:
+0000006E                      168  	.TYPE _crc5_calc@1,function,.LFE4-_crc5_calc@1
+0000006E                      169  _crc5_calc@1:
+0000006E                      170  	.STACK _crc5_calc@1 = 4
+0000006E                      171  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 260
+0000006E 14                   172  	movw de, ax
+0000006F 321F0B               173  	movw bc, #0x0B1F
+00000072 EF00                 174  	br $.BB@LABEL@4_4
+00000074                      175  .BB@LABEL@4_1:	; bb
+00000074                      176  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 266
+00000074 64                   177  	mov a, e
+00000075 617A                 178  	xor a, c
+00000077 318E                 179  	shrw ax, 8+0x00000
+00000079 311E                 180  	shrw ax, 0x01
+0000007B DE00                 181  	bnc $.BB@LABEL@4_3
+0000007D                      182  .BB@LABEL@4_2:	; if_then_bb
+0000007D 62                   183  	mov a, c
+0000007E                      184  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 267
+0000007E 7C28                 185  	xor a, #0x28
+00000080 72                   186  	mov c, a
+00000081                      187  .BB@LABEL@4_3:	; if_break_bb
+00000081 15                   188  	movw ax, de
+00000082                      189  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 269
+00000082 311E                 190  	shrw ax, 0x01
+00000084 14                   191  	movw de, ax
+00000085 62                   192  	mov a, c
+00000086                      193  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 268
+00000086 311A                 194  	shr a, 0x01
+00000088 72                   195  	mov c, a
+00000089                      196  .BB@LABEL@4_4:	; bb22
+00000089 63                   197  	mov a, b
+0000008A                      198  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 265
+0000008A 93                   199  	dec b
+0000008B D1                   200  	cmp0 a
+0000008C DF00                 201  	bnz $.BB@LABEL@4_1
+0000008E                      202  .BB@LABEL@4_5:	; bb30
+0000008E 62                   203  	mov a, c
+0000008F                      204  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 271
+0000008F 7C1F                 205  	xor a, #0x1F
+00000091                      206  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 272
+00000091 D7                   207  	ret
+00000092                      208  .LFE4:
+00000092                      209  	.TYPE _request_measure_on_bus_reset@1,function,.LFE5-_request_measure_on_bus_reset@1
+00000092                      210  _request_measure_on_bus_reset@1:
+00000092                      211  	.STACK _request_measure_on_bus_reset@1 = 4
+00000092                      212  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 280
+00000092 4100                 213  	mov es, #0x00
+00000094 118F0AF7             214  	mov a, es:!0xF70A
+00000098 318E                 215  	shrw ax, 8+0x00000
+0000009A F1                   216  	clrb a
+0000009B 08                   217  	xch a, x
+0000009C 5CC0                 218  	and a, #0xC0
+0000009E 08                   219  	xch a, x
+0000009F 6168                 220  	or a, x
+000000A1 61F8                 221  	sknz
+000000A3                      222  .BB@LABEL@5_1:	; if_then_bb
+000000A3                      223  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 281
+000000A3 71000000             224  	set1 !LOWW(_g_field@8).0
+000000A7                      225  .BB@LABEL@5_2:	; return
+000000A7                      226  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 283
+000000A7 D7                   227  	ret
+000000A8                      228  .LFE5:
+000000A8                      229  	.TYPE _device_set_address@1,function,.LFE6-_device_set_address@1
+000000A8                      230  _device_set_address@1:
+000000A8                      231  	.STACK _device_set_address@1 = 6
+000000A8                      232  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 299
+000000A8 C7                   233  	push hl
+000000A9 9800                 234  	mov [sp+0x00], a
+000000AB                      235  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 306
+000000AB 318E                 236  	shrw ax, 8+0x00000
+000000AD                      237  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 307
+000000AD FE0000               238  	call $!_crc5_calc@1
+000000B0 70                   239  	mov x, a
+000000B1 8800                 240  	mov a, [sp+0x00]
+000000B3                      241  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 309
+000000B3 9F0000               242  	mov !LOWW(_g_expected_token@2), a
+000000B6 F1                   243  	clrb a
+000000B7                      244  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 308
+000000B7 31BD                 245  	shlw ax, 0x0B
+000000B9                      246  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 310
+000000B9 9F0000               247  	mov !LOWW(_g_expected_token@2+0x00001), a
+000000BC C0                   248  	pop ax
+000000BD D7                   249  	ret
+000000BE                      250  .LFE6:
+000000BE                      251  	.TYPE _device_reset@1,function,.LFE7-_device_reset@1
+000000BE                      252  _device_reset@1:
+000000BE                      253  	.STACK _device_reset@1 = 4
+000000BE                      254  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 316
+000000BE F50000               255  	clrb !LOWW(_g_xact_state@1)
+000000C1                      256  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 317
+000000C1 F1                   257  	clrb a
+000000C2 FE0000               258  	call $!_device_set_address@1
+000000C5                      259  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 318
+000000C5 F50000               260  	clrb !LOWW(_g_in_data_pkt_len@4)
+000000C8 5187                 261  	mov a, #0x87
+000000CA                      262  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 322
+000000CA 5F0000               263  	and a, !LOWW(_g_field@8)
+000000CD 9F0000               264  	mov !LOWW(_g_field@8), a
+000000D0                      265  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 323
+000000D0 F50000               266  	clrb !LOWW(_g_transfer_state@9)
+000000D3 51FC                 267  	mov a, #0xFC
+000000D5                      268  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 325
+000000D5 5F0000               269  	and a, !LOWW(_g_field@8)
+000000D8 9F0000               270  	mov !LOWW(_g_field@8), a
+000000DB                      271  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 328
+000000DB FE0000               272  	call $!_request_measure_on_bus_reset@1
+000000DE D7                   273  	ret
+000000DF                      274  .LFE7:
+000000DF                      275  	.TYPE _device_configure@1,function,.LFE8-_device_configure@1
+000000DF                      276  _device_configure@1:
+000000DF                      277  	.STACK _device_configure@1 = 4
+000000DF                      278  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 334
+000000DF 71600000             279  	set1 !LOWW(_g_field@8).6
+000000E3 D7                   280  	ret
+000000E4                      281  .LFE8:
+000000E4                      282  	.TYPE _device_deconfigure@1,function,.LFE9-_device_deconfigure@1
+000000E4                      283  _device_deconfigure@1:
+000000E4                      284  	.STACK _device_deconfigure@1 = 4
+000000E4                      285  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 340
+000000E4 71680000             286  	clr1 !LOWW(_g_field@8).6
+000000E8 D7                   287  	ret
+000000E9                      288  .LFE9:
+000000E9                      289  	.TYPE _calibrate_bitrate@1,function,.LFE10-_calibrate_bitrate@1
+000000E9                      290  _calibrate_bitrate@1:
+000000E9                      291  	.STACK _calibrate_bitrate@1 = 8
+000000E9                      292  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 343
+000000E9 2004                 293  	subw sp, #0x04
+000000EB AEF8                 294  	movw ax, sp
+000000ED 040200               295  	addw ax, #0x0002
+000000F0                      296  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 348
+000000F0 12                   297  	movw bc, ax
+000000F1 B1                   298  	decw ax
+000000F2 FC000000             299  	call !!_swusb_measure_pkt
+000000F6                      300  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 349
+000000F6 D1                   301  	cmp0 a
+000000F7 DF00                 302  	bnz $.BB@LABEL@10_5
+000000F9                      303  .BB@LABEL@10_1:	; if_then_bb
+000000F9                      304  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 350
+000000F9 8801                 305  	mov a, [sp+0x01]
+000000FB 73                   306  	mov b, a
+000000FC 318E                 307  	shrw ax, 8+0x00000
+000000FE 445800               308  	cmpw ax, #0x0058
+00000101 DC00                 309  	bc $.BB@LABEL@10_7
+00000103                      310  .BB@LABEL@10_2:	; bb
+00000103 63                   311  	mov a, b
+00000104 318E                 312  	shrw ax, 8+0x00000
+00000106 446200               313  	cmpw ax, #0x0062
+00000109 DE00                 314  	bnc $.BB@LABEL@10_7
+0000010B                      315  .BB@LABEL@10_3:	; if_then_bb24
+0000010B                      316  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 372
+0000010B A802                 317  	movw ax, [sp+0x02]
+0000010D 12                   318  	movw bc, ax
+0000010E 319D                 319  	shlw ax, 0x09
+00000110 16                   320  	movw hl, ax
+00000111 8801                 321  	mov a, [sp+0x01]
+00000113 9800                 322  	mov [sp+0x00], a
+00000115 318E                 323  	shrw ax, 8+0x00000
+00000117 14                   324  	movw de, ax
+00000118 13                   325  	movw ax, bc
+00000119 317E                 326  	shrw ax, 0x07
+0000011B 12                   327  	movw bc, ax
+0000011C 8800                 328  	mov a, [sp+0x00]
+0000011E 319E                 329  	shrw ax, 8+0x00001
+00000120 07                   330  	addw ax, hl
+00000121 360000               331  	movw hl, #0x0000
+00000124                      332  	divwu
+00000124 CEFB0B                  	-- div**
+00000127 00                      	-- nop
+00000128 12                   333  	movw bc, ax
+00000129                      334  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 373
+00000129 0480E0               335  	addw ax, #0xE080
+0000012C 440001               336  	cmpw ax, #0x0100
+0000012F DE00                 337  	bnc $.BB@LABEL@10_7
+00000131                      338  .BB@LABEL@10_4:	; if_then_bb53
+00000131 62                   339  	mov a, c
+00000132                      340  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 374
+00000132 7C80                 341  	xor a, #0x80
+00000134 9F0000               342  	mov !LOWW(_g_swusb_rate_offset), a
+00000137 5102                 343  	mov a, #0x02
+00000139                      344  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 378
+00000139 6F0000               345  	or a, !LOWW(_g_field@8)
+0000013C 718B                 346  	clr1 a.0
+0000013E 9F0000               347  	mov !LOWW(_g_field@8), a
+00000141 EF00                 348  	br $.BB@LABEL@10_7
+00000143                      349  .BB@LABEL@10_5:	; if_else_bb64
+00000143                      350  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 384
+00000143 81                   351  	inc a
+00000144 61F8                 352  	sknz
+00000146                      353  .BB@LABEL@10_6:	; if_then_bb70
+00000146                      354  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 386
+00000146 FE0000               355  	call $!_device_reset@1
+00000149                      356  .BB@LABEL@10_7:	; return
+00000149 1004                 357  	addw sp, #0x04
+0000014B                      358  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 391
+0000014B D7                   359  	ret
+0000014C                      360  .LFE10:
+0000014C                      361  	.TYPE _int_dminus_handler@1,function,.LFE11-_int_dminus_handler@1
+0000014C                      362  _int_dminus_handler@1:
+0000014C                      363  	.STACK _int_dminus_handler@1 = 16
+0000014C                      364  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 394
+0000014C 200C                 365  	subw sp, #0x0C
+0000014E                      366  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 399
+0000014E 8F0000               367  	mov a, !LOWW(_g_field@8)
+00000151 310500               368  	bf a.0, $.BB@LABEL@11_3
+00000154                      369  .BB@LABEL@11_1:	; bb
+00000154 311300               370  	bt a.1, $.BB@LABEL@11_3
+00000157                      371  .BB@LABEL@11_2:	; if_then_bb
+00000157                      372  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 400
+00000157 FE0000               373  	call $!_calibrate_bitrate@1
+0000015A EE0000               374  	br $!.BB@LABEL@11_50
+0000015D                      375  .BB@LABEL@11_3:	; if_else_bb
+0000015D                      376  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 402
+0000015D AEF8                 377  	movw ax, sp
+0000015F A1                   378  	incw ax
+00000160 FC000000             379  	call !!_swusb_recv_pkt
+00000164 9800                 380  	mov [sp+0x00], a
+00000166                      381  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 403
+00000166 318E                 382  	shrw ax, 8+0x00000
+00000168 319D                 383  	shlw ax, 0x09
+0000016A                      384  	.bc $!.BB@LABEL@11_42
+0000016A 61D8                    	 -- Skncond
+0000016C EE0000                  	 -- br	**.target1
+0000016F                      385  .BB@LABEL@11_4:	; if_then_bb42
+0000016F                      386  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 405
+0000016F 8801                 387  	mov a, [sp+0x01]
+00000171 318E                 388  	shrw ax, 8+0x00000
+00000173 F1                   389  	clrb a
+00000174 08                   390  	xch a, x
+00000175 5C33                 391  	and a, #0x33
+00000177 08                   392  	xch a, x
+00000178 442100               393  	cmpw ax, #0x0021
+0000017B DF00                 394  	bnz $.BB@LABEL@11_22
+0000017D                      395  .BB@LABEL@11_5:	; if_then_bb51
+0000017D 8800                 396  	mov a, [sp+0x00]
+0000017F                      397  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 407
+0000017F 318E                 398  	shrw ax, 8+0x00000
+00000181 31CD                 399  	shlw ax, 0x0C
+00000183 31CE                 400  	shrw ax, 0x0C
+00000185 440300               401  	cmpw ax, #0x0003
+00000188                      402  	.bnz $!.BB@LABEL@11_47
+00000188 61E8                    	 -- Skncond
+0000018A EE0000                  	 -- br	**.target1
+0000018D                      403  .BB@LABEL@11_6:	; bb57
+0000018D 8802                 404  	mov a, [sp+0x02]
+0000018F 4F0000               405  	cmp a, !LOWW(_g_expected_token@2)
+00000192                      406  	.bnz $!.BB@LABEL@11_47
+00000192 61E8                    	 -- Skncond
+00000194 EE0000                  	 -- br	**.target1
+00000197                      407  .BB@LABEL@11_7:	; bb73
+00000197 8803                 408  	mov a, [sp+0x03]
+00000199 4F0000               409  	cmp a, !LOWW(_g_expected_token@2+0x00001)
+0000019C                      410  	.bnz $!.BB@LABEL@11_47
+0000019C 61E8                    	 -- Skncond
+0000019E EE0000                  	 -- br	**.target1
+000001A1                      411  .BB@LABEL@11_8:	; if_then_bb90
+000001A1                      412  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 409
+000001A1 8801                 413  	mov a, [sp+0x01]
+000001A3 4C2D                 414  	cmp a, #0x2D
+000001A5 DF00                 415  	bnz $.BB@LABEL@11_10
+000001A7                      416  .BB@LABEL@11_9:	; if_then_bb98
+000001A7                      417  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 411
+000001A7 E50000               418  	oneb !LOWW(_g_xact_state@1)
+000001AA EE0000               419  	br $!.BB@LABEL@11_50
+000001AD                      420  .BB@LABEL@11_10:	; if_else_bb99
+000001AD                      421  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 412
+000001AD 8801                 422  	mov a, [sp+0x01]
+000001AF 4CE1                 423  	cmp a, #0xE1
+000001B1 DF00                 424  	bnz $.BB@LABEL@11_12
+000001B3                      425  .BB@LABEL@11_11:	; if_then_bb107
+000001B3                      426  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 414
+000001B3 CF000002             427  	mov !LOWW(_g_xact_state@1), #0x02
+000001B7 EE0000               428  	br $!.BB@LABEL@11_50
+000001BA                      429  .BB@LABEL@11_12:	; if_else_bb108
+000001BA                      430  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 415
+000001BA 8801                 431  	mov a, [sp+0x01]
+000001BC 4C69                 432  	cmp a, #0x69
+000001BE                      433  	.bnz $!.BB@LABEL@11_47
+000001BE 61E8                    	 -- Skncond
+000001C0 EE0000                  	 -- br	**.target1
+000001C3                      434  .BB@LABEL@11_13:	; if_then_bb116
+000001C3                      435  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 417
+000001C3 D50000               436  	cmp0 !LOWW(_g_in_data_pkt_len@4)
+000001C6 8F0000               437  	mov a, !LOWW(_g_field@8)
+000001C9 DD00                 438  	bz $.BB@LABEL@11_18
+000001CB                      439  .BB@LABEL@11_14:	; if_then_bb122
+000001CB                      440  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 419
+000001CB 312500               441  	bf a.2, $.BB@LABEL@11_16
+000001CE                      442  .BB@LABEL@11_15:	; if_then_bb122.if_break_bb_crit_edge
+000001CE 514B                 443  	mov a, #0x4B
+000001D0 EF00                 444  	br $.BB@LABEL@11_17
+000001D2                      445  .BB@LABEL@11_16:	; if_else_bb131
+000001D2 51C3                 446  	mov a, #0xC3
+000001D4                      447  .BB@LABEL@11_17:	; if_break_bb
+000001D4 9F0000               448  	mov !LOWW(_g_in_data_pkt@5), a
+000001D7                      449  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 423
+000001D7 F90000               450  	mov c, !LOWW(_g_in_data_pkt_len@4)
+000001DA 300000               451  	movw ax, #LOWW(_g_in_data_pkt@5)
+000001DD FC000000             452  	call !!_swusb_xmit_data_pkt
+000001E1                      453  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 424
+000001E1 CF000003             454  	mov !LOWW(_g_xact_state@1), #0x03
+000001E5 EE0000               455  	br $!.BB@LABEL@11_50
+000001E8                      456  .BB@LABEL@11_18:	; if_else_bb133
+000001E8                      457  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 425
+000001E8 313500               458  	bf a.3, $.BB@LABEL@11_21
+000001EB                      459  .BB@LABEL@11_19:	; if_then_bb141
+000001EB                      460  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 427
+000001EB 511E                 461  	mov a, #0x1E
+000001ED                      462  .BB@LABEL@11_20:	; if_then_bb141
+000001ED FC000000             463  	call !!_swusb_xmit_handshake_pkt
+000001F1 EE0000               464  	br $!.BB@LABEL@11_47
+000001F4                      465  .BB@LABEL@11_21:	; if_else_bb142
+000001F4                      466  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 431
+000001F4 515A                 467  	mov a, #0x5A
+000001F6 EF00                 468  	br $.BB@LABEL@11_20
+000001F8                      469  .BB@LABEL@11_22:	; if_else_bb151
+000001F8                      470  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 444
+000001F8 8F0000               471  	mov a, !LOWW(_g_xact_state@1)
+000001FB 4C01                 472  	cmp a, #0x01
+000001FD DF00                 473  	bnz $.BB@LABEL@11_29
+000001FF                      474  .BB@LABEL@11_23:	; if_then_bb157
+000001FF                      475  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 447
+000001FF 8801                 476  	mov a, [sp+0x01]
+00000201 4CC3                 477  	cmp a, #0xC3
+00000203                      478  	.bnz $!.BB@LABEL@11_47
+00000203 61E8                    	 -- Skncond
+00000205 EE0000                  	 -- br	**.target1
+00000208                      479  .BB@LABEL@11_24:	; bb164
+00000208 8800                 480  	mov a, [sp+0x00]
+0000020A 318E                 481  	shrw ax, 8+0x00000
+0000020C 31CD                 482  	shlw ax, 0x0C
+0000020E 31CE                 483  	shrw ax, 0x0C
+00000210 440300               484  	cmpw ax, #0x0003
+00000213                      485  	.bc $!.BB@LABEL@11_47
+00000213 61D8                    	 -- Skncond
+00000215 EE0000                  	 -- br	**.target1
+00000218                      486  .BB@LABEL@11_25:	; if_then_bb178
+00000218 8800                 487  	mov a, [sp+0x00]
+0000021A                      488  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 449
+0000021A 318E                 489  	shrw ax, 8+0x00000
+0000021C 31CD                 490  	shlw ax, 0x0C
+0000021E                      491  	.bnc $!.BB@LABEL@11_45
+0000021E 61C8                    	 -- Skncond
+00000220 EE0000                  	 -- br	**.target1
+00000223                      492  .BB@LABEL@11_26:	; if_then_bb185
+00000223                      493  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 453
+00000223 51D2                 494  	mov a, #0xD2
+00000225 FC000000             495  	call !!_swusb_xmit_handshake_pkt
+00000229                      496  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 461
+00000229 8802                 497  	mov a, [sp+0x02]
+0000022B 9F0000               498  	mov !LOWW(_g_setup_data@3), a
+0000022E                      499  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 462
+0000022E 8803                 500  	mov a, [sp+0x03]
+00000230 9F0000               501  	mov !LOWW(_g_setup_data@3+0x00001), a
+00000233                      502  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 463
+00000233 8804                 503  	mov a, [sp+0x04]
+00000235 9F0000               504  	mov !LOWW(_g_setup_data@3+0x00002), a
+00000238                      505  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 464
+00000238 8805                 506  	mov a, [sp+0x05]
+0000023A 9F0000               507  	mov !LOWW(_g_setup_data@3+0x00003), a
+0000023D                      508  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 465
+0000023D 8806                 509  	mov a, [sp+0x06]
+0000023F 9F0000               510  	mov !LOWW(_g_setup_data@3+0x00004), a
+00000242                      511  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 466
+00000242 8808                 512  	mov a, [sp+0x08]
+00000244 9F0000               513  	mov !LOWW(_g_setup_data@3+0x00005), a
+00000247                      514  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 467
+00000247 8809                 515  	mov a, [sp+0x09]
+00000249 D1                   516  	cmp0 a
+0000024A 61E8                 517  	skz
+0000024C                      518  .BB@LABEL@11_27:	; if_then_bb214
+0000024C                      519  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 468
+0000024C CF0000FF             520  	mov !LOWW(_g_setup_data@3+0x00005), #0xFF
+00000250                      521  .BB@LABEL@11_28:	; if_break_bb215
+00000250 5114                 522  	mov a, #0x14
+00000252                      523  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 473
+00000252 6F0000               524  	or a, !LOWW(_g_field@8)
+00000255                      525  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 474
+00000255 71BB                 526  	clr1 a.3
+00000257 9F0000               527  	mov !LOWW(_g_field@8), a
+0000025A                      528  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 475
+0000025A F50000               529  	clrb !LOWW(_g_in_data_pkt_len@4)
+0000025D EE0000               530  	br $!.BB@LABEL@11_47
+00000260                      531  .BB@LABEL@11_29:	; if_else_bb228
+00000260                      532  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 486
+00000260 4C02                 533  	cmp a, #0x02
+00000262 DF00                 534  	bnz $.BB@LABEL@11_35
+00000264                      535  .BB@LABEL@11_30:	; if_then_bb234
+00000264 8800                 536  	mov a, [sp+0x00]
+00000266                      537  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 488
+00000266 318E                 538  	shrw ax, 8+0x00000
+00000268 31CD                 539  	shlw ax, 0x0C
+0000026A 31CE                 540  	shrw ax, 0x0C
+0000026C 440300               541  	cmpw ax, #0x0003
+0000026F                      542  	.bc $!.BB@LABEL@11_47
+0000026F 61D8                    	 -- Skncond
+00000271 EE0000                  	 -- br	**.target1
+00000274                      543  .BB@LABEL@11_31:	; if_then_bb241
+00000274 8800                 544  	mov a, [sp+0x00]
+00000276                      545  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 489
+00000276 318E                 546  	shrw ax, 8+0x00000
+00000278 31CD                 547  	shlw ax, 0x0C
+0000027A DE00                 548  	bnc $.BB@LABEL@11_45
+0000027C                      549  .BB@LABEL@11_32:	; if_then_bb248
+0000027C                      550  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 490
+0000027C 8801                 551  	mov a, [sp+0x01]
+0000027E 4C4B                 552  	cmp a, #0x4B
+00000280 DD00                 553  	bz $.BB@LABEL@11_34
+00000282                      554  .BB@LABEL@11_33:	; if_else_bb260
+00000282                      555  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 496
+00000282 8801                 556  	mov a, [sp+0x01]
+00000284 4CC3                 557  	cmp a, #0xC3
+00000286 DF00                 558  	bnz $.BB@LABEL@11_47
+00000288                      559  .BB@LABEL@11_34:	; if_then_bb268
+00000288 51D2                 560  	mov a, #0xD2
+0000028A FC000000             561  	call !!_swusb_xmit_handshake_pkt
+0000028E 71180000             562  	clr1 !LOWW(_g_field@8).1
+00000292 EF00                 563  	br $.BB@LABEL@11_47
+00000294                      564  .BB@LABEL@11_35:	; if_else_bb277
+00000294                      565  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 512
+00000294 4C03                 566  	cmp a, #0x03
+00000296 DF00                 567  	bnz $.BB@LABEL@11_47
+00000298                      568  .BB@LABEL@11_36:	; if_then_bb283
+00000298 8800                 569  	mov a, [sp+0x00]
+0000029A                      570  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 515
+0000029A 318E                 571  	shrw ax, 8+0x00000
+0000029C 31CD                 572  	shlw ax, 0x0C
+0000029E 31CE                 573  	shrw ax, 0x0C
+000002A0 440100               574  	cmpw ax, #0x0001
+000002A3 DF00                 575  	bnz $.BB@LABEL@11_47
+000002A5                      576  .BB@LABEL@11_37:	; bb289
+000002A5 8801                 577  	mov a, [sp+0x01]
+000002A7 4CD2                 578  	cmp a, #0xD2
+000002A9 DF00                 579  	bnz $.BB@LABEL@11_47
+000002AB                      580  .BB@LABEL@11_38:	; if_then_bb304
+000002AB 5104                 581  	mov a, #0x04
+000002AD                      582  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 517
+000002AD 7F0000               583  	xor a, !LOWW(_g_field@8)
+000002B0 73                   584  	mov b, a
+000002B1 9F0000               585  	mov !LOWW(_g_field@8), a
+000002B4                      586  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 518
+000002B4 8F0000               587  	mov a, !LOWW(_g_in_data_pkt_len@4)
+000002B7 318E                 588  	shrw ax, 8+0x00000
+000002B9 440B00               589  	cmpw ax, #0x000B
+000002BC DE00                 590  	bnc $.BB@LABEL@11_40
+000002BE                      591  .BB@LABEL@11_39:	; if_then_bb320
+000002BE 63                   592  	mov a, b
+000002BF                      593  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 520
+000002BF 71BA                 594  	set1 a.3
+000002C1 73                   595  	mov b, a
+000002C2 9F0000               596  	mov !LOWW(_g_field@8), a
+000002C5                      597  .BB@LABEL@11_40:	; if_break_bb324
+000002C5                      598  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 522
+000002C5 F50000               599  	clrb !LOWW(_g_in_data_pkt_len@4)
+000002C8 63                   600  	mov a, b
+000002C9 315500               601  	bf a.5, $.BB@LABEL@11_47
+000002CC                      602  .BB@LABEL@11_41:	; if_then_bb332
+000002CC 517F                 603  	mov a, #0x7F
+000002CE                      604  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 526
+000002CE 5F0000               605  	and a, !LOWW(_g_setup_data@3+0x00002)
+000002D1                      606  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 527
+000002D1 FE0000               607  	call $!_device_set_address@1
+000002D4                      608  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 528
+000002D4 71580000             609  	clr1 !LOWW(_g_field@8).5
+000002D8 EF00                 610  	br $.BB@LABEL@11_47
+000002DA                      611  .BB@LABEL@11_42:	; if_else_bb349
+000002DA 8800                 612  	mov a, [sp+0x00]
+000002DC 70                   613  	mov x, a
+000002DD                      614  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 543
+000002DD 0C7E                 615  	add a, #0x7E
+000002DF 4C02                 616  	cmp a, #0x02
+000002E1 DE00                 617  	bnc $.BB@LABEL@11_48
+000002E3                      618  .BB@LABEL@11_43:	; if_then_bb367
+000002E3                      619  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 544
+000002E3 8F0000               620  	mov a, !LOWW(_g_xact_state@1)
+000002E6 4C01                 621  	cmp a, #0x01
+000002E8 DD00                 622  	bz $.BB@LABEL@11_45
+000002EA                      623  .BB@LABEL@11_44:	; if_then_bb367
+000002EA 4C02                 624  	cmp a, #0x02
+000002EC DF00                 625  	bnz $.BB@LABEL@11_47
+000002EE                      626  .BB@LABEL@11_45:	; if_then_bb385
+000002EE 4100                 627  	mov es, #0x00
+000002F0 118F0AF7             628  	mov a, es:!0xF70A
+000002F4 318E                 629  	shrw ax, 8+0x00000
+000002F6 F1                   630  	clrb a
+000002F7 08                   631  	xch a, x
+000002F8 5CC0                 632  	and a, #0xC0
+000002FA 08                   633  	xch a, x
+000002FB 444000               634  	cmpw ax, #0x0040
+000002FE 61F8                 635  	sknz
+00000300                      636  .BB@LABEL@11_46:	; if_then_bb.i34
+00000300 71000000             637  	set1 !LOWW(_g_field@8).0
+00000304                      638  .BB@LABEL@11_47:	; if_break_bb386
+00000304 F50000               639  	clrb !LOWW(_g_xact_state@1)
+00000307 EF00                 640  	br $.BB@LABEL@11_50
+00000309                      641  .BB@LABEL@11_48:	; if_else_bb387
+00000309                      642  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 553
+00000309 80                   643  	inc x
+0000030A 61F8                 644  	sknz
+0000030C                      645  .BB@LABEL@11_49:	; if_then_bb393
+0000030C                      646  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 555
+0000030C FE0000               647  	call $!_device_reset@1
+0000030F                      648  .BB@LABEL@11_50:	; if_else_bb394
+0000030F 100C                 649  	addw sp, #0x0C
+00000311                      650  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 561
+00000311 D7                   651  	ret
+00000312                      652  .LFE11:
+00000312                      653  	.TYPE _crc16_calc@1,function,.LFE12-_crc16_calc@1
+00000312                      654  _crc16_calc@1:
+00000312                      655  	.STACK _crc16_calc@1 = 6
+00000312                      656  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 563
+00000312 C3                   657  	push bc
+00000313 14                   658  	movw de, ax
+00000314 36FFFF               659  	movw hl, #0xFFFF
+00000317 EF00                 660  	br $.BB@LABEL@12_2
+00000319                      661  .BB@LABEL@12_1:	; bb
+00000319                      662  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 569
+00000319 89                   663  	mov a, [de]
+0000031A 318E                 664  	shrw ax, 8+0x00000
+0000031C 12                   665  	movw bc, ax
+0000031D 17                   666  	movw ax, hl
+0000031E F1                   667  	clrb a
+0000031F 617B                 668  	xor a, b
+00000321 08                   669  	xch a, x
+00000322 617A                 670  	xor a, c
+00000324 08                   671  	xch a, x
+00000325 12                   672  	movw bc, ax
+00000326 311C                 673  	shlw bc, 0x01
+00000328 790000               674  	movw ax, SMRLW(_g_crc_tbl_swap)[bc]
+0000032B                      675  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 570
+0000032B 08                   676  	xch a, x
+0000032C 12                   677  	movw bc, ax
+0000032D 17                   678  	movw ax, hl
+0000032E                      679  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 571
+0000032E 318E                 680  	shrw ax, 0x08
+00000330 617B                 681  	xor a, b
+00000332 08                   682  	xch a, x
+00000333 617A                 683  	xor a, c
+00000335 08                   684  	xch a, x
+00000336 16                   685  	movw hl, ax
+00000337                      686  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 569
+00000337 A5                   687  	incw de
+00000338                      688  .BB@LABEL@12_2:	; bb24
+00000338 8800                 689  	mov a, [sp+0x00]
+0000033A 70                   690  	mov x, a
+0000033B                      691  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 568
+0000033B 91                   692  	dec a
+0000033C 9800                 693  	mov [sp+0x00], a
+0000033E D0                   694  	cmp0 x
+0000033F DF00                 695  	bnz $.BB@LABEL@12_1
+00000341                      696  .BB@LABEL@12_3:	; bb31
+00000341 30FFFF               697  	movw ax, #0xFFFF
+00000344                      698  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 573
+00000344 27                   699  	subw ax, hl
+00000345                      700  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 574
+00000345 C2                   701  	pop bc
+00000346 D7                   702  	ret
+00000347                      703  .LFE12:
+00000347                      704  	.TYPE _memcpy_param_core@1,function,.LFE13-_memcpy_param_core@1
+00000347                      705  _memcpy_param_core@1:
+00000347                      706  	.STACK _memcpy_param_core@1 = 4
+00000347                      707  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 578
+00000347 16                   708  	movw hl, ax
+00000348 EF00                 709  	br $.BB@LABEL@13_2
+0000034A                      710  .BB@LABEL@13_1:	; bb
+0000034A 62                   711  	mov a, c
+0000034B                      712  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 581
+0000034B 9EFD                 713  	mov es, a
+0000034D 1189                 714  	mov a, es:[de]
+0000034F 9B                   715  	mov [hl], a
+00000350 A5                   716  	incw de
+00000351 A7                   717  	incw hl
+00000352                      718  .BB@LABEL@13_2:	; bb15
+00000352 63                   719  	mov a, b
+00000353                      720  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 580
+00000353 93                   721  	dec b
+00000354 D1                   722  	cmp0 a
+00000355 DF00                 723  	bnz $.BB@LABEL@13_1
+00000357                      724  .BB@LABEL@13_3:	; return
+00000357                      725  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 583
+00000357 D7                   726  	ret
+00000358                      727  .LFE13:
+00000358                      728  	.TYPE _decode_string_param_core@1,function,.LFE14-_decode_string_param_core@1
+00000358                      729  _decode_string_param_core@1:
+00000358                      730  	.STACK _decode_string_param_core@1 = 4
+00000358                      731  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 587
+00000358 EF00                 732  	br $.BB@LABEL@14_2
+0000035A                      733  .BB@LABEL@14_1:	; bb
+0000035A 62                   734  	mov a, c
+0000035B                      735  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 590
+0000035B 9EFD                 736  	mov es, a
+0000035D 1189                 737  	mov a, es:[de]
+0000035F 9B                   738  	mov [hl], a
+00000360 A5                   739  	incw de
+00000361                      740  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 591
+00000361 CC0100               741  	mov [hl+0x01], #0x00
+00000364 17                   742  	movw ax, hl
+00000365 040200               743  	addw ax, #0x0002
+00000368                      744  .BB@LABEL@14_2:	; bb
+00000368 16                   745  	movw hl, ax
+00000369 63                   746  	mov a, b
+0000036A                      747  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 589
+0000036A 93                   748  	dec b
+0000036B D1                   749  	cmp0 a
+0000036C DF00                 750  	bnz $.BB@LABEL@14_1
+0000036E                      751  .BB@LABEL@14_3:	; return
+0000036E                      752  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 593
+0000036E D7                   753  	ret
+0000036F                      754  .LFE14:
+0000036F                      755  	.TYPE _make_string_index@1,function,.LFE15-_make_string_index@1
+0000036F                      756  _make_string_index@1:
+0000036F                      757  	.STACK _make_string_index@1 = 6
+0000036F                      758  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 596
+0000036F C7                   759  	push hl
+00000370 9800                 760  	mov [sp+0x00], a
+00000372                      761  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 598
+00000372 4100                 762  	mov es, #0x00
+00000374 320001               763  	movw bc, #0x0100
+00000377 11FB3CF7             764  	movw hl, es:!0xF73C
+0000037B EF00                 765  	br $.BB@LABEL@15_2
+0000037D                      766  .BB@LABEL@15_1:	; bb
+0000037D                      767  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 603
+0000037D 64                   768  	mov a, e
+0000037E 6103                 769  	add b, a
+00000380                      770  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 604
+00000380 82                   771  	inc c
+00000381 17                   772  	movw ax, hl
+00000382 311E                 773  	shrw ax, 0x01
+00000384 16                   774  	movw hl, ax
+00000385                      775  .BB@LABEL@15_2:	; bb16
+00000385                      776  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 602
+00000385 17                   777  	movw ax, hl
+00000386 31FD                 778  	shlw ax, 0x0F
+00000388 31FE                 779  	shrw ax, 0x0F
+0000038A 14                   780  	movw de, ax
+0000038B 8800                 781  	mov a, [sp+0x00]
+0000038D 6142                 782  	cmp c, a
+0000038F DC00                 783  	bc $.BB@LABEL@15_1
+00000391                      784  .BB@LABEL@15_3:	; bb23
+00000391 15                   785  	movw ax, de
+00000392                      786  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 606
+00000392 6168                 787  	or a, x
+00000394 F1                   788  	clrb a
+00000395 61F8                 789  	sknz
+00000397                      790  .BB@LABEL@15_4:	; bb23
+00000397 73                   791  	mov b, a
+00000398                      792  .BB@LABEL@15_5:	; bb23
+00000398 63                   793  	mov a, b
+00000399 C2                   794  	pop bc
+0000039A D7                   795  	ret
+0000039B                      796  .LFE15:
+0000039B                      797  	.TYPE _make_i_alternate_mode_string@1,function,.LFE16-_make_i_alternate_mode_string@1
+0000039B                      798  _make_i_alternate_mode_string@1:
+0000039B                      799  	.STACK _make_i_alternate_mode_string@1 = 4
+0000039B                      800  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 613
+0000039B 0C06                 801  	add a, #0x06
+0000039D                      802  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 615
+0000039D FE0000               803  	call $!_make_string_index@1
+000003A0                      804  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 616
+000003A0 D7                   805  	ret
+000003A1                      806  .LFE16:
+000003A1                      807  	.TYPE _get_max_string_index@1,function,.LFE17-_get_max_string_index@1
+000003A1                      808  _get_max_string_index@1:
+000003A1                      809  	.STACK _get_max_string_index@1 = 4
+000003A1                      810  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 621
+000003A1 4100                 811  	mov es, #0x00
+000003A3 5500                 812  	mov d, #0x00
+000003A5 11AF3CF7             813  	movw ax, es:!0xF73C
+000003A9 EF00                 814  	br $.BB@LABEL@17_2
+000003AB                      815  .BB@LABEL@17_1:	; bb
+000003AB                      816  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 627
+000003AB 85                   817  	inc d
+000003AC 12                   818  	movw bc, ax
+000003AD                      819  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 626
+000003AD B1                   820  	decw ax
+000003AE 615B                 821  	and a, b
+000003B0 08                   822  	xch a, x
+000003B1 615A                 823  	and a, c
+000003B3 08                   824  	xch a, x
+000003B4                      825  .BB@LABEL@17_2:	; bb9
+000003B4                      826  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 625
+000003B4 440000               827  	cmpw ax, #0x0000
+000003B7 DF00                 828  	bnz $.BB@LABEL@17_1
+000003B9                      829  .BB@LABEL@17_3:	; bb13
+000003B9                      830  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 630
+000003B9 65                   831  	mov a, d
+000003BA D7                   832  	ret
+000003BB                      833  .LFE17:
+000003BB                      834  	.TYPE _make_bm_attributes@1,function,.LFE18-_make_bm_attributes@1
+000003BB                      835  _make_bm_attributes@1:
+000003BB                      836  	.STACK _make_bm_attributes@1 = 4
+000003BB                      837  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 635
+000003BB 4100                 838  	mov es, #0x00
+000003BD 118F0AF7             839  	mov a, es:!0xF70A
+000003C1                      840  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 636
+000003C1 318E                 841  	shrw ax, 8+0x00000
+000003C3 311E                 842  	shrw ax, 0x01
+000003C5 51C0                 843  	mov a, #0xC0
+000003C7 61C8                 844  	skc
+000003C9                      845  .BB@LABEL@18_1:	; entry
+000003C9 5180                 846  	mov a, #0x80
+000003CB                      847  .BB@LABEL@18_2:	; entry
+000003CB D7                   848  	ret
+000003CC                      849  .LFE18:
+000003CC                      850  	.TYPE _make_vconn_power_field@1,function,.LFE19-_make_vconn_power_field@1
+000003CC                      851  _make_vconn_power_field@1:
+000003CC                      852  	.STACK _make_vconn_power_field@1 = 6
+000003CC                      853  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 640
+000003CC C7                   854  	push hl
+000003CD                      855  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 642
+000003CD 4100                 856  	mov es, #0x00
+000003CF 118F1EF7             857  	mov a, es:!0xF71E
+000003D3 9800                 858  	mov [sp+0x00], a
+000003D5 70                   859  	mov x, a
+000003D6 8800                 860  	mov a, [sp+0x00]
+000003D8 08                   861  	xch a, x
+000003D9                      862  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 643
+000003D9 5C80                 863  	and a, #0x80
+000003DB 08                   864  	xch a, x
+000003DC 5C7F                 865  	and a, #0x7F
+000003DE 08                   866  	xch a, x
+000003DF                      867  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 644
+000003DF C2                   868  	pop bc
+000003E0 D7                   869  	ret
+000003E1                      870  .LFE19:
+000003E1                      871  	.TYPE _make_in_data_bos_and_container_id@1,function,.LFE20-_make_in_data_bos_and_container_id@1
+000003E1                      872  _make_in_data_bos_and_container_id@1:
+000003E1                      873  	.STACK _make_in_data_bos_and_container_id@1 = 18
+000003E1                      874  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 648
+000003E1 200E                 875  	subw sp, #0x0E
+000003E3 16                   876  	movw hl, ax
+000003E4                      877  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 650
+000003E4 D2                   878  	cmp0 c
+000003E5 DD00                 879  	bz $.BB@LABEL@20_5
+000003E7                      880  .BB@LABEL@20_1:	; entry
+000003E7 92                   881  	dec c
+000003E8 D2                   882  	cmp0 c
+000003E9 DD00                 883  	bz $.BB@LABEL@20_6
+000003EB                      884  .BB@LABEL@20_2:	; entry
+000003EB 92                   885  	dec c
+000003EC D2                   886  	cmp0 c
+000003ED DD00                 887  	bz $.BB@LABEL@20_7
+000003EF                      888  .BB@LABEL@20_3:	; entry
+000003EF 92                   889  	dec c
+000003F0 DF00                 890  	bnz $.BB@LABEL@20_10
+000003F2                      891  .BB@LABEL@20_4:	; switch_clause_bb59
+000003F2 301BF7               892  	movw ax, #0xF71B
+000003F5                      893  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 678
+000003F5 B806                 894  	movw [sp+0x06], ax
+000003F7 C80800               895  	mov [sp+0x08], #0x00
+000003FA A806                 896  	movw ax, [sp+0x06]
+000003FC 14                   897  	movw de, ax
+000003FD 17                   898  	movw ax, hl
+000003FE 320001               899  	movw bc, #0x0100
+00000401 FE0000               900  	call $!_memcpy_param_core@1
+00000404                      901  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 679
+00000404 E1                   902  	oneb a
+00000405 EF00                 903  	br $.BB@LABEL@20_11
+00000407                      904  .BB@LABEL@20_5:	; switch_clause_bb
+00000407                      905  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 653
+00000407 4100                 906  	mov es, #0x00
+00000409 118F1CF7             907  	mov a, es:!0xF71C
+0000040D 9800                 908  	mov [sp+0x00], a
+0000040F                      909  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 656
+0000040F CC0005               910  	mov [hl+0x00], #0x05
+00000412                      911  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 657
+00000412 CC010F               912  	mov [hl+0x01], #0x0F
+00000415                      913  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 654
+00000415 318E                 914  	shrw ax, 8+0x00000
+00000417 12                   915  	movw bc, ax
+00000418 313D                 916  	shlw ax, 0x03
+0000041A 14                   917  	movw de, ax
+0000041B 312C                 918  	shlw bc, 0x02
+0000041D 13                   919  	movw ax, bc
+0000041E 05                   920  	addw ax, de
+0000041F 044500               921  	addw ax, #0x0045
+00000422 12                   922  	movw bc, ax
+00000423                      923  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 658
+00000423 60                   924  	mov a, x
+00000424 9C02                 925  	mov [hl+0x02], a
+00000426 13                   926  	movw ax, bc
+00000427                      927  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 659
+00000427 9C03                 928  	mov [hl+0x03], a
+00000429 8800                 929  	mov a, [sp+0x00]
+0000042B                      930  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 660
+0000042B 0C02                 931  	add a, #0x02
+0000042D 9C04                 932  	mov [hl+0x04], a
+0000042F                      933  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 662
+0000042F CC0514               934  	mov [hl+0x05], #0x14
+00000432                      935  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 663
+00000432 CC0610               936  	mov [hl+0x06], #0x10
+00000435                      937  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 664
+00000435 CC0704               938  	mov [hl+0x07], #0x04
+00000438 EF00                 939  	br $.BB@LABEL@20_9
+0000043A                      940  .BB@LABEL@20_6:	; switch_clause_bb43
+0000043A                      941  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 669
+0000043A CC0000               942  	mov [hl+0x00], #0x00
+0000043D 300CF7               943  	movw ax, #0xF70C
+00000440                      944  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 670
+00000440 B802                 945  	movw [sp+0x02], ax
+00000442 C80400               946  	mov [sp+0x04], #0x00
+00000445 A802                 947  	movw ax, [sp+0x02]
+00000447 14                   948  	movw de, ax
+00000448 17                   949  	movw ax, hl
+00000449 A1                   950  	incw ax
+0000044A 5307                 951  	mov b, #0x07
+0000044C EF00                 952  	br $.BB@LABEL@20_8
+0000044E                      953  .BB@LABEL@20_7:	; switch_clause_bb51
+0000044E 3013F7               954  	movw ax, #0xF713
+00000451                      955  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 674
+00000451 B80A                 956  	movw [sp+0x0A], ax
+00000453 C80C00               957  	mov [sp+0x0C], #0x00
+00000456 A80A                 958  	movw ax, [sp+0x0A]
+00000458 14                   959  	movw de, ax
+00000459 17                   960  	movw ax, hl
+0000045A 5308                 961  	mov b, #0x08
+0000045C                      962  .BB@LABEL@20_8:	; switch_clause_bb51
+0000045C F2                   963  	clrb c
+0000045D FE0000               964  	call $!_memcpy_param_core@1
+00000460                      965  .BB@LABEL@20_9:	; switch_clause_bb51
+00000460 5108                 966  	mov a, #0x08
+00000462 EF00                 967  	br $.BB@LABEL@20_11
+00000464                      968  .BB@LABEL@20_10:	; bb68
+00000464                      969  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 684
+00000464 F1                   970  	clrb a
+00000465                      971  .BB@LABEL@20_11:	; bb68
+00000465 100E                 972  	addw sp, #0x0E
+00000467 D7                   973  	ret
+00000468                      974  .LFE20:
+00000468                      975  	.TYPE _make_in_data_billboard_capability@1,function,.LFE21-_make_in_data_billboard_capability@1
+00000468                      976  _make_in_data_billboard_capability@1:
+00000468                      977  	.STACK _make_in_data_billboard_capability@1 = 8
+00000468                      978  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 688
+00000468 C1                   979  	push ax
+00000469 C7                   980  	push hl
+0000046A 14                   981  	movw de, ax
+0000046B                      982  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 690
+0000046B D2                   983  	cmp0 c
+0000046C DD00                 984  	bz $.BB@LABEL@21_9
+0000046E                      985  .BB@LABEL@21_1:	; entry
+0000046E 92                   986  	dec c
+0000046F D2                   987  	cmp0 c
+00000470 DD00                 988  	bz $.BB@LABEL@21_10
+00000472                      989  .BB@LABEL@21_2:	; entry
+00000472 92                   990  	dec c
+00000473 D2                   991  	cmp0 c
+00000474 DD00                 992  	bz $.BB@LABEL@21_11
+00000476                      993  .BB@LABEL@21_3:	; entry
+00000476 92                   994  	dec c
+00000477 D2                   995  	cmp0 c
+00000478 DD00                 996  	bz $.BB@LABEL@21_11
+0000047A                      997  .BB@LABEL@21_4:	; entry
+0000047A 92                   998  	dec c
+0000047B D2                   999  	cmp0 c
+0000047C DD00                1000  	bz $.BB@LABEL@21_11
+0000047E                     1001  .BB@LABEL@21_5:	; entry
+0000047E 92                  1002  	dec c
+0000047F D2                  1003  	cmp0 c
+00000480 DD00                1004  	bz $.BB@LABEL@21_13
+00000482                     1005  .BB@LABEL@21_6:	; entry
+00000482 92                  1006  	dec c
+00000483 D2                  1007  	cmp0 c
+00000484                     1008  	.bz $!.BB@LABEL@21_14
+00000484 61F8                    	 -- Skncond
+00000486 EE0000                  	 -- br	**.target1
+00000489                     1009  .BB@LABEL@21_7:	; entry
+00000489 92                  1010  	dec c
+0000048A                     1011  	.bz $!.BB@LABEL@21_21
+0000048A 61F8                    	 -- Skncond
+0000048C EE0000                  	 -- br	**.target1
+0000048F                     1012  .BB@LABEL@21_8:	; entry.bb157_crit_edge
+0000048F F1                  1013  	clrb a
+00000490 EE0000              1014  	br $!.BB@LABEL@21_16
+00000493                     1015  .BB@LABEL@21_9:	; switch_clause_bb
+00000493                     1016  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 694
+00000493 4100                1017  	mov es, #0x00
+00000495 118F1CF7            1018  	mov a, es:!0xF71C
+00000499 9800                1019  	mov [sp+0x00], a
+0000049B                     1020  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 696
+0000049B 3129                1021  	shl a, 0x02
+0000049D 0C2C                1022  	add a, #0x2C
+0000049F 99                  1023  	mov [de], a
+000004A0                     1024  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 697
+000004A0 CA0110              1025  	mov [de+0x01], #0x10
+000004A3                     1026  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 698
+000004A3 CA020D              1027  	mov [de+0x02], #0x0D
+000004A6                     1028  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 699
+000004A6 5105                1029  	mov a, #0x05
+000004A8 FE0000              1030  	call $!_make_string_index@1
+000004AB 73                  1031  	mov b, a
+000004AC A802                1032  	movw ax, [sp+0x02]
+000004AE 14                  1033  	movw de, ax
+000004AF 63                  1034  	mov a, b
+000004B0 9A03                1035  	mov [de+0x03], a
+000004B2                     1036  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 694
+000004B2 4100                1037  	mov es, #0x00
+000004B4 8800                1038  	mov a, [sp+0x00]
+000004B6                     1039  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 700
+000004B6 9A04                1040  	mov [de+0x04], a
+000004B8                     1041  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 701
+000004B8 118F1DF7            1042  	mov a, es:!0xF71D
+000004BC 9A05                1043  	mov [de+0x05], a
+000004BE                     1044  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 702
+000004BE FE0000              1045  	call $!_make_vconn_power_field@1
+000004C1 16                  1046  	movw hl, ax
+000004C2                     1047  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 703
+000004C2 60                  1048  	mov a, x
+000004C3 73                  1049  	mov b, a
+000004C4 A802                1050  	movw ax, [sp+0x02]
+000004C6 14                  1051  	movw de, ax
+000004C7 63                  1052  	mov a, b
+000004C8 9A06                1053  	mov [de+0x06], a
+000004CA 17                  1054  	movw ax, hl
+000004CB                     1055  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 704
+000004CB EE0000              1056  	br $!.BB@LABEL@21_19
+000004CE                     1057  .BB@LABEL@21_10:	; switch_clause_bb44
+000004CE                     1058  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 709
+000004CE 8F0000              1059  	mov a, !LOWW(_g_bbc_configured@6)
+000004D1 99                  1060  	mov [de], a
+000004D2 A802                1061  	movw ax, [sp+0x02]
+000004D4                     1062  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 710
+000004D4 A1                  1063  	incw ax
+000004D5 340700              1064  	movw de, #0x0007
+000004D8 EF00                1065  	br $.BB@LABEL@21_12
+000004DA                     1066  .BB@LABEL@21_11:	; switch_clause_bb62
+000004DA 15                  1067  	movw ax, de
+000004DB 340800              1068  	movw de, #0x0008
+000004DE                     1069  .BB@LABEL@21_12:	; switch_clause_bb62
+000004DE F7                  1070  	clrw bc
+000004DF FC000000            1071  	call !!_memset
+000004E3 EF00                1072  	br $.BB@LABEL@21_20
+000004E5                     1073  .BB@LABEL@21_13:	; switch_clause_bb67
+000004E5                     1074  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 728
+000004E5 CA0021              1075  	mov [de+0x00], #0x21
+000004E8                     1076  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 729
+000004E8 CA0101              1077  	mov [de+0x01], #0x01
+000004EB                     1078  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 730
+000004EB 8F0000              1079  	mov a, !LOWW(_g_bbc_additional_failure_info@7)
+000004EE 9A02                1080  	mov [de+0x02], a
+000004F0                     1081  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 731
+000004F0 CA0300              1082  	mov [de+0x03], #0x00
+000004F3                     1083  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 732
+000004F3 4100                1084  	mov es, #0x00
+000004F5 11AF20F7            1085  	movw ax, es:!0xF720
+000004F9 12                  1086  	movw bc, ax
+000004FA                     1087  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 733
+000004FA 60                  1088  	mov a, x
+000004FB 9A04                1089  	mov [de+0x04], a
+000004FD 13                  1090  	movw ax, bc
+000004FE                     1091  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 734
+000004FE 9A05                1092  	mov [de+0x05], a
+00000500                     1093  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 735
+00000500 118F28F7            1094  	mov a, es:!0xF728
+00000504 9A06                1095  	mov [de+0x06], a
+00000506                     1096  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 736
+00000506 F1                  1097  	clrb a
+00000507 EF00                1098  	br $.BB@LABEL@21_18
+00000509                     1099  .BB@LABEL@21_14:	; switch_clause_bb95
+00000509                     1100  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 743
+00000509 4100                1101  	mov es, #0x00
+0000050B 11AF22F7            1102  	movw ax, es:!0xF722
+0000050F 12                  1103  	movw bc, ax
+00000510                     1104  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 744
+00000510 60                  1105  	mov a, x
+00000511 99                  1106  	mov [de], a
+00000512 13                  1107  	movw ax, bc
+00000513                     1108  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 745
+00000513 9A01                1109  	mov [de+0x01], a
+00000515                     1110  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 746
+00000515 118F29F7            1111  	mov a, es:!0xF729
+00000519 9A02                1112  	mov [de+0x02], a
+0000051B                     1113  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 747
+0000051B E1                  1114  	oneb a
+0000051C FE0000              1115  	call $!_make_i_alternate_mode_string@1
+0000051F 73                  1116  	mov b, a
+00000520 A802                1117  	movw ax, [sp+0x02]
+00000522 14                  1118  	movw de, ax
+00000523 63                  1119  	mov a, b
+00000524 9A03                1120  	mov [de+0x03], a
+00000526                     1121  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 743
+00000526 4100                1122  	mov es, #0x00
+00000528                     1123  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 748
+00000528 11401CF702          1124  	cmp es:!0xF71C, #0x02
+0000052D DF00                1125  	bnz $.BB@LABEL@21_17
+0000052F                     1126  .BB@LABEL@21_15:	; switch_clause_bb95.bb157_crit_edge
+0000052F 5104                1127  	mov a, #0x04
+00000531                     1128  .BB@LABEL@21_16:	; bb157
+00000531 1004                1129  	addw sp, #0x04
+00000533                     1130  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 773
+00000533 D7                  1131  	ret
+00000534                     1132  .BB@LABEL@21_17:	; if_break_bb
+00000534                     1133  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 751
+00000534 11AF24F7            1134  	movw ax, es:!0xF724
+00000538 12                  1135  	movw bc, ax
+00000539                     1136  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 752
+00000539 60                  1137  	mov a, x
+0000053A 9A04                1138  	mov [de+0x04], a
+0000053C 13                  1139  	movw ax, bc
+0000053D                     1140  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 753
+0000053D 9A05                1141  	mov [de+0x05], a
+0000053F                     1142  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 754
+0000053F 118F2AF7            1143  	mov a, es:!0xF72A
+00000543 9A06                1144  	mov [de+0x06], a
+00000545                     1145  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 755
+00000545 5102                1146  	mov a, #0x02
+00000547                     1147  .BB@LABEL@21_18:	; if_break_bb
+00000547 FE0000              1148  	call $!_make_i_alternate_mode_string@1
+0000054A 73                  1149  	mov b, a
+0000054B A802                1150  	movw ax, [sp+0x02]
+0000054D 14                  1151  	movw de, ax
+0000054E 63                  1152  	mov a, b
+0000054F                     1153  .BB@LABEL@21_19:	; if_break_bb
+0000054F 9A07                1154  	mov [de+0x07], a
+00000551                     1155  .BB@LABEL@21_20:	; if_break_bb
+00000551 5108                1156  	mov a, #0x08
+00000553 EF00                1157  	br $.BB@LABEL@21_16
+00000555                     1158  .BB@LABEL@21_21:	; switch_clause_bb136
+00000555                     1159  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 762
+00000555 4100                1160  	mov es, #0x00
+00000557 11AF26F7            1161  	movw ax, es:!0xF726
+0000055B 12                  1162  	movw bc, ax
+0000055C                     1163  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 763
+0000055C 60                  1164  	mov a, x
+0000055D 99                  1165  	mov [de], a
+0000055E 13                  1166  	movw ax, bc
+0000055F                     1167  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 764
+0000055F 9A01                1168  	mov [de+0x01], a
+00000561                     1169  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 765
+00000561 118F2BF7            1170  	mov a, es:!0xF72B
+00000565 9A02                1171  	mov [de+0x02], a
+00000567                     1172  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 766
+00000567 5103                1173  	mov a, #0x03
+00000569 FE0000              1174  	call $!_make_i_alternate_mode_string@1
+0000056C 73                  1175  	mov b, a
+0000056D A802                1176  	movw ax, [sp+0x02]
+0000056F 14                  1177  	movw de, ax
+00000570 63                  1178  	mov a, b
+00000571 9A03                1179  	mov [de+0x03], a
+00000573 EF00                1180  	br $.BB@LABEL@21_15
+00000575                     1181  .LFE21:
+00000575                     1182  	.TYPE _make_in_data_billboard_alternate_mode_capability@1,function,.LFE22-_make_in_data_billboard_alternate_mode_capability@1
+00000575                     1183  _make_in_data_billboard_alternate_mode_capability@1:
+00000575                     1184  	.STACK _make_in_data_billboard_alternate_mode_capability@1 = 10
+00000575                     1185  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 778
+00000575 2004                1186  	subw sp, #0x04
+00000577 C1                  1187  	push ax
+00000578 14                  1188  	movw de, ax
+00000579 62                  1189  	mov a, c
+0000057A                     1190  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 790
+0000057A 9A03                1191  	mov [de+0x03], a
+0000057C                     1192  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 787
+0000057C CA0008              1193  	mov [de+0x00], #0x08
+0000057F                     1194  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 788
+0000057F CA0110              1195  	mov [de+0x01], #0x10
+00000582                     1196  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 789
+00000582 CA020F              1197  	mov [de+0x02], #0x0F
+00000585                     1198  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 791
+00000585 5004                1199  	mov x, #0x04
+00000587 D6                  1200  	mulu x
+00000588 040000              1201  	addw ax, #SMRLW(_vdo_param_ptr@11@make_in_data_billboard_alternate_mode_capability@1)
+0000058B 14                  1202  	movw de, ax
+0000058C 040200              1203  	addw ax, #0x0002
+0000058F 16                  1204  	movw hl, ax
+00000590 A9                  1205  	movw ax, [de]
+00000591 B802                1206  	movw [sp+0x02], ax
+00000593 8B                  1207  	mov a, [hl]
+00000594 9804                1208  	mov [sp+0x04], a
+00000596 72                  1209  	mov c, a
+00000597 A802                1210  	movw ax, [sp+0x02]
+00000599 14                  1211  	movw de, ax
+0000059A A800                1212  	movw ax, [sp+0x00]
+0000059C 040400              1213  	addw ax, #0x0004
+0000059F 5304                1214  	mov b, #0x04
+000005A1 FE0000              1215  	call $!_memcpy_param_core@1
+000005A4                     1216  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 793
+000005A4 5108                1217  	mov a, #0x08
+000005A6 1006                1218  	addw sp, #0x06
+000005A8 D7                  1219  	ret
+000005A9                     1220  .LFE22:
+000005A9                     1221  	.TYPE _make_in_data@1,function,.LFE23-_make_in_data@1
+000005A9                     1222  _make_in_data@1:
+000005A9                     1223  	.STACK _make_in_data@1 = 30
+000005A9                     1224  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 799
+000005A9 201A                1225  	subw sp, #0x1A
+000005AB                     1226  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 804
+000005AB 8F0000              1227  	mov a, !LOWW(_g_transfer_state@9)
+000005AE 72                  1228  	mov c, a
+000005AF 91                  1229  	dec a
+000005B0 4C02                1230  	cmp a, #0x02
+000005B2 DC00                1231  	bc $.BB@LABEL@23_15
+000005B4                     1232  .BB@LABEL@23_1:	; entry
+000005B4 0CFE                1233  	add a, #0xFE
+000005B6 D1                  1234  	cmp0 a
+000005B7 DD00                1235  	bz $.BB@LABEL@23_16
+000005B9                     1236  .BB@LABEL@23_2:	; entry
+000005B9 91                  1237  	dec a
+000005BA D1                  1238  	cmp0 a
+000005BB DD00                1239  	bz $.BB@LABEL@23_17
+000005BD                     1240  .BB@LABEL@23_3:	; entry
+000005BD 91                  1241  	dec a
+000005BE D1                  1242  	cmp0 a
+000005BF                     1243  	.bz $!.BB@LABEL@23_18
+000005BF 61F8                    	 -- Skncond
+000005C1 EE0000                  	 -- br	**.target1
+000005C4                     1244  .BB@LABEL@23_4:	; entry
+000005C4 91                  1245  	dec a
+000005C5 D1                  1246  	cmp0 a
+000005C6                     1247  	.bz $!.BB@LABEL@23_19
+000005C6 61F8                    	 -- Skncond
+000005C8 EE0000                  	 -- br	**.target1
+000005CB                     1248  .BB@LABEL@23_5:	; entry
+000005CB 91                  1249  	dec a
+000005CC D1                  1250  	cmp0 a
+000005CD                     1251  	.bz $!.BB@LABEL@23_22
+000005CD 61F8                    	 -- Skncond
+000005CF EE0000                  	 -- br	**.target1
+000005D2                     1252  .BB@LABEL@23_6:	; entry
+000005D2 91                  1253  	dec a
+000005D3 D1                  1254  	cmp0 a
+000005D4                     1255  	.bz $!.BB@LABEL@23_23
+000005D4 61F8                    	 -- Skncond
+000005D6 EE0000                  	 -- br	**.target1
+000005D9                     1256  .BB@LABEL@23_7:	; entry
+000005D9 91                  1257  	dec a
+000005DA D1                  1258  	cmp0 a
+000005DB                     1259  	.bz $!.BB@LABEL@23_24
+000005DB 61F8                    	 -- Skncond
+000005DD EE0000                  	 -- br	**.target1
+000005E0                     1260  .BB@LABEL@23_8:	; entry
+000005E0 91                  1261  	dec a
+000005E1 D1                  1262  	cmp0 a
+000005E2                     1263  	.bz $!.BB@LABEL@23_35
+000005E2 61F8                    	 -- Skncond
+000005E4 EE0000                  	 -- br	**.target1
+000005E7                     1264  .BB@LABEL@23_9:	; entry
+000005E7 91                  1265  	dec a
+000005E8 4C0A                1266  	cmp a, #0x0A
+000005EA                     1267  	.bc $!.BB@LABEL@23_38
+000005EA 61D8                    	 -- Skncond
+000005EC EE0000                  	 -- br	**.target1
+000005EF                     1268  .BB@LABEL@23_10:	; entry
+000005EF 0CF6                1269  	add a, #0xF6
+000005F1 D1                  1270  	cmp0 a
+000005F2                     1271  	.bz $!.BB@LABEL@23_50
+000005F2 61F8                    	 -- Skncond
+000005F4 EE0000                  	 -- br	**.target1
+000005F7                     1272  .BB@LABEL@23_11:	; entry
+000005F7 91                  1273  	dec a
+000005F8 D1                  1274  	cmp0 a
+000005F9                     1275  	.bz $!.BB@LABEL@23_54
+000005F9 61F8                    	 -- Skncond
+000005FB EE0000                  	 -- br	**.target1
+000005FE                     1276  .BB@LABEL@23_12:	; entry
+000005FE 91                  1277  	dec a
+000005FF D1                  1278  	cmp0 a
+00000600 DD00                1279  	bz $.BB@LABEL@23_14
+00000602                     1280  .BB@LABEL@23_13:	; entry
+00000602 91                  1281  	dec a
+00000603                     1282  	.bnz $!.BB@LABEL@23_62
+00000603 61E8                    	 -- Skncond
+00000605 EE0000                  	 -- br	**.target1
+00000608                     1283  .BB@LABEL@23_14:	; switch_clause_bb318
+00000608 F50000              1284  	clrb !LOWW(_g_in_data_pkt@5+0x00001)
+0000060B EE0000              1285  	br $!.BB@LABEL@23_55
+0000060E                     1286  .BB@LABEL@23_15:	; entry.bb321_crit_edge
+0000060E F1                  1287  	clrb a
+0000060F 9802                1288  	mov [sp+0x02], a
+00000611 EE0000              1289  	br $!.BB@LABEL@23_57
+00000614                     1290  .BB@LABEL@23_16:	; switch_clause_bb18
+00000614                     1291  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 815
+00000614 CF000004            1292  	mov !LOWW(_g_transfer_state@9), #0x04
+00000618                     1293  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 817
+00000618 CF000012            1294  	mov !LOWW(_g_in_data_pkt@5+0x00001), #0x12
+0000061C                     1295  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 818
+0000061C E50000              1296  	oneb !LOWW(_g_in_data_pkt@5+0x00002)
+0000061F                     1297  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 819
+0000061F E50000              1298  	oneb !LOWW(_g_in_data_pkt@5+0x00003)
+00000622                     1299  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 820
+00000622 CF000002            1300  	mov !LOWW(_g_in_data_pkt@5+0x00004), #0x02
+00000626                     1301  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 821
+00000626 CF000011            1302  	mov !LOWW(_g_in_data_pkt@5+0x00005), #0x11
+0000062A                     1303  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 822
+0000062A F50000              1304  	clrb !LOWW(_g_in_data_pkt@5+0x00006)
+0000062D                     1305  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 823
+0000062D F50000              1306  	clrb !LOWW(_g_in_data_pkt@5+0x00007)
+00000630                     1307  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 824
+00000630 CF000008            1308  	mov !LOWW(_g_in_data_pkt@5+0x00008), #0x08
+00000634 EF00                1309  	br $.BB@LABEL@23_21
+00000636                     1310  .BB@LABEL@23_17:	; switch_clause_bb19
+00000636                     1311  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 831
+00000636 CF000005            1312  	mov !LOWW(_g_transfer_state@9), #0x05
+0000063A                     1313  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 832
+0000063A 4100                1314  	mov es, #0x00
+0000063C 11AF04F7            1315  	movw ax, es:!0xF704
+00000640 12                  1316  	movw bc, ax
+00000641                     1317  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 833
+00000641 60                  1318  	mov a, x
+00000642 9F0000              1319  	mov !LOWW(_g_in_data_pkt@5+0x00001), a
+00000645 13                  1320  	movw ax, bc
+00000646                     1321  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 834
+00000646 9F0000              1322  	mov !LOWW(_g_in_data_pkt@5+0x00002), a
+00000649                     1323  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 835
+00000649 11AF06F7            1324  	movw ax, es:!0xF706
+0000064D 12                  1325  	movw bc, ax
+0000064E                     1326  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 836
+0000064E 60                  1327  	mov a, x
+0000064F 9F0000              1328  	mov !LOWW(_g_in_data_pkt@5+0x00003), a
+00000652 13                  1329  	movw ax, bc
+00000653                     1330  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 837
+00000653 9F0000              1331  	mov !LOWW(_g_in_data_pkt@5+0x00004), a
+00000656                     1332  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 838
+00000656 11AF08F7            1333  	movw ax, es:!0xF708
+0000065A 12                  1334  	movw bc, ax
+0000065B                     1335  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 839
+0000065B 60                  1336  	mov a, x
+0000065C 9F0000              1337  	mov !LOWW(_g_in_data_pkt@5+0x00005), a
+0000065F 13                  1338  	movw ax, bc
+00000660                     1339  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 840
+00000660 9F0000              1340  	mov !LOWW(_g_in_data_pkt@5+0x00006), a
+00000663                     1341  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 841
+00000663 F1                  1342  	clrb a
+00000664 FE0000              1343  	call $!_make_string_index@1
+00000667 9F0000              1344  	mov !LOWW(_g_in_data_pkt@5+0x00007), a
+0000066A                     1345  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 842
+0000066A E1                  1346  	oneb a
+0000066B FE0000              1347  	call $!_make_string_index@1
+0000066E EF00                1348  	br $.BB@LABEL@23_20
+00000670                     1349  .BB@LABEL@23_18:	; switch_clause_bb43
+00000670 C80202              1350  	mov [sp+0x02], #0x02
+00000673                     1351  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 848
+00000673 5102                1352  	mov a, #0x02
+00000675 FE0000              1353  	call $!_make_string_index@1
+00000678 9F0000              1354  	mov !LOWW(_g_in_data_pkt@5+0x00001), a
+0000067B                     1355  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 849
+0000067B E50000              1356  	oneb !LOWW(_g_in_data_pkt@5+0x00002)
+0000067E EE0000              1357  	br $!.BB@LABEL@23_57
+00000681                     1358  .BB@LABEL@23_19:	; switch_clause_bb45
+00000681                     1359  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 855
+00000681 CF000007            1360  	mov !LOWW(_g_transfer_state@9), #0x07
+00000685                     1361  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 857
+00000685 CF000009            1362  	mov !LOWW(_g_in_data_pkt@5+0x00001), #0x09
+00000689                     1363  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 858
+00000689 CF000002            1364  	mov !LOWW(_g_in_data_pkt@5+0x00002), #0x02
+0000068D                     1365  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 859
+0000068D CF000012            1366  	mov !LOWW(_g_in_data_pkt@5+0x00003), #0x12
+00000691                     1367  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 860
+00000691 F50000              1368  	clrb !LOWW(_g_in_data_pkt@5+0x00004)
+00000694                     1369  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 861
+00000694 E50000              1370  	oneb !LOWW(_g_in_data_pkt@5+0x00005)
+00000697                     1371  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 862
+00000697 E50000              1372  	oneb !LOWW(_g_in_data_pkt@5+0x00006)
+0000069A                     1373  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 863
+0000069A 5103                1374  	mov a, #0x03
+0000069C FE0000              1375  	call $!_make_string_index@1
+0000069F 9F0000              1376  	mov !LOWW(_g_in_data_pkt@5+0x00007), a
+000006A2                     1377  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 864
+000006A2 FE0000              1378  	call $!_make_bm_attributes@1
+000006A5                     1379  .BB@LABEL@23_20:	; switch_clause_bb45
+000006A5 9F0000              1380  	mov !LOWW(_g_in_data_pkt@5+0x00008), a
+000006A8                     1381  .BB@LABEL@23_21:	; switch_clause_bb45
+000006A8 C80208              1382  	mov [sp+0x02], #0x08
+000006AB EE0000              1383  	br $!.BB@LABEL@23_57
+000006AE                     1384  .BB@LABEL@23_22:	; switch_clause_bb48
+000006AE                     1385  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 869
+000006AE CF000008            1386  	mov !LOWW(_g_transfer_state@9), #0x08
+000006B2                     1387  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 870
+000006B2 4100                1388  	mov es, #0x00
+000006B4 118F0BF7            1389  	mov a, es:!0xF70B
+000006B8 9F0000              1390  	mov !LOWW(_g_in_data_pkt@5+0x00001), a
+000006BB                     1391  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 872
+000006BB CF000009            1392  	mov !LOWW(_g_in_data_pkt@5+0x00002), #0x09
+000006BF                     1393  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 873
+000006BF CF000004            1394  	mov !LOWW(_g_in_data_pkt@5+0x00003), #0x04
+000006C3                     1395  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 874
+000006C3 F50000              1396  	clrb !LOWW(_g_in_data_pkt@5+0x00004)
+000006C6                     1397  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 875
+000006C6 F50000              1398  	clrb !LOWW(_g_in_data_pkt@5+0x00005)
+000006C9                     1399  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 876
+000006C9 F50000              1400  	clrb !LOWW(_g_in_data_pkt@5+0x00006)
+000006CC                     1401  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 877
+000006CC CF000011            1402  	mov !LOWW(_g_in_data_pkt@5+0x00007), #0x11
+000006D0                     1403  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 878
+000006D0 F50000              1404  	clrb !LOWW(_g_in_data_pkt@5+0x00008)
+000006D3 EF00                1405  	br $.BB@LABEL@23_21
+000006D5                     1406  .BB@LABEL@23_23:	; switch_clause_bb50
+000006D5                     1407  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 883
+000006D5 F50000              1408  	clrb !LOWW(_g_in_data_pkt@5+0x00001)
+000006D8                     1409  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 884
+000006D8 5104                1410  	mov a, #0x04
+000006DA FE0000              1411  	call $!_make_string_index@1
+000006DD 9F0000              1412  	mov !LOWW(_g_in_data_pkt@5+0x00002), a
+000006E0 EE0000              1413  	br $!.BB@LABEL@23_56
+000006E3                     1414  .BB@LABEL@23_24:	; switch_clause_bb52
+000006E3                     1415  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 891
+000006E3 4100                1416  	mov es, #0x00
+000006E5 118F1CF7            1417  	mov a, es:!0xF71C
+000006E9 9804                1418  	mov [sp+0x04], a
+000006EB F1                  1419  	clrb a
+000006EC 9802                1420  	mov [sp+0x02], a
+000006EE                     1421  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 895
+000006EE 8F0000              1422  	mov a, !LOWW(_g_transferred_packet_num@10)
+000006F1 3139                1423  	shl a, 0x03
+000006F3 9803                1424  	mov [sp+0x03], a
+000006F5                     1425  .BB@LABEL@23_25:	; bb58
+000006F5 8803                1426  	mov a, [sp+0x03]
+000006F7                     1427  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 910
+000006F7 318E                1428  	shrw ax, 8+0x00000
+000006F9 441900              1429  	cmpw ax, #0x0019
+000006FC DE00                1430  	bnc $.BB@LABEL@23_27
+000006FE                     1431  .BB@LABEL@23_26:	; if_then_bb
+000006FE 8803                1432  	mov a, [sp+0x03]
+00000700                     1433  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 912
+00000700 313A                1434  	shr a, 0x03
+00000702 72                  1435  	mov c, a
+00000703 AEF8                1436  	movw ax, sp
+00000705 041200              1437  	addw ax, #0x0012
+00000708 FE0000              1438  	call $!_make_in_data_bos_and_container_id@1
+0000070B 70                  1439  	mov x, a
+0000070C 8803                1440  	mov a, [sp+0x03]
+0000070E 9801                1441  	mov [sp+0x01], a
+00000710 EF00                1442  	br $.BB@LABEL@23_32
+00000712                     1443  .BB@LABEL@23_27:	; if_else_bb
+00000712 8804                1444  	mov a, [sp+0x04]
+00000714                     1445  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 913
+00000714 5004                1446  	mov x, #0x04
+00000716 D6                  1447  	mulu x
+00000717 042C00              1448  	addw ax, #0x002C
+0000071A 12                  1449  	movw bc, ax
+0000071B 8803                1450  	mov a, [sp+0x03]
+0000071D 0CE7                1451  	add a, #0xE7
+0000071F 9801                1452  	mov [sp+0x01], a
+00000721 318E                1453  	shrw ax, 8+0x00000
+00000723 43                  1454  	cmpw ax, bc
+00000724 DE00                1455  	bnc $.BB@LABEL@23_29
+00000726                     1456  .BB@LABEL@23_28:	; if_then_bb86
+00000726 8801                1457  	mov a, [sp+0x01]
+00000728                     1458  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 917
+00000728 313A                1459  	shr a, 0x03
+0000072A 72                  1460  	mov c, a
+0000072B AEF8                1461  	movw ax, sp
+0000072D 041200              1462  	addw ax, #0x0012
+00000730 FE0000              1463  	call $!_make_in_data_billboard_capability@1
+00000733 EF00                1464  	br $.BB@LABEL@23_31
+00000735                     1465  .BB@LABEL@23_29:	; if_else_bb93
+00000735 8804                1466  	mov a, [sp+0x04]
+00000737 73                  1467  	mov b, a
+00000738                     1468  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 919
+00000738 5008                1469  	mov x, #0x08
+0000073A D6                  1470  	mulu x
+0000073B 14                  1471  	movw de, ax
+0000073C 8801                1472  	mov a, [sp+0x01]
+0000073E 70                  1473  	mov x, a
+0000073F 63                  1474  	mov a, b
+00000740 3129                1475  	shl a, 0x02
+00000742 0C2C                1476  	add a, #0x2C
+00000744 6120                1477  	sub x, a
+00000746 60                  1478  	mov a, x
+00000747 9801                1479  	mov [sp+0x01], a
+00000749 318E                1480  	shrw ax, 8+0x00000
+0000074B 45                  1481  	cmpw ax, de
+0000074C                     1482  	.bnc $!.BB@LABEL@23_49
+0000074C 61C8                    	 -- Skncond
+0000074E EE0000                  	 -- br	**.target1
+00000751                     1483  .BB@LABEL@23_30:	; if_then_bb113
+00000751 8801                1484  	mov a, [sp+0x01]
+00000753                     1485  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 923
+00000753 313A                1486  	shr a, 0x03
+00000755 72                  1487  	mov c, a
+00000756 AEF8                1488  	movw ax, sp
+00000758 041200              1489  	addw ax, #0x0012
+0000075B FE0000              1490  	call $!_make_in_data_billboard_alternate_mode_capability@1
+0000075E                     1491  .BB@LABEL@23_31:	; if_then_bb113
+0000075E 70                  1492  	mov x, a
+0000075F                     1493  .BB@LABEL@23_32:	; if_break_bb123
+0000075F FBF8FF              1494  	movw hl, sp
+00000762 5108                1495  	mov a, #0x08
+00000764                     1496  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 932
+00000764 2E02                1497  	sub a, [hl+0x02]
+00000766 73                  1498  	mov b, a
+00000767 8801                1499  	mov a, [sp+0x01]
+00000769                     1500  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 931
+00000769 5C07                1501  	and a, #0x07
+0000076B 6120                1502  	sub x, a
+0000076D 60                  1503  	mov a, x
+0000076E 9B                  1504  	mov [hl], a
+0000076F 63                  1505  	mov a, b
+00000770                     1506  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 933
+00000770 6140                1507  	cmp x, a
+00000772 61F3                1508  	sknh
+00000774                     1509  .BB@LABEL@23_33:	; if_then_bb142
+00000774 9B                  1510  	mov [hl], a
+00000775                     1511  .BB@LABEL@23_34:	; if_break_bb144
+00000775 8801                1512  	mov a, [sp+0x01]
+00000777                     1513  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 935
+00000777 318E                1514  	shrw ax, 8+0x00000
+00000779 31DD                1515  	shlw ax, 0x0D
+0000077B 31DE                1516  	shrw ax, 0x0D
+0000077D 12                  1517  	movw bc, ax
+0000077E 8B                  1518  	mov a, [hl]
+0000077F 318E                1519  	shrw ax, 8+0x00000
+00000781 14                  1520  	movw de, ax
+00000782 17                  1521  	movw ax, hl
+00000783 041200              1522  	addw ax, #0x0012
+00000786 03                  1523  	addw ax, bc
+00000787 12                  1524  	movw bc, ax
+00000788 8802                1525  	mov a, [sp+0x02]
+0000078A 318E                1526  	shrw ax, 8+0x00000
+0000078C 040000              1527  	addw ax, #LOWW(_g_in_data_pkt@5+0x00001)
+0000078F FC000000            1528  	call !!_memcpy
+00000793 8803                1529  	mov a, [sp+0x03]
+00000795 70                  1530  	mov x, a
+00000796 8800                1531  	mov a, [sp+0x00]
+00000798                     1532  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 936
+00000798 6108                1533  	add a, x
+0000079A 9803                1534  	mov [sp+0x03], a
+0000079C 8802                1535  	mov a, [sp+0x02]
+0000079E 70                  1536  	mov x, a
+0000079F 8800                1537  	mov a, [sp+0x00]
+000007A1                     1538  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 937
+000007A1 6108                1539  	add a, x
+000007A3 9802                1540  	mov [sp+0x02], a
+000007A5                     1541  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 903
+000007A5 318E                1542  	shrw ax, 8+0x00000
+000007A7 440800              1543  	cmpw ax, #0x0008
+000007AA                     1544  	.bc $!.BB@LABEL@23_25, $!.BB@LABEL@23_49
+000007AA 61D8                    	 -- Skncond
+000007AC EE0000                  	 -- br	**.target1
+000007AF EE0000                  	 -- br	**.target2
+000007B2                     1545  .BB@LABEL@23_35:	; switch_clause_bb178
+000007B2                     1546  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 948
+000007B2 4100                1547  	mov es, #0x00
+000007B4 11AF3CF7            1548  	movw ax, es:!0xF73C
+000007B8 6168                1549  	or a, x
+000007BA DD00                1550  	bz $.BB@LABEL@23_37
+000007BC                     1551  .BB@LABEL@23_36:	; if_then_bb183
+000007BC                     1552  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 949
+000007BC CF000004            1553  	mov !LOWW(_g_in_data_pkt@5+0x00001), #0x04
+000007C0                     1554  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 950
+000007C0 CF000003            1555  	mov !LOWW(_g_in_data_pkt@5+0x00002), #0x03
+000007C4                     1556  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 951
+000007C4 CF000009            1557  	mov !LOWW(_g_in_data_pkt@5+0x00003), #0x09
+000007C8                     1558  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 952
+000007C8 CF000004            1559  	mov !LOWW(_g_in_data_pkt@5+0x00004), #0x04
+000007CC C80204              1560  	mov [sp+0x02], #0x04
+000007CF EE0000              1561  	br $!.BB@LABEL@23_57
+000007D2                     1562  .BB@LABEL@23_37:	; if_else_bb184
+000007D2                     1563  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 956
+000007D2 CF000002            1564  	mov !LOWW(_g_in_data_pkt@5+0x00001), #0x02
+000007D6                     1565  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 957
+000007D6 CF000003            1566  	mov !LOWW(_g_in_data_pkt@5+0x00002), #0x03
+000007DA EE0000              1567  	br $!.BB@LABEL@23_56
+000007DD                     1568  .BB@LABEL@23_38:	; switch_clause_bb186
+000007DD 303EF7              1569  	movw ax, #0xF73E
+000007E0 14                  1570  	movw de, ax
+000007E1                     1571  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 975
+000007E1 B806                1572  	movw [sp+0x06], ax
+000007E3 E3                  1573  	oneb b
+000007E4 62                  1574  	mov a, c
+000007E5                     1575  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 974
+000007E5 0CF6                1576  	add a, #0xF6
+000007E7 72                  1577  	mov c, a
+000007E8 4100                1578  	mov es, #0x00
+000007EA EF00                1579  	br $.BB@LABEL@23_40
+000007EC                     1580  .BB@LABEL@23_39:	; bb193
+000007EC                     1581  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 980
+000007EC 318E                1582  	shrw ax, 8+0x00000
+000007EE 05                  1583  	addw ax, de
+000007EF A1                  1584  	incw ax
+000007F0 14                  1585  	movw de, ax
+000007F1 60                  1586  	mov a, x
+000007F2 9806                1587  	mov [sp+0x06], a
+000007F4 15                  1588  	movw ax, de
+000007F5 9807                1589  	mov [sp+0x07], a
+000007F7 83                  1590  	inc b
+000007F8                     1591  .BB@LABEL@23_40:	; bb193
+000007F8 C80800              1592  	mov [sp+0x08], #0x00
+000007FB 62                  1593  	mov a, c
+000007FC                     1594  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 979
+000007FC 6143                1595  	cmp b, a
+000007FE 1189                1596  	mov a, es:[de]
+00000800 DC00                1597  	bc $.BB@LABEL@23_39
+00000802                     1598  .BB@LABEL@23_41:	; bb220
+00000802 9800                1599  	mov [sp+0x00], a
+00000804                     1600  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 984
+00000804 8F0000              1601  	mov a, !LOWW(_g_transferred_packet_num@10)
+00000807 D1                  1602  	cmp0 a
+00000808 DF00                1603  	bnz $.BB@LABEL@23_45
+0000080A                     1604  .BB@LABEL@23_42:	; if_then_bb232
+0000080A 8800                1605  	mov a, [sp+0x00]
+0000080C                     1606  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 986
+0000080C 6101                1607  	add a, a
+0000080E 0C02                1608  	add a, #0x02
+00000810 9F0000              1609  	mov !LOWW(_g_in_data_pkt@5+0x00001), a
+00000813                     1610  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 987
+00000813 CF000003            1611  	mov !LOWW(_g_in_data_pkt@5+0x00002), #0x03
+00000817 8800                1612  	mov a, [sp+0x00]
+00000819                     1613  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 988
+00000819 318E                1614  	shrw ax, 8+0x00000
+0000081B 440400              1615  	cmpw ax, #0x0004
+0000081E 61C8                1616  	skc
+00000820                     1617  .BB@LABEL@23_43:	; if_then_bb243
+00000820 C80003              1618  	mov [sp+0x00], #0x03
+00000823                     1619  .BB@LABEL@23_44:	; if_break_bb244
+00000823                     1620  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 989
+00000823 A806                1621  	movw ax, [sp+0x06]
+00000825 A1                  1622  	incw ax
+00000826 B80A                1623  	movw [sp+0x0A], ax
+00000828 8808                1624  	mov a, [sp+0x08]
+0000082A 72                  1625  	mov c, a
+0000082B 980C                1626  	mov [sp+0x0C], a
+0000082D 8800                1627  	mov a, [sp+0x00]
+0000082F 73                  1628  	mov b, a
+00000830 A80A                1629  	movw ax, [sp+0x0A]
+00000832 14                  1630  	movw de, ax
+00000833 300000              1631  	movw ax, #LOWW(_g_in_data_pkt@5+0x00003)
+00000836 FE0000              1632  	call $!_decode_string_param_core@1
+00000839 8800                1633  	mov a, [sp+0x00]
+0000083B                     1634  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 990
+0000083B 6101                1635  	add a, a
+0000083D 0C02                1636  	add a, #0x02
+0000083F EF00                1637  	br $.BB@LABEL@23_48
+00000841                     1638  .BB@LABEL@23_45:	; if_else_bb258
+00000841                     1639  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 993
+00000841 3129                1640  	shl a, 0x02
+00000843 91                  1641  	dec a
+00000844 75                  1642  	mov d, a
+00000845 8800                1643  	mov a, [sp+0x00]
+00000847                     1644  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 994
+00000847 612D                1645  	sub a, d
+00000849 9800                1646  	mov [sp+0x00], a
+0000084B                     1647  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 995
+0000084B 318E                1648  	shrw ax, 8+0x00000
+0000084D 440500              1649  	cmpw ax, #0x0005
+00000850 61C8                1650  	skc
+00000852                     1651  .BB@LABEL@23_46:	; if_then_bb275
+00000852 C80004              1652  	mov [sp+0x00], #0x04
+00000855                     1653  .BB@LABEL@23_47:	; if_break_bb276
+00000855                     1654  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 996
+00000855 A806                1655  	movw ax, [sp+0x06]
+00000857 12                  1656  	movw bc, ax
+00000858 65                  1657  	mov a, d
+00000859 318E                1658  	shrw ax, 8+0x00000
+0000085B 03                  1659  	addw ax, bc
+0000085C A1                  1660  	incw ax
+0000085D B80E                1661  	movw [sp+0x0E], ax
+0000085F 8808                1662  	mov a, [sp+0x08]
+00000861 72                  1663  	mov c, a
+00000862 9810                1664  	mov [sp+0x10], a
+00000864 8800                1665  	mov a, [sp+0x00]
+00000866 73                  1666  	mov b, a
+00000867 A80E                1667  	movw ax, [sp+0x0E]
+00000869 14                  1668  	movw de, ax
+0000086A 300000              1669  	movw ax, #LOWW(_g_in_data_pkt@5+0x00001)
+0000086D FE0000              1670  	call $!_decode_string_param_core@1
+00000870 8800                1671  	mov a, [sp+0x00]
+00000872                     1672  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 997
+00000872 6101                1673  	add a, a
+00000874                     1674  .BB@LABEL@23_48:	; if_break_bb276
+00000874 9802                1675  	mov [sp+0x02], a
+00000876                     1676  .BB@LABEL@23_49:	; if_break_bb294
+00000876 A00000              1677  	inc !LOWW(_g_transferred_packet_num@10)
+00000879 EF00                1678  	br $.BB@LABEL@23_57
+0000087B                     1679  .BB@LABEL@23_50:	; switch_clause_bb297
+0000087B                     1680  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1008
+0000087B 360000              1681  	movw hl, #LOWW(_g_field@8)
+0000087E 31E500              1682  	bf [hl].6, $.BB@LABEL@23_52
+00000881                     1683  .BB@LABEL@23_51:	; switch_clause_bb297.bb307_crit_edge
+00000881 E1                  1684  	oneb a
+00000882 EF00                1685  	br $.BB@LABEL@23_53
+00000884                     1686  .BB@LABEL@23_52:	; bb305
+00000884 F1                  1687  	clrb a
+00000885                     1688  .BB@LABEL@23_53:	; bb307
+00000885 9F0000              1689  	mov !LOWW(_g_in_data_pkt@5+0x00001), a
+00000888 E1                  1690  	oneb a
+00000889 9802                1691  	mov [sp+0x02], a
+0000088B EF00                1692  	br $.BB@LABEL@23_57
+0000088D                     1693  .BB@LABEL@23_54:	; switch_clause_bb311
+0000088D                     1694  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1015
+0000088D 8F0000              1695  	mov a, !LOWW(_g_field@8)
+00000890 317A                1696  	shr a, 0x07
+00000892 9F0000              1697  	mov !LOWW(_g_in_data_pkt@5+0x00001), a
+00000895                     1698  .BB@LABEL@23_55:	; switch_clause_bb318
+00000895 F50000              1699  	clrb !LOWW(_g_in_data_pkt@5+0x00002)
+00000898                     1700  .BB@LABEL@23_56:	; switch_clause_bb318
+00000898 C80202              1701  	mov [sp+0x02], #0x02
+0000089B                     1702  .BB@LABEL@23_57:	; bb321
+0000089B                     1703  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1041
+0000089B D90000              1704  	mov x, !LOWW(_g_setup_data@3+0x00005)
+0000089E 8802                1705  	mov a, [sp+0x02]
+000008A0 6148                1706  	cmp a, x
+000008A2 61D300              1707  	bnh $.BB@LABEL@23_59
+000008A5                     1708  .BB@LABEL@23_58:	; if_then_bb329
+000008A5 60                  1709  	mov a, x
+000008A6 9802                1710  	mov [sp+0x02], a
+000008A8                     1711  .BB@LABEL@23_59:	; if_break_bb331
+000008A8                     1712  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1043
+000008A8 D90000              1713  	mov x, !LOWW(_g_setup_data@3+0x00005)
+000008AB 6120                1714  	sub x, a
+000008AD 60                  1715  	mov a, x
+000008AE 9F0000              1716  	mov !LOWW(_g_setup_data@3+0x00005), a
+000008B1 8802                1717  	mov a, [sp+0x02]
+000008B3                     1718  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1046
+000008B3 318E                1719  	shrw ax, 8+0x00000
+000008B5 440800              1720  	cmpw ax, #0x0008
+000008B8 61D8                1721  	sknc
+000008BA                     1722  .BB@LABEL@23_60:	; if_then_bb343
+000008BA                     1723  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1047
+000008BA F50000              1724  	clrb !LOWW(_g_transfer_state@9)
+000008BD                     1725  .BB@LABEL@23_61:	; if_break_bb344
+000008BD 8802                1726  	mov a, [sp+0x02]
+000008BF 72                  1727  	mov c, a
+000008C0                     1728  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1051
+000008C0 300000              1729  	movw ax, #LOWW(_g_in_data_pkt@5+0x00001)
+000008C3 FE0000              1730  	call $!_crc16_calc@1
+000008C6 12                  1731  	movw bc, ax
+000008C7 8802                1732  	mov a, [sp+0x02]
+000008C9                     1733  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1052
+000008C9 318E                1734  	shrw ax, 8+0x00000
+000008CB 040000              1735  	addw ax, #LOWW(_g_in_data_pkt@5+0x00001)
+000008CE 14                  1736  	movw de, ax
+000008CF 62                  1737  	mov a, c
+000008D0 99                  1738  	mov [de], a
+000008D1                     1739  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1053
+000008D1 A5                  1740  	incw de
+000008D2 13                  1741  	movw ax, bc
+000008D3 99                  1742  	mov [de], a
+000008D4 8802                1743  	mov a, [sp+0x02]
+000008D6                     1744  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1058
+000008D6 0C03                1745  	add a, #0x03
+000008D8 9F0000              1746  	mov !LOWW(_g_in_data_pkt_len@4), a
+000008DB                     1747  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1060
+000008DB E1                  1748  	oneb a
+000008DC EF00                1749  	br $.BB@LABEL@23_63
+000008DE                     1750  .BB@LABEL@23_62:	; bb368
+000008DE                     1751  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1061
+000008DE F1                  1752  	clrb a
+000008DF                     1753  .BB@LABEL@23_63:	; bb368
+000008DF 101A                1754  	addw sp, #0x1A
+000008E1 D7                  1755  	ret
+000008E2                     1756  .LFE23:
+000008E2                     1757  	.TYPE _request_set_address@1,function,.LFE24-_request_set_address@1
+000008E2                     1758  _request_set_address@1:
+000008E2                     1759  	.STACK _request_set_address@1 = 4
+000008E2                     1760  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1066
+000008E2 71500000            1761  	set1 !LOWW(_g_field@8).5
+000008E6                     1762  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1067
+000008E6 E50000              1763  	oneb !LOWW(_g_transfer_state@9)
+000008E9                     1764  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1068
+000008E9 FE0000              1765  	call $!_make_in_data@1
+000008EC                     1766  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1069
+000008EC D7                  1767  	ret
+000008ED                     1768  .LFE24:
+000008ED                     1769  	.TYPE _request_set_configuration@1,function,.LFE25-_request_set_configuration@1
+000008ED                     1770  _request_set_configuration@1:
+000008ED                     1771  	.STACK _request_set_configuration@1 = 4
+000008ED                     1772  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1074
+000008ED 8F0000              1773  	mov a, !LOWW(_g_setup_data@3+0x00002)
+000008F0 D1                  1774  	cmp0 a
+000008F1 DD00                1775  	bz $.BB@LABEL@25_3
+000008F3                     1776  .BB@LABEL@25_1:	; entry
+000008F3 91                  1777  	dec a
+000008F4 DF00                1778  	bnz $.BB@LABEL@25_5
+000008F6                     1779  .BB@LABEL@25_2:	; switch_clause_bb4
+000008F6                     1780  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1080
+000008F6 FE0000              1781  	call $!_device_configure@1
+000008F9 EF00                1782  	br $.BB@LABEL@25_4
+000008FB                     1783  .BB@LABEL@25_3:	; switch_clause_bb
+000008FB                     1784  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1076
+000008FB FE0000              1785  	call $!_device_deconfigure@1
+000008FE                     1786  .BB@LABEL@25_4:	; switch_clause_bb
+000008FE CF000002            1787  	mov !LOWW(_g_transfer_state@9), #0x02
+00000902 FE0000              1788  	call $!_make_in_data@1
+00000905                     1789  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1085
+00000905 D7                  1790  	ret
+00000906                     1791  .BB@LABEL@25_5:	; bb8
+00000906 F1                  1792  	clrb a
+00000907 D7                  1793  	ret
+00000908                     1794  .LFE25:
+00000908                     1795  	.TYPE _request_get_descriptor@1,function,.LFE26-_request_get_descriptor@1
+00000908                     1796  _request_get_descriptor@1:
+00000908                     1797  	.STACK _request_get_descriptor@1 = 6
+00000908                     1798  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1088
+00000908 C7                  1799  	push hl
+00000909                     1800  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1090
+00000909 8F0000              1801  	mov a, !LOWW(_g_setup_data@3+0x00002)
+0000090C 9800                1802  	mov [sp+0x00], a
+0000090E                     1803  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1092
+0000090E 8F0000              1804  	mov a, !LOWW(_g_setup_data@3+0x00003)
+00000911 91                  1805  	dec a
+00000912 D1                  1806  	cmp0 a
+00000913 DD00                1807  	bz $.BB@LABEL@26_6
+00000915                     1808  .BB@LABEL@26_1:	; entry
+00000915 91                  1809  	dec a
+00000916 D1                  1810  	cmp0 a
+00000917 DD00                1811  	bz $.BB@LABEL@26_7
+00000919                     1812  .BB@LABEL@26_2:	; entry
+00000919 91                  1813  	dec a
+0000091A D1                  1814  	cmp0 a
+0000091B DD00                1815  	bz $.BB@LABEL@26_10
+0000091D                     1816  .BB@LABEL@26_3:	; entry
+0000091D 4C0C                1817  	cmp a, #0x0C
+0000091F DF00                1818  	bnz $.BB@LABEL@26_12
+00000921                     1819  .BB@LABEL@26_4:	; switch_clause_bb13
+00000921                     1820  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1107
+00000921 CF000009            1821  	mov !LOWW(_g_transfer_state@9), #0x09
+00000925                     1822  .BB@LABEL@26_5:	; switch_clause_bb13
+00000925 F50000              1823  	clrb !LOWW(_g_transferred_packet_num@10)
+00000928 EF00                1824  	br $.BB@LABEL@26_9
+0000092A                     1825  .BB@LABEL@26_6:	; switch_clause_bb
+0000092A                     1826  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1095
+0000092A CF000003            1827  	mov !LOWW(_g_transfer_state@9), #0x03
+0000092E EF00                1828  	br $.BB@LABEL@26_9
+00000930                     1829  .BB@LABEL@26_7:	; switch_clause_bb6
+00000930 8800                1830  	mov a, [sp+0x00]
+00000932                     1831  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1099
+00000932 D1                  1832  	cmp0 a
+00000933 DF00                1833  	bnz $.BB@LABEL@26_12
+00000935                     1834  .BB@LABEL@26_8:	; if_then_bb
+00000935                     1835  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1100
+00000935 CF000006            1836  	mov !LOWW(_g_transfer_state@9), #0x06
+00000939                     1837  .BB@LABEL@26_9:	; if_then_bb
+00000939 FE0000              1838  	call $!_make_in_data@1
+0000093C C2                  1839  	pop bc
+0000093D                     1840  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1120
+0000093D D7                  1841  	ret
+0000093E                     1842  .BB@LABEL@26_10:	; switch_clause_bb16
+0000093E                     1843  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1112
+0000093E FE0000              1844  	call $!_get_max_string_index@1
+00000941 70                  1845  	mov x, a
+00000942 8800                1846  	mov a, [sp+0x00]
+00000944 08                  1847  	xch a, x
+00000945 6140                1848  	cmp x, a
+00000947 61C300              1849  	bh $.BB@LABEL@26_12
+0000094A                     1850  .BB@LABEL@26_11:	; if_then_bb24
+0000094A 8800                1851  	mov a, [sp+0x00]
+0000094C                     1852  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1113
+0000094C 0C0A                1853  	add a, #0x0A
+0000094E 9F0000              1854  	mov !LOWW(_g_transfer_state@9), a
+00000951 EF00                1855  	br $.BB@LABEL@26_5
+00000953                     1856  .BB@LABEL@26_12:	; bb33
+00000953                     1857  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1120
+00000953 F1                  1858  	clrb a
+00000954 C2                  1859  	pop bc
+00000955 D7                  1860  	ret
+00000956                     1861  .LFE26:
+00000956                     1862  	.TYPE _request_get_configutarion@1,function,.LFE27-_request_get_configutarion@1
+00000956                     1863  _request_get_configutarion@1:
+00000956                     1864  	.STACK _request_get_configutarion@1 = 4
+00000956                     1865  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1125
+00000956 CF000015            1866  	mov !LOWW(_g_transfer_state@9), #0x15
+0000095A                     1867  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1126
+0000095A FE0000              1868  	call $!_make_in_data@1
+0000095D                     1869  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1127
+0000095D D7                  1870  	ret
+0000095E                     1871  .LFE27:
+0000095E                     1872  	.TYPE _request_get_status_device@1,function,.LFE28-_request_get_status_device@1
+0000095E                     1873  _request_get_status_device@1:
+0000095E                     1874  	.STACK _request_get_status_device@1 = 4
+0000095E                     1875  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1132
+0000095E CF000016            1876  	mov !LOWW(_g_transfer_state@9), #0x16
+00000962                     1877  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1133
+00000962 FE0000              1878  	call $!_make_in_data@1
+00000965                     1879  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1134
+00000965 D7                  1880  	ret
+00000966                     1881  .LFE28:
+00000966                     1882  	.TYPE _request_get_status_interface@1,function,.LFE29-_request_get_status_interface@1
+00000966                     1883  _request_get_status_interface@1:
+00000966                     1884  	.STACK _request_get_status_interface@1 = 4
+00000966                     1885  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1139
+00000966 D50000              1886  	cmp0 !LOWW(_g_setup_data@3+0x00004)
+00000969 DF00                1887  	bnz $.BB@LABEL@29_2
+0000096B                     1888  .BB@LABEL@29_1:	; if_then_bb
+0000096B                     1889  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1140
+0000096B CF000017            1890  	mov !LOWW(_g_transfer_state@9), #0x17
+0000096F                     1891  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1141
+0000096F FE0000              1892  	call $!_make_in_data@1
+00000972 D7                  1893  	ret
+00000973                     1894  .BB@LABEL@29_2:	; bb7
+00000973                     1895  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1144
+00000973 F1                  1896  	clrb a
+00000974 D7                  1897  	ret
+00000975                     1898  .LFE29:
+00000975                     1899  	.TYPE _request_get_status_endpoint@1,function,.LFE30-_request_get_status_endpoint@1
+00000975                     1900  _request_get_status_endpoint@1:
+00000975                     1901  	.STACK _request_get_status_endpoint@1 = 4
+00000975                     1902  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1149
+00000975 D50000              1903  	cmp0 !LOWW(_g_setup_data@3+0x00004)
+00000978 DF00                1904  	bnz $.BB@LABEL@30_2
+0000097A                     1905  .BB@LABEL@30_1:	; if_then_bb
+0000097A                     1906  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1150
+0000097A CF000018            1907  	mov !LOWW(_g_transfer_state@9), #0x18
+0000097E                     1908  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1151
+0000097E FE0000              1909  	call $!_make_in_data@1
+00000981 D7                  1910  	ret
+00000982                     1911  .BB@LABEL@30_2:	; bb7
+00000982                     1912  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1154
+00000982 F1                  1913  	clrb a
+00000983 D7                  1914  	ret
+00000984                     1915  .LFE30:
+00000984                     1916  	.TYPE _request_dispatch@1,function,.LFE31-_request_dispatch@1
+00000984                     1917  _request_dispatch@1:
+00000984                     1918  	.STACK _request_dispatch@1 = 4
+00000984                     1919  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1160
+00000984 8F0000              1920  	mov a, !LOWW(_g_setup_data@3)
+00000987 0C80                1921  	add a, #0x80
+00000989 D1                  1922  	cmp0 a
+0000098A DD00                1923  	bz $.BB@LABEL@31_8
+0000098C                     1924  .BB@LABEL@31_1:	; entry
+0000098C 91                  1925  	dec a
+0000098D D1                  1926  	cmp0 a
+0000098E DD00                1927  	bz $.BB@LABEL@31_14
+00000990                     1928  .BB@LABEL@31_2:	; entry
+00000990 91                  1929  	dec a
+00000991 D1                  1930  	cmp0 a
+00000992 DD00                1931  	bz $.BB@LABEL@31_16
+00000994                     1932  .BB@LABEL@31_3:	; entry
+00000994 4C7E                1933  	cmp a, #0x7E
+00000996 DF00                1934  	bnz $.BB@LABEL@31_18
+00000998                     1935  .BB@LABEL@31_4:	; switch_clause_bb
+00000998                     1936  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1162
+00000998 8F0000              1937  	mov a, !LOWW(_g_setup_data@3+0x00001)
+0000099B 0CFB                1938  	add a, #0xFB
+0000099D D1                  1939  	cmp0 a
+0000099E DD00                1940  	bz $.BB@LABEL@31_7
+000009A0                     1941  .BB@LABEL@31_5:	; switch_clause_bb
+000009A0 4C04                1942  	cmp a, #0x04
+000009A2 DF00                1943  	bnz $.BB@LABEL@31_18
+000009A4                     1944  .BB@LABEL@31_6:	; switch_clause_bb7
+000009A4                     1945  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1166
+000009A4 FE0000              1946  	call $!_request_set_configuration@1
+000009A7 D7                  1947  	ret
+000009A8                     1948  .BB@LABEL@31_7:	; switch_clause_bb5
+000009A8                     1949  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1164
+000009A8 FE0000              1950  	call $!_request_set_address@1
+000009AB D7                  1951  	ret
+000009AC                     1952  .BB@LABEL@31_8:	; switch_clause_bb10
+000009AC                     1953  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1171
+000009AC 8F0000              1954  	mov a, !LOWW(_g_setup_data@3+0x00001)
+000009AF D1                  1955  	cmp0 a
+000009B0 DD00                1956  	bz $.BB@LABEL@31_13
+000009B2                     1957  .BB@LABEL@31_9:	; switch_clause_bb10
+000009B2 0CFA                1958  	add a, #0xFA
+000009B4 D1                  1959  	cmp0 a
+000009B5 DD00                1960  	bz $.BB@LABEL@31_12
+000009B7                     1961  .BB@LABEL@31_10:	; switch_clause_bb10
+000009B7 4C02                1962  	cmp a, #0x02
+000009B9 DF00                1963  	bnz $.BB@LABEL@31_18
+000009BB                     1964  .BB@LABEL@31_11:	; switch_clause_bb16
+000009BB                     1965  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1175
+000009BB FE0000              1966  	call $!_request_get_configutarion@1
+000009BE D7                  1967  	ret
+000009BF                     1968  .BB@LABEL@31_12:	; switch_clause_bb13
+000009BF                     1969  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1173
+000009BF FE0000              1970  	call $!_request_get_descriptor@1
+000009C2 D7                  1971  	ret
+000009C3                     1972  .BB@LABEL@31_13:	; switch_clause_bb19
+000009C3                     1973  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1177
+000009C3 FE0000              1974  	call $!_request_get_status_device@1
+000009C6 D7                  1975  	ret
+000009C7                     1976  .BB@LABEL@31_14:	; switch_clause_bb23
+000009C7                     1977  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1182
+000009C7 D50000              1978  	cmp0 !LOWW(_g_setup_data@3+0x00001)
+000009CA DF00                1979  	bnz $.BB@LABEL@31_18
+000009CC                     1980  .BB@LABEL@31_15:	; switch_clause_bb26
+000009CC                     1981  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1184
+000009CC FE0000              1982  	call $!_request_get_status_interface@1
+000009CF D7                  1983  	ret
+000009D0                     1984  .BB@LABEL@31_16:	; switch_clause_bb30
+000009D0                     1985  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1189
+000009D0 D50000              1986  	cmp0 !LOWW(_g_setup_data@3+0x00001)
+000009D3 DF00                1987  	bnz $.BB@LABEL@31_18
+000009D5                     1988  .BB@LABEL@31_17:	; switch_clause_bb33
+000009D5                     1989  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1191
+000009D5 FE0000              1990  	call $!_request_get_status_endpoint@1
+000009D8 D7                  1991  	ret
+000009D9                     1992  .BB@LABEL@31_18:	; bb40
+000009D9                     1993  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1196
+000009D9 F1                  1994  	clrb a
+000009DA D7                  1995  	ret
+000009DB                     1996  .LFE31:
+000009DB                     1997  	.TYPE _swusb_init,function,.LFE32-_swusb_init
+000009DB                     1998  _swusb_init:
+000009DB                     1999  	.STACK _swusb_init = 4
+000009DB                     2000  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1198
+000009DB 5180                2001  	mov a, #0x80
+000009DD                     2002  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1201
+000009DD 6F0000              2003  	or a, !LOWW(_g_field@8)
+000009E0                     2004  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1202
+000009E0 718B                2005  	clr1 a.0
+000009E2 9F0000              2006  	mov !LOWW(_g_field@8), a
+000009E5                     2007  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1203
+000009E5 F50000              2008  	clrb !LOWW(_g_bbc_configured@6)
+000009E8                     2009  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1204
+000009E8 F50000              2010  	clrb !LOWW(_g_bbc_additional_failure_info@7)
+000009EB                     2011  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1207
+000009EB FC000000            2012  	call !!_swusb_io_init
+000009EF                     2013  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1208
+000009EF 5100                2014  	mov a, #LOW(HIGHW(_int_dminus_handler@1))
+000009F1 318E                2015  	shrw ax, 8+0x00000
+000009F3 14                  2016  	movw de, ax
+000009F4 320000              2017  	movw bc, #LOWW(_int_dminus_handler@1)
+000009F7 5102                2018  	mov a, #0x02
+000009F9 FC000000            2019  	call !!_pdc_set_int_routine
+000009FD D7                  2020  	ret
+000009FE                     2021  .LFE32:
+000009FE                     2022  	.TYPE _swusb_proc,function,.LFE33-_swusb_proc
+000009FE                     2023  _swusb_proc:
+000009FE                     2024  	.STACK _swusb_proc = 4
+000009FE                     2025  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1219
+000009FE 360000              2026  	movw hl, #LOWW(_g_field@8)
+00000A01 31C500              2027  	bf [hl].4, $.BB@LABEL@33_4
+00000A04                     2028  .BB@LABEL@33_1:	; if_then_bb
+00000A04                     2029  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1220
+00000A04 5177                2030  	mov a, #0x77
+00000A06 FE0000              2031  	call $!_msg
+00000A09                     2032  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1222
+00000A09 FE0000              2033  	call $!_request_dispatch@1
+00000A0C                     2034  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1223
+00000A0C D1                  2035  	cmp0 a
+00000A0D 61F8                2036  	sknz
+00000A0F                     2037  .BB@LABEL@33_2:	; if_then_bb17
+00000A0F                     2038  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1225
+00000A0F 71300000            2039  	set1 !LOWW(_g_field@8).3
+00000A13                     2040  .BB@LABEL@33_3:	; if_break_bb
+00000A13                     2041  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1227
+00000A13 71480000            2042  	clr1 !LOWW(_g_field@8).4
+00000A17 D7                  2043  	ret
+00000A18                     2044  .BB@LABEL@33_4:	; if_else_bb
+00000A18                     2045  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1229
+00000A18 D50000              2046  	cmp0 !LOWW(_g_in_data_pkt_len@4)
+00000A1B DF00                2047  	bnz $.BB@LABEL@33_8
+00000A1D                     2048  .BB@LABEL@33_5:	; bb28
+00000A1D D50000              2049  	cmp0 !LOWW(_g_transfer_state@9)
+00000A20 DD00                2050  	bz $.BB@LABEL@33_8
+00000A22                     2051  .BB@LABEL@33_6:	; if_then_bb41
+00000A22                     2052  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1232
+00000A22 5172                2053  	mov a, #0x72
+00000A24 FE0000              2054  	call $!_msg
+00000A27                     2055  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1233
+00000A27 FE0000              2056  	call $!_make_in_data@1
+00000A2A                     2057  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1234
+00000A2A D1                  2058  	cmp0 a
+00000A2B 61F8                2059  	sknz
+00000A2D                     2060  .BB@LABEL@33_7:	; if_then_bb54
+00000A2D                     2061  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1236
+00000A2D 71300000            2062  	set1 !LOWW(_g_field@8).3
+00000A31                     2063  .BB@LABEL@33_8:	; return
+00000A31                     2064  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1239
+00000A31 D7                  2065  	ret
+00000A32                     2066  .LFE33:
+00000A32                     2067  	.TYPE _swusb_is_transferring,function,.LFE34-_swusb_is_transferring
+00000A32                     2068  _swusb_is_transferring:
+00000A32                     2069  	.STACK _swusb_is_transferring = 4
+00000A32                     2070  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1243
+00000A32 D50000              2071  	cmp0 !LOWW(_g_transfer_state@9)
+00000A35 DF00                2072  	bnz $.BB@LABEL@34_2
+00000A37                     2073  .BB@LABEL@34_1:	; entry
+00000A37 F1                  2074  	clrb a
+00000A38                     2075  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1244
+00000A38 D7                  2076  	ret
+00000A39                     2077  .BB@LABEL@34_2:	; entry
+00000A39                     2078  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1243
+00000A39 E1                  2079  	oneb a
+00000A3A                     2080  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1244
+00000A3A D7                  2081  	ret
+00000A3B                     2082  .LFE34:
+00000A3B                     2083  	.TYPE _swusb_measure_rate,function,.LFE35-_swusb_measure_rate
+00000A3B                     2084  _swusb_measure_rate:
+00000A3B                     2085  	.STACK _swusb_measure_rate = 4
+00000A3B                     2086  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1248
+00000A3B 71000000            2087  	set1 !LOWW(_g_field@8).0
+00000A3F D7                  2088  	ret
+00000A40                     2089  .LFE35:
+00000A40                     2090  	.TYPE _swusb_enable,function,.LFE36-_swusb_enable
+00000A40                     2091  _swusb_enable:
+00000A40                     2092  	.STACK _swusb_enable = 4
+00000A40                     2093  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1253
+00000A40 FC000000            2094  	call !!_swusb_io_is_enabled
+00000A44 D1                  2095  	cmp0 a
+00000A45 DF00                2096  	bnz $.BB@LABEL@36_2
+00000A47                     2097  .BB@LABEL@36_1:	; if_then_bb
+00000A47                     2098  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1255
+00000A47 FE0000              2099  	call $!_device_reset@1
+00000A4A                     2100  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1258
+00000A4A CF000080            2101  	mov !LOWW(_g_swusb_rate_offset), #0x80
+00000A4E                     2102  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1261
+00000A4E FC000000            2103  	call !!_swusb_io_enable
+00000A52                     2104  .BB@LABEL@36_2:	; return
+00000A52                     2105  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1263
+00000A52 D7                  2106  	ret
+00000A53                     2107  .LFE36:
+00000A53                     2108  	.TYPE _swusb_disable,function,.LFE37-_swusb_disable
+00000A53                     2109  _swusb_disable:
+00000A53                     2110  	.STACK _swusb_disable = 4
+00000A53                     2111  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1268
+00000A53 FC000000            2112  	call !!_swusb_io_disable
+00000A57                     2113  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1271
+00000A57 FE0000              2114  	call $!_device_reset@1
+00000A5A D7                  2115  	ret
+00000A5B                     2116  .LFE37:
+00000A5B                     2117  	.TYPE _swusb_set_power_supply,function,.LFE38-_swusb_set_power_supply
+00000A5B                     2118  _swusb_set_power_supply:
+00000A5B                     2119  	.STACK _swusb_set_power_supply = 4
+00000A5B                     2120  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1274
+00000A5B 718C                2121  	mov1 CY, a.0
+00000A5D                     2122  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1276
+00000A5D 360000              2123  	movw hl, #LOWW(_g_field@8)
+00000A60 71F1                2124  	mov1 [hl].7, CY
+00000A62 D7                  2125  	ret
+00000A63                     2126  .LFE38:
+00000A63                     2127  	.TYPE _swusb_bb_configured,function,.LFE39-_swusb_bb_configured
+00000A63                     2128  _swusb_bb_configured:
+00000A63                     2129  	.STACK _swusb_bb_configured = 8
+00000A63                     2130  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1279
+00000A63 C1                  2131  	push ax
+00000A64 C7                  2132  	push hl
+00000A65 73                  2133  	mov b, a
+00000A66                     2134  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1281
+00000A66 4100                2135  	mov es, #0x00
+00000A68 11D91CF7            2136  	mov x, es:!0xF71C
+00000A6C 63                  2137  	mov a, b
+00000A6D 6140                2138  	cmp x, a
+00000A6F 61D300              2139  	bnh $.BB@LABEL@39_8
+00000A72                     2140  .BB@LABEL@39_1:	; if_then_bb
+00000A72                     2141  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1283
+00000A72 5002                2142  	mov x, #0x02
+00000A74 D6                  2143  	mulu x
+00000A75 60                  2144  	mov a, x
+00000A76 9800                2145  	mov [sp+0x00], a
+00000A78 73                  2146  	mov b, a
+00000A79 300300              2147  	movw ax, #0x0003
+00000A7C D3                  2148  	cmp0 b
+00000A7D EF00                2149  	br $.BB@LABEL@39_3
+00000A7F                     2150  .BB@LABEL@39_2:	; if_then_bb
+00000A7F 01                  2151  	addw ax, ax
+00000A80 93                  2152  	dec b
+00000A81                     2153  .BB@LABEL@39_3:	; if_then_bb
+00000A81 DF00                2154  	bnz $.BB@LABEL@39_2
+00000A83                     2155  .BB@LABEL@39_4:	; if_then_bb
+00000A83 60                  2156  	mov a, x
+00000A84 7CFF                2157  	xor a, #0xFF
+00000A86 5F0000              2158  	and a, !LOWW(_g_bbc_configured@6)
+00000A89 72                  2159  	mov c, a
+00000A8A 9F0000              2160  	mov !LOWW(_g_bbc_configured@6), a
+00000A8D 8800                2161  	mov a, [sp+0x00]
+00000A8F 73                  2162  	mov b, a
+00000A90 8802                2163  	mov a, [sp+0x02]
+00000A92                     2164  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1284
+00000A92 318E                2165  	shrw ax, 8+0x00000
+00000A94 31ED                2166  	shlw ax, 0x0E
+00000A96 31EE                2167  	shrw ax, 0x0E
+00000A98 D3                  2168  	cmp0 b
+00000A99 EF00                2169  	br $.BB@LABEL@39_6
+00000A9B                     2170  .BB@LABEL@39_5:	; if_then_bb
+00000A9B 01                  2171  	addw ax, ax
+00000A9C 93                  2172  	dec b
+00000A9D                     2173  .BB@LABEL@39_6:	; if_then_bb
+00000A9D DF00                2174  	bnz $.BB@LABEL@39_5
+00000A9F                     2175  .BB@LABEL@39_7:	; if_then_bb
+00000A9F 60                  2176  	mov a, x
+00000AA0 616A                2177  	or a, c
+00000AA2 9F0000              2178  	mov !LOWW(_g_bbc_configured@6), a
+00000AA5                     2179  .BB@LABEL@39_8:	; return
+00000AA5 1004                2180  	addw sp, #0x04
+00000AA7                     2181  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1286
+00000AA7 D7                  2182  	ret
+00000AA8                     2183  .LFE39:
+00000AA8                     2184  	.TYPE _swusb_bb_set_additional_failure_info,function,.LFE40-_swusb_bb_set_additional_failure_info
+00000AA8                     2185  _swusb_bb_set_additional_failure_info:
+00000AA8                     2186  	.STACK _swusb_bb_set_additional_failure_info = 4
+00000AA8                     2187  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1288
+00000AA8 9F0000              2188  	mov !LOWW(_g_bbc_additional_failure_info@7), a
+00000AAB                     2189  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb.c", 1290
+00000AAB D7                  2190  	ret
+00000AAC                     2191  .LFE40:
+00000000                     2192  	.SECTION .data,DATA
+00000000                     2193  	.TYPE _thalt,object,1
+00000000                     2194  _thalt:
+00000000 00                  2195  	.DS (1)
+00000001 00                  2196  	.ALIGN 2
+00000002                     2197  	.TYPE _tbp,object,2
+00000002                     2198  _tbp:
+00000002 0700                2199  	.DB2 0x0007
+00000004                     2200  	.TYPE _tbuf,object,16
+00000004                     2201  _tbuf:
+00000004 2D                  2202  	.DB 0x2D,0x2D,0x2D,0x2D,0x2D,0x23,0x23
+00000005 2D              
+00000006 2D              
+00000007 2D              
+00000008 2D              
+00000009 23              
+0000000A 23              
+0000000B 0000000000000000    2203  	.DS (9)
+00000013 00
+00000000                     2204  	.SECTION .bss,BSS
+00000000                     2205  	.TYPE _g_xact_state@1,object,1
+00000000                     2206  _g_xact_state@1:
+00000000                     2207  	.DS (1)
+00000001                     2208  	.TYPE _g_expected_token@2,object,2
+00000001                     2209  _g_expected_token@2:
+00000001                     2210  	.DS (2)
+00000003                     2211  	.TYPE _g_setup_data@3,object,6
+00000003                     2212  _g_setup_data@3:
+00000003                     2213  	.DS (6)
+00000009                     2214  	.TYPE _g_in_data_pkt_len@4,object,1
+00000009                     2215  _g_in_data_pkt_len@4:
+00000009                     2216  	.DS (1)
+0000000A                     2217  	.TYPE _g_in_data_pkt@5,object,11
+0000000A                     2218  _g_in_data_pkt@5:
+0000000A                     2219  	.DS (11)
+00000015                     2220  	.TYPE _g_swusb_rate_offset,object,1
+00000015                     2221  _g_swusb_rate_offset:
+00000015                     2222  	.DS (1)
+00000016                     2223  	.TYPE _g_bbc_configured@6,object,1
+00000016                     2224  _g_bbc_configured@6:
+00000016                     2225  	.DS (1)
+00000017                     2226  	.TYPE _g_bbc_additional_failure_info@7,object,1
+00000017                     2227  _g_bbc_additional_failure_info@7:
+00000017                     2228  	.DS (1)
+00000018                     2229  	.TYPE _g_field@8,object,1
+00000018                     2230  _g_field@8:
+00000018                     2231  	.DS (1)
+00000019                     2232  	.TYPE _g_transfer_state@9,object,1
+00000019                     2233  _g_transfer_state@9:
+00000019                     2234  	.DS (1)
+0000001A                     2235  	.TYPE _g_transferred_packet_num@10,object,1
+0000001A                     2236  _g_transferred_packet_num@10:
+0000001A                     2237  	.DS (1)
+00000000                     2238  	.SECTION .const,CONST
+00000000                     2239  	.ALIGN 2
+00000000                     2240  	.TYPE _vdo_param_ptr@11@make_in_data_billboard_alternate_mode_capability@1,object,16
+00000000                     2241  _vdo_param_ptr@11@make_in_data_billboard_alternate_mode_capability@1:
+00000000 2CF70000            2242  	.DB4 0x0000F72C
+00000004 30F70000            2243  	.DB4 0x0000F730
+00000008 34F70000            2244  	.DB4 0x0000F734
+0000000C 38F70000            2245  	.DB4 0x0000F738
+
+Section List
+Attr     Size                Name
+
+TEXTF              2732 (00000AAC) .textf
+CONST                16 (00000010) .const
+DATA                 20 (00000014) .data
+BSS                  27 (0000001B) .bss
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\swusb.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Billboard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Obj\Release\swusb.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Obj\Release\swusb.asm 
+

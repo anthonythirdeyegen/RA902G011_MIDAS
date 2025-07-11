@@ -1,0 +1,337 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   ..\..\Core\r_systeminit.c
+00000000                        5  #@   ..\..\PDC\smbm_ctrl.c
+00000000                        6  #@   ..\..\PDC\user_timer.c
+00000000                        7  #@   r_main.c
+00000000                        8  #@   R_Main_UserInit.c
+00000000                        9  #@   PDC\dcdc_ctrl.c
+00000000                       10  #@   PDC\led_ctrl.c
+00000000                       11  #@   PDC\sw_ctrl.c
+00000000                       12  #@   PDC\user_main.c
+00000000                       13  #@   PDC\user_main_protection.c
+00000000                       14  #@   PDC\subdev\isl95338.c
+00000000                       15  #@   PDC\subdev\subdev_ctrl.c
+00000000                       16  #@   pd_defs.c
+00000000                       17  #@   -cpu=S3
+00000000                       18  #@   -obj_path=Obj\Release
+00000000                       19  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       20  #@   -g
+00000000                       21  #@   -Osame_code
+00000000                       22  #@   -I PDC\subdev
+00000000                       23  #@   -I PDC
+00000000                       24  #@   -I .
+00000000                       25  #@   -I ..\..\Core
+00000000                       26  #@   -I ..\..\PDC
+00000000                       27  #@   -I ..\..\PDC\Lib
+00000000                       28  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       29  #@   -asm_path=Obj\Release
+00000000                       30  #@   -asmopt=-prn_path=Obj\Release
+00000000                       31  #@   -c
+00000000                       32  #@   -MAKEUD=Obj\Release
+00000000                       33  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_f77933be31b343fd93ec8db906f6b563gqip02wt.1wf
+00000000                       34  #@  compiled at Tue May 06 10:50:36 2025
+00000000                       35  
+00000000                       36  	.PUBLIC _gSubdevInfo
+00000000                       37  	.PUBLIC _gSubDevErr
+00000000                       38  	.EXTERN _init_isl95338
+00000000                       39  	.EXTERN _isl95338_ctrl
+00000000                       40  	.PUBLIC _subdev_init
+00000000                       41  	.PUBLIC _subdev_ctrl
+00000000                       42  	.PUBLIC _subdev_get_alerthandler
+00000000                       43  	.PUBLIC _subdev_get_alert_signal
+00000000                       44  
+00000000                       45  	.SECTION .textf,TEXTF
+00000000                       46  	.TYPE _subdev_init,function,.LFE1-_subdev_init
+00000000                       47  _subdev_init:
+00000000                       48  	.STACK _subdev_init = 6
+00000000                       49  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 81
+00000000 C7                    50  	push hl
+00000001                       51  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 85
+00000001 F50000                52  	clrb !LOWW(_gSubdevInfo)
+00000004                       53  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 86
+00000004 F50000                54  	clrb !LOWW(_gSubdevInfo+0x00001)
+00000007                       55  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 87
+00000007 F50000                56  	clrb !LOWW(_gSubdevInfo+0x00002)
+0000000A                       57  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 88
+0000000A F50000                58  	clrb !LOWW(_gSubdevInfo+0x00003)
+0000000D                       59  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 90
+0000000D F50000                60  	clrb !LOWW(_gSubDevErr)
+00000010                       61  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 91
+00000010 F50000                62  	clrb !LOWW(_gSubDevErr+0x00001)
+00000013 F1                    63  	clrb a
+00000014 EF00                  64  	br $.BB@LABEL@1_5
+00000016                       65  .BB@LABEL@1_1:	; bb
+00000016 8800                  66  	mov a, [sp+0x00]
+00000018                       67  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 94
+00000018 5004                  68  	mov x, #0x04
+0000001A D6                    69  	mulu x
+0000001B 16                    70  	movw hl, ax
+0000001C 040000                71  	addw ax, #SMRLW(_ulSuvdevInitFunc@2)
+0000001F 14                    72  	movw de, ax
+00000020 AA02                  73  	movw ax, [de+0x02]
+00000022 12                    74  	movw bc, ax
+00000023 A9                    75  	movw ax, [de]
+00000024 03                    76  	addw ax, bc
+00000025 61F8                  77  	sknz
+00000027                       78  .BB@LABEL@1_2:	; bb
+00000027 DE00                  79  	bnc $.BB@LABEL@1_4
+00000029                       80  .BB@LABEL@1_3:	; if_then_bb
+00000029 17                    81  	movw ax, hl
+0000002A                       82  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 95
+0000002A 040000                83  	addw ax, #SMRLW(_ulSuvdevInitFunc@2)
+0000002D 14                    84  	movw de, ax
+0000002E 8A02                  85  	mov a, [de+0x02]
+00000030 9EFC                  86  	mov cs, a
+00000032 A9                    87  	movw ax, [de]
+00000033 16                    88  	movw hl, ax
+00000034 61FA                  89  	call hl
+00000036                       90  .BB@LABEL@1_4:	; if_break_bb
+00000036 8800                  91  	mov a, [sp+0x00]
+00000038 81                    92  	inc a
+00000039                       93  .BB@LABEL@1_5:	; if_break_bb
+00000039 9800                  94  	mov [sp+0x00], a
+0000003B                       95  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 93
+0000003B 318E                  96  	shrw ax, 8+0x00000
+0000003D 440800                97  	cmpw ax, #0x0008
+00000040 DC00                  98  	bc $.BB@LABEL@1_1
+00000042                       99  .BB@LABEL@1_6:	; return
+00000042                      100  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 100
+00000042 C0                   101  	pop ax
+00000043 D7                   102  	ret
+00000044                      103  .LFE1:
+00000044                      104  	.TYPE _subdev_ctrl,function,.LFE2-_subdev_ctrl
+00000044                      105  _subdev_ctrl:
+00000044                      106  	.STACK _subdev_ctrl = 6
+00000044                      107  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 105
+00000044 C7                   108  	push hl
+00000045                      109  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 109
+00000045 8F0000               110  	mov a, !LOWW(_gSubdevInfo+0x00001)
+00000048 72                   111  	mov c, a
+00000049 D1                   112  	cmp0 a
+0000004A DD00                 113  	bz $.BB@LABEL@2_6
+0000004C                      114  .BB@LABEL@2_1:	; entry.bb46_crit_edge
+0000004C F1                   115  	clrb a
+0000004D 73                   116  	mov b, a
+0000004E EF00                 117  	br $.BB@LABEL@2_5
+00000050                      118  .BB@LABEL@2_2:	; bb
+00000050 63                   119  	mov a, b
+00000051                      120  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 112
+00000051 318E                 121  	shrw ax, 8+0x00000
+00000053 040000               122  	addw ax, #SMRLW(_ucBitMask@1)
+00000056 16                   123  	movw hl, ax
+00000057 62                   124  	mov a, c
+00000058 5D                   125  	and a, [hl]
+00000059 D1                   126  	cmp0 a
+0000005A DD00                 127  	bz $.BB@LABEL@2_4
+0000005C                      128  .BB@LABEL@2_3:	; if_break_bb
+0000005C                      129  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 117
+0000005C 090000               130  	mov a, SMRLW(_ucBitMask@1)[b]
+0000005F 7CFF                 131  	xor a, #0xFF
+00000061 5F0000               132  	and a, !LOWW(_gSubdevInfo+0x00001)
+00000064 72                   133  	mov c, a
+00000065 9F0000               134  	mov !LOWW(_gSubdevInfo+0x00001), a
+00000068                      135  .BB@LABEL@2_4:	; if_break_bb43
+00000068 83                   136  	inc b
+00000069 63                   137  	mov a, b
+0000006A                      138  .BB@LABEL@2_5:	; bb46
+0000006A                      139  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 111
+0000006A 318E                 140  	shrw ax, 8+0x00000
+0000006C 440800               141  	cmpw ax, #0x0008
+0000006F DC00                 142  	bc $.BB@LABEL@2_2
+00000071 EE0000               143  	br $!.BB@LABEL@2_21
+00000074                      144  .BB@LABEL@2_6:	; if_else_bb
+00000074                      145  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 123
+00000074 D50000               146  	cmp0 !LOWW(_gSubdevInfo+0x00002)
+00000077 DD00                 147  	bz $.BB@LABEL@2_12
+00000079                      148  .BB@LABEL@2_7:	; if_else_bb.bb105_crit_edge
+00000079 F1                   149  	clrb a
+0000007A 73                   150  	mov b, a
+0000007B EF00                 151  	br $.BB@LABEL@2_11
+0000007D                      152  .BB@LABEL@2_8:	; bb60
+0000007D 63                   153  	mov a, b
+0000007E                      154  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 125
+0000007E 318E                 155  	shrw ax, 8+0x00000
+00000080 040000               156  	addw ax, #SMRLW(_ucBitMask@1)
+00000083 16                   157  	movw hl, ax
+00000084 8F0000               158  	mov a, !LOWW(_gSubdevInfo+0x00002)
+00000087 70                   159  	mov x, a
+00000088 5D                   160  	and a, [hl]
+00000089 D1                   161  	cmp0 a
+0000008A DD00                 162  	bz $.BB@LABEL@2_10
+0000008C                      163  .BB@LABEL@2_9:	; if_else_bb91
+0000008C                      164  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 131
+0000008C 090000               165  	mov a, SMRLW(_ucBitMask@1)[b]
+0000008F 7CFF                 166  	xor a, #0xFF
+00000091 6158                 167  	and a, x
+00000093 9F0000               168  	mov !LOWW(_gSubdevInfo+0x00002), a
+00000096                      169  .BB@LABEL@2_10:	; if_break_bb102
+00000096 83                   170  	inc b
+00000097 63                   171  	mov a, b
+00000098                      172  .BB@LABEL@2_11:	; bb105
+00000098                      173  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 124
+00000098 318E                 174  	shrw ax, 8+0x00000
+0000009A 440800               175  	cmpw ax, #0x0008
+0000009D DC00                 176  	bc $.BB@LABEL@2_8
+0000009F                      177  .BB@LABEL@2_12:	; if_break_bb112
+0000009F                      178  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 137
+0000009F D50000               179  	cmp0 !LOWW(_gSubdevInfo)
+000000A2 DD00                 180  	bz $.BB@LABEL@2_21
+000000A4                      181  .BB@LABEL@2_13:	; if_break_bb112.bb163_crit_edge
+000000A4 F1                   182  	clrb a
+000000A5 EF00                 183  	br $.BB@LABEL@2_20
+000000A7                      184  .BB@LABEL@2_14:	; bb119
+000000A7 8801                 185  	mov a, [sp+0x01]
+000000A9                      186  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 139
+000000A9 318E                 187  	shrw ax, 8+0x00000
+000000AB 040000               188  	addw ax, #SMRLW(_ucBitMask@1)
+000000AE 16                   189  	movw hl, ax
+000000AF 8F0000               190  	mov a, !LOWW(_gSubdevInfo)
+000000B2 9800                 191  	mov [sp+0x00], a
+000000B4 5D                   192  	and a, [hl]
+000000B5 D1                   193  	cmp0 a
+000000B6 DD00                 194  	bz $.BB@LABEL@2_19
+000000B8                      195  .BB@LABEL@2_15:	; if_then_bb131
+000000B8 8801                 196  	mov a, [sp+0x01]
+000000BA                      197  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 141
+000000BA 5004                 198  	mov x, #0x04
+000000BC D6                   199  	mulu x
+000000BD 16                   200  	movw hl, ax
+000000BE 040000               201  	addw ax, #SMRLW(_ulSubdevFunc@4)
+000000C1 14                   202  	movw de, ax
+000000C2 AA02                 203  	movw ax, [de+0x02]
+000000C4 12                   204  	movw bc, ax
+000000C5 A9                   205  	movw ax, [de]
+000000C6 03                   206  	addw ax, bc
+000000C7 61F8                 207  	sknz
+000000C9                      208  .BB@LABEL@2_16:	; if_then_bb131
+000000C9 DE00                 209  	bnc $.BB@LABEL@2_18
+000000CB                      210  .BB@LABEL@2_17:	; if_then_bb139
+000000CB 17                   211  	movw ax, hl
+000000CC                      212  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 142
+000000CC 040000               213  	addw ax, #SMRLW(_ulSubdevFunc@4)
+000000CF 14                   214  	movw de, ax
+000000D0 8A02                 215  	mov a, [de+0x02]
+000000D2 9EFC                 216  	mov cs, a
+000000D4 A9                   217  	movw ax, [de]
+000000D5 16                   218  	movw hl, ax
+000000D6 61FA                 219  	call hl
+000000D8 EF00                 220  	br $.BB@LABEL@2_19
+000000DA                      221  .BB@LABEL@2_18:	; if_else_bb149
+000000DA C2                   222  	pop bc
+000000DB C3                   223  	push bc
+000000DC FBF8FF               224  	movw hl, sp
+000000DF                      225  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 145
+000000DF 090000               226  	mov a, SMRLW(_ucBitMask@1)[b]
+000000E2 7CFF                 227  	xor a, #0xFF
+000000E4 5D                   228  	and a, [hl]
+000000E5 9F0000               229  	mov !LOWW(_gSubdevInfo), a
+000000E8                      230  .BB@LABEL@2_19:	; if_break_bb160
+000000E8 8801                 231  	mov a, [sp+0x01]
+000000EA 81                   232  	inc a
+000000EB                      233  .BB@LABEL@2_20:	; if_break_bb160
+000000EB 9801                 234  	mov [sp+0x01], a
+000000ED                      235  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 138
+000000ED 318E                 236  	shrw ax, 8+0x00000
+000000EF 440800               237  	cmpw ax, #0x0008
+000000F2 DC00                 238  	bc $.BB@LABEL@2_14
+000000F4                      239  .BB@LABEL@2_21:	; return
+000000F4                      240  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 153
+000000F4 C0                   241  	pop ax
+000000F5 D7                   242  	ret
+000000F6                      243  .LFE2:
+000000F6                      244  	.TYPE _subdev_get_alerthandler,function,.LFE3-_subdev_get_alerthandler
+000000F6                      245  _subdev_get_alerthandler:
+000000F6                      246  	.STACK _subdev_get_alerthandler = 4
+000000F6                      247  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 155
+000000F6 F6                   248  	clrw ax
+000000F7 12                   249  	movw bc, ax
+000000F8 EF00                 250  	br $.BB@LABEL@3_2
+000000FA                      251  .BB@LABEL@3_1:	; if_break_bb
+000000FA                      252  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 159
+000000FA A3                   253  	incw bc
+000000FB 13                   254  	movw ax, bc
+000000FC                      255  .BB@LABEL@3_2:	; bb11
+000000FC                      256  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 158
+000000FC 7C80                 257  	xor a, #0x80
+000000FE 440880               258  	cmpw ax, #0x8008
+00000101 DC00                 259  	bc $.BB@LABEL@3_1
+00000103                      260  .BB@LABEL@3_3:	; bb18
+00000103                      261  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 165
+00000103 F1                   262  	clrb a
+00000104 D7                   263  	ret
+00000105                      264  .LFE3:
+00000105                      265  	.TYPE _subdev_get_alert_signal,function,.LFE4-_subdev_get_alert_signal
+00000105                      266  _subdev_get_alert_signal:
+00000105                      267  	.STACK _subdev_get_alert_signal = 4
+00000105                      268  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/subdev/subdev_ctrl.c", 170
+00000105 E1                   269  	oneb a
+00000106 D7                   270  	ret
+00000107                      271  .LFE4:
+00000000                      272  	.SECTION .bss,BSS
+00000000                      273  	.TYPE _gSubdevInfo,object,4
+00000000                      274  _gSubdevInfo:
+00000000                      275  	.DS (4)
+00000004                      276  	.TYPE _gSubDevErr,object,2
+00000004                      277  _gSubDevErr:
+00000004                      278  	.DS (2)
+00000000                      279  	.SECTION .const,CONST
+00000000                      280  	.TYPE _ucBitMask@1,object,8
+00000000                      281  _ucBitMask@1:
+00000000 01                   282  	.DB 0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80
+00000001 02              
+00000002 04              
+00000003 08              
+00000004 10              
+00000005 20              
+00000006 40              
+00000007 80              
+00000008                      283  	.ALIGN 2
+00000008                      284  	.TYPE _ulSuvdevInitFunc@2,object,32
+00000008                      285  _ulSuvdevInitFunc@2:
+00000008 0000                 286  	.DB2 LOWW(_init_isl95338)
+0000000A 00                   287  	.DB LOW(HIGHW(_init_isl95338))
+0000000B 00                   288  	.DB 0x00
+0000000C 0000000000000000     289  	.DS (28)
+                 ...
+00000024 00000000
+00000028                      290  	.ALIGN 2
+00000028                      291  	.TYPE _ulSuvdevAlertFunc@3,object,32
+00000028                      292  _ulSuvdevAlertFunc@3:
+00000028 0000000000000000     293  	.DS (32)
+                 ...
+00000040 0000000000000000
+00000048                      294  	.ALIGN 2
+00000048                      295  	.TYPE _ulSubdevFunc@4,object,32
+00000048                      296  _ulSubdevFunc@4:
+00000048 0000                 297  	.DB2 LOWW(_isl95338_ctrl)
+0000004A 00                   298  	.DB LOW(HIGHW(_isl95338_ctrl))
+0000004B 00                   299  	.DB 0x00
+0000004C 0000000000000000     300  	.DS (28)
+                 ...
+00000064 00000000
+00000068                      301  	.ALIGN 2
+00000068                      302  	.TYPE _ulSubdevResetFunc@5,object,32
+00000068                      303  _ulSubdevResetFunc@5:
+00000068 0000000000000000     304  	.DS (32)
+                 ...
+00000080 0000000000000000
+
+Section List
+Attr     Size                Name
+
+TEXTF               263 (00000107) .textf
+CONST               136 (00000088) .const
+BSS                   6 (00000006) .bss
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\subdev_ctrl.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\Obj\Release\subdev_ctrl.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\Obj\Release\subdev_ctrl.asm 
+

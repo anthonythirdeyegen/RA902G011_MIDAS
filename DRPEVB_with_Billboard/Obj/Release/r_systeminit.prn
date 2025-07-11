@@ -1,0 +1,78 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   Billboard\bbc_main.c
+00000000                        5  #@   Billboard\crc16.c
+00000000                        6  #@   Billboard\swusb.c
+00000000                        7  #@   Billboard\swusb_io.c
+00000000                        8  #@   ..\..\Core\r_systeminit.c
+00000000                        9  #@   ..\..\PDC\smbm_ctrl.c
+00000000                       10  #@   ..\..\PDC\user_timer.c
+00000000                       11  #@   PDC\dcdc_ctrl.c
+00000000                       12  #@   PDC\led_ctrl.c
+00000000                       13  #@   PDC\sw_ctrl.c
+00000000                       14  #@   PDC\user_main.c
+00000000                       15  #@   PDC\user_main_protection.c
+00000000                       16  #@   pd_defs.c
+00000000                       17  #@   r_main.c
+00000000                       18  #@   R_Main_UserInit.c
+00000000                       19  #@   PDC\subdev\isl95338.c
+00000000                       20  #@   PDC\subdev\subdev_ctrl.c
+00000000                       21  #@   -cpu=S3
+00000000                       22  #@   -obj_path=Obj\Release
+00000000                       23  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       24  #@   -g
+00000000                       25  #@   -Osame_code
+00000000                       26  #@   -I Billboard
+00000000                       27  #@   -I PDC\subdev
+00000000                       28  #@   -I PDC
+00000000                       29  #@   -I .
+00000000                       30  #@   -I ..\..\PDC\Lib
+00000000                       31  #@   -I ..\..\PDC
+00000000                       32  #@   -I ..\..\Core
+00000000                       33  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       34  #@   -asm_path=Obj\Release
+00000000                       35  #@   -asmopt=-prn_path=Obj\Release
+00000000                       36  #@   -c
+00000000                       37  #@   -MAKEUD=Obj\Release
+00000000                       38  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_c0b7818164c94c2192d757ba2474eae6iiaofrot.nwu
+00000000                       39  #@  compiled at Tue May 06 10:51:15 2025
+00000000                       40  
+00000000                       41  	.PUBLIC _R_Systeminit
+00000000                       42  	.PUBLIC _hdwinit
+00000000                       43  
+00000000                       44  	.SECTION .textf,TEXTF
+00000000                       45  	.TYPE _R_Systeminit,function,.LFE1-_R_Systeminit
+00000000                       46  _R_Systeminit:
+00000000                       47  	.STACK _R_Systeminit = 4
+00000000                       48  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/Core/r_systeminit.c", 77
+00000000 CFF00031              49  	mov !0x00F0, #0x31
+00000004                       50  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/Core/r_systeminit.c", 78
+00000004 CFFC009C              51  	mov !0x00FC, #0x9C
+00000008 D7                    52  	ret
+00000009                       53  .LFE1:
+00000009                       54  	.TYPE _hdwinit,function,.LFE2-_hdwinit
+00000009                       55  _hdwinit:
+00000009                       56  	.STACK _hdwinit = 4
+00000009                       57  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/Core/r_systeminit.c", 98
+00000009 717BFA                58  	di
+0000000C                       59  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/Core/r_systeminit.c", 99
+0000000C FE0000                60  	call $!_R_Systeminit
+0000000F D7                    61  	ret
+00000010                       62  .LFE2:
+
+Section List
+Attr     Size                Name
+
+TEXTF                16 (00000010) .textf
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\r_systeminit.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Billboard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Obj\Release\r_systeminit.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Obj\Release\r_systeminit.asm 
+

@@ -1,0 +1,126 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   Billboard\bbc_main.c
+00000000                        5  #@   Billboard\crc16.c
+00000000                        6  #@   Billboard\swusb.c
+00000000                        7  #@   Billboard\swusb_io.c
+00000000                        8  #@   ..\..\Core\r_systeminit.c
+00000000                        9  #@   ..\..\PDC\smbm_ctrl.c
+00000000                       10  #@   ..\..\PDC\user_timer.c
+00000000                       11  #@   PDC\dcdc_ctrl.c
+00000000                       12  #@   PDC\led_ctrl.c
+00000000                       13  #@   PDC\sw_ctrl.c
+00000000                       14  #@   PDC\user_main.c
+00000000                       15  #@   PDC\user_main_protection.c
+00000000                       16  #@   pd_defs.c
+00000000                       17  #@   r_main.c
+00000000                       18  #@   R_Main_UserInit.c
+00000000                       19  #@   PDC\subdev\isl95338.c
+00000000                       20  #@   PDC\subdev\subdev_ctrl.c
+00000000                       21  #@   -cpu=S3
+00000000                       22  #@   -obj_path=Obj\Release
+00000000                       23  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       24  #@   -g
+00000000                       25  #@   -Osame_code
+00000000                       26  #@   -I Billboard
+00000000                       27  #@   -I PDC\subdev
+00000000                       28  #@   -I PDC
+00000000                       29  #@   -I .
+00000000                       30  #@   -I ..\..\PDC\Lib
+00000000                       31  #@   -I ..\..\PDC
+00000000                       32  #@   -I ..\..\Core
+00000000                       33  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       34  #@   -asm_path=Obj\Release
+00000000                       35  #@   -asmopt=-prn_path=Obj\Release
+00000000                       36  #@   -c
+00000000                       37  #@   -MAKEUD=Obj\Release
+00000000                       38  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_c0b7818164c94c2192d757ba2474eae6iiaofrot.nwu
+00000000                       39  #@  compiled at Tue May 06 10:51:15 2025
+00000000                       40  
+00000000                       41  	.PUBLIC _swusb_io_init
+00000000                       42  	.PUBLIC _swusb_io_is_enabled
+00000000                       43  	.PUBLIC _swusb_io_enable
+00000000                       44  	.PUBLIC _swusb_io_disable
+00000000                       45  	.PUBLIC _swusb_io_clear_irq
+00000000                       46  
+00000000                       47  	.SECTION .textf,TEXTF
+00000000                       48  	.TYPE _swusb_io_init,function,.LFE1-_swusb_io_init
+00000000                       49  _swusb_io_init:
+00000000                       50  	.STACK _swusb_io_init = 4
+00000000                       51  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 10
+00000000 5A08FE                52  	and 0xFFF08, #0xFE
+00000003 51FE                  53  	mov a, #0xFE
+00000005                       54  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 11
+00000005 5F28FF                55  	and a, !0xFF28
+00000008 9E28                  56  	mov 0xFFF28, a
+0000000A 3425FF                57  	movw de, #0xFF25
+0000000D                       58  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 14
+0000000D 89                    59  	mov a, [de]
+0000000E 719A                  60  	set1 a.1
+00000010 99                    61  	mov [de], a
+00000011                       62  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 17
+00000011 89                    63  	mov a, [de]
+00000012 718A                  64  	set1 a.0
+00000014 99                    65  	mov [de], a
+00000015                       66  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 20
+00000015 713BEC                67  	clr1 0xFFFEC.3
+00000018                       68  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 21
+00000018 713BE8                69  	clr1 0xFFFE8.3
+0000001B                       70  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 22
+0000001B 711B38                71  	clr1 0xFFF38.1
+0000001E                       72  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 23
+0000001E 711A39                73  	set1 0xFFF39.1
+00000021 D7                    74  	ret
+00000022                       75  .LFE1:
+00000022                       76  	.TYPE _swusb_io_is_enabled,function,.LFE2-_swusb_io_is_enabled
+00000022                       77  _swusb_io_is_enabled:
+00000022                       78  	.STACK _swusb_io_is_enabled = 4
+00000022                       79  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 26
+00000022 E1                    80  	oneb a
+00000023                       81  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 28
+00000023 5B08                  82  	and a, 0xFFF08
+00000025                       83  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 29
+00000025 D7                    84  	ret
+00000026                       85  .LFE2:
+00000026                       86  	.TYPE _swusb_io_enable,function,.LFE3-_swusb_io_enable
+00000026                       87  _swusb_io_enable:
+00000026                       88  	.STACK _swusb_io_enable = 4
+00000026                       89  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 34
+00000026 713BE4                90  	clr1 0xFFFE4.3
+00000029                       91  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 37
+00000029 6A0801                92  	or 0xFFF08, #0x01
+0000002C D7                    93  	ret
+0000002D                       94  .LFE3:
+0000002D                       95  	.TYPE _swusb_io_disable,function,.LFE4-_swusb_io_disable
+0000002D                       96  _swusb_io_disable:
+0000002D                       97  	.STACK _swusb_io_disable = 4
+0000002D                       98  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 43
+0000002D 713BE4                99  	clr1 0xFFFE4.3
+00000030                      100  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 46
+00000030 5A08FE               101  	and 0xFFF08, #0xFE
+00000033 D7                   102  	ret
+00000034                      103  .LFE4:
+00000034                      104  	.TYPE _swusb_io_clear_irq,function,.LFE5-_swusb_io_clear_irq
+00000034                      105  _swusb_io_clear_irq:
+00000034                      106  	.STACK _swusb_io_clear_irq = 4
+00000034                      107  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_with_Billboard/Billboard/swusb_io.c", 51
+00000034 713BE0               108  	clr1 0xFFFE0.3
+00000037 D7                   109  	ret
+00000038                      110  .LFE5:
+
+Section List
+Attr     Size                Name
+
+TEXTF                56 (00000038) .textf
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\swusb_io.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Billboard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Obj\Release\swusb_io.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\Obj\Release\swusb_io.asm 
+

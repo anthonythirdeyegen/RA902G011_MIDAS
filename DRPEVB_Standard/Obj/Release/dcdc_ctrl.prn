@@ -1,0 +1,996 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   ..\..\Core\r_systeminit.c
+00000000                        5  #@   ..\..\PDC\smbm_ctrl.c
+00000000                        6  #@   ..\..\PDC\user_timer.c
+00000000                        7  #@   r_main.c
+00000000                        8  #@   R_Main_UserInit.c
+00000000                        9  #@   PDC\dcdc_ctrl.c
+00000000                       10  #@   PDC\led_ctrl.c
+00000000                       11  #@   PDC\sw_ctrl.c
+00000000                       12  #@   PDC\user_main.c
+00000000                       13  #@   PDC\user_main_protection.c
+00000000                       14  #@   PDC\subdev\isl95338.c
+00000000                       15  #@   PDC\subdev\subdev_ctrl.c
+00000000                       16  #@   pd_defs.c
+00000000                       17  #@   -cpu=S3
+00000000                       18  #@   -obj_path=Obj\Release
+00000000                       19  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       20  #@   -g
+00000000                       21  #@   -Osame_code
+00000000                       22  #@   -I PDC\subdev
+00000000                       23  #@   -I PDC
+00000000                       24  #@   -I .
+00000000                       25  #@   -I ..\..\Core
+00000000                       26  #@   -I ..\..\PDC
+00000000                       27  #@   -I ..\..\PDC\Lib
+00000000                       28  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       29  #@   -asm_path=Obj\Release
+00000000                       30  #@   -asmopt=-prn_path=Obj\Release
+00000000                       31  #@   -c
+00000000                       32  #@   -MAKEUD=Obj\Release
+00000000                       33  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_f77933be31b343fd93ec8db906f6b563gqip02wt.1wf
+00000000                       34  #@  compiled at Tue May 06 10:50:36 2025
+00000000                       35  
+00000000                       36  	.EXTERN _gSubdevInfo
+00000000                       37  	.EXTERN _gSubDevErr
+00000000                       38  	.PUBLIC _gDCInfo
+00000000                       39  	.PUBLIC _dcdc_ctrl
+00000000                       40  	.PUBLIC _dcdc_init
+00000000                       41  	.PUBLIC _isl_s0
+00000000                       42  	.PUBLIC _isl_s1
+00000000                       43  	.PUBLIC _isl_s1_off_sq
+00000000                       44  	.PUBLIC _isl_s1_on_sq
+00000000                       45  	.PUBLIC _isl_s1_chg_sq
+00000000                       46  	.PUBLIC _isl_s1_snk_off_sq
+00000000                       47  	.PUBLIC _isl_s1_snk_on_sq
+00000000                       48  	.PUBLIC _isl_s1_snk_chg_sq
+00000000                       49  	.EXTERN _pdc_get_req_volt
+00000000                       50  	.PUBLIC _isl_s1_clr_sq
+00000000                       51  	.PUBLIC _isl_s1_get_info
+00000000                       52  	.EXTERN _pdc_get_status
+00000000                       53  
+00000000                       54  	.SECTION .textf,TEXTF
+00000000                       55  	.TYPE _dcdc_ctrl,function,.LFE1-_dcdc_ctrl
+00000000                       56  _dcdc_ctrl:
+00000000                       57  	.STACK _dcdc_ctrl = 4
+00000000                       58  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 88
+00000000 8F0000                59  	mov a, !LOWW(_gSubdevInfo)
+00000003 318E                  60  	shrw ax, 8+0x00000
+00000005 311E                  61  	shrw ax, 0x01
+00000007 DC00                  62  	bc $.BB@LABEL@1_4
+00000009                       63  .BB@LABEL@1_1:	; if_break_bb
+00000009 510F                  64  	mov a, #0x0F
+0000000B                       65  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 92
+0000000B 5F0000                66  	and a, !LOWW(_gDCInfo+0x00005)
+0000000E D1                    67  	cmp0 a
+0000000F DD00                  68  	bz $.BB@LABEL@1_5
+00000011                       69  .BB@LABEL@1_2:	; if_break_bb
+00000011 91                    70  	dec a
+00000012 61F8                  71  	sknz
+00000014                       72  .BB@LABEL@1_3:	; switch_clause_bb9
+00000014                       73  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 97
+00000014 FE0000                74  	call $!_isl_s1
+00000017                       75  .BB@LABEL@1_4:	; return
+00000017                       76  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 103
+00000017 D7                    77  	ret
+00000018                       78  .BB@LABEL@1_5:	; switch_clause_bb
+00000018                       79  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 94
+00000018 FE0000                80  	call $!_isl_s0
+0000001B D7                    81  	ret
+0000001C                       82  .LFE1:
+0000001C                       83  	.TYPE _dcdc_init,function,.LFE2-_dcdc_init
+0000001C                       84  _dcdc_init:
+0000001C                       85  	.STACK _dcdc_init = 4
+0000001C                       86  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 105
+0000001C F6                    87  	clrw ax
+0000001D                       88  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 107
+0000001D BF0000                89  	movw !LOWW(_gDCInfo), ax
+00000020                       90  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 108
+00000020 BF0000                91  	movw !LOWW(_gDCInfo+0x00002), ax
+00000023                       92  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 109
+00000023 BF0000                93  	movw !LOWW(_gDCInfo+0x00004), ax
+00000026 510F                  94  	mov a, #0x0F
+00000028                       95  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 110
+00000028 5F0000                96  	and a, !LOWW(_gDCInfo+0x00005)
+0000002B 9F0000                97  	mov !LOWW(_gDCInfo+0x00005), a
+0000002E                       98  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 112
+0000002E D7                    99  	ret
+0000002F                      100  .LFE2:
+0000002F                      101  	.TYPE _isl_s0,function,.LFE3-_isl_s0
+0000002F                      102  _isl_s0:
+0000002F                      103  	.STACK _isl_s0 = 4
+0000002F                      104  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 117
+0000002F 8F0000               105  	mov a, !LOWW(_gSubDevErr)
+00000032 73                   106  	mov b, a
+00000033 318E                 107  	shrw ax, 8+0x00000
+00000035 311E                 108  	shrw ax, 0x01
+00000037 DE00                 109  	bnc $.BB@LABEL@3_2
+00000039                      110  .BB@LABEL@3_1:	; if_then_bb
+00000039 63                   111  	mov a, b
+0000003A                      112  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 118
+0000003A 718B                 113  	clr1 a.0
+0000003C 9F0000               114  	mov !LOWW(_gSubDevErr), a
+0000003F                      115  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 122
+0000003F F50000               116  	clrb !LOWW(_gDCInfo+0x00004)
+00000042                      117  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 123
+00000042 D7                   118  	ret
+00000043                      119  .BB@LABEL@3_2:	; if_break_bb
+00000043                      120  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 126
+00000043 8F0000               121  	mov a, !LOWW(_gDCInfo+0x00004)
+00000046 4C02                 122  	cmp a, #0x02
+00000048 DC00                 123  	bc $.BB@LABEL@3_10
+0000004A                      124  .BB@LABEL@3_3:	; if_break_bb
+0000004A 0CFE                 125  	add a, #0xFE
+0000004C D1                   126  	cmp0 a
+0000004D DD00                 127  	bz $.BB@LABEL@3_11
+0000004F                      128  .BB@LABEL@3_4:	; if_break_bb
+0000004F 91                   129  	dec a
+00000050 D1                   130  	cmp0 a
+00000051 DD00                 131  	bz $.BB@LABEL@3_12
+00000053                      132  .BB@LABEL@3_5:	; if_break_bb
+00000053 91                   133  	dec a
+00000054 D1                   134  	cmp0 a
+00000055 DD00                 135  	bz $.BB@LABEL@3_13
+00000057                      136  .BB@LABEL@3_6:	; if_break_bb
+00000057 91                   137  	dec a
+00000058 D1                   138  	cmp0 a
+00000059 DD00                 139  	bz $.BB@LABEL@3_15
+0000005B                      140  .BB@LABEL@3_7:	; if_break_bb
+0000005B 91                   141  	dec a
+0000005C DF00                 142  	bnz $.BB@LABEL@3_9
+0000005E                      143  .BB@LABEL@3_8:	; switch_clause_bb53
+0000005E 63                   144  	mov a, b
+0000005F                      145  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 154
+0000005F 718B                 146  	clr1 a.0
+00000061 9F0000               147  	mov !LOWW(_gSubDevErr), a
+00000064                      148  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 155
+00000064 71380000             149  	clr1 !LOWW(_gDCInfo+0x00003).3
+00000068 E1                   150  	oneb a
+00000069                      151  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 156
+00000069 6F0000               152  	or a, !LOWW(_gDCInfo+0x00005)
+0000006C 5CF1                 153  	and a, #0xF1
+0000006E 9F0000               154  	mov !LOWW(_gDCInfo+0x00005), a
+00000071                      155  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 157
+00000071 F50000               156  	clrb !LOWW(_gDCInfo+0x00004)
+00000074 5110                 157  	mov a, #0x10
+00000076                      158  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 158
+00000076 6F0000               159  	or a, !LOWW(_gDCInfo+0x00005)
+00000079 5C1F                 160  	and a, #0x1F
+0000007B 9F0000               161  	mov !LOWW(_gDCInfo+0x00005), a
+0000007E                      162  .BB@LABEL@3_9:	; return
+0000007E                      163  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 165
+0000007E D7                   164  	ret
+0000007F                      165  .BB@LABEL@3_10:	; switch_clause_bb
+0000007F                      166  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 129
+0000007F E50000               167  	oneb !LOWW(_gDCInfo+0x0000E)
+00000082                      168  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 130
+00000082 CF000002             169  	mov !LOWW(_gDCInfo+0x00004), #0x02
+00000086 EF00                 170  	br $.BB@LABEL@3_14
+00000088                      171  .BB@LABEL@3_11:	; switch_clause_bb21
+00000088                      172  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 134
+00000088 CF000002             173  	mov !LOWW(_gDCInfo+0x0000E), #0x02
+0000008C                      174  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 135
+0000008C CF000003             175  	mov !LOWW(_gDCInfo+0x00004), #0x03
+00000090 EF00                 176  	br $.BB@LABEL@3_14
+00000092                      177  .BB@LABEL@3_12:	; switch_clause_bb29
+00000092                      178  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 139
+00000092 CF000003             179  	mov !LOWW(_gDCInfo+0x0000E), #0x03
+00000096                      180  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 140
+00000096 CF000004             181  	mov !LOWW(_gDCInfo+0x00004), #0x04
+0000009A EF00                 182  	br $.BB@LABEL@3_14
+0000009C                      183  .BB@LABEL@3_13:	; switch_clause_bb37
+0000009C                      184  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 144
+0000009C CF000004             185  	mov !LOWW(_gDCInfo+0x0000E), #0x04
+000000A0                      186  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 145
+000000A0 CF000005             187  	mov !LOWW(_gDCInfo+0x00004), #0x05
+000000A4                      188  .BB@LABEL@3_14:	; switch_clause_bb37
+000000A4 71000000             189  	set1 !LOWW(_gSubdevInfo).0
+000000A8                      190  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 165
+000000A8 D7                   191  	ret
+000000A9                      192  .BB@LABEL@3_15:	; switch_clause_bb45
+000000A9                      193  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 149
+000000A9 CF000005             194  	mov !LOWW(_gDCInfo+0x0000E), #0x05
+000000AD                      195  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 150
+000000AD CF000006             196  	mov !LOWW(_gDCInfo+0x00004), #0x06
+000000B1 EF00                 197  	br $.BB@LABEL@3_14
+000000B3                      198  .LFE3:
+000000B3                      199  	.TYPE _isl_s1,function,.LFE4-_isl_s1
+000000B3                      200  _isl_s1:
+000000B3                      201  	.STACK _isl_s1 = 4
+000000B3                      202  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 169
+000000B3 8F0000               203  	mov a, !LOWW(_gDCInfo)
+000000B6 70                   204  	mov x, a
+000000B7 310500               205  	bf a.0, $.BB@LABEL@4_5
+000000BA                      206  .BB@LABEL@4_1:	; if_then_bb
+000000BA                      207  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 170
+000000BA AF0000               208  	movw ax, !LOWW(_gDCInfo)
+000000BD 440100               209  	cmpw ax, #0x0001
+000000C0 DF00                 210  	bnz $.BB@LABEL@4_3
+000000C2                      211  .BB@LABEL@4_2:	; if_then_bb10
+000000C2                      212  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 171
+000000C2 FE0000               213  	call $!_isl_s1_off_sq
+000000C5 D7                   214  	ret
+000000C6                      215  .BB@LABEL@4_3:	; if_else_bb
+000000C6 E1                   216  	oneb a
+000000C7                      217  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 174
+000000C7 6F0000               218  	or a, !LOWW(_gDCInfo+0x00005)
+000000CA 5CF1                 219  	and a, #0xF1
+000000CC 9F0000               220  	mov !LOWW(_gDCInfo+0x00005), a
+000000CF E6                   221  	onew ax
+000000D0                      222  .BB@LABEL@4_4:	; if_else_bb
+000000D0 F50000               223  	clrb !LOWW(_gDCInfo+0x00004)
+000000D3 BF0000               224  	movw !LOWW(_gDCInfo), ax
+000000D6                      225  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 208
+000000D6 D7                   226  	ret
+000000D7                      227  .BB@LABEL@4_5:	; if_else_bb17
+000000D7                      228  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 179
+000000D7 311500               229  	bf a.1, $.BB@LABEL@4_7
+000000DA                      230  .BB@LABEL@4_6:	; if_then_bb26
+000000DA                      231  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 180
+000000DA FE0000               232  	call $!_isl_s1_on_sq
+000000DD D7                   233  	ret
+000000DE                      234  .BB@LABEL@4_7:	; if_else_bb27
+000000DE                      235  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 182
+000000DE 312500               236  	bf a.2, $.BB@LABEL@4_9
+000000E1                      237  .BB@LABEL@4_8:	; if_then_bb35
+000000E1                      238  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 183
+000000E1 FE0000               239  	call $!_isl_s1_chg_sq
+000000E4 D7                   240  	ret
+000000E5                      241  .BB@LABEL@4_9:	; if_else_bb36
+000000E5                      242  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 185
+000000E5 313500               243  	bf a.3, $.BB@LABEL@4_13
+000000E8                      244  .BB@LABEL@4_10:	; if_then_bb44
+000000E8                      245  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 186
+000000E8 AF0000               246  	movw ax, !LOWW(_gDCInfo)
+000000EB 440800               247  	cmpw ax, #0x0008
+000000EE DF00                 248  	bnz $.BB@LABEL@4_12
+000000F0                      249  .BB@LABEL@4_11:	; if_then_bb49
+000000F0                      250  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 187
+000000F0 FE0000               251  	call $!_isl_s1_snk_off_sq
+000000F3 D7                   252  	ret
+000000F4                      253  .BB@LABEL@4_12:	; if_else_bb50
+000000F4 E1                   254  	oneb a
+000000F5                      255  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 190
+000000F5 6F0000               256  	or a, !LOWW(_gDCInfo+0x00005)
+000000F8 5CF1                 257  	and a, #0xF1
+000000FA 9F0000               258  	mov !LOWW(_gDCInfo+0x00005), a
+000000FD 300800               259  	movw ax, #0x0008
+00000100 EF00                 260  	br $.BB@LABEL@4_4
+00000102                      261  .BB@LABEL@4_13:	; if_else_bb58
+00000102                      262  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 195
+00000102 315500               263  	bf a.5, $.BB@LABEL@4_15
+00000105                      264  .BB@LABEL@4_14:	; if_then_bb66
+00000105                      265  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 196
+00000105 FE0000               266  	call $!_isl_s1_snk_on_sq
+00000108 D7                   267  	ret
+00000109                      268  .BB@LABEL@4_15:	; if_else_bb67
+00000109                      269  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 198
+00000109 316500               270  	bf a.6, $.BB@LABEL@4_17
+0000010C                      271  .BB@LABEL@4_16:	; if_then_bb75
+0000010C                      272  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 199
+0000010C FE0000               273  	call $!_isl_s1_snk_chg_sq
+0000010F D7                   274  	ret
+00000110                      275  .BB@LABEL@4_17:	; if_else_bb76
+00000110                      276  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 201
+00000110 8F0000               277  	mov a, !LOWW(_gDCInfo+0x00001)
+00000113 310500               278  	bf a.0, $.BB@LABEL@4_19
+00000116                      279  .BB@LABEL@4_18:	; if_then_bb84
+00000116                      280  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 202
+00000116 718B                 281  	clr1 a.0
+00000118 9F0000               282  	mov !LOWW(_gDCInfo+0x00001), a
+0000011B D7                   283  	ret
+0000011C                      284  .BB@LABEL@4_19:	; if_else_bb88
+0000011C 60                   285  	mov a, x
+0000011D 317500               286  	bf a.7, $.BB@LABEL@4_21
+00000120                      287  .BB@LABEL@4_20:	; if_then_bb95
+00000120                      288  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 205
+00000120 FE0000               289  	call $!_isl_s1_get_info
+00000123                      290  .BB@LABEL@4_21:	; return
+00000123                      291  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 208
+00000123 D7                   292  	ret
+00000124                      293  .LFE4:
+00000124                      294  	.TYPE _isl_s1_off_sq,function,.LFE5-_isl_s1_off_sq
+00000124                      295  _isl_s1_off_sq:
+00000124                      296  	.STACK _isl_s1_off_sq = 4
+00000124                      297  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 212
+00000124 8F0000               298  	mov a, !LOWW(_gSubDevErr)
+00000127 73                   299  	mov b, a
+00000128 318E                 300  	shrw ax, 8+0x00000
+0000012A 311E                 301  	shrw ax, 0x01
+0000012C DE00                 302  	bnc $.BB@LABEL@5_2
+0000012E                      303  .BB@LABEL@5_1:	; if_then_bb
+0000012E 63                   304  	mov a, b
+0000012F                      305  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 213
+0000012F 718B                 306  	clr1 a.0
+00000131 9F0000               307  	mov !LOWW(_gSubDevErr), a
+00000134                      308  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 214
+00000134 71300000             309  	set1 !LOWW(_gDCInfo+0x00003).3
+00000138                      310  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 215
+00000138 71080000             311  	clr1 !LOWW(_gDCInfo).0
+0000013C                      312  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 217
+0000013C F50000               313  	clrb !LOWW(_gDCInfo+0x00005)
+0000013F EF00                 314  	br $.BB@LABEL@5_5
+00000141                      315  .BB@LABEL@5_2:	; if_break_bb
+00000141                      316  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 222
+00000141 8F0000               317  	mov a, !LOWW(_gDCInfo+0x00004)
+00000144 D1                   318  	cmp0 a
+00000145 DD00                 319  	bz $.BB@LABEL@5_7
+00000147                      320  .BB@LABEL@5_3:	; if_break_bb
+00000147 4C0A                 321  	cmp a, #0x0A
+00000149 DF00                 322  	bnz $.BB@LABEL@5_6
+0000014B                      323  .BB@LABEL@5_4:	; switch_clause_bb33
+0000014B                      324  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 229
+0000014B 71080000             325  	clr1 !LOWW(_gDCInfo).0
+0000014F                      326  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 230
+0000014F 71380000             327  	clr1 !LOWW(_gDCInfo+0x00003).3
+00000153 5110                 328  	mov a, #0x10
+00000155                      329  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 231
+00000155 6F0000               330  	or a, !LOWW(_gDCInfo+0x00005)
+00000158 5C1F                 331  	and a, #0x1F
+0000015A 9F0000               332  	mov !LOWW(_gDCInfo+0x00005), a
+0000015D                      333  .BB@LABEL@5_5:	; switch_clause_bb33
+0000015D F50000               334  	clrb !LOWW(_gDCInfo+0x00004)
+00000160                      335  .BB@LABEL@5_6:	; return
+00000160                      336  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 240
+00000160 D7                   337  	ret
+00000161                      338  .BB@LABEL@5_7:	; switch_clause_bb
+00000161                      339  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 224
+00000161 E50000               340  	oneb !LOWW(_gDCInfo+0x0000E)
+00000164                      341  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 225
+00000164 CF00000A             342  	mov !LOWW(_gDCInfo+0x00004), #0x0A
+00000168                      343  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 226
+00000168 71000000             344  	set1 !LOWW(_gSubdevInfo).0
+0000016C D7                   345  	ret
+0000016D                      346  .LFE5:
+0000016D                      347  	.TYPE _isl_s1_on_sq,function,.LFE6-_isl_s1_on_sq
+0000016D                      348  _isl_s1_on_sq:
+0000016D                      349  	.STACK _isl_s1_on_sq = 4
+0000016D                      350  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 244
+0000016D 8F0000               351  	mov a, !LOWW(_gSubDevErr)
+00000170 73                   352  	mov b, a
+00000171 318E                 353  	shrw ax, 8+0x00000
+00000173 311E                 354  	shrw ax, 0x01
+00000175 DE00                 355  	bnc $.BB@LABEL@6_2
+00000177                      356  .BB@LABEL@6_1:	; if_then_bb
+00000177 63                   357  	mov a, b
+00000178                      358  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 245
+00000178 718B                 359  	clr1 a.0
+0000017A 9F0000               360  	mov !LOWW(_gSubDevErr), a
+0000017D                      361  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 246
+0000017D 71300000             362  	set1 !LOWW(_gDCInfo+0x00003).3
+00000181                      363  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 247
+00000181 71180000             364  	clr1 !LOWW(_gDCInfo).1
+00000185                      365  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 249
+00000185 F50000               366  	clrb !LOWW(_gDCInfo+0x00005)
+00000188 EF00                 367  	br $.BB@LABEL@6_13
+0000018A                      368  .BB@LABEL@6_2:	; if_break_bb
+0000018A                      369  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 254
+0000018A 8F0000               370  	mov a, !LOWW(_gDCInfo+0x00004)
+0000018D D1                   371  	cmp0 a
+0000018E DD00                 372  	bz $.BB@LABEL@6_15
+00000190                      373  .BB@LABEL@6_3:	; if_break_bb
+00000190 0CEC                 374  	add a, #0xEC
+00000192 D1                   375  	cmp0 a
+00000193 DD00                 376  	bz $.BB@LABEL@6_16
+00000195                      377  .BB@LABEL@6_4:	; if_break_bb
+00000195 91                   378  	dec a
+00000196 D1                   379  	cmp0 a
+00000197 DD00                 380  	bz $.BB@LABEL@6_17
+00000199                      381  .BB@LABEL@6_5:	; if_break_bb
+00000199 91                   382  	dec a
+0000019A D1                   383  	cmp0 a
+0000019B DD00                 384  	bz $.BB@LABEL@6_18
+0000019D                      385  .BB@LABEL@6_6:	; if_break_bb
+0000019D 91                   386  	dec a
+0000019E D1                   387  	cmp0 a
+0000019F DD00                 388  	bz $.BB@LABEL@6_19
+000001A1                      389  .BB@LABEL@6_7:	; if_break_bb
+000001A1 91                   390  	dec a
+000001A2 D1                   391  	cmp0 a
+000001A3 DD00                 392  	bz $.BB@LABEL@6_20
+000001A5                      393  .BB@LABEL@6_8:	; if_break_bb
+000001A5 91                   394  	dec a
+000001A6 D1                   395  	cmp0 a
+000001A7 DD00                 396  	bz $.BB@LABEL@6_21
+000001A9                      397  .BB@LABEL@6_9:	; if_break_bb
+000001A9 91                   398  	dec a
+000001AA D1                   399  	cmp0 a
+000001AB DD00                 400  	bz $.BB@LABEL@6_22
+000001AD                      401  .BB@LABEL@6_10:	; if_break_bb
+000001AD 91                   402  	dec a
+000001AE D1                   403  	cmp0 a
+000001AF DD00                 404  	bz $.BB@LABEL@6_24
+000001B1                      405  .BB@LABEL@6_11:	; if_break_bb
+000001B1 91                   406  	dec a
+000001B2 DF00                 407  	bnz $.BB@LABEL@6_14
+000001B4                      408  .BB@LABEL@6_12:	; switch_clause_bb97
+000001B4                      409  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 305
+000001B4 71180000             410  	clr1 !LOWW(_gDCInfo).1
+000001B8                      411  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 306
+000001B8 71380000             412  	clr1 !LOWW(_gDCInfo+0x00003).3
+000001BC 5120                 413  	mov a, #0x20
+000001BE                      414  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 307
+000001BE 6F0000               415  	or a, !LOWW(_gDCInfo+0x00005)
+000001C1 5C2F                 416  	and a, #0x2F
+000001C3 9F0000               417  	mov !LOWW(_gDCInfo+0x00005), a
+000001C6                      418  .BB@LABEL@6_13:	; switch_clause_bb97
+000001C6 F50000               419  	clrb !LOWW(_gDCInfo+0x00004)
+000001C9                      420  .BB@LABEL@6_14:	; return
+000001C9                      421  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 316
+000001C9 D7                   422  	ret
+000001CA                      423  .BB@LABEL@6_15:	; switch_clause_bb
+000001CA                      424  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 256
+000001CA CF000002             425  	mov !LOWW(_gDCInfo+0x0000E), #0x02
+000001CE                      426  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 257
+000001CE CF000014             427  	mov !LOWW(_gDCInfo+0x00004), #0x14
+000001D2 EF00                 428  	br $.BB@LABEL@6_23
+000001D4                      429  .BB@LABEL@6_16:	; switch_clause_bb33
+000001D4                      430  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 261
+000001D4 CF000003             431  	mov !LOWW(_gDCInfo+0x0000E), #0x03
+000001D8                      432  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 262
+000001D8 CF000015             433  	mov !LOWW(_gDCInfo+0x00004), #0x15
+000001DC EF00                 434  	br $.BB@LABEL@6_23
+000001DE                      435  .BB@LABEL@6_17:	; switch_clause_bb41
+000001DE                      436  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 266
+000001DE CF000004             437  	mov !LOWW(_gDCInfo+0x0000E), #0x04
+000001E2                      438  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 267
+000001E2 CF000016             439  	mov !LOWW(_gDCInfo+0x00004), #0x16
+000001E6 EF00                 440  	br $.BB@LABEL@6_23
+000001E8                      441  .BB@LABEL@6_18:	; switch_clause_bb49
+000001E8                      442  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 271
+000001E8 CF000005             443  	mov !LOWW(_gDCInfo+0x0000E), #0x05
+000001EC                      444  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 272
+000001EC CF000017             445  	mov !LOWW(_gDCInfo+0x00004), #0x17
+000001F0 EF00                 446  	br $.BB@LABEL@6_23
+000001F2                      447  .BB@LABEL@6_19:	; switch_clause_bb57
+000001F2                      448  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 276
+000001F2 CF000007             449  	mov !LOWW(_gDCInfo+0x0000E), #0x07
+000001F6                      450  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 277
+000001F6 CF000018             451  	mov !LOWW(_gDCInfo+0x00004), #0x18
+000001FA EF00                 452  	br $.BB@LABEL@6_23
+000001FC                      453  .BB@LABEL@6_20:	; switch_clause_bb65
+000001FC                      454  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 281
+000001FC CF000008             455  	mov !LOWW(_gDCInfo+0x0000E), #0x08
+00000200                      456  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 282
+00000200 CF000019             457  	mov !LOWW(_gDCInfo+0x00004), #0x19
+00000204 EF00                 458  	br $.BB@LABEL@6_23
+00000206                      459  .BB@LABEL@6_21:	; switch_clause_bb73
+00000206                      460  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 289
+00000206 CF000009             461  	mov !LOWW(_gDCInfo+0x0000E), #0x09
+0000020A                      462  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 290
+0000020A CF00001A             463  	mov !LOWW(_gDCInfo+0x00004), #0x1A
+0000020E EF00                 464  	br $.BB@LABEL@6_23
+00000210                      465  .BB@LABEL@6_22:	; switch_clause_bb81
+00000210                      466  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 295
+00000210 CF00000A             467  	mov !LOWW(_gDCInfo+0x0000E), #0x0A
+00000214                      468  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 296
+00000214 CF00001B             469  	mov !LOWW(_gDCInfo+0x00004), #0x1B
+00000218                      470  .BB@LABEL@6_23:	; switch_clause_bb81
+00000218 71000000             471  	set1 !LOWW(_gSubdevInfo).0
+0000021C                      472  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 316
+0000021C D7                   473  	ret
+0000021D                      474  .BB@LABEL@6_24:	; switch_clause_bb89
+0000021D                      475  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 300
+0000021D CF000011             476  	mov !LOWW(_gDCInfo+0x0000E), #0x11
+00000221                      477  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 301
+00000221 CF00001C             478  	mov !LOWW(_gDCInfo+0x00004), #0x1C
+00000225 EF00                 479  	br $.BB@LABEL@6_23
+00000227                      480  .LFE6:
+00000227                      481  	.TYPE _isl_s1_chg_sq,function,.LFE7-_isl_s1_chg_sq
+00000227                      482  _isl_s1_chg_sq:
+00000227                      483  	.STACK _isl_s1_chg_sq = 4
+00000227                      484  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 320
+00000227 8F0000               485  	mov a, !LOWW(_gSubDevErr)
+0000022A 73                   486  	mov b, a
+0000022B 318E                 487  	shrw ax, 8+0x00000
+0000022D 311E                 488  	shrw ax, 0x01
+0000022F DE00                 489  	bnc $.BB@LABEL@7_2
+00000231                      490  .BB@LABEL@7_1:	; if_then_bb
+00000231 63                   491  	mov a, b
+00000232                      492  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 321
+00000232 718B                 493  	clr1 a.0
+00000234 9F0000               494  	mov !LOWW(_gSubDevErr), a
+00000237                      495  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 322
+00000237 71300000             496  	set1 !LOWW(_gDCInfo+0x00003).3
+0000023B                      497  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 323
+0000023B 71280000             498  	clr1 !LOWW(_gDCInfo).2
+0000023F                      499  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 325
+0000023F F50000               500  	clrb !LOWW(_gDCInfo+0x00005)
+00000242 EF00                 501  	br $.BB@LABEL@7_8
+00000244                      502  .BB@LABEL@7_2:	; if_break_bb
+00000244                      503  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 330
+00000244 8F0000               504  	mov a, !LOWW(_gDCInfo+0x00004)
+00000247 D1                   505  	cmp0 a
+00000248 DD00                 506  	bz $.BB@LABEL@7_10
+0000024A                      507  .BB@LABEL@7_3:	; if_break_bb
+0000024A 0CE2                 508  	add a, #0xE2
+0000024C D1                   509  	cmp0 a
+0000024D DD00                 510  	bz $.BB@LABEL@7_11
+0000024F                      511  .BB@LABEL@7_4:	; if_break_bb
+0000024F 91                   512  	dec a
+00000250 D1                   513  	cmp0 a
+00000251 DD00                 514  	bz $.BB@LABEL@7_12
+00000253                      515  .BB@LABEL@7_5:	; if_break_bb
+00000253 91                   516  	dec a
+00000254 D1                   517  	cmp0 a
+00000255 DD00                 518  	bz $.BB@LABEL@7_14
+00000257                      519  .BB@LABEL@7_6:	; if_break_bb
+00000257 91                   520  	dec a
+00000258 DF00                 521  	bnz $.BB@LABEL@7_9
+0000025A                      522  .BB@LABEL@7_7:	; switch_clause_bb57
+0000025A                      523  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 356
+0000025A 71280000             524  	clr1 !LOWW(_gDCInfo).2
+0000025E                      525  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 357
+0000025E 71380000             526  	clr1 !LOWW(_gDCInfo+0x00003).3
+00000262                      527  .BB@LABEL@7_8:	; switch_clause_bb57
+00000262 F50000               528  	clrb !LOWW(_gDCInfo+0x00004)
+00000265                      529  .BB@LABEL@7_9:	; return
+00000265                      530  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 367
+00000265 D7                   531  	ret
+00000266                      532  .BB@LABEL@7_10:	; switch_clause_bb
+00000266                      533  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 332
+00000266 CF000007             534  	mov !LOWW(_gDCInfo+0x0000E), #0x07
+0000026A                      535  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 333
+0000026A CF00001E             536  	mov !LOWW(_gDCInfo+0x00004), #0x1E
+0000026E EF00                 537  	br $.BB@LABEL@7_13
+00000270                      538  .BB@LABEL@7_11:	; switch_clause_bb33
+00000270                      539  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 337
+00000270 CF000008             540  	mov !LOWW(_gDCInfo+0x0000E), #0x08
+00000274                      541  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 338
+00000274 CF00001F             542  	mov !LOWW(_gDCInfo+0x00004), #0x1F
+00000278 EF00                 543  	br $.BB@LABEL@7_13
+0000027A                      544  .BB@LABEL@7_12:	; switch_clause_bb41
+0000027A                      545  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 345
+0000027A CF000009             546  	mov !LOWW(_gDCInfo+0x0000E), #0x09
+0000027E                      547  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 346
+0000027E CF000020             548  	mov !LOWW(_gDCInfo+0x00004), #0x20
+00000282                      549  .BB@LABEL@7_13:	; switch_clause_bb41
+00000282 71000000             550  	set1 !LOWW(_gSubdevInfo).0
+00000286                      551  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 367
+00000286 D7                   552  	ret
+00000287                      553  .BB@LABEL@7_14:	; switch_clause_bb49
+00000287                      554  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 351
+00000287 CF00000A             555  	mov !LOWW(_gDCInfo+0x0000E), #0x0A
+0000028B                      556  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 352
+0000028B CF000021             557  	mov !LOWW(_gDCInfo+0x00004), #0x21
+0000028F EF00                 558  	br $.BB@LABEL@7_13
+00000291                      559  .LFE7:
+00000291                      560  	.TYPE _isl_s1_snk_off_sq,function,.LFE8-_isl_s1_snk_off_sq
+00000291                      561  _isl_s1_snk_off_sq:
+00000291                      562  	.STACK _isl_s1_snk_off_sq = 4
+00000291                      563  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 372
+00000291 8F0000               564  	mov a, !LOWW(_gSubDevErr)
+00000294 73                   565  	mov b, a
+00000295 318E                 566  	shrw ax, 8+0x00000
+00000297 311E                 567  	shrw ax, 0x01
+00000299 DE00                 568  	bnc $.BB@LABEL@8_2
+0000029B                      569  .BB@LABEL@8_1:	; if_then_bb
+0000029B 63                   570  	mov a, b
+0000029C                      571  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 373
+0000029C 718B                 572  	clr1 a.0
+0000029E 9F0000               573  	mov !LOWW(_gSubDevErr), a
+000002A1                      574  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 374
+000002A1 71300000             575  	set1 !LOWW(_gDCInfo+0x00003).3
+000002A5                      576  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 375
+000002A5 71380000             577  	clr1 !LOWW(_gDCInfo).3
+000002A9                      578  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 377
+000002A9 F50000               579  	clrb !LOWW(_gDCInfo+0x00005)
+000002AC                      580  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 378
+000002AC F50000               581  	clrb !LOWW(_gDCInfo+0x00004)
+000002AF                      582  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 379
+000002AF D7                   583  	ret
+000002B0                      584  .BB@LABEL@8_2:	; if_break_bb
+000002B0                      585  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 382
+000002B0 8F0000               586  	mov a, !LOWW(_gDCInfo+0x00004)
+000002B3 D1                   587  	cmp0 a
+000002B4 DD00                 588  	bz $.BB@LABEL@8_7
+000002B6                      589  .BB@LABEL@8_3:	; if_break_bb
+000002B6 0CD8                 590  	add a, #0xD8
+000002B8 D1                   591  	cmp0 a
+000002B9 DD00                 592  	bz $.BB@LABEL@8_12
+000002BB                      593  .BB@LABEL@8_4:	; if_break_bb
+000002BB 91                   594  	dec a
+000002BC DF00                 595  	bnz $.BB@LABEL@8_6
+000002BE                      596  .BB@LABEL@8_5:	; switch_clause_bb49
+000002BE                      597  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 400
+000002BE 71380000             598  	clr1 !LOWW(_gDCInfo).3
+000002C2                      599  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 401
+000002C2 71380000             600  	clr1 !LOWW(_gDCInfo+0x00003).3
+000002C6                      601  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 402
+000002C6 F50000               602  	clrb !LOWW(_gDCInfo+0x00004)
+000002C9 5110                 603  	mov a, #0x10
+000002CB                      604  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 404
+000002CB 6F0000               605  	or a, !LOWW(_gDCInfo+0x00005)
+000002CE 5C1F                 606  	and a, #0x1F
+000002D0 9F0000               607  	mov !LOWW(_gDCInfo+0x00005), a
+000002D3                      608  .BB@LABEL@8_6:	; return
+000002D3                      609  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 410
+000002D3 D7                   610  	ret
+000002D4                      611  .BB@LABEL@8_7:	; switch_clause_bb
+000002D4                      612  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 384
+000002D4 FC000000             613  	call !!_pdc_get_req_volt
+000002D8                      614  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 385
+000002D8 6168                 615  	or a, x
+000002DA DF00                 616  	bnz $.BB@LABEL@8_9
+000002DC                      617  .BB@LABEL@8_8:	; switch_clause_bb.if_break_bb33_crit_edge
+000002DC 5105                 618  	mov a, #0x05
+000002DE EF00                 619  	br $.BB@LABEL@8_10
+000002E0                      620  .BB@LABEL@8_9:	; if_else_bb
+000002E0 5114                 621  	mov a, #0x14
+000002E2                      622  .BB@LABEL@8_10:	; if_break_bb33
+000002E2 9F0000               623  	mov !LOWW(_gDCInfo+0x0000E), a
+000002E5                      624  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 391
+000002E5 CF000028             625  	mov !LOWW(_gDCInfo+0x00004), #0x28
+000002E9                      626  .BB@LABEL@8_11:	; if_break_bb33
+000002E9 71000000             627  	set1 !LOWW(_gSubdevInfo).0
+000002ED                      628  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 410
+000002ED D7                   629  	ret
+000002EE                      630  .BB@LABEL@8_12:	; switch_clause_bb41
+000002EE                      631  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 395
+000002EE E50000               632  	oneb !LOWW(_gDCInfo+0x0000E)
+000002F1                      633  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 396
+000002F1 CF000029             634  	mov !LOWW(_gDCInfo+0x00004), #0x29
+000002F5 EF00                 635  	br $.BB@LABEL@8_11
+000002F7                      636  .LFE8:
+000002F7                      637  	.TYPE _isl_s1_snk_on_sq,function,.LFE9-_isl_s1_snk_on_sq
+000002F7                      638  _isl_s1_snk_on_sq:
+000002F7                      639  	.STACK _isl_s1_snk_on_sq = 4
+000002F7                      640  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 414
+000002F7 8F0000               641  	mov a, !LOWW(_gSubDevErr)
+000002FA 73                   642  	mov b, a
+000002FB 318E                 643  	shrw ax, 8+0x00000
+000002FD 311E                 644  	shrw ax, 0x01
+000002FF DE00                 645  	bnc $.BB@LABEL@9_2
+00000301                      646  .BB@LABEL@9_1:	; if_then_bb
+00000301 63                   647  	mov a, b
+00000302                      648  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 415
+00000302 718B                 649  	clr1 a.0
+00000304 9F0000               650  	mov !LOWW(_gSubDevErr), a
+00000307                      651  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 416
+00000307 71300000             652  	set1 !LOWW(_gDCInfo+0x00003).3
+0000030B                      653  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 417
+0000030B 71580000             654  	clr1 !LOWW(_gDCInfo).5
+0000030F                      655  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 419
+0000030F F50000               656  	clrb !LOWW(_gDCInfo+0x00005)
+00000312                      657  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 420
+00000312 F50000               658  	clrb !LOWW(_gDCInfo+0x00004)
+00000315                      659  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 421
+00000315 D7                   660  	ret
+00000316                      661  .BB@LABEL@9_2:	; if_break_bb
+00000316                      662  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 424
+00000316 8F0000               663  	mov a, !LOWW(_gDCInfo+0x00004)
+00000319 D1                   664  	cmp0 a
+0000031A DD00                 665  	bz $.BB@LABEL@9_10
+0000031C                      666  .BB@LABEL@9_3:	; if_break_bb
+0000031C 0CCE                 667  	add a, #0xCE
+0000031E D1                   668  	cmp0 a
+0000031F DD00                 669  	bz $.BB@LABEL@9_11
+00000321                      670  .BB@LABEL@9_4:	; if_break_bb
+00000321 91                   671  	dec a
+00000322 D1                   672  	cmp0 a
+00000323 DD00                 673  	bz $.BB@LABEL@9_12
+00000325                      674  .BB@LABEL@9_5:	; if_break_bb
+00000325 91                   675  	dec a
+00000326 D1                   676  	cmp0 a
+00000327 DD00                 677  	bz $.BB@LABEL@9_13
+00000329                      678  .BB@LABEL@9_6:	; if_break_bb
+00000329 91                   679  	dec a
+0000032A D1                   680  	cmp0 a
+0000032B DD00                 681  	bz $.BB@LABEL@9_15
+0000032D                      682  .BB@LABEL@9_7:	; if_break_bb
+0000032D 91                   683  	dec a
+0000032E DF00                 684  	bnz $.BB@LABEL@9_9
+00000330                      685  .BB@LABEL@9_8:	; switch_clause_bb65
+00000330                      686  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 451
+00000330 71580000             687  	clr1 !LOWW(_gDCInfo).5
+00000334                      688  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 452
+00000334 71380000             689  	clr1 !LOWW(_gDCInfo+0x00003).3
+00000338                      690  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 453
+00000338 F50000               691  	clrb !LOWW(_gDCInfo+0x00004)
+0000033B 5110                 692  	mov a, #0x10
+0000033D                      693  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 455
+0000033D 6F0000               694  	or a, !LOWW(_gDCInfo+0x00005)
+00000340 5C1F                 695  	and a, #0x1F
+00000342 9F0000               696  	mov !LOWW(_gDCInfo+0x00005), a
+00000345                      697  .BB@LABEL@9_9:	; return
+00000345                      698  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 461
+00000345 D7                   699  	ret
+00000346                      700  .BB@LABEL@9_10:	; switch_clause_bb
+00000346                      701  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 426
+00000346 E50000               702  	oneb !LOWW(_gDCInfo+0x0000E)
+00000349                      703  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 427
+00000349 CF000032             704  	mov !LOWW(_gDCInfo+0x00004), #0x32
+0000034D EF00                 705  	br $.BB@LABEL@9_14
+0000034F                      706  .BB@LABEL@9_11:	; switch_clause_bb33
+0000034F                      707  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 431
+0000034F CF000002             708  	mov !LOWW(_gDCInfo+0x0000E), #0x02
+00000353                      709  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 432
+00000353 CF000033             710  	mov !LOWW(_gDCInfo+0x00004), #0x33
+00000357 EF00                 711  	br $.BB@LABEL@9_14
+00000359                      712  .BB@LABEL@9_12:	; switch_clause_bb41
+00000359                      713  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 436
+00000359 CF000003             714  	mov !LOWW(_gDCInfo+0x0000E), #0x03
+0000035D                      715  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 437
+0000035D CF000034             716  	mov !LOWW(_gDCInfo+0x00004), #0x34
+00000361 EF00                 717  	br $.BB@LABEL@9_14
+00000363                      718  .BB@LABEL@9_13:	; switch_clause_bb49
+00000363                      719  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 441
+00000363 CF000004             720  	mov !LOWW(_gDCInfo+0x0000E), #0x04
+00000367                      721  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 442
+00000367 CF000035             722  	mov !LOWW(_gDCInfo+0x00004), #0x35
+0000036B                      723  .BB@LABEL@9_14:	; switch_clause_bb49
+0000036B 71000000             724  	set1 !LOWW(_gSubdevInfo).0
+0000036F                      725  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 461
+0000036F D7                   726  	ret
+00000370                      727  .BB@LABEL@9_15:	; switch_clause_bb57
+00000370                      728  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 446
+00000370 CF000014             729  	mov !LOWW(_gDCInfo+0x0000E), #0x14
+00000374                      730  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 447
+00000374 CF000036             731  	mov !LOWW(_gDCInfo+0x00004), #0x36
+00000378 EF00                 732  	br $.BB@LABEL@9_14
+0000037A                      733  .LFE9:
+0000037A                      734  	.TYPE _isl_s1_snk_chg_sq,function,.LFE10-_isl_s1_snk_chg_sq
+0000037A                      735  _isl_s1_snk_chg_sq:
+0000037A                      736  	.STACK _isl_s1_snk_chg_sq = 4
+0000037A                      737  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 465
+0000037A 8F0000               738  	mov a, !LOWW(_gSubDevErr)
+0000037D 73                   739  	mov b, a
+0000037E 318E                 740  	shrw ax, 8+0x00000
+00000380 311E                 741  	shrw ax, 0x01
+00000382 DE00                 742  	bnc $.BB@LABEL@10_2
+00000384                      743  .BB@LABEL@10_1:	; if_then_bb
+00000384 63                   744  	mov a, b
+00000385                      745  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 466
+00000385 718B                 746  	clr1 a.0
+00000387 9F0000               747  	mov !LOWW(_gSubDevErr), a
+0000038A                      748  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 467
+0000038A 71300000             749  	set1 !LOWW(_gDCInfo+0x00003).3
+0000038E                      750  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 468
+0000038E 71680000             751  	clr1 !LOWW(_gDCInfo).6
+00000392                      752  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 470
+00000392 F50000               753  	clrb !LOWW(_gDCInfo+0x00005)
+00000395                      754  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 471
+00000395 F50000               755  	clrb !LOWW(_gDCInfo+0x00004)
+00000398                      756  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 472
+00000398 D7                   757  	ret
+00000399                      758  .BB@LABEL@10_2:	; if_break_bb
+00000399                      759  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 475
+00000399 8F0000               760  	mov a, !LOWW(_gDCInfo+0x00004)
+0000039C D1                   761  	cmp0 a
+0000039D DD00                 762  	bz $.BB@LABEL@10_11
+0000039F                      763  .BB@LABEL@10_3:	; if_break_bb
+0000039F 0CD9                 764  	add a, #0xD9
+000003A1 D1                   765  	cmp0 a
+000003A2 DD00                 766  	bz $.BB@LABEL@10_12
+000003A4                      767  .BB@LABEL@10_4:	; if_break_bb
+000003A4 91                   768  	dec a
+000003A5 D1                   769  	cmp0 a
+000003A6 DD00                 770  	bz $.BB@LABEL@10_13
+000003A8                      771  .BB@LABEL@10_5:	; if_break_bb
+000003A8 91                   772  	dec a
+000003A9 D1                   773  	cmp0 a
+000003AA DD00                 774  	bz $.BB@LABEL@10_14
+000003AC                      775  .BB@LABEL@10_6:	; if_break_bb
+000003AC 91                   776  	dec a
+000003AD D1                   777  	cmp0 a
+000003AE DD00                 778  	bz $.BB@LABEL@10_15
+000003B0                      779  .BB@LABEL@10_7:	; if_break_bb
+000003B0 91                   780  	dec a
+000003B1 D1                   781  	cmp0 a
+000003B2 DD00                 782  	bz $.BB@LABEL@10_17
+000003B4                      783  .BB@LABEL@10_8:	; if_break_bb
+000003B4 91                   784  	dec a
+000003B5 DF00                 785  	bnz $.BB@LABEL@10_10
+000003B7                      786  .BB@LABEL@10_9:	; switch_clause_bb73
+000003B7                      787  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 507
+000003B7 71680000             788  	clr1 !LOWW(_gDCInfo).6
+000003BB                      789  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 508
+000003BB 71380000             790  	clr1 !LOWW(_gDCInfo+0x00003).3
+000003BF                      791  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 509
+000003BF F50000               792  	clrb !LOWW(_gDCInfo+0x00004)
+000003C2 5130                 793  	mov a, #0x30
+000003C4                      794  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 511
+000003C4 6F0000               795  	or a, !LOWW(_gDCInfo+0x00005)
+000003C7 5C3F                 796  	and a, #0x3F
+000003C9 9F0000               797  	mov !LOWW(_gDCInfo+0x00005), a
+000003CC                      798  .BB@LABEL@10_10:	; return
+000003CC                      799  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 517
+000003CC D7                   800  	ret
+000003CD                      801  .BB@LABEL@10_11:	; switch_clause_bb
+000003CD                      802  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 477
+000003CD CF000015             803  	mov !LOWW(_gDCInfo+0x0000E), #0x15
+000003D1                      804  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 478
+000003D1 CF000027             805  	mov !LOWW(_gDCInfo+0x00004), #0x27
+000003D5 EF00                 806  	br $.BB@LABEL@10_16
+000003D7                      807  .BB@LABEL@10_12:	; switch_clause_bb33
+000003D7                      808  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 482
+000003D7 CF00000B             809  	mov !LOWW(_gDCInfo+0x0000E), #0x0B
+000003DB                      810  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 483
+000003DB CF000028             811  	mov !LOWW(_gDCInfo+0x00004), #0x28
+000003DF EF00                 812  	br $.BB@LABEL@10_16
+000003E1                      813  .BB@LABEL@10_13:	; switch_clause_bb41
+000003E1                      814  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 487
+000003E1 CF00000C             815  	mov !LOWW(_gDCInfo+0x0000E), #0x0C
+000003E5                      816  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 488
+000003E5 CF000029             817  	mov !LOWW(_gDCInfo+0x00004), #0x29
+000003E9 EF00                 818  	br $.BB@LABEL@10_16
+000003EB                      819  .BB@LABEL@10_14:	; switch_clause_bb49
+000003EB                      820  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 492
+000003EB CF00000D             821  	mov !LOWW(_gDCInfo+0x0000E), #0x0D
+000003EF                      822  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 493
+000003EF CF00002A             823  	mov !LOWW(_gDCInfo+0x00004), #0x2A
+000003F3 EF00                 824  	br $.BB@LABEL@10_16
+000003F5                      825  .BB@LABEL@10_15:	; switch_clause_bb57
+000003F5                      826  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 497
+000003F5 CF00000E             827  	mov !LOWW(_gDCInfo+0x0000E), #0x0E
+000003F9                      828  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 498
+000003F9 CF00002B             829  	mov !LOWW(_gDCInfo+0x00004), #0x2B
+000003FD                      830  .BB@LABEL@10_16:	; switch_clause_bb57
+000003FD 71000000             831  	set1 !LOWW(_gSubdevInfo).0
+00000401                      832  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 517
+00000401 D7                   833  	ret
+00000402                      834  .BB@LABEL@10_17:	; switch_clause_bb65
+00000402                      835  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 502
+00000402 CF000010             836  	mov !LOWW(_gDCInfo+0x0000E), #0x10
+00000406                      837  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 503
+00000406 CF00002C             838  	mov !LOWW(_gDCInfo+0x00004), #0x2C
+0000040A EF00                 839  	br $.BB@LABEL@10_16
+0000040C                      840  .LFE10:
+0000040C                      841  	.TYPE _isl_s1_clr_sq,function,.LFE11-_isl_s1_clr_sq
+0000040C                      842  _isl_s1_clr_sq:
+0000040C                      843  	.STACK _isl_s1_clr_sq = 4
+0000040C                      844  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 521
+0000040C 8F0000               845  	mov a, !LOWW(_gSubDevErr)
+0000040F 73                   846  	mov b, a
+00000410 318E                 847  	shrw ax, 8+0x00000
+00000412 311E                 848  	shrw ax, 0x01
+00000414 DE00                 849  	bnc $.BB@LABEL@11_2
+00000416                      850  .BB@LABEL@11_1:	; if_then_bb
+00000416 63                   851  	mov a, b
+00000417                      852  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 522
+00000417 718B                 853  	clr1 a.0
+00000419 9F0000               854  	mov !LOWW(_gSubDevErr), a
+0000041C                      855  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 523
+0000041C 71300000             856  	set1 !LOWW(_gDCInfo+0x00003).3
+00000420                      857  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 524
+00000420 71080000             858  	clr1 !LOWW(_gDCInfo+0x00001).0
+00000424                      859  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 526
+00000424 F50000               860  	clrb !LOWW(_gDCInfo+0x00005)
+00000427 EF00                 861  	br $.BB@LABEL@11_5
+00000429                      862  .BB@LABEL@11_2:	; if_break_bb
+00000429                      863  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 531
+00000429 8F0000               864  	mov a, !LOWW(_gDCInfo+0x00004)
+0000042C D1                   865  	cmp0 a
+0000042D DD00                 866  	bz $.BB@LABEL@11_7
+0000042F                      867  .BB@LABEL@11_3:	; if_break_bb
+0000042F 4C32                 868  	cmp a, #0x32
+00000431 DF00                 869  	bnz $.BB@LABEL@11_6
+00000433                      870  .BB@LABEL@11_4:	; switch_clause_bb33
+00000433                      871  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 538
+00000433 71080000             872  	clr1 !LOWW(_gDCInfo+0x00001).0
+00000437                      873  .BB@LABEL@11_5:	; switch_clause_bb33
+00000437 F50000               874  	clrb !LOWW(_gDCInfo+0x00004)
+0000043A                      875  .BB@LABEL@11_6:	; return
+0000043A                      876  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 546
+0000043A D7                   877  	ret
+0000043B                      878  .BB@LABEL@11_7:	; switch_clause_bb
+0000043B                      879  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 533
+0000043B CF00000F             880  	mov !LOWW(_gDCInfo+0x0000E), #0x0F
+0000043F                      881  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 534
+0000043F CF000032             882  	mov !LOWW(_gDCInfo+0x00004), #0x32
+00000443                      883  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 535
+00000443 71000000             884  	set1 !LOWW(_gSubdevInfo).0
+00000447 D7                   885  	ret
+00000448                      886  .LFE11:
+00000448                      887  	.TYPE _isl_s1_get_info,function,.LFE12-_isl_s1_get_info
+00000448                      888  _isl_s1_get_info:
+00000448                      889  	.STACK _isl_s1_get_info = 6
+00000448                      890  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 548
+00000448 C7                   891  	push hl
+00000449                      892  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 551
+00000449 8F0000               893  	mov a, !LOWW(_gSubDevErr)
+0000044C 73                   894  	mov b, a
+0000044D 318E                 895  	shrw ax, 8+0x00000
+0000044F 311E                 896  	shrw ax, 0x01
+00000451 DE00                 897  	bnc $.BB@LABEL@12_2
+00000453                      898  .BB@LABEL@12_1:	; if_then_bb
+00000453 63                   899  	mov a, b
+00000454                      900  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 552
+00000454 718B                 901  	clr1 a.0
+00000456 9F0000               902  	mov !LOWW(_gSubDevErr), a
+00000459                      903  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 553
+00000459 71300000             904  	set1 !LOWW(_gDCInfo+0x00003).3
+0000045D                      905  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 554
+0000045D 71780000             906  	clr1 !LOWW(_gDCInfo).7
+00000461                      907  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 556
+00000461 F50000               908  	clrb !LOWW(_gDCInfo+0x00005)
+00000464 EF00                 909  	br $.BB@LABEL@12_11
+00000466                      910  .BB@LABEL@12_2:	; if_break_bb
+00000466                      911  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 561
+00000466 8F0000               912  	mov a, !LOWW(_gDCInfo+0x00004)
+00000469 D1                   913  	cmp0 a
+0000046A DD00                 914  	bz $.BB@LABEL@12_13
+0000046C                      915  .BB@LABEL@12_3:	; if_break_bb
+0000046C 0CC4                 916  	add a, #0xC4
+0000046E D1                   917  	cmp0 a
+0000046F DD00                 918  	bz $.BB@LABEL@12_15
+00000471                      919  .BB@LABEL@12_4:	; if_break_bb
+00000471 91                   920  	dec a
+00000472 DF00                 921  	bnz $.BB@LABEL@12_12
+00000474                      922  .BB@LABEL@12_5:	; switch_clause_bb42
+00000474                      923  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 573
+00000474 FC000000             924  	call !!_pdc_get_status
+00000478 B800                 925  	movw [sp+0x00], ax
+0000047A                      926  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 574
+0000047A 8800                 927  	mov a, [sp+0x00]
+0000047C 310500               928  	bf a.0, $.BB@LABEL@12_10
+0000047F                      929  .BB@LABEL@12_6:	; bb54
+0000047F AEF8                 930  	movw ax, sp
+00000481 16                   931  	movw hl, ax
+00000482 319500               932  	bf [hl].1, $.BB@LABEL@12_10
+00000485                      933  .BB@LABEL@12_7:	; if_then_bb72
+00000485 51FD                 934  	mov a, #0xFD
+00000487                      935  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 575
+00000487 5F0000               936  	and a, !LOWW(_gDCInfo+0x00002)
+0000048A 73                   937  	mov b, a
+0000048B AF0000               938  	movw ax, !LOWW(_gDCInfo+0x00006)
+0000048E F0                   939  	clrb x
+0000048F 5C60                 940  	and a, #0x60
+00000491 440040               941  	cmpw ax, #0x4000
+00000494 63                   942  	mov a, b
+00000495 61F8                 943  	sknz
+00000497                      944  .BB@LABEL@12_8:	; if_then_bb78
+00000497                      945  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 576
+00000497 719A                 946  	set1 a.1
+00000499                      947  .BB@LABEL@12_9:	; if_else_bb
+00000499 9F0000               948  	mov !LOWW(_gDCInfo+0x00002), a
+0000049C                      949  .BB@LABEL@12_10:	; if_break_bb86
+0000049C                      950  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 583
+0000049C 71780000             951  	clr1 !LOWW(_gDCInfo).7
+000004A0                      952  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 584
+000004A0 71380000             953  	clr1 !LOWW(_gDCInfo+0x00003).3
+000004A4                      954  .BB@LABEL@12_11:	; if_break_bb86
+000004A4 F50000               955  	clrb !LOWW(_gDCInfo+0x00004)
+000004A7                      956  .BB@LABEL@12_12:	; return
+000004A7 C0                   957  	pop ax
+000004A8                      958  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 594
+000004A8 D7                   959  	ret
+000004A9                      960  .BB@LABEL@12_13:	; switch_clause_bb
+000004A9                      961  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 563
+000004A9 CF000013             962  	mov !LOWW(_gDCInfo+0x0000E), #0x13
+000004AD                      963  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 564
+000004AD CF00003C             964  	mov !LOWW(_gDCInfo+0x00004), #0x3C
+000004B1                      965  .BB@LABEL@12_14:	; switch_clause_bb
+000004B1 71000000             966  	set1 !LOWW(_gSubdevInfo).0
+000004B5 EF00                 967  	br $.BB@LABEL@12_12
+000004B7                      968  .BB@LABEL@12_15:	; switch_clause_bb34
+000004B7                      969  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 568
+000004B7 CF000012             970  	mov !LOWW(_gDCInfo+0x0000E), #0x12
+000004BB                      971  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/R9A02G011_251_DRPEVB/DRPEVB_Standard/PDC/dcdc_ctrl.c", 569
+000004BB CF00003D             972  	mov !LOWW(_gDCInfo+0x00004), #0x3D
+000004BF EF00                 973  	br $.BB@LABEL@12_14
+000004C1                      974  .LFE12:
+00000000                      975  	.SECTION .bss,BSS
+00000000                      976  	.ALIGN 2
+00000000                      977  	.TYPE _gDCInfo,object,18
+00000000                      978  _gDCInfo:
+00000000                      979  	.DS (18)
+
+Section List
+Attr     Size                Name
+
+TEXTF              1217 (000004C1) .textf
+BSS                  18 (00000012) .bss
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\dcdc_ctrl.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\Obj\Release\dcdc_ctrl.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\Obj\Release\dcdc_ctrl.asm 
+

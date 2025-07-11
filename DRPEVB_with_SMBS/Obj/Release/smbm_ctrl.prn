@@ -1,0 +1,661 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   ..\..\Core\r_systeminit.c
+00000000                        5  #@   ..\..\PDC\smbm_ctrl.c
+00000000                        6  #@   ..\..\PDC\user_timer.c
+00000000                        7  #@   r_main.c
+00000000                        8  #@   R_Main_UserInit.c
+00000000                        9  #@   PDC\dcdc_ctrl.c
+00000000                       10  #@   PDC\led_ctrl.c
+00000000                       11  #@   PDC\sw_ctrl.c
+00000000                       12  #@   PDC\user_main.c
+00000000                       13  #@   PDC\user_main_protection.c
+00000000                       14  #@   PDC\user_main_smbs.c
+00000000                       15  #@   PDC\subdev\isl95338.c
+00000000                       16  #@   PDC\subdev\subdev_ctrl.c
+00000000                       17  #@   pd_defs.c
+00000000                       18  #@   -cpu=S3
+00000000                       19  #@   -obj_path=Obj\Release
+00000000                       20  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       21  #@   -g
+00000000                       22  #@   -Osame_code
+00000000                       23  #@   -I PDC\subdev
+00000000                       24  #@   -I PDC
+00000000                       25  #@   -I .
+00000000                       26  #@   -I ..\..\Core
+00000000                       27  #@   -I ..\..\PDC
+00000000                       28  #@   -I ..\..\PDC\Lib
+00000000                       29  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       30  #@   -asm_path=Obj\Release
+00000000                       31  #@   -asmopt=-prn_path=Obj\Release
+00000000                       32  #@   -c
+00000000                       33  #@   -MAKEUD=Obj\Release
+00000000                       34  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_e3002be62e4449b4be3cba83f694525fphcbxarf.1nx
+00000000                       35  #@  compiled at Tue May 06 10:50:51 2025
+00000000                       36  
+00000000                       37  	.EXTERN _gSubdevInfo
+00000000                       38  	.PUBLIC _gSmbmInfo
+00000000                       39  	.PUBLIC _smbm_init
+00000000                       40  	.EXTERN _pdc_set_int_routine
+00000000                       41  	.PUBLIC _smbm_ctrl
+00000000                       42  	.EXTERN _subdev_get_alert_signal
+00000000                       43  	.EXTERN _subdev_get_alerthandler
+00000000                       44  	.EXTERN _pd_tm_start_user_cnt
+00000000                       45  	.EXTERN _pd_tm_chk_user_stat
+00000000                       46  	.EXTERN _pd_tm_stop_user_cnt
+00000000                       47  	.PUBLIC _smbm_set_subdev
+00000000                       48  	.PUBLIC _smbm_set_protocol
+00000000                       49  	.PUBLIC _smbm_clr_status
+00000000                       50  	.PUBLIC _smbm_reset
+00000000                       51  	.PUBLIC _smbm_int_write_routine
+00000000                       52  	.PUBLIC _smbm_int_read_routine
+00000000                       53  	.PUBLIC _smbm_copy_word
+00000000                       54  	.EXTERN _pdc_timer_active
+00000000                       55  
+00000000                       56  	.SECTION .textf,TEXTF
+00000000                       57  	.TYPE _smbm_init,function,.LFE1-_smbm_init
+00000000                       58  _smbm_init:
+00000000                       59  	.STACK _smbm_init = 4
+00000000                       60  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 55
+00000000 F50000                61  	clrb !LOWW(_gSmbmInfo)
+00000003                       62  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 56
+00000003 F50000                63  	clrb !LOWW(_gSmbmInfo+0x00001)
+00000006 F6                    64  	clrw ax
+00000007                       65  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 57
+00000007 BF0000                66  	movw !LOWW(_gSmbmInfo+0x00004), ax
+0000000A                       67  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 58
+0000000A BF0000                68  	movw !LOWW(_gSmbmInfo+0x00008), ax
+0000000D                       69  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 59
+0000000D BF0000                70  	movw !LOWW(_gSmbmInfo+0x00006), ax
+00000010                       71  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 58
+00000010 F50000                72  	clrb !LOWW(_gSmbmInfo+0x0000A)
+00000013                       73  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 60
+00000013 F50000                74  	clrb !LOWW(_gSmbmInfo+0x00002)
+00000016                       75  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 61
+00000016 F50000                76  	clrb !LOWW(_gSmbmInfo+0x00003)
+00000019 34FC00                77  	movw de, #0x00FC
+0000001C                       78  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 63
+0000001C 89                    79  	mov a, [de]
+0000001D 719A                  80  	set1 a.1
+0000001F 99                    81  	mov [de], a
+00000020 F6                    82  	clrw ax
+00000021                       83  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 68
+00000021 BF0805                84  	movw !0x0508, ax
+00000024                       85  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 70
+00000024 340000                86  	movw de, #0x0000
+00000027 F7                    87  	clrw bc
+00000028 5110                  88  	mov a, #0x10
+0000002A FC000000              89  	call !!_pdc_set_int_routine
+0000002E                       90  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 72
+0000002E 715BE7                91  	clr1 0xFFFE7.5
+00000031                       92  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 74
+00000031 D7                    93  	ret
+00000032                       94  .LFE1:
+00000032                       95  	.TYPE _smbm_ctrl,function,.LFE2-_smbm_ctrl
+00000032                       96  _smbm_ctrl:
+00000032                       97  	.STACK _smbm_ctrl = 4
+00000032                       98  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 84
+00000032 FC000000              99  	call !!_subdev_get_alert_signal
+00000036 D1                   100  	cmp0 a
+00000037 DD00                 101  	bz $.BB@LABEL@2_2
+00000039                      102  .BB@LABEL@2_1:	; bb
+00000039 AF0405               103  	movw ax, !0x0504
+0000003C 318D                 104  	shlw ax, 0x08
+0000003E DE00                 105  	bnc $.BB@LABEL@2_6
+00000040                      106  .BB@LABEL@2_2:	; bb14
+00000040 D50000               107  	cmp0 !LOWW(_gSubdevInfo+0x00002)
+00000043 DF00                 108  	bnz $.BB@LABEL@2_6
+00000045                      109  .BB@LABEL@2_3:	; bb26
+00000045 D50000               110  	cmp0 !LOWW(_gSmbmInfo+0x00003)
+00000048 DF00                 111  	bnz $.BB@LABEL@2_6
+0000004A                      112  .BB@LABEL@2_4:	; if_then_bb
+0000004A                      113  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 87
+0000004A FC000000             114  	call !!_subdev_get_alerthandler
+0000004E D1                   115  	cmp0 a
+0000004F 61E8                 116  	skz
+00000051                      117  .BB@LABEL@2_5:	; if_then_bb44
+00000051                      118  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 88
+00000051 CF0000FF             119  	mov !LOWW(_gSubdevInfo+0x00002), #0xFF
+00000055                      120  .BB@LABEL@2_6:	; if_break_bb45
+00000055                      121  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 92
+00000055 8F0000               122  	mov a, !LOWW(_gSmbmInfo)
+00000058 91                   123  	dec a
+00000059 D1                   124  	cmp0 a
+0000005A DD00                 125  	bz $.BB@LABEL@2_11
+0000005C                      126  .BB@LABEL@2_7:	; if_break_bb45
+0000005C 91                   127  	dec a
+0000005D D1                   128  	cmp0 a
+0000005E DD00                 129  	bz $.BB@LABEL@2_16
+00000060                      130  .BB@LABEL@2_8:	; if_break_bb45
+00000060 4C05                 131  	cmp a, #0x05
+00000062 DF00                 132  	bnz $.BB@LABEL@2_25
+00000064                      133  .BB@LABEL@2_9:	; switch_clause_bb102
+00000064                      134  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 135
+00000064 8F0000               135  	mov a, !LOWW(_gSmbmInfo+0x00001)
+00000067 D1                   136  	cmp0 a
+00000068 DF00                 137  	bnz $.BB@LABEL@2_20
+0000006A                      138  .BB@LABEL@2_10:	; switch_clause_bb102.if_break_bb118_crit_edge
+0000006A 510E                 139  	mov a, #0x0E
+0000006C EF00                 140  	br $.BB@LABEL@2_23
+0000006E                      141  .BB@LABEL@2_11:	; switch_clause_bb
+0000006E                      142  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 97
+0000006E 8F0000               143  	mov a, !LOWW(_gSmbmInfo+0x00001)
+00000071 D1                   144  	cmp0 a
+00000072 DF00                 145  	bnz $.BB@LABEL@2_13
+00000074                      146  .BB@LABEL@2_12:	; switch_clause_bb.if_break_bb62_crit_edge
+00000074 5106                 147  	mov a, #0x06
+00000076 EF00                 148  	br $.BB@LABEL@2_23
+00000078                      149  .BB@LABEL@2_13:	; if_else_bb
+00000078                      150  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 101
+00000078 91                   151  	dec a
+00000079 DF00                 152  	bnz $.BB@LABEL@2_15
+0000007B                      153  .BB@LABEL@2_14:	; if_else_bb.if_break_bb62_crit_edge
+0000007B 5102                 154  	mov a, #0x02
+0000007D EF00                 155  	br $.BB@LABEL@2_23
+0000007F                      156  .BB@LABEL@2_15:	; if_else_bb60
+0000007F E1                   157  	oneb a
+00000080 EF00                 158  	br $.BB@LABEL@2_23
+00000082                      159  .BB@LABEL@2_16:	; switch_clause_bb76
+00000082                      160  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 119
+00000082 AF0000               161  	movw ax, !LOWW(_gSmbmInfo+0x00004)
+00000085 440000               162  	cmpw ax, #0x0000
+00000088 DD00                 163  	bz $.BB@LABEL@2_25
+0000008A                      164  .BB@LABEL@2_17:	; if_then_bb81
+0000008A                      165  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 120
+0000008A 12                   166  	movw bc, ax
+0000008B 5107                 167  	mov a, #0x07
+0000008D FC000000             168  	call !!_pd_tm_chk_user_stat
+00000091 4C02                 169  	cmp a, #0x02
+00000093 DF00                 170  	bnz $.BB@LABEL@2_25
+00000095                      171  .BB@LABEL@2_18:	; if_then_bb88
+00000095                      172  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 121
+00000095 5107                 173  	mov a, #0x07
+00000097 FC000000             174  	call !!_pd_tm_stop_user_cnt
+0000009B 30FFFF               175  	movw ax, #0xFFFF
+0000009E                      176  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 122
+0000009E 020000               177  	addw ax, !LOWW(_gSmbmInfo+0x00004)
+000000A1 BF0000               178  	movw !LOWW(_gSmbmInfo+0x00004), ax
+000000A4                      179  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 123
+000000A4 6168                 180  	or a, x
+000000A6 DF00                 181  	bnz $.BB@LABEL@2_24
+000000A8                      182  .BB@LABEL@2_19:	; if_then_bb96
+000000A8 F6                   183  	clrw ax
+000000A9                      184  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 124
+000000A9 BF0005               185  	movw !0x0500, ax
+000000AC                      186  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 125
+000000AC CF000008             187  	mov !LOWW(_gSmbmInfo+0x00002), #0x08
+000000B0                      188  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 126
+000000B0 CF000018             189  	mov !LOWW(_gSmbmInfo), #0x18
+000000B4 D7                   190  	ret
+000000B5                      191  .BB@LABEL@2_20:	; if_else_bb109
+000000B5                      192  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 139
+000000B5 91                   193  	dec a
+000000B6 DF00                 194  	bnz $.BB@LABEL@2_22
+000000B8                      195  .BB@LABEL@2_21:	; if_else_bb109.if_break_bb118_crit_edge
+000000B8 510A                 196  	mov a, #0x0A
+000000BA EF00                 197  	br $.BB@LABEL@2_23
+000000BC                      198  .BB@LABEL@2_22:	; if_else_bb116
+000000BC F1                   199  	clrb a
+000000BD                      200  .BB@LABEL@2_23:	; if_break_bb118
+000000BD CF000002             201  	mov !LOWW(_gSmbmInfo), #0x02
+000000C1 318E                 202  	shrw ax, 8+0x00000
+000000C3 12                   203  	movw bc, ax
+000000C4 30FFFF               204  	movw ax, #0xFFFF
+000000C7 020000               205  	addw ax, !LOWW(_gSmbmInfo+0x00006)
+000000CA 318D                 206  	shlw ax, 0x08
+000000CC 03                   207  	addw ax, bc
+000000CD BF0005               208  	movw !0x0500, ax
+000000D0 AF0000               209  	movw ax, !LOWW(_gSmbmInfo+0x00004)
+000000D3 6168                 210  	or a, x
+000000D5 DD00                 211  	bz $.BB@LABEL@2_25
+000000D7                      212  .BB@LABEL@2_24:	; if_then_bb129
+000000D7 5107                 213  	mov a, #0x07
+000000D9 FC000000             214  	call !!_pd_tm_start_user_cnt
+000000DD                      215  .BB@LABEL@2_25:	; return
+000000DD                      216  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 158
+000000DD D7                   217  	ret
+000000DE                      218  .LFE2:
+000000DE                      219  	.TYPE _smbm_set_subdev,function,.LFE3-_smbm_set_subdev
+000000DE                      220  _smbm_set_subdev:
+000000DE                      221  	.STACK _smbm_set_subdev = 4
+000000DE                      222  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 163
+000000DE D50000               223  	cmp0 !LOWW(_gSmbmInfo)
+000000E1 61F8                 224  	sknz
+000000E3                      225  .BB@LABEL@3_1:	; if_then_bb
+000000E3                      226  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 167
+000000E3 BF0C05               227  	movw !0x050C, ax
+000000E6                      228  .BB@LABEL@3_2:	; return
+000000E6                      229  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 171
+000000E6 D7                   230  	ret
+000000E7                      231  .LFE3:
+000000E7                      232  	.TYPE _smbm_set_protocol,function,.LFE4-_smbm_set_protocol
+000000E7                      233  _smbm_set_protocol:
+000000E7                      234  	.STACK _smbm_set_protocol = 12
+000000E7                      235  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 176
+000000E7 C5                   236  	push de
+000000E8 C3                   237  	push bc
+000000E9 C7                   238  	push hl
+000000EA C1                   239  	push ax
+000000EB 77                   240  	mov h, a
+000000EC                      241  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 181
+000000EC AF0805               242  	movw ax, !0x0508
+000000EF B802                 243  	movw [sp+0x02], ax
+000000F1                      244  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 183
+000000F1 8F0000               245  	mov a, !LOWW(_gSmbmInfo)
+000000F4 73                   246  	mov b, a
+000000F5 D1                   247  	cmp0 a
+000000F6 DD00                 248  	bz $.BB@LABEL@4_2
+000000F8                      249  .BB@LABEL@4_1:	; entry
+000000F8 63                   250  	mov a, b
+000000F9 4C06                 251  	cmp a, #0x06
+000000FB                      252  	.bnz $!.BB@LABEL@4_18
+000000FB 61E8                    	 -- Skncond
+000000FD EE0000                  	 -- br	**.target1
+00000100                      253  .BB@LABEL@4_2:	; if_then_bb
+00000100                      254  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 186
+00000100 62                   255  	mov a, c
+00000101 5080                 256  	mov x, #0x80
+00000103 D6                   257  	mulu x
+00000104 12                   258  	movw bc, ax
+00000105 8800                 259  	mov a, [sp+0x00]
+00000107 318E                 260  	shrw ax, 8+0x00000
+00000109 14                   261  	movw de, ax
+0000010A 67                   262  	mov a, h
+0000010B FBF8FF               263  	movw hl, sp
+0000010E F0                   264  	clrb x
+0000010F 616B                 265  	or a, b
+00000111 08                   266  	xch a, x
+00000112 616A                 267  	or a, c
+00000114 616C                 268  	or a, e
+00000116 08                   269  	xch a, x
+00000117 616D                 270  	or a, d
+00000119 BF1005               271  	movw !0x0510, ax
+0000011C A80C                 272  	movw ax, [sp+0x0C]
+0000011E                      273  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 187
+0000011E BF0000               274  	movw !LOWW(_gSmbmInfo+0x00006), ax
+00000121 A806                 275  	movw ax, [sp+0x06]
+00000123                      276  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 188
+00000123 6168                 277  	or a, x
+00000125 DD00                 278  	bz $.BB@LABEL@4_4
+00000127                      279  .BB@LABEL@4_3:	; if_then_bb.bb42_crit_edge
+00000127 530F                 280  	mov b, #0x0F
+00000129 EF00                 281  	br $.BB@LABEL@4_5
+0000012B                      282  .BB@LABEL@4_4:	; bb41
+0000012B F3                   283  	clrb b
+0000012C                      284  .BB@LABEL@4_5:	; bb42
+0000012C A806                 285  	movw ax, [sp+0x06]
+0000012E BF0000               286  	movw !LOWW(_gSmbmInfo+0x00008), ax
+00000131 63                   287  	mov a, b
+00000132 9F0000               288  	mov !LOWW(_gSmbmInfo+0x0000A), a
+00000135 8805                 289  	mov a, [sp+0x05]
+00000137                      290  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 189
+00000137 9F0000               291  	mov !LOWW(_gSmbmInfo+0x00001), a
+0000013A 8B                   292  	mov a, [hl]
+0000013B                      293  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 191
+0000013B 318E                 294  	shrw ax, 8+0x00000
+0000013D 311E                 295  	shrw ax, 0x01
+0000013F DC00                 296  	bc $.BB@LABEL@4_10
+00000141                      297  .BB@LABEL@4_6:	; if_then_bb54
+00000141 E6                   298  	onew ax
+00000142                      299  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 193
+00000142 020000               300  	addw ax, !LOWW(_gSmbmInfo+0x00006)
+00000145 311E                 301  	shrw ax, 0x01
+00000147 B804                 302  	movw [sp+0x04], ax
+00000149 301405               303  	movw ax, #0x0514
+0000014C F7                   304  	clrw bc
+0000014D EF00                 305  	br $.BB@LABEL@4_8
+0000014F                      306  .BB@LABEL@4_7:	; bb58
+0000014F                      307  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 197
+0000014F 13                   308  	movw ax, bc
+00000150 01                   309  	addw ax, ax
+00000151 610906               310  	addw ax, [hl+0x06]
+00000154 14                   311  	movw de, ax
+00000155 A9                   312  	movw ax, [de]
+00000156 14                   313  	movw de, ax
+00000157 AB                   314  	movw ax, [hl]
+00000158 35                   315  	xchw ax, de
+00000159 B9                   316  	movw [de], ax
+0000015A AB                   317  	movw ax, [hl]
+0000015B                      318  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 198
+0000015B 040200               319  	addw ax, #0x0002
+0000015E A3                   320  	incw bc
+0000015F                      321  .BB@LABEL@4_8:	; bb58
+0000015F BB                   322  	movw [hl], ax
+00000160 13                   323  	movw ax, bc
+00000161                      324  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 195
+00000161 614904               325  	cmpw ax, [hl+0x04]
+00000164 DC00                 326  	bc $.BB@LABEL@4_7
+00000166                      327  .BB@LABEL@4_9:	; bb76
+00000166                      328  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 200
+00000166 5100                 329  	mov a, #LOW(HIGHW(_smbm_int_write_routine))
+00000168 320000               330  	movw bc, #LOWW(_smbm_int_write_routine)
+0000016B EF00                 331  	br $.BB@LABEL@4_11
+0000016D                      332  .BB@LABEL@4_10:	; if_else_bb
+0000016D                      333  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 203
+0000016D 5100                 334  	mov a, #LOW(HIGHW(_smbm_int_read_routine))
+0000016F 320000               335  	movw bc, #LOWW(_smbm_int_read_routine)
+00000172                      336  .BB@LABEL@4_11:	; if_else_bb
+00000172 318E                 337  	shrw ax, 8+0x00000
+00000174 14                   338  	movw de, ax
+00000175 5110                 339  	mov a, #0x10
+00000177 FC000000             340  	call !!_pdc_set_int_routine
+0000017B                      341  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 206
+0000017B 40000001             342  	cmp !LOWW(_gSmbmInfo+0x00001), #0x01
+0000017F 8802                 343  	mov a, [sp+0x02]
+00000181 70                   344  	mov x, a
+00000182 DF00                 345  	bnz $.BB@LABEL@4_13
+00000184                      346  .BB@LABEL@4_12:	; if_then_bb88
+00000184                      347  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 207
+00000184 71BA                 348  	set1 a.3
+00000186 9802                 349  	mov [sp+0x02], a
+00000188 60                   350  	mov a, x
+00000189                      351  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 208
+00000189 6C09                 352  	or a, #0x09
+0000018B EF00                 353  	br $.BB@LABEL@4_14
+0000018D                      354  .BB@LABEL@4_13:	; if_else_bb103
+0000018D                      355  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 211
+0000018D 718A                 356  	set1 a.0
+0000018F                      357  .BB@LABEL@4_14:	; if_else_bb103
+0000018F 9802                 358  	mov [sp+0x02], a
+00000191                      359  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 216
+00000191 A802                 360  	movw ax, [sp+0x02]
+00000193 BF0805               361  	movw !0x0508, ax
+00000196                      362  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 218
+00000196 D50000               363  	cmp0 !LOWW(_gSmbmInfo)
+00000199 DF00                 364  	bnz $.BB@LABEL@4_16
+0000019B                      365  .BB@LABEL@4_15:	; if_break_bb111.if_break_bb121_crit_edge
+0000019B E1                   366  	oneb a
+0000019C EF00                 367  	br $.BB@LABEL@4_17
+0000019E                      368  .BB@LABEL@4_16:	; if_else_bb120
+0000019E 5107                 369  	mov a, #0x07
+000001A0                      370  .BB@LABEL@4_17:	; if_break_bb121
+000001A0 9F0000               371  	mov !LOWW(_gSmbmInfo), a
+000001A3 A80E                 372  	movw ax, [sp+0x0E]
+000001A5                      373  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 225
+000001A5 BF0000               374  	movw !LOWW(_gSmbmInfo+0x00004), ax
+000001A8                      375  .BB@LABEL@4_18:	; return
+000001A8 1008                 376  	addw sp, #0x08
+000001AA                      377  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 228
+000001AA D7                   378  	ret
+000001AB                      379  .LFE4:
+000001AB                      380  	.TYPE _smbm_clr_status,function,.LFE5-_smbm_clr_status
+000001AB                      381  _smbm_clr_status:
+000001AB                      382  	.STACK _smbm_clr_status = 4
+000001AB                      383  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 235
+000001AB 8F0000               384  	mov a, !LOWW(_gSmbmInfo)
+000001AE 4C18                 385  	cmp a, #0x18
+000001B0 DD00                 386  	bz $.BB@LABEL@5_2
+000001B2                      387  .BB@LABEL@5_1:	; entry
+000001B2 4C06                 388  	cmp a, #0x06
+000001B4 DF00                 389  	bnz $.BB@LABEL@5_3
+000001B6                      390  .BB@LABEL@5_2:	; if_then_bb
+000001B6 F6                   391  	clrw ax
+000001B7                      392  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 238
+000001B7 BF0005               393  	movw !0x0500, ax
+000001BA                      394  .BB@LABEL@5_3:	; if_break_bb
+000001BA                      395  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 241
+000001BA F50000               396  	clrb !LOWW(_gSmbmInfo)
+000001BD                      397  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 243
+000001BD D7                   398  	ret
+000001BE                      399  .LFE5:
+000001BE                      400  	.TYPE _smbm_reset,function,.LFE6-_smbm_reset
+000001BE                      401  _smbm_reset:
+000001BE                      402  	.STACK _smbm_reset = 4
+000001BE                      403  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 251
+000001BE 717BFA               404  	di
+000001C1 300F00               405  	movw ax, #0x000F
+000001C4                      406  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 252
+000001C4 BF0405               407  	movw !0x0504, ax
+000001C7 F6                   408  	clrw ax
+000001C8                      409  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 256
+000001C8 BF0805               410  	movw !0x0508, ax
+000001CB                      411  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 259
+000001CB 340000               412  	movw de, #0x0000
+000001CE F7                   413  	clrw bc
+000001CF 5110                 414  	mov a, #0x10
+000001D1 FC000000             415  	call !!_pdc_set_int_routine
+000001D5                      416  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 261
+000001D5 8F0000               417  	mov a, !LOWW(_gSmbmInfo)
+000001D8 318E                 418  	shrw ax, 8+0x00000
+000001DA 31FD                 419  	shlw ax, 0x0F
+000001DC DE00                 420  	bnc $.BB@LABEL@6_2
+000001DE                      421  .BB@LABEL@6_1:	; if_then_bb
+000001DE F6                   422  	clrw ax
+000001DF                      423  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 262
+000001DF BF0005               424  	movw !0x0500, ax
+000001E2                      425  .BB@LABEL@6_2:	; if_break_bb
+000001E2                      426  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 265
+000001E2 F50000               427  	clrb !LOWW(_gSmbmInfo)
+000001E5                      428  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 267
+000001E5 717AFA               429  	ei
+000001E8                      430  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 269
+000001E8 D7                   431  	ret
+000001E9                      432  .LFE6:
+000001E9                      433  	.TYPE _smbm_int_write_routine,function,.LFE7-_smbm_int_write_routine
+000001E9                      434  _smbm_int_write_routine:
+000001E9                      435  	.STACK _smbm_int_write_routine = 6
+000001E9                      436  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 275
+000001E9 C7                   437  	push hl
+000001EA                      438  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 280
+000001EA AF0405               439  	movw ax, !0x0504
+000001ED B800                 440  	movw [sp+0x00], ax
+000001EF AEF8                 441  	movw ax, sp
+000001F1 16                   442  	movw hl, ax
+000001F2                      443  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 282
+000001F2 319500               444  	bf [hl].1, $.BB@LABEL@7_2
+000001F5                      445  .BB@LABEL@7_1:	; entry.bb26_crit_edge
+000001F5 F1                   446  	clrb a
+000001F6 EF00                 447  	br $.BB@LABEL@7_4
+000001F8                      448  .BB@LABEL@7_2:	; bb
+000001F8 AEF8                 449  	movw ax, sp
+000001FA 16                   450  	movw hl, ax
+000001FB 31A300               451  	bt [hl].2, $.BB@LABEL@7_1
+000001FE                      452  .BB@LABEL@7_3:	; bb25
+000001FE E1                   453  	oneb a
+000001FF                      454  .BB@LABEL@7_4:	; bb26
+000001FF D1                   455  	cmp0 a
+00000200 8800                 456  	mov a, [sp+0x00]
+00000202 70                   457  	mov x, a
+00000203 DF00                 458  	bnz $.BB@LABEL@7_6
+00000205                      459  .BB@LABEL@7_5:	; if_then_bb
+00000205                      460  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 284
+00000205 8800                 461  	mov a, [sp+0x00]
+00000207 311A                 462  	shr a, 0x01
+00000209 5C02                 463  	and a, #0x02
+0000020B 73                   464  	mov b, a
+0000020C 60                   465  	mov a, x
+0000020D 719C                 466  	mov1 CY, a.1
+0000020F 63                   467  	mov a, b
+00000210 71A9                 468  	mov1 a.2, CY
+00000212 9F0000               469  	mov !LOWW(_gSmbmInfo+0x00002), a
+00000215                      470  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 285
+00000215 CF000018             471  	mov !LOWW(_gSmbmInfo), #0x18
+00000219 EF00                 472  	br $.BB@LABEL@7_10
+0000021B                      473  .BB@LABEL@7_6:	; if_else_bb
+0000021B                      474  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 287
+0000021B 313500               475  	bf a.3, $.BB@LABEL@7_8
+0000021E                      476  .BB@LABEL@7_7:	; if_then_bb62
+0000021E                      477  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 288
+0000021E CF000006             478  	mov !LOWW(_gSmbmInfo), #0x06
+00000222 EF00                 479  	br $.BB@LABEL@7_10
+00000224                      480  .BB@LABEL@7_8:	; if_else_bb63
+00000224 AEF8                 481  	movw ax, sp
+00000226 16                   482  	movw hl, ax
+00000227 318500               483  	bf [hl].0, $.BB@LABEL@7_11
+0000022A                      484  .BB@LABEL@7_9:	; if_then_bb75
+0000022A                      485  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 291
+0000022A CF000008             486  	mov !LOWW(_gSmbmInfo), #0x08
+0000022E                      487  .BB@LABEL@7_10:	; if_then_bb99
+0000022E                      488  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 301
+0000022E 5107                 489  	mov a, #0x07
+00000230 FC000000             490  	call !!_pd_tm_stop_user_cnt
+00000234 300F00               491  	movw ax, #0x000F
+00000237                      492  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 304
+00000237 BF0405               493  	movw !0x0504, ax
+0000023A F6                   494  	clrw ax
+0000023B                      495  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 309
+0000023B BF0805               496  	movw !0x0508, ax
+0000023E                      497  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 311
+0000023E 340000               498  	movw de, #0x0000
+00000241 F7                   499  	clrw bc
+00000242 5110                 500  	mov a, #0x10
+00000244 FC000000             501  	call !!_pdc_set_int_routine
+00000248                      502  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 312
+00000248 FC000000             503  	call !!_pdc_timer_active
+0000024C                      504  .BB@LABEL@7_11:	; if_else_bb76
+0000024C C0                   505  	pop ax
+0000024D                      506  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 315
+0000024D D7                   507  	ret
+0000024E                      508  .LFE7:
+0000024E                      509  	.TYPE _smbm_int_read_routine,function,.LFE8-_smbm_int_read_routine
+0000024E                      510  _smbm_int_read_routine:
+0000024E                      511  	.STACK _smbm_int_read_routine = 6
+0000024E                      512  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 320
+0000024E C7                   513  	push hl
+0000024F                      514  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 325
+0000024F AF0405               515  	movw ax, !0x0504
+00000252 B800                 516  	movw [sp+0x00], ax
+00000254 AEF8                 517  	movw ax, sp
+00000256 16                   518  	movw hl, ax
+00000257                      519  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 327
+00000257 319500               520  	bf [hl].1, $.BB@LABEL@8_2
+0000025A                      521  .BB@LABEL@8_1:	; entry.bb26_crit_edge
+0000025A F1                   522  	clrb a
+0000025B EF00                 523  	br $.BB@LABEL@8_4
+0000025D                      524  .BB@LABEL@8_2:	; bb
+0000025D AEF8                 525  	movw ax, sp
+0000025F 16                   526  	movw hl, ax
+00000260 31A300               527  	bt [hl].2, $.BB@LABEL@8_1
+00000263                      528  .BB@LABEL@8_3:	; bb25
+00000263 E1                   529  	oneb a
+00000264                      530  .BB@LABEL@8_4:	; bb26
+00000264 D1                   531  	cmp0 a
+00000265 8800                 532  	mov a, [sp+0x00]
+00000267 70                   533  	mov x, a
+00000268 DF00                 534  	bnz $.BB@LABEL@8_6
+0000026A                      535  .BB@LABEL@8_5:	; if_then_bb
+0000026A                      536  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 329
+0000026A 8800                 537  	mov a, [sp+0x00]
+0000026C 311A                 538  	shr a, 0x01
+0000026E 5C02                 539  	and a, #0x02
+00000270 73                   540  	mov b, a
+00000271 60                   541  	mov a, x
+00000272 719C                 542  	mov1 CY, a.1
+00000274 63                   543  	mov a, b
+00000275 71A9                 544  	mov1 a.2, CY
+00000277 9F0000               545  	mov !LOWW(_gSmbmInfo+0x00002), a
+0000027A                      546  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 330
+0000027A CF000018             547  	mov !LOWW(_gSmbmInfo), #0x18
+0000027E EF00                 548  	br $.BB@LABEL@8_10
+00000280                      549  .BB@LABEL@8_6:	; if_else_bb
+00000280                      550  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 332
+00000280 313500               551  	bf a.3, $.BB@LABEL@8_8
+00000283                      552  .BB@LABEL@8_7:	; if_then_bb62
+00000283                      553  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 333
+00000283 CF000006             554  	mov !LOWW(_gSmbmInfo), #0x06
+00000287 EF00                 555  	br $.BB@LABEL@8_10
+00000289                      556  .BB@LABEL@8_8:	; if_else_bb63
+00000289 AEF8                 557  	movw ax, sp
+0000028B 16                   558  	movw hl, ax
+0000028C 318500               559  	bf [hl].0, $.BB@LABEL@8_13
+0000028F                      560  .BB@LABEL@8_9:	; if_then_bb75
+0000028F                      561  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 336
+0000028F CF000008             562  	mov !LOWW(_gSmbmInfo), #0x08
+00000293                      563  .BB@LABEL@8_10:	; if_then_bb99
+00000293                      564  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 347
+00000293 5107                 565  	mov a, #0x07
+00000295 FC000000             566  	call !!_pd_tm_stop_user_cnt
+00000299                      567  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 349
+00000299 40000018             568  	cmp !LOWW(_gSmbmInfo), #0x18
+0000029D DD00                 569  	bz $.BB@LABEL@8_12
+0000029F                      570  .BB@LABEL@8_11:	; if_then_bb106
+0000029F E6                   571  	onew ax
+000002A0                      572  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 350
+000002A0 020000               573  	addw ax, !LOWW(_gSmbmInfo+0x00006)
+000002A3 311E                 574  	shrw ax, 0x01
+000002A5 14                   575  	movw de, ax
+000002A6 DB0000               576  	movw bc, !LOWW(_gSmbmInfo+0x00008)
+000002A9 301405               577  	movw ax, #0x0514
+000002AC FE0000               578  	call $!_smbm_copy_word
+000002AF                      579  .BB@LABEL@8_12:	; if_break_bb113
+000002AF 300F00               580  	movw ax, #0x000F
+000002B2                      581  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 354
+000002B2 BF0405               582  	movw !0x0504, ax
+000002B5 F6                   583  	clrw ax
+000002B6                      584  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 358
+000002B6 BF0805               585  	movw !0x0508, ax
+000002B9                      586  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 360
+000002B9 340000               587  	movw de, #0x0000
+000002BC F7                   588  	clrw bc
+000002BD 5110                 589  	mov a, #0x10
+000002BF FC000000             590  	call !!_pdc_set_int_routine
+000002C3                      591  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 361
+000002C3 FC000000             592  	call !!_pdc_timer_active
+000002C7                      593  .BB@LABEL@8_13:	; if_else_bb76
+000002C7 C0                   594  	pop ax
+000002C8                      595  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 364
+000002C8 D7                   596  	ret
+000002C9                      597  .LFE8:
+000002C9                      598  	.TYPE _smbm_copy_word,function,.LFE9-_smbm_copy_word
+000002C9                      599  _smbm_copy_word:
+000002C9                      600  	.STACK _smbm_copy_word = 10
+000002C9                      601  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 366
+000002C9 C1                   602  	push ax
+000002CA C7                   603  	push hl
+000002CB C3                   604  	push bc
+000002CC F6                   605  	clrw ax
+000002CD EF00                 606  	br $.BB@LABEL@9_2
+000002CF                      607  .BB@LABEL@9_1:	; bb
+000002CF A804                 608  	movw ax, [sp+0x04]
+000002D1 16                   609  	movw hl, ax
+000002D2                      610  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 371
+000002D2 AB                   611  	movw ax, [hl]
+000002D3 12                   612  	movw bc, ax
+000002D4 C6                   613  	pop hl
+000002D5 C7                   614  	push hl
+000002D6 13                   615  	movw ax, bc
+000002D7 BB                   616  	movw [hl], ax
+000002D8 A804                 617  	movw ax, [sp+0x04]
+000002DA                      618  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 373
+000002DA 040200               619  	addw ax, #0x0002
+000002DD B804                 620  	movw [sp+0x04], ax
+000002DF A800                 621  	movw ax, [sp+0x00]
+000002E1                      622  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 372
+000002E1 040200               623  	addw ax, #0x0002
+000002E4 B800                 624  	movw [sp+0x00], ax
+000002E6 A802                 625  	movw ax, [sp+0x02]
+000002E8                      626  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 373
+000002E8 A1                   627  	incw ax
+000002E9                      628  .BB@LABEL@9_2:	; bb
+000002E9 B802                 629  	movw [sp+0x02], ax
+000002EB                      630  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 370
+000002EB 45                   631  	cmpw ax, de
+000002EC DC00                 632  	bc $.BB@LABEL@9_1
+000002EE                      633  .BB@LABEL@9_3:	; return
+000002EE                      634  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/smbm_ctrl.c", 376
+000002EE 1006                 635  	addw sp, #0x06
+000002F0 D7                   636  	ret
+000002F1                      637  .LFE9:
+00000000                      638  	.SECTION .bss,BSS
+00000000                      639  	.ALIGN 2
+00000000                      640  	.TYPE _gSmbmInfo,object,12
+00000000                      641  _gSmbmInfo:
+00000000                      642  	.DS (12)
+
+Section List
+Attr     Size                Name
+
+TEXTF               753 (000002F1) .textf
+BSS                  12 (0000000C) .bss
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\smbm_ctrl.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\Obj\Release\smbm_ctrl.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\Obj\Release\smbm_ctrl.asm 
+

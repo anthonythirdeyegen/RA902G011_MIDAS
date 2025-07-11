@@ -1,0 +1,424 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   ..\..\Core\r_systeminit.c
+00000000                        5  #@   ..\..\PDC\smbm_ctrl.c
+00000000                        6  #@   ..\..\PDC\user_timer.c
+00000000                        7  #@   r_main.c
+00000000                        8  #@   R_Main_UserInit.c
+00000000                        9  #@   PDC\dcdc_ctrl.c
+00000000                       10  #@   PDC\led_ctrl.c
+00000000                       11  #@   PDC\sw_ctrl.c
+00000000                       12  #@   PDC\user_main.c
+00000000                       13  #@   PDC\user_main_authentication.c
+00000000                       14  #@   PDC\user_main_protection.c
+00000000                       15  #@   PDC\subdev\isl95338.c
+00000000                       16  #@   PDC\subdev\relamcu.c
+00000000                       17  #@   PDC\subdev\subdev_ctrl.c
+00000000                       18  #@   pd_defs.c
+00000000                       19  #@   -cpu=S3
+00000000                       20  #@   -obj_path=Obj\Release
+00000000                       21  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       22  #@   -g
+00000000                       23  #@   -Osame_code
+00000000                       24  #@   -I PDC\subdev
+00000000                       25  #@   -I PDC
+00000000                       26  #@   -I .
+00000000                       27  #@   -I ..\..\Core
+00000000                       28  #@   -I ..\..\PDC
+00000000                       29  #@   -I ..\..\PDC\Lib
+00000000                       30  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       31  #@   -asm_path=Obj\Release
+00000000                       32  #@   -asmopt=-prn_path=Obj\Release
+00000000                       33  #@   -c
+00000000                       34  #@   -MAKEUD=Obj\Release
+00000000                       35  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_a1bd8f6515f746a38e66ad14f6afd87clhozzw5x.izr
+00000000                       36  #@  compiled at Tue May 06 10:50:44 2025
+00000000                       37  
+00000000                       38  	.PUBLIC _init_tau0_channel1
+00000000                       39  	.PUBLIC _init_tau0_channel2
+00000000                       40  	.PUBLIC _init_tau0_channel3
+00000000                       41  	.PUBLIC _init_tm_12bit
+00000000                       42  	.PUBLIC _tm_12bit_start_gtimer
+00000000                       43  	.EXTERN _pdc_set_int_routine
+00000000                       44  	.PUBLIC _tm_12tm_stop_gtimer
+00000000                       45  	.PUBLIC _tm_12bit_intr_hdlr
+00000000                       46  	.PUBLIC _tm1_start_gtimer
+00000000                       47  	.PUBLIC _tm2_start_gtimer
+00000000                       48  	.PUBLIC _tm1_is_start_gtimer
+00000000                       49  	.PUBLIC _tm3_start_gtimer
+00000000                       50  	.PUBLIC _tm1_stop_gtimer
+00000000                       51  	.PUBLIC _tm2_stop_gtimer
+00000000                       52  	.PUBLIC _tm3_stop_gtimer
+00000000                       53  	.PUBLIC _tm_calc_counter
+00000000                       54  
+00000000                       55  	.SECTION .textf,TEXTF
+00000000                       56  	.TYPE _init_tau0_channel1,function,.LFE1-_init_tau0_channel1
+00000000                       57  _init_tau0_channel1:
+00000000                       58  	.STACK _init_tau0_channel1 = 4
+00000000                       59  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 16
+00000000 713AEE                60  	set1 0xFFFEE.3
+00000003                       61  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 17
+00000003 713AEA                62  	set1 0xFFFEA.3
+00000006 349201                63  	movw de, #0x0192
+00000009 3000C0                64  	movw ax, #0xC000
+0000000C                       65  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 19
+0000000C B9                    66  	movw [de], ax
+0000000D                       67  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 21
+0000000D AA26                  68  	movw ax, [de+0x26]
+0000000F 08                    69  	xch a, x
+00000010 5CFD                  70  	and a, #0xFD
+00000012 08                    71  	xch a, x
+00000013 BA26                  72  	movw [de+0x26], ax
+00000015                       73  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 22
+00000015 AA28                  74  	movw ax, [de+0x28]
+00000017 08                    75  	xch a, x
+00000018 5CFD                  76  	and a, #0xFD
+0000001A 08                    77  	xch a, x
+0000001B BA28                  78  	movw [de+0x28], ax
+0000001D                       79  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 24
+0000001D AA24                  80  	movw ax, [de+0x24]
+0000001F 08                    81  	xch a, x
+00000020 6CF0                  82  	or a, #0xF0
+00000022 08                    83  	xch a, x
+00000023 BA24                  84  	movw [de+0x24], ax
+00000025 D7                    85  	ret
+00000026                       86  .LFE1:
+00000026                       87  	.TYPE _init_tau0_channel2,function,.LFE2-_init_tau0_channel2
+00000026                       88  _init_tau0_channel2:
+00000026                       89  	.STACK _init_tau0_channel2 = 4
+00000026                       90  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 29
+00000026 714AEE                91  	set1 0xFFFEE.4
+00000029                       92  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 30
+00000029 714AEA                93  	set1 0xFFFEA.4
+0000002C 349401                94  	movw de, #0x0194
+0000002F 300080                95  	movw ax, #0x8000
+00000032                       96  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 32
+00000032 B9                    97  	movw [de], ax
+00000033                       98  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 34
+00000033 AA24                  99  	movw ax, [de+0x24]
+00000035 08                   100  	xch a, x
+00000036 5CFB                 101  	and a, #0xFB
+00000038 08                   102  	xch a, x
+00000039 BA24                 103  	movw [de+0x24], ax
+0000003B                      104  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 35
+0000003B AA26                 105  	movw ax, [de+0x26]
+0000003D 08                   106  	xch a, x
+0000003E 5CFB                 107  	and a, #0xFB
+00000040 08                   108  	xch a, x
+00000041 BA26                 109  	movw [de+0x26], ax
+00000043                      110  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 37
+00000043 AA22                 111  	movw ax, [de+0x22]
+00000045 6C02                 112  	or a, #0x02
+00000047 BA22                 113  	movw [de+0x22], ax
+00000049 D7                   114  	ret
+0000004A                      115  .LFE2:
+0000004A                      116  	.TYPE _init_tau0_channel3,function,.LFE3-_init_tau0_channel3
+0000004A                      117  _init_tau0_channel3:
+0000004A                      118  	.STACK _init_tau0_channel3 = 4
+0000004A                      119  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 43
+0000004A 715AEE               120  	set1 0xFFFEE.5
+0000004D                      121  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 44
+0000004D 715AEA               122  	set1 0xFFFEA.5
+00000050 349601               123  	movw de, #0x0196
+00000053 3000C0               124  	movw ax, #0xC000
+00000056                      125  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 46
+00000056 B9                   126  	movw [de], ax
+00000057                      127  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 48
+00000057 AA22                 128  	movw ax, [de+0x22]
+00000059 08                   129  	xch a, x
+0000005A 5CF7                 130  	and a, #0xF7
+0000005C 08                   131  	xch a, x
+0000005D BA22                 132  	movw [de+0x22], ax
+0000005F                      133  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 49
+0000005F AA24                 134  	movw ax, [de+0x24]
+00000061 08                   135  	xch a, x
+00000062 5CF7                 136  	and a, #0xF7
+00000064 08                   137  	xch a, x
+00000065 BA24                 138  	movw [de+0x24], ax
+00000067                      139  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 51
+00000067 AA20                 140  	movw ax, [de+0x20]
+00000069 6C10                 141  	or a, #0x10
+0000006B BA20                 142  	movw [de+0x20], ax
+0000006D D7                   143  	ret
+0000006E                      144  .LFE3:
+0000006E                      145  	.TYPE _init_tm_12bit,function,.LFE4-_init_tm_12bit
+0000006E                      146  _init_tm_12bit:
+0000006E                      147  	.STACK _init_tm_12bit = 4
+0000006E                      148  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 57
+0000006E 7140F300             149  	set1 !0x00F3.4
+00000072 D7                   150  	ret
+00000073                      151  .LFE4:
+00000073                      152  	.TYPE _tm_12bit_start_gtimer,function,.LFE5-_tm_12bit_start_gtimer
+00000073                      153  _tm_12bit_start_gtimer:
+00000073                      154  	.STACK _tm_12bit_start_gtimer = 6
+00000073                      155  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 60
+00000073 C1                   156  	push ax
+00000074                      157  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 62
+00000074 712BE3               158  	clr1 0xFFFE3.2
+00000077                      159  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 63
+00000077 CB900000             160  	movw 0xFFF90, #0x0000
+0000007B                      161  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 64
+0000007B 712BE7               162  	clr1 0xFFFE7.2
+0000007E                      163  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 65
+0000007E 5115                 164  	mov a, #0x15
+00000080 FC000000             165  	call !!_pdc_set_int_routine
+00000084 A800                 166  	movw ax, [sp+0x00]
+00000086 12                   167  	movw bc, ax
+00000087                      168  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 67
+00000087 314D                 169  	shlw ax, 0x04
+00000089 23                   170  	subw ax, bc
+0000008A B1                   171  	decw ax
+0000008B 6C80                 172  	or a, #0x80
+0000008D 5C8F                 173  	and a, #0x8F
+0000008F BE90                 174  	movw 0xFFF90, ax
+00000091 C0                   175  	pop ax
+00000092 D7                   176  	ret
+00000093                      177  .LFE5:
+00000093                      178  	.TYPE _tm_12tm_stop_gtimer,function,.LFE6-_tm_12tm_stop_gtimer
+00000093                      179  _tm_12tm_stop_gtimer:
+00000093                      180  	.STACK _tm_12tm_stop_gtimer = 4
+00000093                      181  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 72
+00000093 712AE7               182  	set1 0xFFFE7.2
+00000096                      183  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 73
+00000096 340000               184  	movw de, #0x0000
+00000099 F7                   185  	clrw bc
+0000009A 5115                 186  	mov a, #0x15
+0000009C FC000000             187  	call !!_pdc_set_int_routine
+000000A0                      188  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 74
+000000A0 712BE3               189  	clr1 0xFFFE3.2
+000000A3                      190  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 75
+000000A3 CB900000             191  	movw 0xFFF90, #0x0000
+000000A7 D7                   192  	ret
+000000A8                      193  .LFE6:
+000000A8                      194  	.TYPE _tm_12bit_intr_hdlr,function,.LFE7-_tm_12bit_intr_hdlr
+000000A8                      195  _tm_12bit_intr_hdlr:
+000000A8                      196  	.STACK _tm_12bit_intr_hdlr = 4
+000000A8                      197  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 81
+000000A8 CEABAC               198  	mov 0xFFFAB, #0xAC
+000000AB D7                   199  	ret
+000000AC                      200  .LFE7:
+000000AC                      201  	.TYPE _tm1_start_gtimer,function,.LFE8-_tm1_start_gtimer
+000000AC                      202  _tm1_start_gtimer:
+000000AC                      203  	.STACK _tm1_start_gtimer = 6
+000000AC                      204  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 84
+000000AC C1                   205  	push ax
+000000AD                      206  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 86
+000000AD 510B                 207  	mov a, #0x0B
+000000AF FC000000             208  	call !!_pdc_set_int_routine
+000000B3 A800                 209  	movw ax, [sp+0x00]
+000000B5                      210  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 87
+000000B5 FE0000               211  	call $!_tm_calc_counter
+000000B8 BD1A                 212  	movw 0xFFF1A, ax
+000000BA                      213  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 89
+000000BA 713BE2               214  	clr1 0xFFFE2.3
+000000BD                      215  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 90
+000000BD 713BE6               216  	clr1 0xFFFE6.3
+000000C0 34B201               217  	movw de, #0x01B2
+000000C3                      218  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 91
+000000C3 A9                   219  	movw ax, [de]
+000000C4 08                   220  	xch a, x
+000000C5 6C02                 221  	or a, #0x02
+000000C7 08                   222  	xch a, x
+000000C8 B9                   223  	movw [de], ax
+000000C9 C0                   224  	pop ax
+000000CA D7                   225  	ret
+000000CB                      226  .LFE8:
+000000CB                      227  	.TYPE _tm2_start_gtimer,function,.LFE9-_tm2_start_gtimer
+000000CB                      228  _tm2_start_gtimer:
+000000CB                      229  	.STACK _tm2_start_gtimer = 6
+000000CB                      230  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 94
+000000CB C1                   231  	push ax
+000000CC                      232  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 96
+000000CC 510C                 233  	mov a, #0x0C
+000000CE FC000000             234  	call !!_pdc_set_int_routine
+000000D2 34B601               235  	movw de, #0x01B6
+000000D5                      236  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 97
+000000D5 A9                   237  	movw ax, [de]
+000000D6 08                   238  	xch a, x
+000000D7 5C0F                 239  	and a, #0x0F
+000000D9 08                   240  	xch a, x
+000000DA B9                   241  	movw [de], ax
+000000DB A800                 242  	movw ax, [sp+0x00]
+000000DD                      243  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 98
+000000DD 44D107               244  	cmpw ax, #0x07D1
+000000E0 DC00                 245  	bc $.BB@LABEL@9_2
+000000E2                      246  .BB@LABEL@9_1:	; if_then_bb
+000000E2                      247  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 99
+000000E2 A9                   248  	movw ax, [de]
+000000E3 08                   249  	xch a, x
+000000E4 6CF0                 250  	or a, #0xF0
+000000E6 EF00                 251  	br $.BB@LABEL@9_5
+000000E8                      252  .BB@LABEL@9_2:	; if_else_bb
+000000E8                      253  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 100
+000000E8 441500               254  	cmpw ax, #0x0015
+000000EB A9                   255  	movw ax, [de]
+000000EC 08                   256  	xch a, x
+000000ED DC00                 257  	bc $.BB@LABEL@9_4
+000000EF                      258  .BB@LABEL@9_3:	; if_then_bb14
+000000EF                      259  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 101
+000000EF 6CA0                 260  	or a, #0xA0
+000000F1 EF00                 261  	br $.BB@LABEL@9_5
+000000F3                      262  .BB@LABEL@9_4:	; if_else_bb17
+000000F3                      263  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 103
+000000F3 6C40                 264  	or a, #0x40
+000000F5                      265  .BB@LABEL@9_5:	; if_else_bb17
+000000F5 08                   266  	xch a, x
+000000F6 B9                   267  	movw [de], ax
+000000F7 A800                 268  	movw ax, [sp+0x00]
+000000F9                      269  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 105
+000000F9 FE0000               270  	call $!_tm_calc_counter
+000000FC BE64                 271  	movw 0xFFF64, ax
+000000FE                      272  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 106
+000000FE 714BE2               273  	clr1 0xFFFE2.4
+00000101                      274  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 107
+00000101 714BE6               275  	clr1 0xFFFE6.4
+00000104 34B201               276  	movw de, #0x01B2
+00000107                      277  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 108
+00000107 A9                   278  	movw ax, [de]
+00000108 08                   279  	xch a, x
+00000109 6C04                 280  	or a, #0x04
+0000010B 08                   281  	xch a, x
+0000010C B9                   282  	movw [de], ax
+0000010D C0                   283  	pop ax
+0000010E D7                   284  	ret
+0000010F                      285  .LFE9:
+0000010F                      286  	.TYPE _tm1_is_start_gtimer,function,.LFE10-_tm1_is_start_gtimer
+0000010F                      287  _tm1_is_start_gtimer:
+0000010F                      288  	.STACK _tm1_is_start_gtimer = 4
+0000010F                      289  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 113
+0000010F AFB001               290  	movw ax, !0x01B0
+00000112 60                   291  	mov a, x
+00000113 311A                 292  	shr a, 0x01
+00000115 5C01                 293  	and a, #0x01
+00000117 D7                   294  	ret
+00000118                      295  .LFE10:
+00000118                      296  	.TYPE _tm3_start_gtimer,function,.LFE11-_tm3_start_gtimer
+00000118                      297  _tm3_start_gtimer:
+00000118                      298  	.STACK _tm3_start_gtimer = 6
+00000118                      299  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 119
+00000118 C1                   300  	push ax
+00000119                      301  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 121
+00000119 510D                 302  	mov a, #0x0D
+0000011B FC000000             303  	call !!_pdc_set_int_routine
+0000011F A800                 304  	movw ax, [sp+0x00]
+00000121                      305  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 122
+00000121 FE0000               306  	call $!_tm_calc_counter
+00000124 BE66                 307  	movw 0xFFF66, ax
+00000126                      308  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 124
+00000126 715BE2               309  	clr1 0xFFFE2.5
+00000129                      310  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 125
+00000129 715BE6               311  	clr1 0xFFFE6.5
+0000012C 34B201               312  	movw de, #0x01B2
+0000012F                      313  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 126
+0000012F A9                   314  	movw ax, [de]
+00000130 08                   315  	xch a, x
+00000131 6C08                 316  	or a, #0x08
+00000133 08                   317  	xch a, x
+00000134 B9                   318  	movw [de], ax
+00000135 C0                   319  	pop ax
+00000136 D7                   320  	ret
+00000137                      321  .LFE11:
+00000137                      322  	.TYPE _tm1_stop_gtimer,function,.LFE12-_tm1_stop_gtimer
+00000137                      323  _tm1_stop_gtimer:
+00000137                      324  	.STACK _tm1_stop_gtimer = 4
+00000137                      325  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 128
+00000137 34B401               326  	movw de, #0x01B4
+0000013A                      327  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 130
+0000013A A9                   328  	movw ax, [de]
+0000013B 08                   329  	xch a, x
+0000013C 6C02                 330  	or a, #0x02
+0000013E 08                   331  	xch a, x
+0000013F B9                   332  	movw [de], ax
+00000140                      333  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 131
+00000140 713BE2               334  	clr1 0xFFFE2.3
+00000143                      335  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 132
+00000143 713AE6               336  	set1 0xFFFE6.3
+00000146 D7                   337  	ret
+00000147                      338  .LFE12:
+00000147                      339  	.TYPE _tm2_stop_gtimer,function,.LFE13-_tm2_stop_gtimer
+00000147                      340  _tm2_stop_gtimer:
+00000147                      341  	.STACK _tm2_stop_gtimer = 4
+00000147                      342  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 135
+00000147 34B401               343  	movw de, #0x01B4
+0000014A                      344  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 137
+0000014A A9                   345  	movw ax, [de]
+0000014B 08                   346  	xch a, x
+0000014C 6C04                 347  	or a, #0x04
+0000014E 08                   348  	xch a, x
+0000014F B9                   349  	movw [de], ax
+00000150                      350  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 138
+00000150 714BE2               351  	clr1 0xFFFE2.4
+00000153                      352  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 139
+00000153 714AE6               353  	set1 0xFFFE6.4
+00000156 D7                   354  	ret
+00000157                      355  .LFE13:
+00000157                      356  	.TYPE _tm3_stop_gtimer,function,.LFE14-_tm3_stop_gtimer
+00000157                      357  _tm3_stop_gtimer:
+00000157                      358  	.STACK _tm3_stop_gtimer = 4
+00000157                      359  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 142
+00000157 34B401               360  	movw de, #0x01B4
+0000015A                      361  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 144
+0000015A A9                   362  	movw ax, [de]
+0000015B 08                   363  	xch a, x
+0000015C 6C08                 364  	or a, #0x08
+0000015E 08                   365  	xch a, x
+0000015F B9                   366  	movw [de], ax
+00000160                      367  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 145
+00000160 715BE2               368  	clr1 0xFFFE2.5
+00000163                      369  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 146
+00000163 715AE6               370  	set1 0xFFFE6.5
+00000166 D7                   371  	ret
+00000167                      372  .LFE14:
+00000167                      373  	.TYPE _tm_calc_counter,function,.LFE15-_tm_calc_counter
+00000167                      374  _tm_calc_counter:
+00000167                      375  	.STACK _tm_calc_counter = 4
+00000167                      376  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 149
+00000167 44D107               377  	cmpw ax, #0x07D1
+0000016A                      378  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 152
+0000016A DC00                 379  	bc $.BB@LABEL@15_3
+0000016C                      380  .BB@LABEL@15_1:	; if_then_bb
+0000016C                      381  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 154
+0000016C 32DC02               382  	movw bc, #0x02DC
+0000016F 34E803               383  	movw de, #0x03E8
+00000172                      384  .BB@LABEL@15_2:	; if_then_bb
+00000172 CEFB01               385  	mulhu
+00000175 360000               386  	movw hl, #0x0000
+00000178                      387  	divwu
+00000178 CEFB0B                  	-- div**
+0000017B 00                      	-- nop
+0000017C B1                   388  	decw ax
+0000017D                      389  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 163
+0000017D D7                   390  	ret
+0000017E                      391  .BB@LABEL@15_3:	; if_else_bb
+0000017E                      392  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 155
+0000017E 441500               393  	cmpw ax, #0x0015
+00000181 DC00                 394  	bc $.BB@LABEL@15_5
+00000183                      395  .BB@LABEL@15_4:	; if_then_bb14
+00000183                      396  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 157
+00000183 32EA00               397  	movw bc, #0x00EA
+00000186 340A00               398  	movw de, #0x000A
+00000189 EF00                 399  	br $.BB@LABEL@15_2
+0000018B                      400  .BB@LABEL@15_5:	; if_else_bb20
+0000018B                      401  	.LINE "C:/Users/AnthonyRusso/Documents/Workspace/R9A02G011PDC_Lib_sample_premium/PDC/user_timer.c", 160
+0000018B 32DC05               402  	movw bc, #0x05DC
+0000018E CEFB02               403  	mulh
+00000191 B1                   404  	decw ax
+00000192 D7                   405  	ret
+00000193                      406  .LFE15:
+
+Section List
+Attr     Size                Name
+
+TEXTF               403 (00000193) .textf
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\user_timer.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Auth\PDC\subdev -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Auth\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Auth -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\Core -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC -include=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\PDC\Lib -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output=C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Auth\Obj\Release\user_timer.obj C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Auth\Obj\Release\user_timer.asm 
+
