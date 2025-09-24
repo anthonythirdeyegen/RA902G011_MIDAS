@@ -8,8 +8,11 @@
 #include "user_timer.h"
 #include "led_ctrl.h"
 #include "sw_ctrl.h"
+#include <stdint.h>
 
 #define DATA_MESSAGE		0x01
+#define CMD_DP_STATUS     0x10U   // “Status Update”
+#define CMD_DP_CONFIGURE  0x11U   // “Configure”
 
 USHORT gusTemp;
 UCHAR  gucVdmFlg;
@@ -150,98 +153,93 @@ void user_func_event (void)
 	}
 	else if (gPdc.uPdEvent.bit.bChkRcvPDM != 0U) {
 		if (gRcvMess.uInfo.bit.bClass == DATA_MESSAGE) {
-			SVDM_HEADER uVdmhead;
-			uVdmhead.data[0] = gRcvMess.uspData[0];
-			uVdmhead.data[1] = gRcvMess.uspData[1];
-			if (uVdmhead.bit_s.bVdmType == SVDM_VDMH_TYPE_SVDM) {
-				if (   (uVdmhead.bit_s.bCmd   == SVDM_VDMH_CMD_DIS_SVIDS)
-				    && (uVdmhead.bit_s.bSVID == PDSID                   )
-				    && (gRcvMess.uInfo.bit.bLen == 4U)
-				    && (   (uStatus.bit.bDR        == 0U)
-					    || (uStatus.bit.bComRevPDC != 0U))) {
-					if (uStatus.bit.bComRevPDC != 0U) {
-						gSndMess.uspData[0] = 0xA042U;
-					}
-					else {
-						gSndMess.uspData[0] = 0x8042U;
-					}
-					gSndMess.uspData[1] = PDSID;
-					gSndMess.uspData[2] = 0x0000U;
-					gSndMess.uspData[3] = DUMMYSID;
-					gSndMess.uInfo.bit.bLen = 8U;
-					pdc_set_cmd(PDC_CMD_SND_VDM, 0);
-				}
-				else if (   (uVdmhead.bit_s.bCmd  == SVDM_VDMH_CMD_DIS_MODES)
-				         && (uVdmhead.bit_s.bSVID == DUMMYSID               )
-				         && (gRcvMess.uInfo.bit.bLen == 4U)
-				         && (   (uStatus.bit.bDR        == 0U)
-				             || (uStatus.bit.bComRevPDC != 0U))) {
-					if (uStatus.bit.bComRevPDC != 0U) {
-						gSndMess.uspData[0] = 0xA043U;
-					}
-					else {
-						gSndMess.uspData[0] = 0x8043U;
-					}
-					gSndMess.uspData[1] = DUMMYSID;
-					gSndMess.uspData[2] = 0x0001U;
-					gSndMess.uspData[3] = 0x0000U;
-					gSndMess.uInfo.bit.bLen = 8U;
-					pdc_set_cmd(PDC_CMD_SND_VDM, 0);
-				}
-				else if (   (uVdmhead.bit_s.bCmd  == SVDM_VDMH_CMD_ENTER_MODE)
-				         && (uVdmhead.bit_s.bSVID == DUMMYSID                )
-				         && (gRcvMess.uInfo.bit.bLen == 4U)
-				         && (uStatus.bit.bDR        == 0U)) {
-					pd_tm_start_user_cnt(TM_ID_USER2);
-					gucEnterModeEnable = 1U;
-					
-					if (uStatus.bit.bComRevPDC != 0U) {
-						gSndMess.uspData[0] = 0xA044U;
-					}
-					else {
-						gSndMess.uspData[0] = 0x8044U;
-					}
-					gSndMess.uspData[1] = DUMMYSID;
-					gSndMess.uInfo.bit.bLen = 4U;
-					pdc_set_cmd(PDC_CMD_SND_VDM, 0);
-				}
-				else if (   (uVdmhead.bit_s.bCmd  == SVDM_VDMH_CMD_EXIT_MODE)
-				         && (uVdmhead.bit_s.bSVID == DUMMYSID               )
-				         && (gRcvMess.uInfo.bit.bLen == 4U)
-				         && (uStatus.bit.bDR        == 0U)) {
-					pd_tm_stop_user_cnt(TM_ID_USER2);
-					gucEnterModeEnable = 0U;
-					gucLEDStatus = 0U;
-					
-					if (uStatus.bit.bComRevPDC != 0U) {
-						gSndMess.uspData[0] = 0xA045U;
-					}
-					else {
-						gSndMess.uspData[0] = 0x8045U;
-					}
-					gSndMess.uspData[1] = DUMMYSID;
-					gSndMess.uInfo.bit.bLen = 4U;
-					pdc_set_cmd(PDC_CMD_SND_VDM, 0);
-				}
-				else {
-					uVdmhead.bit_s.bCmdType = SVDM_VDMH_CMD_RESP_NACK;
-					if (uStatus.bit.bComRevPDC != 0U) {
-						gSndMess.uspData[0] = uVdmhead.data[0];
-					}
-					else {
-						gSndMess.uspData[0] = uVdmhead.data[1];
-					}
-					gSndMess.uspData[1] = PDSID;
-					gSndMess.uInfo.bit.bLen = 4U;
-					pdc_set_cmd(PDC_CMD_SND_VDM, 0);
-				}
-			}
-			else if (uStatus.bit.bComRevPDC == 1U) { // PD3
-				pdc_set_cmd(PDC_CMD_SND_NOT_SUPPORTED, 0);
-			}
-		}
-		gPdc.uPdEvent.bit.bChkRcvPDM = 0U;
-	}
+        		SVDM_HEADER uVdmhead;
+        		uVdmhead.data[0] = gRcvMess.uspData[0];
+        		uVdmhead.data[1] = gRcvMess.uspData[1];
+
+        	if (uVdmhead.bit_s.bVdmType == SVDM_VDMH_TYPE_SVDM) {
+            		USHORT *tx = gSndMess.uspData;
+
+            		// ---- Discover SVIDs ----
+            		if (uVdmhead.bit_s.bCmd == SVDM_VDMH_CMD_DIS_SVIDS) {
+               			// Reply with VESA SVID 0xFF01 + terminator 0x0000
+                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA042U : 0x8042U;
+                		tx[1] = 0xFF01U; // VESA
+                		tx[2] = 0x0000U; // terminator
+                		gSndMess.uInfo.bit.bLen = 6U; // 3 halfwords
+                		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+            		}
+
+            		// ---- Discover Modes (for VESA) ----
+            		else if ((uVdmhead.bit_s.bCmd == SVDM_VDMH_CMD_DIS_MODES) &&
+                     	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
+                		// Build a single DP Mode VDO (example: DP 1.3, UFP_D, pin assignment D/E)
+                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA043U : 0x8043U;
+                		tx[1] = 0xFF01U;  // VESA SVID
+                		// DP Mode VDO (example values, adjust bits for your design)
+                		tx[2] = 0x00010280U; // revision=1.3, UFP_D=1, pin D/E supported
+                		gSndMess.uInfo.bit.bLen = 6U;
+	                	pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+	        	}
+
+            		// ---- Enter Mode (for DP) ----
+            		else if ((uVdmhead.bit_s.bCmd == SVDM_VDMH_CMD_ENTER_MODE) &&
+                     	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
+                		gucEnterModeEnable = 1U;
+                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA044U : 0x8044U;
+                		tx[1] = 0xFF01U;
+                		gSndMess.uInfo.bit.bLen = 4U;
+                		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+            		}
+
+            		// ---- Exit Mode (for DP) ----
+            		else if ((uVdmhead.bit_s.bCmd == SVDM_VDMH_CMD_EXIT_MODE) &&
+                     	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
+                		gucEnterModeEnable = 0U;
+                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA045U : 0x8045U;
+                		tx[1] = 0xFF01U;
+                		gSndMess.uInfo.bit.bLen = 4U;
+                		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+            		}
+
+           		// ---- DP Status Update ----
+            		else if ((uVdmhead.bit_s.bCmd == CMD_DP_STATUS) &&
+                     	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
+                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA046U : 0x8046U;
+                		tx[1] = 0xFF01U;
+                		// DP Status VDO: HPD=1, IRQ=0, role=UFP_D
+                		tx[2] = 0x00000001U;
+                		gSndMess.uInfo.bit.bLen = 6U;
+                		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+            		}
+
+            		// ---- DP Configure ----
+            		else if ((uVdmhead.bit_s.bCmd == CMD_DP_CONFIGURE) &&
+                     	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
+                		// Validate pin assignment and ACK
+                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA047U : 0x8047U;
+                		tx[1] = 0xFF01U;
+                		gSndMess.uInfo.bit.bLen = 4U;
+                		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+                		// TODO: switch mux/HPD line here
+            		}
+
+            		// ---- Default: NACK ----
+            		else {
+                	uVdmhead.bit_s.bCmdType = SVDM_VDMH_CMD_RESP_NACK;
+                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? uVdmhead.data[0] : uVdmhead.data[1];
+                		tx[1] = 0xFF01U;
+                		gSndMess.uInfo.bit.bLen = 4U;
+               			pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+            		}
+        	}
+		
+        	else if (uStatus.bit.bComRevPDC == 1U) { // PD3
+            		pdc_set_cmd(PDC_CMD_SND_NOT_SUPPORTED, PDC_TARGET_SOP);
+        	}
+    	}
+    	gPdc.uPdEvent.bit.bChkRcvPDM = 0U;
+}
 	else if (gPdc.uPdEvent.bit.bNonPDCon != 0U) {
 		if (uStatus.bit.bPR != 0U) { // ATT.SRC
 			gPdc.uPdEvent.bit.bNonPDCon = 0U;

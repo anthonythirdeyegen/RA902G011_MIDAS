@@ -1561,6 +1561,8 @@
             <Path>PDC\subdev\isl95338.h</Path>
             <Path>PDC\subdev\subdev_ctrl.c</Path>
             <Path>PDC\subdev\subdev_ctrl.h</Path>
+            <Path>PDC\subdev\tmuxhs4446.c</Path>
+            <Path>PDC\subdev\tmuxhs4446.h</Path>
           </Category>
         </Category>
       </Category>
@@ -1590,6 +1592,7 @@
           <Path>Obj\DefaultBuild\user_main_protection.obj</Path>
           <Path>Obj\DefaultBuild\isl95338.obj</Path>
           <Path>Obj\DefaultBuild\subdev_ctrl.obj</Path>
+          <Path>Obj\DefaultBuild\tmuxhs4446.obj</Path>
           <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
         </LinkOrder>
         <CommonOptions>
@@ -1698,6 +1701,7 @@
           <Path>Obj\Release\user_main_protection.obj</Path>
           <Path>Obj\Release\isl95338.obj</Path>
           <Path>Obj\Release\subdev_ctrl.obj</Path>
+          <Path>Obj\Release\tmuxhs4446.obj</Path>
           <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
         </LinkOrder>
         <CommonOptions>
@@ -1750,6 +1754,7 @@
           <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\malloc_n.lib</Option>
           <Option>-LIBrary=%MicomToolPath%\CC-RL\V1.15.00\lib\rl78em4r.lib</Option>
           <Option>-OCDBG=04</Option>
+          <Option>-DEBUG_MONITOR</Option>
           <Option>-USER_OPT_BYTE=7F7BE0</Option>
           <Option>-LISt=Obj\%BuildModeName%\%ProjectName%.map</Option>
           <Option>-SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT</Option>

@@ -12,22 +12,79 @@
       <DebuggerProperty-OptionalProperty-Assemble-DisplaySymbol>SymbolOffset</DebuggerProperty-OptionalProperty-Assemble-DisplaySymbol>
       <DebuggerProperty-OptionalProperty-Assemble-DisplayFunctionName>Yes</DebuggerProperty-OptionalProperty-Assemble-DisplayFunctionName>
     </Instance>
+    <Instance Guid="b3648f00-5ee1-44bd-9fb9-d35fbaeed535">
+      <DeviceChangedCounter>0</DeviceChangedCounter>
+      <DeviceName>R9A02G011</DeviceName>
+      <DebuggerProperty-OptionalProperty-Assemble-DisplaySymbol>SymbolOffset</DebuggerProperty-OptionalProperty-Assemble-DisplaySymbol>
+      <DebuggerProperty-OptionalProperty-Assemble-DisplayFunctionName>Yes</DebuggerProperty-OptionalProperty-Assemble-DisplayFunctionName>
+    </Instance>
   </Class>
   <Class Guid="2c267d36-9968-416b-8f39-cfcf1e069830">
     <Instance Guid="9a2aa537-6164-42cd-80e4-e708b32cd890">
       <Bookmarks>0</Bookmarks>
     </Instance>
   </Class>
-  <Class Guid="29b411d9-bd89-4bd0-8039-3f500de10677">
-    <Instance Guid="76aae16a-9b3c-4e4f-9390-f377b426311f">
-      <ProjectSaveKeyHoldPrebuildOptions>False</ProjectSaveKeyHoldPrebuildOptions>
-      <ProjectSaveKeyMeasurmentConditionOperationAfterRecordMemory>NonStopOverwriteMemory</ProjectSaveKeyMeasurmentConditionOperationAfterRecordMemory>
-      <ProjectSaveKeyMeasurmentConditionSamplingTime>ST10US</ProjectSaveKeyMeasurmentConditionSamplingTime>
-      <ProjectSaveKeyMeasurmentConditionAcqCond>All</ProjectSaveKeyMeasurmentConditionAcqCond>
-      <ProjectSaveKeyTriggerConditionUseTriggerFunction>False</ProjectSaveKeyTriggerConditionUseTriggerFunction>
-      <ProjectSaveKeyFindCondition>OverThreshold</ProjectSaveKeyFindCondition>
-      <ProjectSaveKeyPanelStatusHideAllOptionalLine>False</ProjectSaveKeyPanelStatusHideAllOptionalLine>
-      <ProjectSaveKeyPanelStatusConnectSourceWindow>False</ProjectSaveKeyPanelStatusConnectSourceWindow>
+  <Class Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
+    <Instance Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
+      <DebugConsole-COMport>COM1</DebugConsole-COMport>
+      <DebugConsole-Baudrate>0</DebugConsole-Baudrate>
+      <DebugConsole-Echoback>enable</DebugConsole-Echoback>
+      <DebugConsole-EnableDisable>enable</DebugConsole-EnableDisable>
+    </Instance>
+  </Class>
+  <Class Guid="2e5a2d99-73c8-434e-963e-228cb95ebec4">
+    <Instance Guid="00000000-0000-0000-0000-000000000000">
+      <Current.DocListVersion>1</Current.DocListVersion>
+      <Current.UpdateDate>638941390025129248</Current.UpdateDate>
+      <Current.DocList.UM.Count>1</Current.DocList.UM.Count>
+      <Current.DocList.UM.Doc000.DocType>DTYPE_UM</Current.DocList.UM.Doc000.DocType>
+      <Current.DocList.UM.Doc000.Region>RegionAm</Current.DocList.UM.Doc000.Region>
+      <Current.DocList.UM.Doc000.Title>R9A02G011 User's Manual: Hardware</Current.DocList.UM.Doc000.Title>
+      <Current.DocList.UM.Doc000.RevNo>Rev.2.50</Current.DocList.UM.Doc000.RevNo>
+      <Current.DocList.UM.Doc000.IssueDate>2025/01/20</Current.DocList.UM.Doc000.IssueDate>
+      <Current.DocList.UM.Doc000.DocNo>R19UH0102EJ0250</Current.DocList.UM.Doc000.DocNo>
+      <Current.DocList.UM.Doc000.DocURL>/document/mah/r9a02g011-users-manual-hardware/r19uh0102ej0250-usb.pdf</Current.DocList.UM.Doc000.DocURL>
+      <Current.DocList.UM.Doc000.UpdateType>DUTYPE_NONE</Current.DocList.UM.Doc000.UpdateType>
+      <Current.DocList.UM.Doc000.IsRead>False</Current.DocList.UM.Doc000.IsRead>
+      <Current.DocList.TU.Count>1</Current.DocList.TU.Count>
+      <Current.DocList.TU.Doc000.DocType>DTYPE_TU</Current.DocList.TU.Doc000.DocType>
+      <Current.DocList.TU.Doc000.Region>RegionAm</Current.DocList.TU.Doc000.Region>
+      <Current.DocList.TU.Doc000.Title>Notification for additional restriction on usage of SMBus Interface of USB Power Delivery Controller (R9A02G011, R9J02G012)</Current.DocList.TU.Doc000.Title>
+      <Current.DocList.TU.Doc000.RevNo>-</Current.DocList.TU.Doc000.RevNo>
+      <Current.DocList.TU.Doc000.IssueDate>2024/04/17</Current.DocList.TU.Doc000.IssueDate>
+      <Current.DocList.TU.Doc000.DocNo>TN-USB-A0005A/E</Current.DocList.TU.Doc000.DocNo>
+      <Current.DocList.TU.Doc000.DocURL>/document/tcu/notification-additional-restriction-usage-smbus-interface-usb-power-delivery-controller-r9a02g011/REN_tnusba0005ae.pdf_TCU_20240417.pdf</Current.DocList.TU.Doc000.DocURL>
+      <Current.DocList.TU.Doc000.UpdateType>DUTYPE_NONE</Current.DocList.TU.Doc000.UpdateType>
+      <Current.DocList.TU.Doc000.IsRead>False</Current.DocList.TU.Doc000.IsRead>
+      <Current.DocList.AN.Count>1</Current.DocList.AN.Count>
+      <Current.DocList.AN.Doc000.DocType>DTYPE_AN</Current.DocList.AN.Doc000.DocType>
+      <Current.DocList.AN.Doc000.Region>RegionAm</Current.DocList.AN.Doc000.Region>
+      <Current.DocList.AN.Doc000.Title>R9A02G011 / R9J02G012 Flash memory Programming Guide</Current.DocList.AN.Doc000.Title>
+      <Current.DocList.AN.Doc000.RevNo>Rev.2.20</Current.DocList.AN.Doc000.RevNo>
+      <Current.DocList.AN.Doc000.IssueDate>2022/04/22</Current.DocList.AN.Doc000.IssueDate>
+      <Current.DocList.AN.Doc000.DocNo>R19AN0060EJ0220</Current.DocList.AN.Doc000.DocNo>
+      <Current.DocList.AN.Doc000.DocURL>/document/apn/r9a02g011-r9j02g012-flash-memory-programming-guide/r19an0060ej0220-usb.pdf</Current.DocList.AN.Doc000.DocURL>
+      <Current.DocList.AN.Doc000.UpdateType>DUTYPE_NONE</Current.DocList.AN.Doc000.UpdateType>
+      <Current.DocList.AN.Doc000.IsRead>False</Current.DocList.AN.Doc000.IsRead>
+      <Current.DocList.AN.Doc000.SampleCode>False</Current.DocList.AN.Doc000.SampleCode>
+      <Current.DocList.AN.Doc000.SampleCodeURL />
+      <Current.DocList.AN.Doc000.SampleCodeZipURL />
+      <Current.DocList.AN.Doc000.InfoPro.Count>0</Current.DocList.AN.Doc000.InfoPro.Count>
+      <Current.DocList.AN.Doc000.InfoPro />
+      <Current.DocList.AN.Doc000.InfoFunc.Count>1</Current.DocList.AN.Doc000.InfoFunc.Count>
+      <Current.DocList.AN.Doc000.InfoFunc>USB;</Current.DocList.AN.Doc000.InfoFunc>
+      <Current.DocList.AN.Doc000.InfoApp.Count>0</Current.DocList.AN.Doc000.InfoApp.Count>
+      <Current.DocList.AN.Doc000.InfoApp />
+      <Current.DocList.TN.Count>1</Current.DocList.TN.Count>
+      <Current.DocList.TN.Doc000.DocType>DTYPE_TN</Current.DocList.TN.Doc000.DocType>
+      <Current.DocList.TN.Doc000.Region>RegionAm</Current.DocList.TN.Doc000.Region>
+      <Current.DocList.TN.Doc000.Title>[Notes] Renesas Flash Programmer</Current.DocList.TN.Doc000.Title>
+      <Current.DocList.TN.Doc000.RevNo>Rev.1.00</Current.DocList.TN.Doc000.RevNo>
+      <Current.DocList.TN.Doc000.IssueDate>2021/01/16</Current.DocList.TN.Doc000.IssueDate>
+      <Current.DocList.TN.Doc000.DocNo>R20TS0651EJ0100</Current.DocList.TN.Doc000.DocNo>
+      <Current.DocList.TN.Doc000.DocURL>/document/tnn/notes-renesas-flash-programmer-0/REN_r20ts0651ej0100-rfptn_TNN_20210116.pdf</Current.DocList.TN.Doc000.DocURL>
+      <Current.DocList.TN.Doc000.UpdateType>DUTYPE_NONE</Current.DocList.TN.Doc000.UpdateType>
+      <Current.DocList.TN.Doc000.IsRead>False</Current.DocList.TN.Doc000.IsRead>
     </Instance>
   </Class>
   <Class Guid="eeae2c1c-3b17-44ca-9a69-17638edf07a9">
@@ -191,12 +248,16 @@
       <VirtualBoardDockingVisibleValue>True</VirtualBoardDockingVisibleValue>
     </Instance>
   </Class>
-  <Class Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
-    <Instance Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
-      <DebugConsole-COMport>COM1</DebugConsole-COMport>
-      <DebugConsole-Baudrate>0</DebugConsole-Baudrate>
-      <DebugConsole-Echoback>enable</DebugConsole-Echoback>
-      <DebugConsole-EnableDisable>enable</DebugConsole-EnableDisable>
+  <Class Guid="29b411d9-bd89-4bd0-8039-3f500de10677">
+    <Instance Guid="76aae16a-9b3c-4e4f-9390-f377b426311f">
+      <ProjectSaveKeyHoldPrebuildOptions>False</ProjectSaveKeyHoldPrebuildOptions>
+      <ProjectSaveKeyMeasurmentConditionOperationAfterRecordMemory>NonStopOverwriteMemory</ProjectSaveKeyMeasurmentConditionOperationAfterRecordMemory>
+      <ProjectSaveKeyMeasurmentConditionSamplingTime>ST10US</ProjectSaveKeyMeasurmentConditionSamplingTime>
+      <ProjectSaveKeyMeasurmentConditionAcqCond>All</ProjectSaveKeyMeasurmentConditionAcqCond>
+      <ProjectSaveKeyTriggerConditionUseTriggerFunction>False</ProjectSaveKeyTriggerConditionUseTriggerFunction>
+      <ProjectSaveKeyFindCondition>OverThreshold</ProjectSaveKeyFindCondition>
+      <ProjectSaveKeyPanelStatusHideAllOptionalLine>False</ProjectSaveKeyPanelStatusHideAllOptionalLine>
+      <ProjectSaveKeyPanelStatusConnectSourceWindow>False</ProjectSaveKeyPanelStatusConnectSourceWindow>
     </Instance>
   </Class>
 </CubeSuiteProject.User>

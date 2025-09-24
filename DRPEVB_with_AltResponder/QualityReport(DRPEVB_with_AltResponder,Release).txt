@@ -1,90 +1,25 @@
 QualityReport
-Tuesday, May 6, 2025 10:51:32 AM
+Wednesday, September 24, 2025 1:38:48 PM
 
 ------ Start build(DRPEVB_with_AltResponder, Release) ------
-C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\ccrl.exe ..\..\Core\r_systeminit.c ..\..\PDC\smbm_ctrl.c ..\..\PDC\user_timer.c pd_defs.c r_main.c R_Main_UserInit.c PDC\dcdc_ctrl.c PDC\led_ctrl.c PDC\sw_ctrl.c PDC\user_main.c PDC\user_main_protection.c PDC\subdev\isl95338.c PDC\subdev\subdev_ctrl.c -cpu=S3 -obj_path=Obj\Release "-dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -g -Osame_code -I PDC\subdev -I PDC -I . -I ..\..\PDC\Lib -I ..\..\PDC -I ..\..\Core -D RELEASE_BUILD=1,PPS_SPRT=0 -asm_path=Obj\Release -asmopt=-prn_path=Obj\Release -c -MAKEUD=Obj\Release -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_4c3a7638c87f40a0a08c50a18542095edbh5bdb1.u5c -msg_lang=english
-W0511187:The evaluation period for the option "-Odefault" of CC-RL V1 has expired. It is implicitly changed to "-Olite". Please consider purchasing the product to continue using "-Odefault". By explicitly specifying "-Olite" or "-Onothing", this warning message disappears. 
-W0511123:The "-Osame_code" option is ignored when the "-Olite" option is specified at the same time.
-C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\ccrl.exe ..\..\Core\cstart.asm ..\..\Core\stkinit.asm -cpu=S3 -obj_path=Obj\Release "-dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -g -I . -c -MAKEUD=Obj\Release -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_37b58b5009b14f1eac0e71d0c4259c9bz21kgrgq.j0m -msg_lang=english
-C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\rlink.exe -MAKEUD=Obj\Release\DRPEVB_with_AltResponder.lk.ud -subcommand=Obj\Release\DRPEVB_with_AltResponder.clnk
-W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
-W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
-W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
-Renesas Optimizing Linker Completed
------- Build ended(Error:0, Warning:5)(DRPEVB_with_AltResponder, Release) ------
-
---- CommandFile 1 ---
-Obj\Release\DRPEVB_with_AltResponder.clnk :
--Input=Obj\Release\cstart.obj
--Input=Obj\Release\r_systeminit.obj
--Input=Obj\Release\stkinit.obj
--Input=Obj\Release\smbm_ctrl.obj
--Input=Obj\Release\user_timer.obj
--Input=Obj\Release\pd_defs.obj
--Input=Obj\Release\r_main.obj
--Input=Obj\Release\R_Main_UserInit.obj
--Input=Obj\Release\dcdc_ctrl.obj
--Input=Obj\Release\led_ctrl.obj
--Input=Obj\Release\sw_ctrl.obj
--Input=Obj\Release\user_main.obj
--Input=Obj\Release\user_main_protection.obj
--Input=Obj\Release\isl95338.obj
--Input=Obj\Release\subdev_ctrl.obj
--LIBrary=..\..\PDC\Lib\R9A02G011PDC.lib
--SECURITY_ID=00000000000000000000
--DEVICE=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
--DEBug
--NOCOmpress
--NOOPtimize
--OUtput=Obj\Release\DRPEVB_with_AltResponder.abs
--LIBrary=C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\lib\rl78em4s.lib
--LIBrary=C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\lib\malloc_n.lib
--LIBrary=C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\lib\rl78em4r.lib
--OCDBG=04
--USER_OPT_BYTE=7F7BE0
--LISt=Obj\Release\DRPEVB_with_AltResponder.map
--SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT
--STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20
--ROm=.data=.dataR
--ROm=.sdata=.sdataR
--NOMessage
--STACk
--NOLOgo
--end
--Input=Obj\Release\DRPEVB_with_AltResponder.abs
--DEVICE=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
--OUtput=Obj\Release\DRPEVB_with_AltResponder.hex
--FOrm=Hexadecimal
--BYte_count=20
--CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0
--NOMessage
--end
--Input=Obj\Release\DRPEVB_with_AltResponder.abs
--DEVICE=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
--OUtput=..\Release\DRPEVB_with_AltResponder\Main.hex=2000-FBFF
--FOrm=Hexadecimal
--SPace=00
--BYte_count=20
--CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0
--NOMessage
--exit
+------ Build ended(Error:0, Warning:0)(DRPEVB_with_AltResponder, Release) ------
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.abs: 9921c130ac0014f8bd282984512296c9ee3543d7
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.hex: 03c1e23a79d429d2e4f85f379224d685b548f15f
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\Release\DRPEVB_with_AltResponder\Main.hex: 0d60ad98c24e33e8cf1eb62c352a82610dd08254
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.abs: da09e0c91aefe4d6b1ff9ec83aea030741961746
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.hex: 671974065e7a9934bd0855e99c809781369d3491
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\Release\DRPEVB_with_AltResponder\Main.hex: 7bfbb3d45cd165046f7f59489532fe8289f44c5c
 
 
 --- System Information ---
 *OS Version
- Microsoft Windows 11 Pro (-, 10.0.22631, WOW64)
+ Microsoft Windows 11 Pro (-, 10.0.26100, WOW64)
 *Language
  English (United States)
 *.NET Framework Version
  Microsoft .NET Framework 4 [.NET 4.8 or later] (533320)
 *WebView2 Version
- 136.0.3240.50
+ 140.0.3485.81
 
 --- Application Information ---
 *Product Name
@@ -96,20 +31,20 @@ C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G
 *Assembly Version
  3.12.10.1
 *Sales Area
- Japan
+ Global
 *Product License
  
 *Execution Place
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  252 MB
+  388 MB
  *Number of GDI Objects
-  2108
+  2380
  *Number of USER Objects
-  1073
+  1368
  *Opened Files
-  9 editors, 9 files, 64 KB
+  20 editors, 20 files, 148 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in
@@ -245,7 +180,7 @@ Device Information Common Interface
   DeviceInformation.dll
 
 --- Main Project Information ---
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\R9A02G011_251_DRPEVB.mtpj
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\R9A02G011_251_DRPEVB.mtpj
 Microcontroller Information
  *R9A02G011
   *File Name: Version
@@ -270,7 +205,7 @@ Build Tool Information
  
 
 Debug Tool Information
- *RL78 E1(Serial)
+ *RL78 E2 Lite
   Debugger Library V8.13.00.04 [26 Nov 2024]
   
 
@@ -290,7 +225,7 @@ Other Tool Information
  *None
 
 --- Subproject Information(1/8) ---
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\DRPEVB_Standard.mtsp
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_Standard\DRPEVB_Standard.mtsp
 Microcontroller Information
  *R9A02G011
   *File Name: Version
@@ -315,7 +250,7 @@ Build Tool Information
  
 
 Debug Tool Information
- *RL78 E1(Serial)
+ *RL78 E2 Lite
   Debugger Library V8.13.00.04 [26 Nov 2024]
   
 
@@ -335,7 +270,7 @@ Other Tool Information
  *None
 
 --- Subproject Information(2/8) ---
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Auth\DRPEVB_with_Auth.mtsp
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Auth\DRPEVB_with_Auth.mtsp
 Microcontroller Information
  *R9A02G011
   *File Name: Version
@@ -380,7 +315,7 @@ Other Tool Information
  *None
 
 --- Subproject Information(3/8) ---
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\DRPEVB_with_SMBS.mtsp
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\DRPEVB_with_SMBS.mtsp
 Microcontroller Information
  *R9A02G011
   *File Name: Version
@@ -425,7 +360,7 @@ Other Tool Information
  *None
 
 --- Subproject Information(4/8) ---
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_ISL9241\DRPEVB_ISL9241.mtsp
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_ISL9241\DRPEVB_ISL9241.mtsp
 Microcontroller Information
  *R9A02G011
   *File Name: Version
@@ -470,7 +405,7 @@ Other Tool Information
  *None
 
 --- Subproject Information(5/8) ---
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltInitiator\DRPEVB_with_AltInitiator.mtsp
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltInitiator\DRPEVB_with_AltInitiator.mtsp
 Microcontroller Information
  *R9A02G011
   *File Name: Version
@@ -515,7 +450,7 @@ Other Tool Information
  *None
 
 --- Subproject Information(6/8) ---
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\DRPEVB_with_AltResponder.mtsp
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\DRPEVB_with_AltResponder.mtsp
 Microcontroller Information
  *R9A02G011
   *File Name: Version
@@ -540,7 +475,7 @@ Build Tool Information
  
 
 Debug Tool Information
- *RL78 E1(Serial)
+ *RL78 E2 Lite
   Debugger Library V8.13.00.04 [26 Nov 2024]
   
 
@@ -560,7 +495,7 @@ Other Tool Information
  *None
 
 --- Subproject Information(7/8) ---
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\DRPEVB_with_Billboard.mtsp
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Billboard\DRPEVB_with_Billboard.mtsp
 Microcontroller Information
  *R9A02G011
   *File Name: Version
@@ -605,7 +540,7 @@ Other Tool Information
  *None
 
 --- Subproject Information(8/8) ---
-C:\Users\AnthonyRusso\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_PPSsink\DRPEVB_with_PPSsink.mtsp
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_PPSsink\DRPEVB_with_PPSsink.mtsp
 Microcontroller Information
  *R9A02G011
   *File Name: Version
