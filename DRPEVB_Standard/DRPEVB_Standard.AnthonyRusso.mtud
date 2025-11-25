@@ -24,6 +24,14 @@
       <Bookmarks>0</Bookmarks>
     </Instance>
   </Class>
+  <Class Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
+    <Instance Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
+      <DebugConsole-COMport>COM1</DebugConsole-COMport>
+      <DebugConsole-Baudrate>0</DebugConsole-Baudrate>
+      <DebugConsole-Echoback>enable</DebugConsole-Echoback>
+      <DebugConsole-EnableDisable>enable</DebugConsole-EnableDisable>
+    </Instance>
+  </Class>
   <Class Guid="2e5a2d99-73c8-434e-963e-228cb95ebec4">
     <Instance Guid="00000000-0000-0000-0000-000000000000">
       <Current.DocListVersion>1</Current.DocListVersion>
@@ -238,14 +246,6 @@
     <Instance Guid="9c3ccd2d-10ae-4bf1-a5c9-a95f518c52cc">
       <VirtualBoardDockingVisibleHasValue>True</VirtualBoardDockingVisibleHasValue>
       <VirtualBoardDockingVisibleValue>True</VirtualBoardDockingVisibleValue>
-    </Instance>
-  </Class>
-  <Class Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
-    <Instance Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
-      <DebugConsole-COMport>COM1</DebugConsole-COMport>
-      <DebugConsole-Baudrate>0</DebugConsole-Baudrate>
-      <DebugConsole-Echoback>enable</DebugConsole-Echoback>
-      <DebugConsole-EnableDisable>enable</DebugConsole-EnableDisable>
     </Instance>
   </Class>
   <Class Guid="29b411d9-bd89-4bd0-8039-3f500de10677">

@@ -1,12 +1,12 @@
 QualityReport
-Tuesday, November 25, 2025 12:19:44 PM
+Tuesday, November 25, 2025 6:05:14 PM
 
 ------ Start build(DRPEVB_with_AltInitiator, Release) ------
 ------ Build ended(Error:0, Warning:0)(DRPEVB_with_AltInitiator, Release) ------
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltInitiator\Obj\Release\DRPEVB_with_AltInitiator.abs: e330eb8d8c873d28794e2fe7ae4e3378d7a7167c
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltInitiator\Obj\Release\DRPEVB_with_AltInitiator.abs: b6cdd9ada2d52636136d566f558982143a8e4a3c
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltInitiator\Obj\Release\DRPEVB_with_AltInitiator.hex: acd354652df95576d30322f92df43807e4ea8b89
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\Release\DRPEVB_with_AltInitiator\Main.hex: b3a29d7e810d52b2c514e5e652be84894eb83a6c
 
@@ -38,13 +38,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  535 MB
+  400 MB
  *Number of GDI Objects
-  2258
+  2178
  *Number of USER Objects
-  1257
+  1197
  *Opened Files
-  9 editors, 9 files, 62 KB
+  10 editors, 10 files, 70 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in

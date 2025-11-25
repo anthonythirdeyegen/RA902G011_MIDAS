@@ -88,10 +88,45 @@ UCHAR  gucLEDStatus;
 
 static UCHAR gGetStatPending = 0;
 static UCHAR gGetStatLastResult = 0xFF;
+static UCHAR g_alert_pending = 0;
+static UCHAR g_hpd_irq_flag = 1U;
 
 void user_func_start_timer_thermistor(void);
 void user_func_stop_timer_thermistor (void);
 void user_func_intr_timer_thermistor (void);
+
+void hpd_int_init(void)
+{
+    	PM8_bit.no2 = 1U;   // P82 = input
+    
+   // 1. Mask INTP7
+	MK0L_bit.no7 = 1U;
+
+	// 2. Clear any pending flag
+	IF0L_bit.no7 = 0U;
+
+	// 4. Priority = highest
+	PR10L_bit.no7 = 0U;
+	PR00L_bit.no7 = 0U;
+
+	// 5. Unmask INTP7
+	MK0L_bit.no7 = 0U;
+}
+
+static UCHAR hpd_get_level(void)
+{
+    // Returns 1 if HPD pin is high, 0 if low
+    return (P1_bit.no7 ? 1U : 0U);
+}
+
+static void intp7_hpd_isr(void)
+{
+    // Clear flag
+    IF0L_bit.no7 = 0U;
+
+    // Tell system an HPD edge occurred
+    g_hpd_irq_flag = 1U;
+}
 
 void user_init(void)
 {
@@ -104,7 +139,9 @@ void user_init(void)
 	
 	// Output Port Setting
 	                   P1_bit.no6 = 0U; PM1_bit.no6 = 0U; // VC_DRV1   :P16
-	                   P1_bit.no7 = 0U; PM1_bit.no7 = 0U; // VC_DRV2   :P17
+	                   //P1_bit.no7 = 0U; PM1_bit.no7 = 0U; // VC_DRV2   :P17
+			   PM1_bit.no7 = 1U; // P17 = input
+			   P1_bit.no7 = 0U; // Clear latch
 	POM5_bit.no0 = 1U; P5_bit.no0 = 1U; PM5_bit.no0 = 0U; // DM        :P50(OpenDrain)
 	POM5_bit.no1 = 1U; P5_bit.no1 = 1U; PM5_bit.no1 = 0U; // DP        :P51(OpenDrain)
 	                   P7_bit.no1 = 0U; PM7_bit.no1 = 0U; // DISCHG    :P71
@@ -136,12 +173,65 @@ void user_init(void)
 	smbm_init();
 	led_init();
 	sw_init();
+	hpd_int_init();
+}
+
+dp_send_status_from_gpio(void)
+{
+	/*
+	USHORT dp_status = 0;
+
+    	// Always report “UFP_D connected” in bits 7:6
+    	dp_status |= DP_STATUS_CONN_UFP_D;
+
+    	// If HPD GPIO is high, set HPD bit
+    	if (hpd_get_level()) {
+        dp_status |= DP_STATUS_HPD_HIGH;
+    	}
+				
+    	tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA050U : 0x8050U;
+    	tx[1] = 0xFF01U;
+    	tx[2] = dp_status;
+    	tx[3] = 0x0000;
+        gSndMess.uInfo.bit.bLen = 8U;
+        pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+	*/
 }
 
 void user_func_event (void)
 {
 	PD_STATUS uStatus = pdc_get_status();
 	ULONG dp_mode_vdo = 0U;
+
+    	/* --- Handle HPD IRQ -> send DP_STATUS VDM, but only when PD core is idle --- */
+    	if (g_hpd_irq_flag) {
+        	UCHAR r = pdc_get_cmd_result();
+
+        	// Only send if no other PD command is in progress
+        	if (r != PDC_CMD_RSLT_PROGRESS && gucEnterModeEnable) {  // optional DP-mode gate
+            		USHORT *tx = gSndMess.uspData;
+            		USHORT dp_status = 0;
+
+            		g_hpd_irq_flag = 0U;      // consume the event
+
+            		// Always report “UFP_D connected” in bits 7:6
+            		dp_status |= DP_STATUS_CONN_UFP_D;
+
+            		// If HPD GPIO is high, set HPD bit
+            		if (hpd_get_level()) {
+                		dp_status |= DP_STATUS_HPD_HIGH;
+            		}
+
+            		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA050U : 0x8050U; // DP_STATUS header
+            		tx[1] = 0xFF01U;                                            // VESA SVID
+            		tx[2] = dp_status;                                          // DP Status VDO
+            		tx[3] = 0x0000;                                             // reserved
+
+            		gSndMess.uInfo.bit.bLen = 8U; // 4 halfwords
+            		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+        	}
+        	// else: PD engine busy, leave g_hpd_irq_flag = 1 and try again next user_func_event()
+    	}
 	
 	if (gPdc.uPdEvent.bit.bPlugChg != 0U) {
 		if (uStatus.bit.bPlug != 0U) {
@@ -226,11 +316,10 @@ void user_func_event (void)
         		uVdmhead.data[0] = gRcvMess.uspData[0];
         		uVdmhead.data[1] = gRcvMess.uspData[1];
 
-        		if (gRcvMess.uInfo.bit.bType == 0x06) {   // ALERT data message
-            		// Respond with Get_Status
-            		pdc_set_cmd(PDC_CMD_SND_GET_STAT, PDC_TARGET_SOP);
-			gGetStatPending = 1;
-        		}
+    			if (gRcvMess.uInfo.bit.bType == 0x06U) {   // ALERT data message
+        			gGetStatPending = 1;   // mark that we must send Get_Status
+    			}
+        		
         		else {
 			
 		
@@ -297,10 +386,9 @@ void user_func_event (void)
                 		gSndMess.uInfo.bit.bLen = 4U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
 				tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON);
-				P1_bit.no7 = 0U; //HPD
             		}
 
-           		// ---- DP Status Update ----
+           		/*// ---- DP Status Update ----
             		else if ((uVdmhead.bit_s.bCmd == CMD_DP_STATUS) &&
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
                 		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA050U : 0x8050U;
@@ -309,6 +397,26 @@ void user_func_event (void)
                 		//tx[2] = DP_STATUS_READY;
 				tx[2] = 0x000a;
 				tx[3] = 0x0000;
+                		gSndMess.uInfo.bit.bLen = 8U;
+                		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+            		}
+			*/
+			else if ((uVdmhead.bit_s.bCmd == CMD_DP_STATUS) &&
+                     	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
+				USHORT dp_status = 0;
+
+    				// Always report “UFP_D connected” in bits 7:6
+    				dp_status |= DP_STATUS_CONN_UFP_D;
+
+    				// If HPD GPIO is high, set HPD bit
+    				if (hpd_get_level()) {
+        			dp_status |= DP_STATUS_HPD_HIGH;
+    				}
+				
+    				tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA050U : 0x8050U;
+    				tx[1] = 0xFF01U;
+    				tx[2] = dp_status;
+    				tx[3] = 0x0000;
                 		gSndMess.uInfo.bit.bLen = 8U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
             		}
@@ -329,7 +437,6 @@ void user_func_event (void)
 					else{
 						tmuxhs4446_request_mode(TMUX_CONF_DP4_FLIP);
 					}
-					//P1_bit.no7 = 1U; //HPD
 					tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA040U : 0x8050U;
                 			tx[1] = 0xFF01U;
 					
@@ -356,12 +463,18 @@ void user_func_event (void)
     	}
 	}
 	if (gGetStatPending) {
-    		UCHAR r = pdc_get_cmd_result();            // 
-    		if (r != PDC_CMD_RSLT_PROGRESS) {          // command finished or rejected 
-        		gGetStatPending = 0;
-        		gGetStatLastResult = r;                // inspect with debugger
-    		}
-	}
+    		UCHAR r = pdc_get_cmd_result();
+
+    		// Only start a new command if the previous one is not still in progress
+    		if (r != PDC_CMD_RSLT_PROGRESS) {
+        	pdc_set_cmd(PDC_CMD_SND_GET_STAT, PDC_TARGET_SOP);
+		//pdc_set_cmd(PDC_CMD_SND_GET_SRC_CAP, PDC_TARGET_SOP);
+
+
+        	gGetStatPending = 0;       // clear "need to send" flag
+        	gGetStatLastResult = PDC_CMD_RSLT_PROGRESS; // for debugging if you want
+    }
+}
 		
     	gPdc.uPdEvent.bit.bChkRcvPDM = 0U;
 }
