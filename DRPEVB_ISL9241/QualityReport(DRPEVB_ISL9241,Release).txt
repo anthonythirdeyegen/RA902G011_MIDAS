@@ -1,25 +1,25 @@
 QualityReport
-Wednesday, September 24, 2025 1:38:48 PM
+Tuesday, November 25, 2025 12:19:43 PM
 
 ------ Start build(DRPEVB_ISL9241, Release) ------
 ------ Build ended(Error:0, Warning:0)(DRPEVB_ISL9241, Release) ------
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_ISL9241\Obj\Release\DRPEVB_ISL9241.abs: 87c177a8c3d49ada6bccd9a9ac60a46d8fb19ca4
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_ISL9241\Obj\Release\DRPEVB_ISL9241.abs: f874ea179a70b63eb9a523660768241a7bf6ece5
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_ISL9241\Obj\Release\DRPEVB_ISL9241.hex: 564a8c9db49982da89d93b2dc46e427a8cd11534
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\Release\DRPEVB_ISL9241\Main.hex: d02432c681532ac3143ddb830b3203e7022d1234
 
 
 --- System Information ---
 *OS Version
- Microsoft Windows 11 Pro (-, 10.0.26100, WOW64)
+ Microsoft Windows 11 Pro (-, 10.0.26200, WOW64)
 *Language
  English (United States)
 *.NET Framework Version
  Microsoft .NET Framework 4 [.NET 4.8 or later] (533320)
 *WebView2 Version
- 140.0.3485.81
+ 142.0.3595.94
 
 --- Application Information ---
 *Product Name
@@ -38,13 +38,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  388 MB
+  535 MB
  *Number of GDI Objects
-  2380
+  2258
  *Number of USER Objects
-  1368
+  1257
  *Opened Files
-  20 editors, 20 files, 148 KB
+  9 editors, 9 files, 62 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in

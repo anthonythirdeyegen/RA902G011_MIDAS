@@ -14,7 +14,7 @@ void R_MAIN_UserInit(void)
     /* Start user code. Do not edit comment generated here */
 	
 	// set post and source power and sink power before pd_core_init()
-	pdc_set_port_conf(PDC_ROLE_DRP_DRD, PDC_ACS_VCONN);
+	pdc_set_port_conf(PDC_ROLE_SNK_UFP, PDC_ACS_VCONN);
 	pdc_set_src_conf(60000U, 4, 0, PDC_NOPD_CUR_3_0A);
 	pdc_set_snk_conf(60000U, 5, 0);
 	pdc_set_sys_conf(PDC_SYS_DR_SWAP_PASSIVE, PDC_SYS_PR_SWAP_PASSIVE, (PDC_SYS_UNCNST_PWR | PDC_SYS_EXT_PWR_DC), 0U);

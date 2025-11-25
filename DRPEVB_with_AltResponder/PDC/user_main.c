@@ -8,11 +8,75 @@
 #include "user_timer.h"
 #include "led_ctrl.h"
 #include "sw_ctrl.h"
-#include <stdint.h>
+#include "tmuxhs4446.h"
 
 #define DATA_MESSAGE		0x01
 #define CMD_DP_STATUS     0x10U   // “Status Update”
 #define CMD_DP_CONFIGURE  0x11U   // “Configure”
+
+// DP Alt Mode Discover Modes VDO
+// ---- Port capability (bits 1:0)
+#define DP_PORT_CAP_UFP_D     0x01u
+#define DP_PORT_CAP_DFP_D     0x02u
+#define DP_PORT_CAP_BOTH      0x03u
+
+// ---- Signaling for DisplayPort (bits 5:2)
+#define DP_SIG_DP13           (1u << 2)   // Supports DP v1.3 signaling
+#define DP_SIG_USB_GEN2       (1u << 3)   // Supports USB Gen2 signaling
+// 0b0100 = DP1.3 only
+// 0b1000 = USB Gen2 only
+
+// ---- Receptacle / Plug indication (bit 6)
+#define DP_PLUG               (0u << 6)   // DisplayPort interface on USB-C plug
+#define DP_RECEPTACLE         (1u << 6)   // DisplayPort interface on USB-C receptacle
+
+// ---- USB2.0 signaling not used (bit 7)
+#define DP_USB2_NOT_USED      (1u << 7)   // USB2 lines not needed in DP mode
+
+// ---- DFP_D pin assignments (bits 15:8)
+#define DP_DFP_PIN_A          (1u << (8+0))
+#define DP_DFP_PIN_B          (1u << (8+1))
+#define DP_DFP_PIN_C          (1u << (8+2))
+#define DP_DFP_PIN_D          (1u << (8+3))
+#define DP_DFP_PIN_E          (1u << (8+4))
+#define DP_DFP_PIN_F          (1u << (8+5))
+
+// ---- UFP_D pin assignments (bits 23:16)
+#define DP_UFP_PIN_A          (1u << (16+0))
+#define DP_UFP_PIN_B          (1u << (16+1))
+#define DP_UFP_PIN_C          (1u << (16+2))
+#define DP_UFP_PIN_D          (1u << (16+3))
+#define DP_UFP_PIN_E          (1u << (16+4))
+#define DP_UFP_PIN_F          (1u << (16+5))
+
+// Role bits (low bits)
+#define DP_MODE_UFP_D           (1U << 7)
+#define DP_MODE_DFP_D           (1U << 6)
+
+// DisplayPort Status VDO (UFP_D -> DFP_D)
+// Bit 0: HPD state (1 = HPD high)
+#define DP_STATUS_HPD_HIGH          (1U << 0)
+// Bit 1: IRQ_HPD (1 = pulse request); must also keep HPD high
+#define DP_STATUS_IRQ_HPD           (1U << 1)
+// Bit 2: Request Exit from DP Alt Mode (1 = request to exit)
+#define DP_STATUS_REQ_EXIT_MODE     (1U << 2)
+// Bit 3: Request switch to USB (1 = exit DP and return to USB data)
+#define DP_STATUS_REQ_USB           (1U << 3)
+// Bit 4: Multi-Function preferred (1 = prefer DP + USB3 if possible)
+#define DP_STATUS_MF_PREFERRED      (1U << 4)
+// Bit 5: Low power (1 = sink in low-power; source may adapt)
+#define DP_STATUS_POWER_LOW         (1U << 5)
+#define DP_STATUS_CONN_UFP_D   (2U << 6)  // bits 7:6 = 10b
+// DisplayPort Status VDO Typicals
+#define DP_STATUS_READY         (DP_STATUS_HPD_HIGH | DP_STATUS_CONN_UFP_D)
+// IRQ HPD pulse (HPD must be high)
+#define DP_STATUS_IRQ_PULSE     (DP_STATUS_HPD_HIGH | DP_STATUS_IRQ_HPD)
+// Ask source to drop DP Alt Mode and go back to USB
+#define DP_STATUS_EXIT_TO_USB   (DP_STATUS_HPD_HIGH | DP_STATUS_REQ_USB)
+// Prefer multi-function (2-lane DP + USB3) when feasible
+#define DP_STATUS_MF_READY      (DP_STATUS_HPD_HIGH | DP_STATUS_MF_PREFERRED)
+
+
 
 USHORT gusTemp;
 UCHAR  gucVdmFlg;
@@ -21,6 +85,9 @@ UCHAR  gucOmfData;
 UCHAR  gucReserved;
 UCHAR  gucEnterModeEnable;
 UCHAR  gucLEDStatus;
+
+static UCHAR gGetStatPending = 0;
+static UCHAR gGetStatLastResult = 0xFF;
 
 void user_func_start_timer_thermistor(void);
 void user_func_stop_timer_thermistor (void);
@@ -74,13 +141,14 @@ void user_init(void)
 void user_func_event (void)
 {
 	PD_STATUS uStatus = pdc_get_status();
+	ULONG dp_mode_vdo = 0U;
 	
 	if (gPdc.uPdEvent.bit.bPlugChg != 0U) {
 		if (uStatus.bit.bPlug != 0U) {
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
 			pdc_set_pps_stat(0x02, 0xFF, 0xFFFFU);
 #endif
-			P7_bit.no1 = 0U; // DISCHG:OFF
+			//P7_bit.no1 = 0U; // DISCHG:OFF
 			user_func_start_timer_thermistor();
 			if (uStatus.bit.bPR != 0U) { // ATT.SRC
 				gLed.uReq.bits.bSrcEn = 1U;
@@ -103,7 +171,7 @@ void user_func_event (void)
 				gucLEDStatus = 0U;
 				if (gPdc.uPdReq.bit.bSrcOff == 0U) {
 					pd_tm_start_user_cnt(TM_ID_USER2);
-					P7_bit.no1 = 1U; // DISCHG:ON
+					//P7_bit.no1 = 1U; // DISCHG:ON
 					gucWaiCmp = 1U;
 				}
 				else {
@@ -117,7 +185,7 @@ void user_func_event (void)
 					    || (pd_tm_chk_user_stat(TM_ID_USER2, 650U) == TM_ST_OVR)) {
 						pd_tm_stop_user_cnt(TM_ID_USER2);
 						gucWaiCmp = 0U;
-						P7_bit.no1 = 0U; // DISCHG:OFF
+						//P7_bit.no1 = 0U; // DISCHG:OFF
 						gPdc.uPdEvent.bit.bPlugChg = 0U;
 					}
 				}
@@ -152,11 +220,20 @@ void user_func_event (void)
 		gPdc.uPdEvent.bit.bNewRequest = 0U;
 	}
 	else if (gPdc.uPdEvent.bit.bChkRcvPDM != 0U) {
+		
 		if (gRcvMess.uInfo.bit.bClass == DATA_MESSAGE) {
         		SVDM_HEADER uVdmhead;
         		uVdmhead.data[0] = gRcvMess.uspData[0];
         		uVdmhead.data[1] = gRcvMess.uspData[1];
 
+        		if (gRcvMess.uInfo.bit.bType == 0x06) {   // ALERT data message
+            		// Respond with Get_Status
+            		pdc_set_cmd(PDC_CMD_SND_GET_STAT, PDC_TARGET_SOP);
+			gGetStatPending = 1;
+        		}
+        		else {
+			
+		
         	if (uVdmhead.bit_s.bVdmType == SVDM_VDMH_TYPE_SVDM) {
             		USHORT *tx = gSndMess.uspData;
 
@@ -164,21 +241,40 @@ void user_func_event (void)
             		if (uVdmhead.bit_s.bCmd == SVDM_VDMH_CMD_DIS_SVIDS) {
                			// Reply with VESA SVID 0xFF01 + terminator 0x0000
                 		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA042U : 0x8042U;
-                		tx[1] = 0xFF01U; // VESA
-                		tx[2] = 0x0000U; // terminator
-                		gSndMess.uInfo.bit.bLen = 6U; // 3 halfwords
+				tx[1] = 0xFF00U;
+				tx[3] = 0x0000U; // terminator
+                		tx[2] = 0xFF01U; // VESA
+                		gSndMess.uInfo.bit.bLen = 8U; // 4 halfwords
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+				//PDC_CMD_SND_VDM = (0x2FU)  PDC_TARGET_SOP = (0U)
             		}
 
             		// ---- Discover Modes (for VESA) ----
             		else if ((uVdmhead.bit_s.bCmd == SVDM_VDMH_CMD_DIS_MODES) &&
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
-                		// Build a single DP Mode VDO (example: DP 1.3, UFP_D, pin assignment D/E)
+                		// Build a single DP Mode VDO
                 		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA043U : 0x8043U;
                 		tx[1] = 0xFF01U;  // VESA SVID
-                		// DP Mode VDO (example values, adjust bits for your design)
-                		tx[2] = 0x00010280U; // revision=1.3, UFP_D=1, pin D/E supported
-                		gSndMess.uInfo.bit.bLen = 6U;
+                		
+				// DP Mode VDO
+				dp_mode_vdo = ( DP_PORT_CAP_UFP_D | 
+				DP_SIG_DP13 | 
+				DP_PLUG | 
+				DP_USB2_NOT_USED | 
+				DP_UFP_PIN_D | 
+				DP_UFP_PIN_E );
+                		
+				//tx[2] = (USHORT)(dp_mode_vdo);                    // low16 of VDO
+    				//tx[3] = (USHORT)(dp_mode_vdo >> 16);            // high16 of VDO
+				
+				//tx[2] = (USHORT)(dp_mode_vdo & 0xFFFF);         // low word
+				//tx[3] = (USHORT)((dp_mode_vdo >> 16) & 0xFFFF); // high word
+				
+				//Do not know why the macros dont work
+				tx[2] = 0x00C5;
+				tx[3] = 0x0018;
+
+                		gSndMess.uInfo.bit.bLen = 8U;
 	                	pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
 	        	}
 
@@ -186,7 +282,7 @@ void user_func_event (void)
             		else if ((uVdmhead.bit_s.bCmd == SVDM_VDMH_CMD_ENTER_MODE) &&
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
                 		gucEnterModeEnable = 1U;
-                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA044U : 0x8044U;
+                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA144U : 0x8144U;
                 		tx[1] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 4U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
@@ -200,16 +296,20 @@ void user_func_event (void)
                 		tx[1] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 4U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+				tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON);
+				P1_bit.no7 = 0U; //HPD
             		}
 
            		// ---- DP Status Update ----
             		else if ((uVdmhead.bit_s.bCmd == CMD_DP_STATUS) &&
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
-                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA046U : 0x8046U;
+                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA050U : 0x8050U;
                 		tx[1] = 0xFF01U;
-                		// DP Status VDO: HPD=1, IRQ=0, role=UFP_D
-                		tx[2] = 0x00000001U;
-                		gSndMess.uInfo.bit.bLen = 6U;
+                		// DP Status VDO: HPD=0, IRQ=0, role=UFP_D
+                		//tx[2] = DP_STATUS_READY;
+				tx[2] = 0x000a;
+				tx[3] = 0x0000;
+                		gSndMess.uInfo.bit.bLen = 8U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
             		}
 
@@ -221,7 +321,23 @@ void user_func_event (void)
                 		tx[1] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 4U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
-                		// TODO: switch mux/HPD line here
+				// TODO: HPD line here
+				if (uStatus.bit.bPlug){
+					if (uStatus.bit.bCc == 0U){
+                				tmuxhs4446_request_mode(TMUX_CONF_DP4);
+					}
+					else{
+						tmuxhs4446_request_mode(TMUX_CONF_DP4_FLIP);
+					}
+					//P1_bit.no7 = 1U; //HPD
+					tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA040U : 0x8050U;
+                			tx[1] = 0xFF01U;
+					
+					tx[2] = 0x000b;
+					tx[3] = 0x0000;
+					
+					pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+				}
             		}
 
             		// ---- Default: NACK ----
@@ -235,9 +351,18 @@ void user_func_event (void)
         	}
 		
         	else if (uStatus.bit.bComRevPDC == 1U) { // PD3
-            		pdc_set_cmd(PDC_CMD_SND_NOT_SUPPORTED, PDC_TARGET_SOP);
+            		//pdc_set_cmd(PDC_CMD_SND_NOT_SUPPORTED, PDC_TARGET_SOP);
         	}
     	}
+	}
+	if (gGetStatPending) {
+    		UCHAR r = pdc_get_cmd_result();            // 
+    		if (r != PDC_CMD_RSLT_PROGRESS) {          // command finished or rejected 
+        		gGetStatPending = 0;
+        		gGetStatLastResult = r;                // inspect with debugger
+    		}
+	}
+		
     	gPdc.uPdEvent.bit.bChkRcvPDM = 0U;
 }
 	else if (gPdc.uPdEvent.bit.bNonPDCon != 0U) {
@@ -340,7 +465,7 @@ void user_func_event (void)
 	}
 	else if (gPdc.uPdReq.bit.bSnkOn != 0U) {
 		if(gDCInfo.uReq.usData == 0U){
-			P7_bit.no3 = 1U; // DR_GATE:ON
+			P7_bit.no3 = 1U; // DR_GATE:ON Repurpose for SXR
 			gDCInfo.uReq.bit.bSnkOn = 1U;
 			gPdc.uPdReq.bit.bSnkOn = 0U;
 		}

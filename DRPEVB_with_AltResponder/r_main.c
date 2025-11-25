@@ -47,6 +47,7 @@ Includes
 #include "sw_ctrl.h"
 /* End user code. Do not edit comment generated here */
 #include "r_cg_userdefine.h"
+#include "tmuxhs4446.h"
 
 /***********************************************************************************************************************
 Pragma directive
@@ -117,7 +118,8 @@ void main(void)
 					break;
 			}
 		}
-		dcdc_ctrl();
+		//dcdc_ctrl();
+		//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON);
 		subdev_ctrl();
 		smbm_ctrl();
 	}

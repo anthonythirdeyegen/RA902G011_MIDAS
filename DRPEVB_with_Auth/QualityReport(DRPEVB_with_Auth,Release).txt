@@ -1,25 +1,25 @@
 QualityReport
-Wednesday, September 24, 2025 1:38:47 PM
+Tuesday, November 25, 2025 12:19:43 PM
 
 ------ Start build(DRPEVB_with_Auth, Release) ------
 ------ Build ended(Error:0, Warning:0)(DRPEVB_with_Auth, Release) ------
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Auth\Obj\Release\DRPEVB_with_Auth.abs: 08631691627280876f89b528d96465fc4f724665
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Auth\Obj\Release\DRPEVB_with_Auth.abs: de990d9dcaeee209466f786d09724710aafbc050
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_Auth\Obj\Release\DRPEVB_with_Auth.hex: 28fb9af10fc005aaeaad897f30af171628ab20ec
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\Release\DRPEVB_with_Auth\Main.hex: 36b37ff02fff8a508a1cf981fd0ec3c7ec06e3ca
 
 
 --- System Information ---
 *OS Version
- Microsoft Windows 11 Pro (-, 10.0.26100, WOW64)
+ Microsoft Windows 11 Pro (-, 10.0.26200, WOW64)
 *Language
  English (United States)
 *.NET Framework Version
  Microsoft .NET Framework 4 [.NET 4.8 or later] (533320)
 *WebView2 Version
- 140.0.3485.81
+ 142.0.3595.94
 
 --- Application Information ---
 *Product Name
@@ -38,13 +38,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  388 MB
+  535 MB
  *Number of GDI Objects
-  2380
+  2258
  *Number of USER Objects
-  1368
+  1257
  *Opened Files
-  20 editors, 20 files, 148 KB
+  9 editors, 9 files, 62 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in
