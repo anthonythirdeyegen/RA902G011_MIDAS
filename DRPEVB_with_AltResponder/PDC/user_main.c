@@ -90,6 +90,7 @@ static UCHAR gGetStatPending = 0;
 static UCHAR gGetStatLastResult = 0xFF;
 static UCHAR g_alert_pending = 0;
 static UCHAR g_hpd_irq_flag = 1U;
+static UCHAR g_dp_mode_configured = 0U;
 
 void user_func_start_timer_thermistor(void);
 void user_func_stop_timer_thermistor (void);
@@ -176,43 +177,21 @@ void user_init(void)
 	hpd_int_init();
 }
 
-dp_send_status_from_gpio(void)
-{
-	/*
-	USHORT dp_status = 0;
-
-    	// Always report “UFP_D connected” in bits 7:6
-    	dp_status |= DP_STATUS_CONN_UFP_D;
-
-    	// If HPD GPIO is high, set HPD bit
-    	if (hpd_get_level()) {
-        dp_status |= DP_STATUS_HPD_HIGH;
-    	}
-				
-    	tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA050U : 0x8050U;
-    	tx[1] = 0xFF01U;
-    	tx[2] = dp_status;
-    	tx[3] = 0x0000;
-        gSndMess.uInfo.bit.bLen = 8U;
-        pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
-	*/
-}
-
 void user_func_event (void)
 {
 	PD_STATUS uStatus = pdc_get_status();
 	ULONG dp_mode_vdo = 0U;
 
     	/* --- Handle HPD IRQ -> send DP_STATUS VDM, but only when PD core is idle --- */
-    	if (g_hpd_irq_flag) {
+    	if (g_hpd_irq_flag && g_dp_mode_configured) {
         	UCHAR r = pdc_get_cmd_result();
 
         	// Only send if no other PD command is in progress
-        	if (r != PDC_CMD_RSLT_PROGRESS && gucEnterModeEnable) {  // optional DP-mode gate
+        	if (r != PDC_CMD_RSLT_PROGRESS && gucEnterModeEnable) {
             		USHORT *tx = gSndMess.uspData;
             		USHORT dp_status = 0;
 
-            		g_hpd_irq_flag = 0U;      // consume the event
+            		g_hpd_irq_flag = 0U;      // clear the flag
 
             		// Always report “UFP_D connected” in bits 7:6
             		dp_status |= DP_STATUS_CONN_UFP_D;
@@ -230,7 +209,7 @@ void user_func_event (void)
             		gSndMess.uInfo.bit.bLen = 8U; // 4 halfwords
             		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
         	}
-        	// else: PD engine busy, leave g_hpd_irq_flag = 1 and try again next user_func_event()
+        	// else: PD engine busy, leave g_hpd_irq_flag = 1
     	}
 	
 	if (gPdc.uPdEvent.bit.bPlugChg != 0U) {
@@ -386,6 +365,7 @@ void user_func_event (void)
                 		gSndMess.uInfo.bit.bLen = 4U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
 				tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON);
+				g_dp_mode_configured = 0U;
             		}
 
            		/*// ---- DP Status Update ----
@@ -415,7 +395,7 @@ void user_func_event (void)
 				
     				tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA050U : 0x8050U;
     				tx[1] = 0xFF01U;
-    				tx[2] = dp_status;
+    				tx[2] = dp_status; // At this stage this should be Low status
     				tx[3] = 0x0000;
                 		gSndMess.uInfo.bit.bLen = 8U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
@@ -429,7 +409,6 @@ void user_func_event (void)
                 		tx[1] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 4U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
-				// TODO: HPD line here
 				if (uStatus.bit.bPlug){
 					if (uStatus.bit.bCc == 0U){
                 				tmuxhs4446_request_mode(TMUX_CONF_DP4);
@@ -444,6 +423,8 @@ void user_func_event (void)
 					tx[3] = 0x0000;
 					
 					pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+					g_dp_mode_configured = 1U;
+			
 				}
             		}
 
@@ -473,11 +454,11 @@ void user_func_event (void)
 
         	gGetStatPending = 0;       // clear "need to send" flag
         	gGetStatLastResult = PDC_CMD_RSLT_PROGRESS; // for debugging if you want
-    }
-}
+    		}
+	}
 		
     	gPdc.uPdEvent.bit.bChkRcvPDM = 0U;
-}
+}	
 	else if (gPdc.uPdEvent.bit.bNonPDCon != 0U) {
 		if (uStatus.bit.bPR != 0U) { // ATT.SRC
 			gPdc.uPdEvent.bit.bNonPDCon = 0U;
