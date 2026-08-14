@@ -9,6 +9,7 @@
 #include "led_ctrl.h"
 #include "sw_ctrl.h"
 #include "tmuxhs4446.h"
+#include <stdint.h>
 
 #define DATA_MESSAGE		0x01
 #define CMD_DP_STATUS     0x10U   // “Status Update”
@@ -55,7 +56,9 @@
 
 // DisplayPort Status VDO (UFP_D -> DFP_D)
 // Bit 0: HPD state (1 = HPD high)
-#define DP_STATUS_HPD_HIGH          (1U << 0)
+#define DP_STATUS_HPD_HIGH          (1U << 7)
+// Bit 0: HPD state (1 = HPD high)
+#define DP_STATUS_HPD_LOW          (0U << 7)
 // Bit 1: IRQ_HPD (1 = pulse request); must also keep HPD high
 #define DP_STATUS_IRQ_HPD           (1U << 1)
 // Bit 2: Request Exit from DP Alt Mode (1 = request to exit)
@@ -66,8 +69,9 @@
 #define DP_STATUS_MF_PREFERRED      (1U << 4)
 // Bit 5: Low power (1 = sink in low-power; source may adapt)
 #define DP_STATUS_POWER_LOW         (1U << 5)
-#define DP_STATUS_CONN_UFP_D   (2U << 6)  // bits 7:6 = 10b
+#define DP_STATUS_CONN_UFP_D   (2U << 0)  // bits 7:6 = 10b
 // DisplayPort Status VDO Typicals
+#define DP_STATUS_ENABLED 	(1U << 3)
 #define DP_STATUS_READY         (DP_STATUS_HPD_HIGH | DP_STATUS_CONN_UFP_D)
 // IRQ HPD pulse (HPD must be high)
 #define DP_STATUS_IRQ_PULSE     (DP_STATUS_HPD_HIGH | DP_STATUS_IRQ_HPD)
@@ -91,6 +95,12 @@ static UCHAR gGetStatLastResult = 0xFF;
 static UCHAR g_alert_pending = 0;
 static UCHAR g_hpd_irq_flag = 1U;
 static UCHAR g_dp_mode_configured = 0U;
+static UCHAR g_hpd_toggled = 0U;
+static UCHAR g_hpd_state = 0U;
+static UCHAR g_cmd_queued = 0U;
+
+volatile UCHAR r_dbg;
+volatile UCHAR enter_dbg;
 
 void user_func_start_timer_thermistor(void);
 void user_func_stop_timer_thermistor (void);
@@ -99,8 +109,13 @@ void user_func_intr_timer_thermistor (void);
 void hpd_int_init(void)
 {
     	PM8_bit.no2 = 1U;   // P82 = input
-    
-   // 1. Mask INTP7
+	PM1_bit.no7 = 1U; // P17 = input
+	
+	#ifdef PMC8
+    	PMC8_bit.no2 = 0U;    // Use digital input function
+	#endif
+/*	Not using interrupt    
+   	// 1. Mask INTP7
 	MK0L_bit.no7 = 1U;
 
 	// 2. Clear any pending flag
@@ -112,21 +127,27 @@ void hpd_int_init(void)
 
 	// 5. Unmask INTP7
 	MK0L_bit.no7 = 0U;
+*/	
 }
 
 static UCHAR hpd_get_level(void)
 {
     // Returns 1 if HPD pin is high, 0 if low
-    return (P1_bit.no7 ? 1U : 0U);
+    return (P1_bit.no7 ? 1U : 0U); //SXR
+    //return (P8_bit.no2 ? 1U : 0U); //Devboard
 }
 
-static void intp7_hpd_isr(void)
+void hpd_poll_task(void)
 {
-    // Clear flag
-    IF0L_bit.no7 = 0U;
-
-    // Tell system an HPD edge occurred
-    g_hpd_irq_flag = 1U;
+    	static UCHAR prev = 0x00;  
+    	UCHAR curr = hpd_get_level();
+	
+    	if (curr != prev)
+    	{
+        	g_hpd_toggled = 1U;   // HPD edge occurred
+		g_hpd_state = curr;
+        	prev = curr;          // update stored value
+    	}	
 }
 
 void user_init(void)
@@ -145,10 +166,12 @@ void user_init(void)
 			   P1_bit.no7 = 0U; // Clear latch
 	POM5_bit.no0 = 1U; P5_bit.no0 = 1U; PM5_bit.no0 = 0U; // DM        :P50(OpenDrain)
 	POM5_bit.no1 = 1U; P5_bit.no1 = 1U; PM5_bit.no1 = 0U; // DP        :P51(OpenDrain)
+			   P7_bit.no0 = 0U; PM7_bit.no0 = 0U; //PD_READY   :P70
 	                   P7_bit.no1 = 0U; PM7_bit.no1 = 0U; // DISCHG    :P71
 	                   P7_bit.no3 = 0U; PM7_bit.no3 = 0U; // DR_GATE   :P73
 	POM8_bit.no0 = 1U; P8_bit.no0 = 1U; PM8_bit.no0 = 0U; // PUE       :P80(OpenDrain)
-	POM8_bit.no2 = 1U; P8_bit.no2 = 1U; PM8_bit.no2 = 0U; // LED       :P82(OpenDrain)
+			   P8_bit.no1 = 0U; PM8_bit.no1 = 0U;
+	//POM8_bit.no2 = 1U; P8_bit.no2 = 1U; PM8_bit.no2 = 0U; // LED       :P82(OpenDrain)
 	{
 		PER2 |= PER2_SMBM;
 		POM3_bit.no0 = 1U; P3_bit.no0 = 1U; PM3_bit.no0= 0U; // MSTSCL
@@ -169,37 +192,50 @@ void user_init(void)
 	init_tau0_channel3();
 	init_tm_12bit();
 	
-	dcdc_init();
+	//dcdc_init();
 	subdev_init();
 	smbm_init();
-	led_init();
+	//led_init();
 	sw_init();
 	hpd_int_init();
+	
+	tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON);
 }
 
 void user_func_event (void)
 {
 	PD_STATUS uStatus = pdc_get_status();
 	ULONG dp_mode_vdo = 0U;
-
-    	/* --- Handle HPD IRQ -> send DP_STATUS VDM, but only when PD core is idle --- */
-    	if (g_hpd_irq_flag && g_dp_mode_configured) {
+	
+	r_dbg = pdc_get_cmd_result();
+	
+	g_cmd_queued = 0U;
+	
+	hpd_poll_task();
+	
+	//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
+	//g_hpd_toggled =0; //for testing
+	P7_bit.no0 = 1U; //We are ready for for device Configuration.
+	
+    	/* send DP_STATUS VDM, but only when PD core is idle --- */
+	/*if (!g_cmd_queued && (g_hpd_toggled && g_dp_mode_configured)) {
         	UCHAR r = pdc_get_cmd_result();
-
+		
         	// Only send if no other PD command is in progress
         	if (r != PDC_CMD_RSLT_PROGRESS && gucEnterModeEnable) {
+			
+			
             		USHORT *tx = gSndMess.uspData;
             		USHORT dp_status = 0;
-
-            		g_hpd_irq_flag = 0U;      // clear the flag
+			
+			g_hpd_toggled = 0U;  //clear toggled
+            		g_hpd_irq_flag = 0U; // clear the flag
 
             		// Always report “UFP_D connected” in bits 7:6
             		dp_status |= DP_STATUS_CONN_UFP_D;
 
-            		// If HPD GPIO is high, set HPD bit
-            		if (hpd_get_level()) {
-                		dp_status |= DP_STATUS_HPD_HIGH;
-            		}
+                	dp_status |= g_hpd_state << 7;
+
 
             		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA050U : 0x8050U; // DP_STATUS header
             		tx[1] = 0xFF01U;                                            // VESA SVID
@@ -208,9 +244,10 @@ void user_func_event (void)
 
             		gSndMess.uInfo.bit.bLen = 8U; // 4 halfwords
             		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+			g_cmd_queued = 1U;
         	}
-        	// else: PD engine busy, leave g_hpd_irq_flag = 1
-    	}
+        	
+    	}*/
 	
 	if (gPdc.uPdEvent.bit.bPlugChg != 0U) {
 		if (uStatus.bit.bPlug != 0U) {
@@ -310,8 +347,10 @@ void user_func_event (void)
                			// Reply with VESA SVID 0xFF01 + terminator 0x0000
                 		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA042U : 0x8042U;
 				tx[1] = 0xFF00U;
-				tx[3] = 0x0000U; // terminator
-                		tx[2] = 0xFF01U; // VESA
+				//tx[2] = 0xFF01U; // VESA
+				//tx[3] = 0x0000U; // terminator
+				tx[2] = 0x0000U;
+				tx[3] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 8U; // 4 halfwords
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
 				//PDC_CMD_SND_VDM = (0x2FU)  PDC_TARGET_SOP = (0U)
@@ -329,21 +368,20 @@ void user_func_event (void)
 				DP_SIG_DP13 | 
 				DP_PLUG | 
 				DP_USB2_NOT_USED | 
-				DP_UFP_PIN_D | 
+				//DP_UFP_PIN_D |
+				DP_UFP_PIN_C | 
 				DP_UFP_PIN_E );
                 		
 				//tx[2] = (USHORT)(dp_mode_vdo);                    // low16 of VDO
     				//tx[3] = (USHORT)(dp_mode_vdo >> 16);            // high16 of VDO
 				
-				//tx[2] = (USHORT)(dp_mode_vdo & 0xFFFF);         // low word
-				//tx[3] = (USHORT)((dp_mode_vdo >> 16) & 0xFFFF); // high word
-				
 				//Do not know why the macros dont work
 				tx[2] = 0x00C5;
-				tx[3] = 0x0018;
+				tx[3] = 0x0004;
 
                 		gSndMess.uInfo.bit.bLen = 8U;
 	                	pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+				g_cmd_queued = 1U;
 	        	}
 
             		// ---- Enter Mode (for DP) ----
@@ -354,6 +392,7 @@ void user_func_event (void)
                 		tx[1] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 4U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+				g_cmd_queued = 1U;
             		}
 
             		// ---- Exit Mode (for DP) ----
@@ -364,6 +403,7 @@ void user_func_event (void)
                 		tx[1] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 4U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+				g_cmd_queued = 1U;
 				tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON);
 				g_dp_mode_configured = 0U;
             		}
@@ -384,14 +424,16 @@ void user_func_event (void)
 			else if ((uVdmhead.bit_s.bCmd == CMD_DP_STATUS) &&
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
 				USHORT dp_status = 0;
-
+				P7_bit.no0 = 1U; //We are ready for for device Configuration.
     				// Always report “UFP_D connected” in bits 7:6
     				dp_status |= DP_STATUS_CONN_UFP_D;
-
+				dp_status |= DP_STATUS_ENABLED;
     				// If HPD GPIO is high, set HPD bit
-    				if (hpd_get_level()) {
-        			dp_status |= DP_STATUS_HPD_HIGH;
-    				}
+    				//if (hpd_get_level()) {
+        			//dp_status |= DP_STATUS_HPD_HIGH;
+    				//}
+				//dp_status |= DP_STATUS_HPD_HIGH;
+				
 				
     				tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA050U : 0x8050U;
     				tx[1] = 0xFF01U;
@@ -399,32 +441,58 @@ void user_func_event (void)
     				tx[3] = 0x0000;
                 		gSndMess.uInfo.bit.bLen = 8U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+				g_cmd_queued = 1U;
             		}
 
             		// ---- DP Configure ----
             		else if ((uVdmhead.bit_s.bCmd == CMD_DP_CONFIGURE) &&
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
                 		// Validate pin assignment and ACK
-                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA047U : 0x8047U;
-                		tx[1] = 0xFF01U;
-                		gSndMess.uInfo.bit.bLen = 4U;
-                		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+                		uint8_t  cmd;
+    				uint8_t  objPos;
+    				UCHAR  ver;
+   				USHORT hdr0;
+    				USHORT hdr1;
+				
+				cmd    = uVdmhead.bit_s.bCmd;      /* should be 0x11 (DP_CONFIGURE) */
+    				objPos = uVdmhead.bit_s.bObjPos;   /* usually 0 for DP */
+				ver    = (UCHAR)uVdmhead.bit_s.bVersion;
+				
 				if (uStatus.bit.bPlug){
 					if (uStatus.bit.bCc == 0U){
                 				tmuxhs4446_request_mode(TMUX_CONF_DP4);
+						//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
 					}
 					else{
 						tmuxhs4446_request_mode(TMUX_CONF_DP4_FLIP);
+						//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
 					}
-					tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA040U : 0x8050U;
-                			tx[1] = 0xFF01U;
 					
-					tx[2] = 0x000b;
-					tx[3] = 0x0000;
+    				/* Start from received header words */
+    				hdr0 = uVdmhead.data[0];   /* low 16 bits */
+    				hdr1 = uVdmhead.data[1];   /* high 16 bits (contains SVID high part) */
+
+    				/* Set CMDT = ACK (01b) while keeping other fields the same */
+    				hdr0 &= (USHORT)~(0x3U << 6);      /* clear bCmdType bits */
+    				hdr0 |= (USHORT)(1U   << 6);       /* bCmdType = 1 (ACK) */
+
+    				/* (Optional) re-stamp command and objpos so we know they’re correct */
+    				hdr0 &= (USHORT)~0x1FU;            /* clear bCmd  [4:0]   */
+    				hdr0 |= (USHORT)(cmd & 0x1FU);
+
+    				hdr0 &= (USHORT)~(0x7U << 8);      /* clear bObjPos [10:8] */
+    				hdr0 |= (USHORT)((USHORT)objPos << 8);
+
+    				tx[0] = hdr0;          /* Structured VDM header low word */
+    				tx[1] = hdr1;          /* high word (SVID bits) */
+    				//tx[2] = 0x0000U;
+    				//tx[3] = 0x0000U;
 					
-					pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
-					g_dp_mode_configured = 1U;
-			
+				gSndMess.uInfo.bit.bLen = 4U;	
+				pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+				g_cmd_queued = 1U;
+				g_dp_mode_configured = 1U;
+					
 				}
             		}
 
@@ -435,8 +503,10 @@ void user_func_event (void)
                 		tx[1] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 4U;
                			pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+				g_cmd_queued = 1U;
             		}
         	}
+		
 		
         	else if (uStatus.bit.bComRevPDC == 1U) { // PD3
             		//pdc_set_cmd(PDC_CMD_SND_NOT_SUPPORTED, PDC_TARGET_SOP);
@@ -483,6 +553,47 @@ void user_func_event (void)
 		gPdc.uPdEvent.bit.bErr = 0U;
 	}
 	
+	if (!g_cmd_queued && (g_hpd_toggled && g_dp_mode_configured)) {
+        	UCHAR r = pdc_get_cmd_result();
+		
+        	// Only send if no other PD command is in progress
+        	if (r != PDC_CMD_RSLT_PROGRESS && gucEnterModeEnable) {
+			
+			
+            		USHORT *tx = gSndMess.uspData;
+            		USHORT dp_status = 0;
+			
+			//g_hpd_toggled = 0U;  //clear toggled
+            		g_hpd_irq_flag = 0U; // clear the flag
+
+            		// Always report “UFP_D connected” in bits 7:6
+            		dp_status |= DP_STATUS_CONN_UFP_D;
+			dp_status |= DP_STATUS_ENABLED;
+                	dp_status |= g_hpd_state << 7;
+
+
+            		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA106U : 0x8106U; // DP_STATUS header
+            		tx[1] = 0xFF01U;                                            // VESA SVID
+            		tx[2] = dp_status;                                          // DP Status VDO
+            		tx[3] = 0x0000;                                             // reserved
+
+            		gSndMess.uInfo.bit.bLen = 8U; // 4 halfwords
+			
+			r_dbg = pdc_get_cmd_result();
+			enter_dbg = gucEnterModeEnable;
+            		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+			
+			r_dbg = pdc_get_cmd_result();
+			
+			if ((r_dbg == PDC_CMD_RSLT_PROGRESS) || (r_dbg == PDC_CMD_RSLT_SUCCESS)){
+				g_hpd_toggled = 0U;  //clear toggled
+				g_cmd_queued = 1U;
+			}
+			
+        	}
+        	
+    	}
+	
 	if (gPdc.uPdReq.bit.bVconnDis != 0U) {
 		P1_bit.no6 = 0U; // VC_DRV1:OFF
 		P1_bit.no7 = 0U; // VC_DRV2:OFF
@@ -493,7 +604,7 @@ void user_func_event (void)
 			P1_bit.no6 = 1U; // VC_DRV1:ON
 		}
 		else { // CC1
-			P1_bit.no7 = 1U; // VC_DRV2:ON
+			//P1_bit.no7 = 1U; // VC_DRV2:ON
 		}
 		gPdc.uPdReq.bit.bVconnEn = 0U;
 	}
@@ -516,13 +627,13 @@ void user_func_event (void)
 				SHORT usVbus = pdc_get_an_volt(AN_CH_VBUS);
 				if (usVbus >= 0) {
 					if (usVbus <= 800) {
-						P7_bit.no1 = 0U; // DISCHG:OFF
+						//P7_bit.no1 = 0U; // DISCHG:OFF
 						gPdc.uPdReq.bit.bSrcOff    = 0U;
 						gucWaiCmp = 0U;
 					}
 					else if (usVbus <= 5500) {
 						P7_bit.no3 = 0U; // DR_GATE:OFF
-						P7_bit.no1 = 1U; // DISCHG:ON
+						//P7_bit.no1 = 1U; // DISCHG:ON
 					}
 				}
 			} 
@@ -582,3 +693,14 @@ void user_func_event (void)
 		gDCInfo.uNtfy.usData = 0U;
 	}
 }
+/*
+#pragma vector = INTP7_vect
+__interrupt static void hpd_int_isr(void)
+{
+    // Clear flag
+    IF0L_bit.no7 = 0U;
+
+    // Tell system an HPD edge occurred
+    g_hpd_irq_flag = 1U;
+}
+*/

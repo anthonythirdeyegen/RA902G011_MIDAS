@@ -89,14 +89,6 @@
       <ProjectSaveKeyPanelStatusConnectSourceWindow>False</ProjectSaveKeyPanelStatusConnectSourceWindow>
     </Instance>
   </Class>
-  <Class Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
-    <Instance Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
-      <DebugConsole-COMport>COM1</DebugConsole-COMport>
-      <DebugConsole-Baudrate>0</DebugConsole-Baudrate>
-      <DebugConsole-Echoback>enable</DebugConsole-Echoback>
-      <DebugConsole-EnableDisable>enable</DebugConsole-EnableDisable>
-    </Instance>
-  </Class>
   <Class Guid="ce51aa0d-1353-40fe-ba85-46c1106c7c21">
     <Instance Guid="00000000-0000-0000-0000-000000000000">
       <IsSymbolOffsetVisible>False</IsSymbolOffsetVisible>
@@ -177,6 +169,96 @@
       <WithHexadecimal3>True</WithHexadecimal3>
       <Expanded3>False</Expanded3>
       <Notation3>Auto</Notation3>
+      <WatchId4>4</WatchId4>
+      <ParentId4>-1</ParentId4>
+      <WatchStatement4>g_hpd_toggled</WatchStatement4>
+      <WatchType4>WatchItem</WatchType4>
+      <Memo4 />
+      <BitWidth4>8</BitWidth4>
+      <Encode4>20127</Encode4>
+      <WithHexadecimal4>True</WithHexadecimal4>
+      <Expanded4>False</Expanded4>
+      <Notation4>Auto</Notation4>
+      <WatchId5>5</WatchId5>
+      <ParentId5>-1</ParentId5>
+      <WatchStatement5>g_dp_mode_configured</WatchStatement5>
+      <WatchType5>WatchItem</WatchType5>
+      <Memo5 />
+      <BitWidth5>8</BitWidth5>
+      <Encode5>20127</Encode5>
+      <WithHexadecimal5>True</WithHexadecimal5>
+      <Expanded5>False</Expanded5>
+      <Notation5>Auto</Notation5>
+      <WatchId6>6</WatchId6>
+      <ParentId6>-1</ParentId6>
+      <WatchStatement6>curr</WatchStatement6>
+      <WatchType6>WatchItem</WatchType6>
+      <Memo6 />
+      <BitWidth6>8</BitWidth6>
+      <Encode6>20127</Encode6>
+      <WithHexadecimal6>True</WithHexadecimal6>
+      <Expanded6>False</Expanded6>
+      <Notation6>Auto</Notation6>
+      <WatchId7>7</WatchId7>
+      <ParentId7>-1</ParentId7>
+      <WatchStatement7>prev</WatchStatement7>
+      <WatchType7>WatchItem</WatchType7>
+      <Memo7 />
+      <BitWidth7>8</BitWidth7>
+      <Encode7>20127</Encode7>
+      <WithHexadecimal7>True</WithHexadecimal7>
+      <Expanded7>False</Expanded7>
+      <Notation7>Auto</Notation7>
+      <WatchId8>8</WatchId8>
+      <ParentId8>-1</ParentId8>
+      <WatchStatement8 />
+      <WatchType8>WatchItem</WatchType8>
+      <Memo8 />
+      <BitWidth8>8</BitWidth8>
+      <Encode8>20127</Encode8>
+      <WithHexadecimal8>True</WithHexadecimal8>
+      <Expanded8>False</Expanded8>
+      <Notation8>Auto</Notation8>
+      <WatchId9>9</WatchId9>
+      <ParentId9>-1</ParentId9>
+      <WatchStatement9>g_cmd_queued</WatchStatement9>
+      <WatchType9>WatchItem</WatchType9>
+      <Memo9 />
+      <BitWidth9>8</BitWidth9>
+      <Encode9>20127</Encode9>
+      <WithHexadecimal9>True</WithHexadecimal9>
+      <Expanded9>False</Expanded9>
+      <Notation9>Auto</Notation9>
+      <WatchId10>10</WatchId10>
+      <ParentId10>-1</ParentId10>
+      <WatchStatement10>r_dbg</WatchStatement10>
+      <WatchType10>WatchItem</WatchType10>
+      <Memo10 />
+      <BitWidth10>8</BitWidth10>
+      <Encode10>20127</Encode10>
+      <WithHexadecimal10>True</WithHexadecimal10>
+      <Expanded10>False</Expanded10>
+      <Notation10>Auto</Notation10>
+      <WatchId11>11</WatchId11>
+      <ParentId11>-1</ParentId11>
+      <WatchStatement11>enter_dbg</WatchStatement11>
+      <WatchType11>WatchItem</WatchType11>
+      <Memo11 />
+      <BitWidth11>8</BitWidth11>
+      <Encode11>20127</Encode11>
+      <WithHexadecimal11>True</WithHexadecimal11>
+      <Expanded11>False</Expanded11>
+      <Notation11>Auto</Notation11>
+      <WatchId12>12</WatchId12>
+      <ParentId12>-1</ParentId12>
+      <WatchStatement12>r</WatchStatement12>
+      <WatchType12>WatchItem</WatchType12>
+      <Memo12 />
+      <BitWidth12>8</BitWidth12>
+      <Encode12>20127</Encode12>
+      <WithHexadecimal12>True</WithHexadecimal12>
+      <Expanded12>False</Expanded12>
+      <Notation12>Auto</Notation12>
     </Instance>
     <Instance Guid="3e85fe22-38a0-44af-bbc8-8b0507ddb643">
       <Name>PanelWatch2</Name>
@@ -339,6 +421,14 @@
     <Instance Guid="9c3ccd2d-10ae-4bf1-a5c9-a95f518c52cc">
       <VirtualBoardDockingVisibleHasValue>True</VirtualBoardDockingVisibleHasValue>
       <VirtualBoardDockingVisibleValue>True</VirtualBoardDockingVisibleValue>
+    </Instance>
+  </Class>
+  <Class Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
+    <Instance Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
+      <DebugConsole-COMport>COM1</DebugConsole-COMport>
+      <DebugConsole-Baudrate>0</DebugConsole-Baudrate>
+      <DebugConsole-Echoback>enable</DebugConsole-Echoback>
+      <DebugConsole-EnableDisable>enable</DebugConsole-EnableDisable>
     </Instance>
   </Class>
   <Class Guid="78a1d8b9-6c3e-49af-90d4-3c01ff02a7b4">

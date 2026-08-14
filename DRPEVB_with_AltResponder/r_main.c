@@ -77,7 +77,7 @@ void main(void)
 	while (1U) {
 		ucMode = pd_core();
 		
-		ucMode &= led_ctrl();
+		//ucMode &= led_ctrl();
 		ucMode &= sw_ctrl();
 		
 		if (gPdc.uPdReq.bit.bExitMain != 0U) {

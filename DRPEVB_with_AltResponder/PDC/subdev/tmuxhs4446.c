@@ -11,7 +11,7 @@
 
 /* Match your ISL driver style: 400 kHz and 8-bit shifted address. */
 #define VAL_I2C_CLK         (SMBM_CLOCK_400K)                 /* like ISL95338 */   /* :contentReference[oaicite:4]{index=4} */
-#define VAL_I2C_SLAVEADDR   ((UCHAR)0x48u<<1) /* A1=A0=0 -> 0x48 -> shift */        /* :contentReference[oaicite:5]{index=5} */
+#define VAL_I2C_SLAVEADDR   ((UCHAR)0x54u<<1) /* A1=A0=0 -> 0x48 -> shift */        /* :contentReference[oaicite:5]{index=5} */
 
 /* One global info block, same pattern as ISL95338 */
 TMUXHS4446_INFO gTmuxInfo;

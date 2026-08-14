@@ -15,10 +15,10 @@
 typedef enum {
     TMUX_CONF_OPEN_PD   = 0x00, /* open + power-down */
     TMUX_CONF_OPEN_ON   = 0x01, /* open (powered)    */
-    TMUX_CONF_USB       = 0x02, /* USB SS only       */
-    TMUX_CONF_USB_FLIP  = 0x03, /* USB SS flipped    */
-    TMUX_CONF_DP4       = 0x04, /* 4-lane DP         */
-    TMUX_CONF_DP4_FLIP  = 0x05, /* 4-lane DP flipped */
+    TMUX_CONF_USB       = 0x04, /* USB SS only       */
+    TMUX_CONF_USB_FLIP  = 0x05, /* USB SS flipped    */
+    TMUX_CONF_DP4       = 0x02, /* 4-lane DP         */
+    TMUX_CONF_DP4_FLIP  = 0x03, /* 4-lane DP flipped */
     TMUX_CONF_DP2_USB   = 0x06, /* 2-lane DP + USB   */
     TMUX_CONF_DP2_USB_F = 0x07  /* 2-lane DP + USB flipped */
 } tmux_conf_t;

@@ -1,6 +1,6 @@
 #include "typedefs.h"
 
-const UCHAR  PD_SPEC_REV = 2U;          // 1U:PD2, 2U:PD3
+const UCHAR  PD_SPEC_REV = 1U;          // 1U:PD2, 2U:PD3
 const UCHAR  PD_PDM_SPRT_GET_SRCCAP_E   = 1U;
 const UCHAR  PD_PDM_SPRT_GET_BAT_CAP    = 0U;
 const UCHAR  PD_PDM_SPRT_GET_BAT_STATUS = 0U;

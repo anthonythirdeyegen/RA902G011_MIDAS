@@ -1,14 +1,14 @@
 QualityReport
-Tuesday, November 25, 2025 7:08:44 PM
+Wednesday, February 18, 2026 1:10:13 PM
 
 ------ Start build(DRPEVB_with_AltResponder, Release) ------
 ------ Build ended(Error:0, Warning:0)(DRPEVB_with_AltResponder, Release) ------
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.abs: e7c35c8ac1293403705f9fb3481f295d8dca91f7
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.hex: 1cb579ab48790928814e9505a60e8e7383257a3a
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\Release\DRPEVB_with_AltResponder\Main.hex: c11cd17744293cc1146631d4775f35c8de92cf3a
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.abs: 8eb20a9b04d6ffb6f6a2e5036bbce4a43a89e0b4
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.hex: 1a26af56130cc644192f103d4f42913fb64ddd2d
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_Lib_sample_premium\R9A02G011_251_DRPEVB\Release\DRPEVB_with_AltResponder\Main.hex: 951d571175b3dc650099874fafdc3955b2cc7b2e
 
 
 --- System Information ---
@@ -17,9 +17,9 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_
 *Language
  English (United States)
 *.NET Framework Version
- Microsoft .NET Framework 4 [.NET 4.8 or later] (533320)
+ Microsoft .NET Framework 4 [.NET 4.8 or later] (533509)
 *WebView2 Version
- 142.0.3595.94
+ 144.0.3719.115
 
 --- Application Information ---
 *Product Name
@@ -38,13 +38,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\R9A02G011PDC_
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  402 MB
+  316 MB
  *Number of GDI Objects
-  2187
+  2188
  *Number of USER Objects
-  1230
+  1190
  *Opened Files
-  10 editors, 10 files, 69 KB
+  12 editors, 12 files, 88 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in

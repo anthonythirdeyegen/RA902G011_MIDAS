@@ -19,7 +19,8 @@ void sw_init(void)
 {
 	init_tau0_channel1();
 	pdc_set_int_routine(intID_INTP6, (ULONG)&sw_func_intr_sw);
-	P8_bit.no1 = 1U; PM8_bit.no1 = 1U; PMK6 = 0U; // SW :P81(INTR6)
+	//P8_bit.no1 = 1U; PM8_bit.no1 = 1U; PMK6 = 0U; // SW :P81(INTR6) I am using this pin for another purpose
+	P8_bit.no1 = 0U; PM8_bit.no1 = 1U; PMK6 = 0U; // SW :P81(INTR6)
 	gSW.status = SW_STATE_PULL;
 	gSW.ucPress = 0U;
 }
