@@ -161,6 +161,7 @@ void user_init(void)
 	
 	// Output Port Setting
 	                   P1_bit.no6 = 0U; PM1_bit.no6 = 0U; // VC_DRV1   :P16
+	PMC2_bit.no2 = 0U; P2_bit.no2 = 0U; PM2_bit.no2 = 0U; // POWER_GOOD: P22
 	                   //P1_bit.no7 = 0U; PM1_bit.no7 = 0U; // VC_DRV2   :P17
 			   PM1_bit.no7 = 1U; // P17 = input
 			   P1_bit.no7 = 0U; // Clear latch
@@ -266,6 +267,7 @@ void user_func_event (void)
 			gucWaiCmp = 0U;
 		}
 		else {
+			P2_bit.no2 = 0U; // POWER_GOOD:OFF
 			if (gucWaiCmp == 0U) {
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
 				pdc_set_pps_stat(0x02, 0xFF, 0xFFFFU);
@@ -311,6 +313,7 @@ void user_func_event (void)
 		gPdc.uPdEvent.bit.bDrChg = 0U;
 	}
 	else if (gPdc.uPdEvent.bit.bNewContract != 0U) {
+		P2_bit.no2 = 1U; // POWER_GOOD:ON
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
 		if ((uStatus.bit.bPR   != 0U) && (pdc_is_pps_mode() !=0U)) {
 			pd_tm_start_user_cnt(TM_ID_USER2);
@@ -609,6 +612,7 @@ void user_func_event (void)
 		gPdc.uPdReq.bit.bVconnEn = 0U;
 	}
 	else if (gPdc.uPdReq.bit.bSrcOff != 0U) {
+		P2_bit.no2 = 0U; // POWER_GOOD:OFF
 		if (gucWaiCmp == 0U) {
 			gDCInfo.uReq.bit.bSrcOff = 1U;
 			gucWaiCmp = 1U;
@@ -640,6 +644,7 @@ void user_func_event (void)
 		}
 	}
 	else if (gPdc.uPdReq.bit.bSnkOff != 0U) {
+		P2_bit.no2 = 0U; // POWER_GOOD:OFF
 		if (uStatus.bit.bPlug == 0U) { // Unplug
 			P7_bit.no3 = 0U; // DR_GATE:OFF
 			gDCInfo.uReq.bit.bSnkOff = 1U;
