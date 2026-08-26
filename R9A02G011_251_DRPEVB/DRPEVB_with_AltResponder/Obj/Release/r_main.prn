@@ -1,0 +1,202 @@
+RL78 Family Assembler V1.15.00.03 Assemble Source List
+
+OFFSET   CODE                  NO  SOURCE STATEMENT
+
+00000000                        1  #CC-RL Compiler RL78 Assembler Source
+00000000                        2  #@  CC-RL Version : V1.15.00  [06 Dec 2024]
+00000000                        3  #@  Commmand :
+00000000                        4  #@   ..\..\Core\r_systeminit.c
+00000000                        5  #@   ..\..\PDC\smbm_ctrl.c
+00000000                        6  #@   ..\..\PDC\user_timer.c
+00000000                        7  #@   pd_defs.c
+00000000                        8  #@   r_main.c
+00000000                        9  #@   R_Main_UserInit.c
+00000000                       10  #@   PDC\dcdc_ctrl.c
+00000000                       11  #@   PDC\led_ctrl.c
+00000000                       12  #@   PDC\sw_ctrl.c
+00000000                       13  #@   PDC\user_main.c
+00000000                       14  #@   PDC\user_main_protection.c
+00000000                       15  #@   PDC\subdev\isl95338.c
+00000000                       16  #@   PDC\subdev\subdev_ctrl.c
+00000000                       17  #@   PDC\subdev\tmuxhs4446.c
+00000000                       18  #@   -cpu=S3
+00000000                       19  #@   -obj_path=Obj\Release
+00000000                       20  #@   -dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
+00000000                       21  #@   -g
+00000000                       22  #@   -Osame_code
+00000000                       23  #@   -I PDC\subdev
+00000000                       24  #@   -I PDC
+00000000                       25  #@   -I .
+00000000                       26  #@   -I ..\..\PDC\Lib
+00000000                       27  #@   -I ..\..\PDC
+00000000                       28  #@   -I ..\..\Core
+00000000                       29  #@   -D RELEASE_BUILD=1,PPS_SPRT=0
+00000000                       30  #@   -asm_path=Obj\Release
+00000000                       31  #@   -asmopt=-prn_path=Obj\Release
+00000000                       32  #@   -c
+00000000                       33  #@   -MAKEUD=Obj\Release
+00000000                       34  #@   -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_ecc9417ec240495db11f2574a45372a1ol0f4dbw.oia
+00000000                       35  #@  compiled at Wed Aug 26 14:31:31 2026
+00000000                       36  
+00000000                       37  	.EXTERN _gPdc
+00000000                       38  	.EXTERN _gDCInfo
+00000000                       39  	.EXTERN _gSubdevInfo
+00000000                       40  	.PUBLIC _main
+00000000                       41  	.EXTERN _R_MAIN_UserInit
+00000000                       42  	.EXTERN _pdc_active
+00000000                       43  	.EXTERN _pd_core
+00000000                       44  	.EXTERN _sw_ctrl
+00000000                       45  	.EXTERN _user_func_event
+00000000                       46  	.EXTERN _user_func_chk_device
+00000000                       47  	.EXTERN _user_func_snd_attention
+00000000                       48  	.EXTERN _tm_12bit_start_gtimer
+00000000                       49  	.EXTERN _pdc_get_idle_time
+00000000                       50  	.EXTERN _tm_12bit_intr_hdlr
+00000000                       51  	.EXTERN _tm_12tm_stop_gtimer
+00000000                       52  	.EXTERN _pdc_stop
+00000000                       53  	.EXTERN _pdc_run
+00000000                       54  	.EXTERN _subdev_ctrl
+00000000                       55  	.EXTERN _smbm_ctrl
+00000000                       56  
+00000000                       57  	.SECTION .textf,TEXTF
+00000000                       58  	.TYPE _main,function,.LFE1-_main
+00000000                       59  _main:
+00000000                       60  	.STACK _main = 6
+00000000                       61  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 70
+00000000 C7                    62  	push hl
+00000001                       63  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 73
+00000001 FC000000              64  	call !!_R_MAIN_UserInit
+00000005                       65  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 76
+00000005 FC000000              66  	call !!_pdc_active
+00000009 EE0000                67  	br $!.BB@LABEL@1_16
+0000000C                       68  .BB@LABEL@1_1:	; if_break_bb
+0000000C                       69  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 87
+0000000C AF0000                70  	movw ax, !LOWW(_gPdc)
+0000000F 6168                  71  	or a, x
+00000011 DF00                  72  	bnz $.BB@LABEL@1_7
+00000013                       73  .BB@LABEL@1_2:	; bb17
+00000013 AF0000                74  	movw ax, !LOWW(_gPdc+0x00002)
+00000016 6168                  75  	or a, x
+00000018 DF00                  76  	bnz $.BB@LABEL@1_7
+0000001A                       77  .BB@LABEL@1_3:	; bb27
+0000001A AF0000                78  	movw ax, !LOWW(_gDCInfo)
+0000001D 6168                  79  	or a, x
+0000001F DF00                  80  	bnz $.BB@LABEL@1_7
+00000021                       81  .BB@LABEL@1_4:	; bb38
+00000021 AF0000                82  	movw ax, !LOWW(_gDCInfo+0x00002)
+00000024 08                    83  	xch a, x
+00000025 5CF0                  84  	and a, #0xF0
+00000027 08                    85  	xch a, x
+00000028 6168                  86  	or a, x
+0000002A DF00                  87  	bnz $.BB@LABEL@1_7
+0000002C                       88  .BB@LABEL@1_5:	; bb50
+0000002C 51F0                  89  	mov a, #0xF0
+0000002E 5F0000                90  	and a, !LOWW(_gDCInfo+0x00005)
+00000031 D1                    91  	cmp0 a
+00000032 DD00                  92  	bz $.BB@LABEL@1_7
+00000034                       93  .BB@LABEL@1_6:	; bb63
+00000034 D50000                94  	cmp0 !LOWW(_gSubdevInfo+0x00002)
+00000037 DD00                  95  	bz $.BB@LABEL@1_8
+00000039                       96  .BB@LABEL@1_7:	; if_then_bb76
+00000039                       97  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 93
+00000039 FC000000              98  	call !!_user_func_event
+0000003D EF00                  99  	br $.BB@LABEL@1_15
+0000003F                      100  .BB@LABEL@1_8:	; if_else_bb
+0000003F                      101  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 96
+0000003F FC000000             102  	call !!_user_func_chk_device
+00000043 9800                 103  	mov [sp+0x00], a
+00000045                      104  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 100
+00000045 FC000000             105  	call !!_user_func_snd_attention
+00000049 73                   106  	mov b, a
+0000004A 8801                 107  	mov a, [sp+0x01]
+0000004C 70                   108  	mov x, a
+0000004D 8800                 109  	mov a, [sp+0x00]
+0000004F                      110  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 96
+0000004F 6150                 111  	and x, a
+00000051 63                   112  	mov a, b
+00000052                      113  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 100
+00000052 6158                 114  	and a, x
+00000054                      115  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 101
+00000054 91                   116  	dec a
+00000055 D1                   117  	cmp0 a
+00000056 DD00                 118  	bz $.BB@LABEL@1_12
+00000058                      119  .BB@LABEL@1_9:	; if_else_bb
+00000058 0CFE                 120  	add a, #0xFE
+0000005A D1                   121  	cmp0 a
+0000005B DD00                 122  	bz $.BB@LABEL@1_13
+0000005D                      123  .BB@LABEL@1_10:	; if_else_bb
+0000005D 4C04                 124  	cmp a, #0x04
+0000005F DF00                 125  	bnz $.BB@LABEL@1_15
+00000061                      126  .BB@LABEL@1_11:	; switch_clause_bb96
+00000061                      127  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 111
+00000061 FC000000             128  	call !!_pdc_stop
+00000065                      129  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 112
+00000065 FC000000             130  	call !!_pdc_get_idle_time
+00000069 12                   131  	movw bc, ax
+0000006A 5100                 132  	mov a, #LOW(HIGHW(_tm_12bit_intr_hdlr))
+0000006C 318E                 133  	shrw ax, 8+0x00000
+0000006E 14                   134  	movw de, ax
+0000006F 13                   135  	movw ax, bc
+00000070 320000               136  	movw bc, #LOWW(_tm_12bit_intr_hdlr)
+00000073 FC000000             137  	call !!_tm_12bit_start_gtimer
+00000077                      138  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 113
+00000077 61FD                 139  	stop
+00000079                      140  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 114
+00000079 FC000000             141  	call !!_pdc_run
+0000007D EF00                 142  	br $.BB@LABEL@1_14
+0000007F                      143  .BB@LABEL@1_12:	; switch_clause_bb
+0000007F                      144  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 103
+0000007F 61ED                 145  	halt
+00000081 EF00                 146  	br $.BB@LABEL@1_15
+00000083                      147  .BB@LABEL@1_13:	; switch_clause_bb91
+00000083                      148  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 106
+00000083 FC000000             149  	call !!_pdc_get_idle_time
+00000087 12                   150  	movw bc, ax
+00000088 5100                 151  	mov a, #LOW(HIGHW(_tm_12bit_intr_hdlr))
+0000008A 318E                 152  	shrw ax, 8+0x00000
+0000008C 14                   153  	movw de, ax
+0000008D 13                   154  	movw ax, bc
+0000008E 320000               155  	movw bc, #LOWW(_tm_12bit_intr_hdlr)
+00000091 FC000000             156  	call !!_tm_12bit_start_gtimer
+00000095                      157  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 107
+00000095 61ED                 158  	halt
+00000097                      159  .BB@LABEL@1_14:	; switch_clause_bb96
+00000097 FC000000             160  	call !!_tm_12tm_stop_gtimer
+0000009B                      161  .BB@LABEL@1_15:	; if_break_bb102
+0000009B                      162  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 123
+0000009B FC000000             163  	call !!_subdev_ctrl
+0000009F                      164  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 124
+0000009F FC000000             165  	call !!_smbm_ctrl
+000000A3                      166  .BB@LABEL@1_16:	; bb103
+000000A3                      167  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 78
+000000A3 FC000000             168  	call !!_pd_core
+000000A7 9800                 169  	mov [sp+0x00], a
+000000A9                      170  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 81
+000000A9 FC000000             171  	call !!_sw_ctrl
+000000AD 70                   172  	mov x, a
+000000AE 8800                 173  	mov a, [sp+0x00]
+000000B0 6158                 174  	and a, x
+000000B2 9801                 175  	mov [sp+0x01], a
+000000B4                      176  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 83
+000000B4 8F0000               177  	mov a, !LOWW(_gPdc+0x00001)
+000000B7                      178  	.bf a.7, $!.BB@LABEL@1_1
+000000B7 317300                  	 -- Bncond	xxx.bit	,$.BR_TEMP@1
+000000BA EE0000                  	 -- br	**.target2
+000000BD                         .BR_TEMP@1:
+000000BD                      179  .BB@LABEL@1_17:	; return
+000000BD                      180  	.LINE "C:/Users/AnthonyRusso/OneDrive - Banc3 Federal/Documents/Workspace/RA902G011_MIDAS/R9A02G011_251_DRPEVB/DRPEVB_with_AltResponder/r_main.c", 128
+000000BD C0                   181  	pop ax
+000000BE D7                   182  	ret
+000000BF                      183  .LFE1:
+
+Section List
+Attr     Size                Name
+
+TEXTF               191 (000000BF) .textf
+
+Command Line Parameter
+Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\asrl.exe" @C:\Users\ANTHON~1\AppData\Local\Temp\$ccrl\r_main.asm.cmd 
+
+Command File Parameter
+-define=__RENESAS_VERSION__=0x01150000 -cpu=S3 -include="C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\PDC\subdev" -include="C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\PDC" -include="C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder" -include="C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\PDC\Lib" -include="C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\PDC" -include="C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\Core" -character_set=none -dev="C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -prn_path=Obj\Release -output="C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\r_main.obj" "C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\r_main.asm" 
+
