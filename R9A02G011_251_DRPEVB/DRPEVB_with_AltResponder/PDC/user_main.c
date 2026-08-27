@@ -160,7 +160,9 @@ void user_init(void)
 	// If ucAn10 = 1 at pd_core_init() -> PM2_bit.no2, PMC2_bit.no2
 	
 	// Output Port Setting
-	                   P1_bit.no6 = 0U; PM1_bit.no6 = 0U; // VC_DRV1   :P16
+	                   //P1_bit.no6 = 0U; PM1_bit.no6 = 0U; // VC_DRV1   :P16
+			   PM1_bit.no6 = 1U; // P16 = input, available for user design
+			   P1_bit.no6 = 0U; // Clear latch
 	PMC2_bit.no2 = 0U; P2_bit.no2 = 0U; PM2_bit.no2 = 0U; // POWER_GOOD: P22
 	                   //P1_bit.no7 = 0U; PM1_bit.no7 = 0U; // VC_DRV2   :P17
 			   PM1_bit.no7 = 1U; // P17 = input
@@ -598,13 +600,13 @@ void user_func_event (void)
     	}
 	
 	if (gPdc.uPdReq.bit.bVconnDis != 0U) {
-		P1_bit.no6 = 0U; // VC_DRV1:OFF
+		//P1_bit.no6 = 0U; // VC_DRV1:OFF
 		P1_bit.no7 = 0U; // VC_DRV2:OFF
 		gPdc.uPdReq.bit.bVconnDis = 0U;
 	}
 	else if (gPdc.uPdReq.bit.bVconnEn != 0U) {
 		if (uStatus.bit.bCc != 0U) { // CC2
-			P1_bit.no6 = 1U; // VC_DRV1:ON
+			//P1_bit.no6 = 1U; // VC_DRV1:ON
 		}
 		else { // CC1
 			//P1_bit.no7 = 1U; // VC_DRV2:ON
