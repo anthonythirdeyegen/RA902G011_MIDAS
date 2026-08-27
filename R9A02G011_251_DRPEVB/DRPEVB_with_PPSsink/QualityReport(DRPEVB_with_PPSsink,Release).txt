@@ -1,77 +1,12 @@
 QualityReport
-Thursday, August 27, 2026 11:22:49 AM
+Thursday, August 27, 2026 1:20:58 PM
 
 ------ Start build(DRPEVB_with_PPSsink, Release) ------
-C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\ccrl.exe ..\..\Core\r_systeminit.c ..\..\PDC\smbm_ctrl.c ..\..\PDC\user_timer.c pd_defs.c r_main.c R_Main_UserInit.c PDC\dcdc_ctrl.c PDC\led_ctrl.c PDC\sw_ctrl.c PDC\user_main.c PDC\user_main_protection.c PDC\subdev\isl95338.c PDC\subdev\subdev_ctrl.c -cpu=S3 -obj_path=Obj\Release "-dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -g -Osame_code -I PDC\subdev -I PDC -I . -I ..\..\PDC\Lib -I ..\..\PDC -I ..\..\Core -D RELEASE_BUILD=1,PPS_SPRT=0 -asm_path=Obj\Release -asmopt=-prn_path=Obj\Release -c -MAKEUD=Obj\Release -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_bd96692706f5418abb16f0aea4a234a45qb1bepf.iiu -msg_lang=english
-W0511187:The evaluation period for the option "-Odefault" of CC-RL V1 has expired. It is implicitly changed to "-Olite". Please consider purchasing the product to continue using "-Odefault". By explicitly specifying "-Olite" or "-Onothing", this warning message disappears. 
-W0511123:The "-Osame_code" option is ignored when the "-Olite" option is specified at the same time.
-C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\ccrl.exe ..\..\Core\cstart.asm ..\..\Core\stkinit.asm -cpu=S3 -obj_path=Obj\Release "-dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -g -I . -I ..\.. -c -MAKEUD=Obj\Release -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_35494dc447994cb0a879e983bedce5afm4lzkptd.wph -msg_lang=english
-C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\rlink.exe -MAKEUD=Obj\Release\DRPEVB_with_PPSsink.lk.ud -subcommand=Obj\Release\DRPEVB_with_PPSsink.clnk
-W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
-W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
-W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
-Renesas Optimizing Linker Completed
------- Build ended(Error:0, Warning:5)(DRPEVB_with_PPSsink, Release) ------
-
---- CommandFile 1 ---
-Obj\Release\DRPEVB_with_PPSsink.clnk :
--Input=Obj\Release\cstart.obj
--Input=Obj\Release\r_systeminit.obj
--Input=Obj\Release\stkinit.obj
--Input=Obj\Release\smbm_ctrl.obj
--Input=Obj\Release\user_timer.obj
--Input=Obj\Release\pd_defs.obj
--Input=Obj\Release\r_main.obj
--Input=Obj\Release\R_Main_UserInit.obj
--Input=Obj\Release\dcdc_ctrl.obj
--Input=Obj\Release\led_ctrl.obj
--Input=Obj\Release\sw_ctrl.obj
--Input=Obj\Release\user_main.obj
--Input=Obj\Release\user_main_protection.obj
--Input=Obj\Release\isl95338.obj
--Input=Obj\Release\subdev_ctrl.obj
--LIBrary=..\..\PDC\Lib\R9A02G011PDC.lib
--SECURITY_ID=00000000000000000000
--DEVICE=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
--DEBug
--NOCOmpress
--NOOPtimize
--OUtput=Obj\Release\DRPEVB_with_PPSsink.abs
--LIBrary=C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\lib\rl78em4s.lib
--LIBrary=C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\lib\malloc_n.lib
--LIBrary=C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\lib\rl78em4r.lib
--OCDBG=04
--USER_OPT_BYTE=7F7BE0
--LISt=Obj\Release\DRPEVB_with_PPSsink.map
--SHow=SYmbol,Reference,Total_size,VECTOR,STRUCT
--STARt=.const,.text,.RLIB,.SLIB,.textf,.constf,.data,.sdata/02010,.dataR,.bss/FF958,.stack_bss/FFDA0,.sdataR,.sbss/FFE20
--ROm=.data=.dataR
--ROm=.sdata=.sdataR
--NOMessage
--STACk
--NOLOgo
--end
--Input=Obj\Release\DRPEVB_with_PPSsink.abs
--DEVICE=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
--OUtput=Obj\Release\DRPEVB_with_PPSsink.hex
--FOrm=Hexadecimal
--BYte_count=20
--CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0
--NOMessage
--end
--Input=Obj\Release\DRPEVB_with_PPSsink.abs
--DEVICE=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
--OUtput=..\Release\DRPEVB_with_PPSsink\Main.hex=2000-FBFF
--FOrm=Hexadecimal
--SPace=00
--BYte_count=20
--CRc=FBFE=2000-FBFD/16-CCITT-LSB(0000):LITTLE-2-0
--NOMessage
--exit
+------ Build ended(Error:0, Warning:0)(DRPEVB_with_PPSsink, Release) ------
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_PPSsink\Obj\Release\DRPEVB_with_PPSsink.abs: 662b9b423af0a66a42354a64f3e267d8d38fa38d
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_PPSsink\Obj\Release\DRPEVB_with_PPSsink.abs: e6100e0b9370f0cc8027146b7e52a144811f3d8d
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_PPSsink\Obj\Release\DRPEVB_with_PPSsink.hex: 47cae30e5d1fa5f1c63dda687eefc2086f14c2fd
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\Release\DRPEVB_with_PPSsink\Main.hex: df4abfd6c8517a2fa02fdeb7ac18be14fd729e0d
 
@@ -103,13 +38,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MID
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  391 MB
+  418 MB
  *Number of GDI Objects
-  2294
+  2364
  *Number of USER Objects
-  1232
+  1255
  *Opened Files
-  14 editors, 14 files, 93 KB
+  14 editors, 14 files, 94 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in

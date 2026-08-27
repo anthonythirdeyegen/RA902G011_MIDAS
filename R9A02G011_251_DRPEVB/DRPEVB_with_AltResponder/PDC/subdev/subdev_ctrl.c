@@ -4,6 +4,7 @@
 #include "typedefs.h"
 #include "r_cg_macrodriver.h"
 #include "tmuxhs4446.h"
+#include "bq25798.h"
 
 /******************************************************************************
  Global values
@@ -27,7 +28,7 @@ static const UCHAR ucBitMask[SUBDEV_CTRL_FUNC]={
 static const  ULONG ulSuvdevInitFunc[SUBDEV_CTRL_FUNC]={
 	(ULONG)&init_isl95338,
 	(ULONG)&init_tmuxhs4446,
-	NULL,
+	(ULONG)&init_bq25798,
 	NULL,
 	NULL,
 	NULL,
@@ -52,7 +53,7 @@ static const ULONG ulSuvdevAlertFunc[SUBDEV_CTRL_FUNC]={
 static const ULONG ulSubdevFunc[SUBDEV_CTRL_FUNC]={
 	(ULONG)&isl95338_ctrl,
 	(ULONG)&tmuxhs4446_ctrl,
-	NULL,
+	(ULONG)&bq25798_ctrl,
 	NULL,
 	NULL,
 	NULL,

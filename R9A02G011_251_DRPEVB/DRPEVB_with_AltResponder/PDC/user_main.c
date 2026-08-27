@@ -9,11 +9,15 @@
 #include "led_ctrl.h"
 #include "sw_ctrl.h"
 #include "tmuxhs4446.h"
+#include "bq25798.h"
 #include <stdint.h>
 
 #define DATA_MESSAGE		0x01
 #define CMD_DP_STATUS     0x10U   // “Status Update”
 #define CMD_DP_CONFIGURE  0x11U   // “Configure”
+
+#define CHARGER_SYSTEM_RESERVE_MA  ((USHORT)500U)
+#define CHARGER_MAX_CHARGE_MA      ((USHORT)2000U)
 
 // DP Alt Mode Discover Modes VDO
 // ---- Port capability (bits 1:0)
@@ -111,6 +115,26 @@ void user_func_intr_timer_thermistor (void);
 static void charge_en_update(void)
 {
 	P1_bit.no6 = ((has_charger != 0U) && (g_power_negotiated != 0U)) ? 1U : 0U;
+}
+
+static void charger_current_update(void)
+{
+	USHORT usInputMa = (USHORT)(pdc_get_req_cur() * 10U);
+	USHORT usChargeMa = 0U;
+
+	if ((has_charger == 0U) || (g_power_negotiated == 0U) || (usInputMa <= CHARGER_SYSTEM_RESERVE_MA)) {
+		return;
+	}
+
+	usChargeMa = (USHORT)(usInputMa - CHARGER_SYSTEM_RESERVE_MA);
+	if (usChargeMa > CHARGER_MAX_CHARGE_MA) {
+		usChargeMa = CHARGER_MAX_CHARGE_MA;
+	}
+
+	bq25798_request_use_iindpm_register();
+	bq25798_request_input_current(usInputMa);
+	bq25798_request_charge_current(usChargeMa);
+	bq25798_request_charge_enable(1U);
 }
 
 void hpd_int_init(void)
@@ -277,6 +301,9 @@ void user_func_event (void)
 		else {
 			g_power_negotiated = 0U;
 			charge_en_update();
+			if (has_charger != 0U) {
+				bq25798_request_charge_enable(0U);
+			}
 			P2_bit.no2 = 0U; // POWER_GOOD:OFF
 			if (gucWaiCmp == 0U) {
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
@@ -326,6 +353,7 @@ void user_func_event (void)
 		P2_bit.no2 = 1U; // POWER_GOOD:ON
 		g_power_negotiated = 1U;
 		charge_en_update();
+		charger_current_update();
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
 		if ((uStatus.bit.bPR   != 0U) && (pdc_is_pps_mode() !=0U)) {
 			pd_tm_start_user_cnt(TM_ID_USER2);
@@ -626,6 +654,9 @@ void user_func_event (void)
 	else if (gPdc.uPdReq.bit.bSrcOff != 0U) {
 		g_power_negotiated = 0U;
 		charge_en_update();
+		if (has_charger != 0U) {
+			bq25798_request_charge_enable(0U);
+		}
 		P2_bit.no2 = 0U; // POWER_GOOD:OFF
 		if (gucWaiCmp == 0U) {
 			gDCInfo.uReq.bit.bSrcOff = 1U;
@@ -660,6 +691,9 @@ void user_func_event (void)
 	else if (gPdc.uPdReq.bit.bSnkOff != 0U) {
 		g_power_negotiated = 0U;
 		charge_en_update();
+		if (has_charger != 0U) {
+			bq25798_request_charge_enable(0U);
+		}
 		P2_bit.no2 = 0U; // POWER_GOOD:OFF
 		if (uStatus.bit.bPlug == 0U) { // Unplug
 			P7_bit.no3 = 0U; // DR_GATE:OFF

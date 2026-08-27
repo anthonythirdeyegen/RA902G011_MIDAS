@@ -1,26 +1,23 @@
 QualityReport
-Thursday, August 27, 2026 11:22:47 AM
+Thursday, August 27, 2026 1:20:59 PM
 
 ------ Start build(DRPEVB_with_AltResponder, Release) ------
-C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\ccrl.exe ..\..\Core\r_systeminit.c ..\..\PDC\smbm_ctrl.c ..\..\PDC\user_timer.c pd_defs.c r_main.c R_Main_UserInit.c PDC\dcdc_ctrl.c PDC\led_ctrl.c PDC\sw_ctrl.c PDC\user_main.c PDC\user_main_protection.c PDC\subdev\isl95338.c PDC\subdev\subdev_ctrl.c PDC\subdev\tmuxhs4446.c -cpu=S3 -obj_path=Obj\Release "-dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -g -Osame_code -I PDC\subdev -I PDC -I . -I ..\..\PDC\Lib -I ..\..\PDC -I ..\..\Core -D RELEASE_BUILD=1,PPS_SPRT=0 -asm_path=Obj\Release -asmopt=-prn_path=Obj\Release -c -MAKEUD=Obj\Release -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_539d872d80314bff8bbe2d30e86881dauvefjukh.spf -msg_lang=english
+C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\ccrl.exe PDC\user_main.c PDC\subdev\subdev_ctrl.c PDC\subdev\bq25798.c -cpu=S3 -obj_path=Obj\Release "-dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -g -Osame_code -I PDC\subdev -I PDC -I . -I ..\..\PDC\Lib -I ..\..\PDC -I ..\..\Core -D RELEASE_BUILD=1,PPS_SPRT=0 -asm_path=Obj\Release -asmopt=-prn_path=Obj\Release -c -MAKEUD=Obj\Release -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_65421c82994144699a4d2c27a39ae78ewr4b1032.cfj -msg_lang=english
 W0511187:The evaluation period for the option "-Odefault" of CC-RL V1 has expired. It is implicitly changed to "-Olite". Please consider purchasing the product to continue using "-Odefault". By explicitly specifying "-Olite" or "-Onothing", this warning message disappears. 
 W0511123:The "-Osame_code" option is ignored when the "-Olite" option is specified at the same time.
-PDC\user_main.c(387):W0520063:Shift count is too large
-PDC\user_main.c(388):W0520063:Shift count is too large
-PDC\user_main.c(468):W0520550:Variable "ver" was set but never used
-PDC\user_main.c(216):W0520550:Variable "dp_mode_vdo" was set but never used
-PDC\user_main.c(95):W0520550:Variable "gGetStatLastResult" was set but never used
-PDC\user_main.c(96):W0520177:Variable "g_alert_pending" was declared but never referenced
-PDC\user_main.c(97):W0520550:Variable "g_hpd_irq_flag" was set but never used
-PDC\subdev\tmuxhs4446.c(86):W0520167:Argument of type "UCHAR __near *" is incompatible with parameter of type "USHORT *__near"
-PDC\subdev\tmuxhs4446.c(89):W0523082:Pointer to the object of even alignment holds the odd address
-C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\ccrl.exe ..\..\Core\cstart.asm ..\..\Core\stkinit.asm -cpu=S3 -obj_path=Obj\Release "-dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -g -I . -c -MAKEUD=Obj\Release -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_60dbbea293a14b568d916133d7c5a311guxmo3ju.yo0 -msg_lang=english
+PDC\user_main.c(415):W0520063:Shift count is too large
+PDC\user_main.c(416):W0520063:Shift count is too large
+PDC\user_main.c(496):W0520550:Variable "ver" was set but never used
+PDC\user_main.c(240):W0520550:Variable "dp_mode_vdo" was set but never used
+PDC\user_main.c(99):W0520550:Variable "gGetStatLastResult" was set but never used
+PDC\user_main.c(100):W0520177:Variable "g_alert_pending" was declared but never referenced
+PDC\user_main.c(101):W0520550:Variable "g_hpd_irq_flag" was set but never used
 C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\rlink.exe -MAKEUD=Obj\Release\DRPEVB_with_AltResponder.lk.ud -subcommand=Obj\Release\DRPEVB_with_AltResponder.clnk
 W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
 W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
 W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
 Renesas Optimizing Linker Completed
------- Build ended(Error:0, Warning:14)(DRPEVB_with_AltResponder, Release) ------
+------ Build ended(Error:0, Warning:12)(DRPEVB_with_AltResponder, Release) ------
 
 --- CommandFile 1 ---
 Obj\Release\DRPEVB_with_AltResponder.clnk :
@@ -40,6 +37,7 @@ Obj\Release\DRPEVB_with_AltResponder.clnk :
 -Input=Obj\Release\isl95338.obj
 -Input=Obj\Release\subdev_ctrl.obj
 -Input=Obj\Release\tmuxhs4446.obj
+-Input=Obj\Release\bq25798.obj
 -LIBrary=..\..\PDC\Lib\R9A02G011PDC.lib
 -SECURITY_ID=00000000000000000000
 -DEVICE=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF
@@ -82,9 +80,9 @@ Obj\Release\DRPEVB_with_AltResponder.clnk :
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.abs: 8c6386af11f73435520c149e0634e09e28dddb20
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.hex: 07c96082fbccb42e538edb9aa1ae6d2b99923763
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\Release\DRPEVB_with_AltResponder\Main.hex: 6af025ecc78bfac8dc5f736a4dc0616e9fbc0fb9
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.abs: 2726c6cf6a757125e5e4e62518d10f9554ac8f5a
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.hex: 8df697925b51c19d602dc077e40b65e69c94208f
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\Release\DRPEVB_with_AltResponder\Main.hex: 5954b13225fe7604ee4a57561c2c9789ec89c972
 
 
 --- System Information ---
@@ -114,13 +112,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MID
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  390 MB
+  418 MB
  *Number of GDI Objects
-  2294
+  2364
  *Number of USER Objects
-  1231
+  1255
  *Opened Files
-  14 editors, 14 files, 93 KB
+  14 editors, 14 files, 94 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in

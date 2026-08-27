@@ -304,6 +304,20 @@
       <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
       <ParentItem>19ef3b3c-07a0-4870-8146-32a2591fc42b</ParentItem>
     </Instance>
+    <Instance Guid="e42b566e-790d-44c3-897a-70efae995739">
+      <Name>bq25798.c</Name>
+      <Type>File</Type>
+      <RelativePath>PDC\subdev\bq25798.c</RelativePath>
+      <TreeImageGuid>941832c1-fc3b-4e1b-94e8-01ea17128b42</TreeImageGuid>
+      <ParentItem>19ef3b3c-07a0-4870-8146-32a2591fc42b</ParentItem>
+    </Instance>
+    <Instance Guid="be58f72a-d044-4a8a-812e-77d3e368b786">
+      <Name>bq25798.h</Name>
+      <Type>File</Type>
+      <RelativePath>PDC\subdev\bq25798.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>19ef3b3c-07a0-4870-8146-32a2591fc42b</ParentItem>
+    </Instance>
   </Class>
   <Class Guid="fb98844b-2c27-4275-9804-f6e63e204da0">
     <Instance Guid="2a349cb6-b982-4ade-adcd-104b883ad81c">

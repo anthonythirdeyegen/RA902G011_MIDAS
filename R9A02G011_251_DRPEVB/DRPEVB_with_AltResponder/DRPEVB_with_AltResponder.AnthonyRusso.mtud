@@ -89,6 +89,14 @@
       <ProjectSaveKeyPanelStatusConnectSourceWindow>False</ProjectSaveKeyPanelStatusConnectSourceWindow>
     </Instance>
   </Class>
+  <Class Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
+    <Instance Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
+      <DebugConsole-COMport>COM1</DebugConsole-COMport>
+      <DebugConsole-Baudrate>0</DebugConsole-Baudrate>
+      <DebugConsole-Echoback>enable</DebugConsole-Echoback>
+      <DebugConsole-EnableDisable>enable</DebugConsole-EnableDisable>
+    </Instance>
+  </Class>
   <Class Guid="ce51aa0d-1353-40fe-ba85-46c1106c7c21">
     <Instance Guid="00000000-0000-0000-0000-000000000000">
       <IsSymbolOffsetVisible>False</IsSymbolOffsetVisible>
@@ -421,14 +429,6 @@
     <Instance Guid="9c3ccd2d-10ae-4bf1-a5c9-a95f518c52cc">
       <VirtualBoardDockingVisibleHasValue>True</VirtualBoardDockingVisibleHasValue>
       <VirtualBoardDockingVisibleValue>True</VirtualBoardDockingVisibleValue>
-    </Instance>
-  </Class>
-  <Class Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
-    <Instance Guid="d9e7a26a-0526-4119-b8c3-b0112e16eb03">
-      <DebugConsole-COMport>COM1</DebugConsole-COMport>
-      <DebugConsole-Baudrate>0</DebugConsole-Baudrate>
-      <DebugConsole-Echoback>enable</DebugConsole-Echoback>
-      <DebugConsole-EnableDisable>enable</DebugConsole-EnableDisable>
     </Instance>
   </Class>
   <Class Guid="78a1d8b9-6c3e-49af-90d4-3c01ff02a7b4">
