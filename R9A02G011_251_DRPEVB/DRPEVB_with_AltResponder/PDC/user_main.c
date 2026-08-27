@@ -89,6 +89,7 @@ UCHAR  gucOmfData;
 UCHAR  gucReserved;
 UCHAR  gucEnterModeEnable;
 UCHAR  gucLEDStatus;
+UCHAR  has_charger = 0U;
 
 static UCHAR gGetStatPending = 0;
 static UCHAR gGetStatLastResult = 0xFF;
@@ -98,6 +99,7 @@ static UCHAR g_dp_mode_configured = 0U;
 static UCHAR g_hpd_toggled = 0U;
 static UCHAR g_hpd_state = 0U;
 static UCHAR g_cmd_queued = 0U;
+static UCHAR g_power_negotiated = 0U;
 
 volatile UCHAR r_dbg;
 volatile UCHAR enter_dbg;
@@ -105,6 +107,11 @@ volatile UCHAR enter_dbg;
 void user_func_start_timer_thermistor(void);
 void user_func_stop_timer_thermistor (void);
 void user_func_intr_timer_thermistor (void);
+
+static void charge_en_update(void)
+{
+	P1_bit.no6 = ((has_charger != 0U) && (g_power_negotiated != 0U)) ? 1U : 0U;
+}
 
 void hpd_int_init(void)
 {
@@ -160,9 +167,7 @@ void user_init(void)
 	// If ucAn10 = 1 at pd_core_init() -> PM2_bit.no2, PMC2_bit.no2
 	
 	// Output Port Setting
-	                   //P1_bit.no6 = 0U; PM1_bit.no6 = 0U; // VC_DRV1   :P16
-			   PM1_bit.no6 = 1U; // P16 = input, available for user design
-			   P1_bit.no6 = 0U; // Clear latch
+	                   P1_bit.no6 = 0U; PM1_bit.no6 = 0U; // CHARGE_EN :P16
 	PMC2_bit.no2 = 0U; P2_bit.no2 = 0U; PM2_bit.no2 = 0U; // POWER_GOOD: P22
 	                   //P1_bit.no7 = 0U; PM1_bit.no7 = 0U; // VC_DRV2   :P17
 			   PM1_bit.no7 = 1U; // P17 = input
@@ -215,6 +220,7 @@ void user_func_event (void)
 	g_cmd_queued = 0U;
 	
 	hpd_poll_task();
+	charge_en_update();
 	
 	//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
 	//g_hpd_toggled =0; //for testing
@@ -269,6 +275,8 @@ void user_func_event (void)
 			gucWaiCmp = 0U;
 		}
 		else {
+			g_power_negotiated = 0U;
+			charge_en_update();
 			P2_bit.no2 = 0U; // POWER_GOOD:OFF
 			if (gucWaiCmp == 0U) {
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
@@ -316,6 +324,8 @@ void user_func_event (void)
 	}
 	else if (gPdc.uPdEvent.bit.bNewContract != 0U) {
 		P2_bit.no2 = 1U; // POWER_GOOD:ON
+		g_power_negotiated = 1U;
+		charge_en_update();
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
 		if ((uStatus.bit.bPR   != 0U) && (pdc_is_pps_mode() !=0U)) {
 			pd_tm_start_user_cnt(TM_ID_USER2);
@@ -614,6 +624,8 @@ void user_func_event (void)
 		gPdc.uPdReq.bit.bVconnEn = 0U;
 	}
 	else if (gPdc.uPdReq.bit.bSrcOff != 0U) {
+		g_power_negotiated = 0U;
+		charge_en_update();
 		P2_bit.no2 = 0U; // POWER_GOOD:OFF
 		if (gucWaiCmp == 0U) {
 			gDCInfo.uReq.bit.bSrcOff = 1U;
@@ -646,6 +658,8 @@ void user_func_event (void)
 		}
 	}
 	else if (gPdc.uPdReq.bit.bSnkOff != 0U) {
+		g_power_negotiated = 0U;
+		charge_en_update();
 		P2_bit.no2 = 0U; // POWER_GOOD:OFF
 		if (uStatus.bit.bPlug == 0U) { // Unplug
 			P7_bit.no3 = 0U; // DR_GATE:OFF

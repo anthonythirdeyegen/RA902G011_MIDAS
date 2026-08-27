@@ -1,0 +1,26 @@
+# Renesas / RL78 build output
+**/Obj/
+**/Obj/**
+
+# Release/build output directories
+**/Release/*.hex
+
+# Compiler/linker generated files
+*.abs
+*.clnk
+*.lk.ud
+*.map
+*.sni
+*.udm
+*.obj
+*.prn
+*.drv.ud
+*.frt.ud
+*.asm.ud
+
+# Generated assembly output
+# Be careful: only use this if your .asm files are generated
+# **/Obj/**/*.asm
+
+# Generated quality reports
+QualityReport(*,Release).txt

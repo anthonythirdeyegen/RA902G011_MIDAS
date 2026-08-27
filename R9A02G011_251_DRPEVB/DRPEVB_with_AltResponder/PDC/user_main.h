@@ -46,4 +46,6 @@ UCHAR user_func_snd_mess  (void);
 UCHAR user_func_snd_attention (void);
 void  user_init(void);
 
+extern UCHAR has_charger;
+
 #endif // ___USER_MAIN_H
