@@ -94,6 +94,7 @@ UCHAR  gucReserved;
 UCHAR  gucEnterModeEnable;
 UCHAR  gucLEDStatus;
 UCHAR  has_charger = 0U;
+UCHAR  bb_extvcc = 0U;
 
 static UCHAR gGetStatPending = 0;
 static UCHAR gGetStatLastResult = 0xFF;
@@ -115,6 +116,11 @@ void user_func_intr_timer_thermistor (void);
 static void charge_en_update(void)
 {
 	P1_bit.no6 = ((has_charger != 0U) && (g_power_negotiated != 0U)) ? 1U : 0U;
+}
+
+static void bb_extvcc_update(void)
+{
+	P7_bit.no2 = ((bb_extvcc != 0U) && (g_power_negotiated != 0U)) ? 1U : 0U;
 }
 
 static void charger_current_update(void)
@@ -200,6 +206,7 @@ void user_init(void)
 	POM5_bit.no1 = 1U; P5_bit.no1 = 1U; PM5_bit.no1 = 0U; // DP        :P51(OpenDrain)
 			   P7_bit.no0 = 0U; PM7_bit.no0 = 0U; //PD_READY   :P70
 	                   P7_bit.no1 = 0U; PM7_bit.no1 = 0U; // DISCHG    :P71
+	                   P7_bit.no2 = 0U; PM7_bit.no2 = 0U; // BB_EXTVCC :P72
 	                   P7_bit.no3 = 0U; PM7_bit.no3 = 0U; // DR_GATE   :P73
 	POM8_bit.no0 = 1U; P8_bit.no0 = 1U; PM8_bit.no0 = 0U; // PUE       :P80(OpenDrain)
 			   P8_bit.no1 = 0U; PM8_bit.no1 = 0U;
@@ -244,6 +251,7 @@ void user_func_event (void)
 	g_cmd_queued = 0U;
 	
 	hpd_poll_task();
+	bb_extvcc_update();
 	charge_en_update();
 	
 	//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
@@ -300,6 +308,7 @@ void user_func_event (void)
 		}
 		else {
 			g_power_negotiated = 0U;
+			bb_extvcc_update();
 			charge_en_update();
 			if (has_charger != 0U) {
 				bq25798_request_charge_enable(0U);
@@ -350,10 +359,11 @@ void user_func_event (void)
 		gPdc.uPdEvent.bit.bDrChg = 0U;
 	}
 	else if (gPdc.uPdEvent.bit.bNewContract != 0U) {
-		P2_bit.no2 = 1U; // POWER_GOOD:ON
 		g_power_negotiated = 1U;
+		bb_extvcc_update();
 		charge_en_update();
 		charger_current_update();
+		P2_bit.no2 = 1U; // POWER_GOOD:ON
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
 		if ((uStatus.bit.bPR   != 0U) && (pdc_is_pps_mode() !=0U)) {
 			pd_tm_start_user_cnt(TM_ID_USER2);
@@ -653,6 +663,7 @@ void user_func_event (void)
 	}
 	else if (gPdc.uPdReq.bit.bSrcOff != 0U) {
 		g_power_negotiated = 0U;
+		bb_extvcc_update();
 		charge_en_update();
 		if (has_charger != 0U) {
 			bq25798_request_charge_enable(0U);
@@ -690,6 +701,7 @@ void user_func_event (void)
 	}
 	else if (gPdc.uPdReq.bit.bSnkOff != 0U) {
 		g_power_negotiated = 0U;
+		bb_extvcc_update();
 		charge_en_update();
 		if (has_charger != 0U) {
 			bq25798_request_charge_enable(0U);
