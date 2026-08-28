@@ -18,6 +18,7 @@
 
 #define CHARGER_SYSTEM_RESERVE_MA  ((USHORT)500U)
 #define CHARGER_MAX_CHARGE_MA      ((USHORT)2000U)
+#define BB_EXTVCC_STARTUP_DELAY_MS ((USHORT)10U)
 
 // DP Alt Mode Discover Modes VDO
 // ---- Port capability (bits 1:0)
@@ -105,6 +106,8 @@ static UCHAR g_hpd_toggled = 0U;
 static UCHAR g_hpd_state = 0U;
 static UCHAR g_cmd_queued = 0U;
 static UCHAR g_power_negotiated = 0U;
+static UCHAR g_bb_power_good_pending = 0U;
+static UCHAR g_bb_extvcc_delay_done = 0U;
 
 volatile UCHAR r_dbg;
 volatile UCHAR enter_dbg;
@@ -112,6 +115,8 @@ volatile UCHAR enter_dbg;
 void user_func_start_timer_thermistor(void);
 void user_func_stop_timer_thermistor (void);
 void user_func_intr_timer_thermistor (void);
+static void bb_extvcc_delay_done(void);
+static void charger_current_update(void);
 
 static void charge_en_update(void)
 {
@@ -121,6 +126,40 @@ static void charge_en_update(void)
 static void bb_extvcc_update(void)
 {
 	P7_bit.no2 = ((bb_extvcc != 0U) && (g_power_negotiated != 0U)) ? 1U : 0U;
+}
+
+static void bb_power_good_complete(void)
+{
+	charge_en_update();
+	charger_current_update();
+	P2_bit.no2 = 1U; // POWER_GOOD:ON
+	g_bb_power_good_pending = 0U;
+}
+
+static void bb_power_good_cancel(void)
+{
+	tm2_stop_gtimer();
+	g_bb_power_good_pending = 0U;
+	g_bb_extvcc_delay_done = 0U;
+}
+
+static void bb_power_good_task(void)
+{
+	if ((g_bb_power_good_pending != 0U) && (g_bb_extvcc_delay_done != 0U)) {
+		g_bb_extvcc_delay_done = 0U;
+		if (g_power_negotiated != 0U) {
+			bb_power_good_complete();
+		}
+		else {
+			g_bb_power_good_pending = 0U;
+		}
+	}
+}
+
+static void bb_extvcc_delay_done(void)
+{
+	tm2_stop_gtimer();
+	g_bb_extvcc_delay_done = 1U;
 }
 
 static void charger_current_update(void)
@@ -228,6 +267,7 @@ void user_init(void)
 	gucEnterModeEnable = 0U;
 	gucLEDStatus = 0U;
 	
+	init_tau0_channel2();
 	init_tau0_channel3();
 	init_tm_12bit();
 	
@@ -253,6 +293,7 @@ void user_func_event (void)
 	hpd_poll_task();
 	bb_extvcc_update();
 	charge_en_update();
+	bb_power_good_task();
 	
 	//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
 	//g_hpd_toggled =0; //for testing
@@ -308,6 +349,7 @@ void user_func_event (void)
 		}
 		else {
 			g_power_negotiated = 0U;
+			bb_power_good_cancel();
 			bb_extvcc_update();
 			charge_en_update();
 			if (has_charger != 0U) {
@@ -362,8 +404,14 @@ void user_func_event (void)
 		g_power_negotiated = 1U;
 		bb_extvcc_update();
 		charge_en_update();
-		charger_current_update();
-		P2_bit.no2 = 1U; // POWER_GOOD:ON
+		if (bb_extvcc != 0U) {
+			g_bb_extvcc_delay_done = 0U;
+			g_bb_power_good_pending = 1U;
+			tm2_start_gtimer(BB_EXTVCC_STARTUP_DELAY_MS, (ULONG)&bb_extvcc_delay_done);
+		}
+		else {
+			bb_power_good_complete();
+		}
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
 		if ((uStatus.bit.bPR   != 0U) && (pdc_is_pps_mode() !=0U)) {
 			pd_tm_start_user_cnt(TM_ID_USER2);
@@ -663,6 +711,7 @@ void user_func_event (void)
 	}
 	else if (gPdc.uPdReq.bit.bSrcOff != 0U) {
 		g_power_negotiated = 0U;
+		bb_power_good_cancel();
 		bb_extvcc_update();
 		charge_en_update();
 		if (has_charger != 0U) {
@@ -701,6 +750,7 @@ void user_func_event (void)
 	}
 	else if (gPdc.uPdReq.bit.bSnkOff != 0U) {
 		g_power_negotiated = 0U;
+		bb_power_good_cancel();
 		bb_extvcc_update();
 		charge_en_update();
 		if (has_charger != 0U) {
