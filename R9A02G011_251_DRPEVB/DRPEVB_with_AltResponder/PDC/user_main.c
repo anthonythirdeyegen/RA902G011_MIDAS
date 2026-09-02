@@ -13,8 +13,8 @@
 #include <stdint.h>
 
 #define DATA_MESSAGE		0x01
-#define CMD_DP_STATUS     0x10U   // “Status Update”
-#define CMD_DP_CONFIGURE  0x11U   // “Configure”
+#define CMD_DP_STATUS     0x10U   // ï¿½Status Updateï¿½
+#define CMD_DP_CONFIGURE  0x11U   // ï¿½Configureï¿½
 
 #define CHARGER_SYSTEM_RESERVE_MA  ((USHORT)500U)
 #define CHARGER_MAX_CHARGE_MA      ((USHORT)2000U)
@@ -36,8 +36,8 @@
 #define DP_PLUG               (0u << 6)   // DisplayPort interface on USB-C plug
 #define DP_RECEPTACLE         (1u << 6)   // DisplayPort interface on USB-C receptacle
 
-// ---- USB2.0 signaling not used (bit 7)
-#define DP_USB2_NOT_USED      (1u << 7)   // USB2 lines not needed in DP mode
+// ---- USB2.0 signaling supported (bit 7)
+#define DP_USB2_SUPPORTED     (1u << 7)   // USB2 signaling supported in DP mode
 
 // ---- DFP_D pin assignments (bits 15:8)
 #define DP_DFP_PIN_A          (1u << (8+0))
@@ -48,12 +48,12 @@
 #define DP_DFP_PIN_F          (1u << (8+5))
 
 // ---- UFP_D pin assignments (bits 23:16)
-#define DP_UFP_PIN_A          (1u << (16+0))
-#define DP_UFP_PIN_B          (1u << (16+1))
-#define DP_UFP_PIN_C          (1u << (16+2))
-#define DP_UFP_PIN_D          (1u << (16+3))
-#define DP_UFP_PIN_E          (1u << (16+4))
-#define DP_UFP_PIN_F          (1u << (16+5))
+#define DP_UFP_PIN_A          (1UL << (16+0))
+#define DP_UFP_PIN_B          (1UL << (16+1))
+#define DP_UFP_PIN_C          (1UL << (16+2))
+#define DP_UFP_PIN_D          (1UL << (16+3))
+#define DP_UFP_PIN_E          (1UL << (16+4))
+#define DP_UFP_PIN_F          (1UL << (16+5))
 
 // Role bits (low bits)
 #define DP_MODE_UFP_D           (1U << 7)
@@ -313,7 +313,7 @@ void user_func_event (void)
 			g_hpd_toggled = 0U;  //clear toggled
             		g_hpd_irq_flag = 0U; // clear the flag
 
-            		// Always report “UFP_D connected” in bits 7:6
+            		// Always report ï¿½UFP_D connectedï¿½ in bits 7:6
             		dp_status |= DP_STATUS_CONN_UFP_D;
 
                 	dp_status |= g_hpd_state << 7;
@@ -465,18 +465,22 @@ void user_func_event (void)
                 		tx[1] = 0xFF01U;  // VESA SVID
                 		
 				// DP Mode VDO
+				// Active profile: 4-lane DP only, pin assignments C/E.
+				// For 2-lane DP + USB later, review DP_USB2_SUPPORTED and add D/F.
 				dp_mode_vdo = ( DP_PORT_CAP_UFP_D | 
 				DP_SIG_DP13 | 
 				DP_PLUG | 
-				DP_USB2_NOT_USED | 
-				//DP_UFP_PIN_D |
+				DP_USB2_SUPPORTED | 
 				DP_UFP_PIN_C | 
 				DP_UFP_PIN_E );
+				// 2-lane staging:
+				// dp_mode_vdo |= (DP_UFP_PIN_D | DP_UFP_PIN_F);
                 		
 				//tx[2] = (USHORT)(dp_mode_vdo);                    // low16 of VDO
     				//tx[3] = (USHORT)(dp_mode_vdo >> 16);            // high16 of VDO
 				
-				//Do not know why the macros dont work
+				// 4-lane DP only: C/E advertised.
+				// 2-lane staging with D/F would require updating these hardcoded words.
 				tx[2] = 0x00C5;
 				tx[3] = 0x0004;
 
@@ -526,7 +530,7 @@ void user_func_event (void)
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
 				USHORT dp_status = 0;
 				P7_bit.no0 = 1U; //We are ready for for device Configuration.
-    				// Always report “UFP_D connected” in bits 7:6
+    				// Always report ï¿½UFP_D connectedï¿½ in bits 7:6
     				dp_status |= DP_STATUS_CONN_UFP_D;
 				dp_status |= DP_STATUS_ENABLED;
     				// If HPD GPIO is high, set HPD bit
@@ -562,10 +566,12 @@ void user_func_event (void)
 				if (uStatus.bit.bPlug){
 					if (uStatus.bit.bCc == 0U){
                 				tmuxhs4446_request_mode(TMUX_CONF_DP4);
+						// 2-lane staging: tmuxhs4446_request_mode(TMUX_CONF_DP2_USB);
 						//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
 					}
 					else{
 						tmuxhs4446_request_mode(TMUX_CONF_DP4_FLIP);
+						// 2-lane staging: tmuxhs4446_request_mode(TMUX_CONF_DP2_USB_F);
 						//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
 					}
 					
@@ -577,7 +583,7 @@ void user_func_event (void)
     				hdr0 &= (USHORT)~(0x3U << 6);      /* clear bCmdType bits */
     				hdr0 |= (USHORT)(1U   << 6);       /* bCmdType = 1 (ACK) */
 
-    				/* (Optional) re-stamp command and objpos so we know they’re correct */
+    				/* (Optional) re-stamp command and objpos so we know theyï¿½re correct */
     				hdr0 &= (USHORT)~0x1FU;            /* clear bCmd  [4:0]   */
     				hdr0 |= (USHORT)(cmd & 0x1FU);
 
@@ -667,7 +673,7 @@ void user_func_event (void)
 			//g_hpd_toggled = 0U;  //clear toggled
             		g_hpd_irq_flag = 0U; // clear the flag
 
-            		// Always report “UFP_D connected” in bits 7:6
+            		// Always report ï¿½UFP_D connectedï¿½ in bits 7:6
             		dp_status |= DP_STATUS_CONN_UFP_D;
 			dp_status |= DP_STATUS_ENABLED;
                 	dp_status |= g_hpd_state << 7;
