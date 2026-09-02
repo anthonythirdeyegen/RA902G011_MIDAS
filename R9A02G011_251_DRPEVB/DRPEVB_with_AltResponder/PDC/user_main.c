@@ -47,6 +47,14 @@
 #define DP_DFP_PIN_E          (1u << (8+4))
 #define DP_DFP_PIN_F          (1u << (8+5))
 
+#define DP_CONF_PIN_MASK      ((USHORT)0x3F00U)
+#define DP_CONF_PIN_C         ((USHORT)(1U << (8+2)))
+#define DP_CONF_PIN_D         ((USHORT)(1U << (8+3)))
+#define DP_CONF_PIN_E         ((USHORT)(1U << (8+4)))
+#define DP_CONF_PIN_F         ((USHORT)(1U << (8+5)))
+#define DP_CONF_PIN_DP4_MASK  ((USHORT)(DP_CONF_PIN_C | DP_CONF_PIN_E))
+#define DP_CONF_PIN_DP2_MASK  ((USHORT)(DP_CONF_PIN_D | DP_CONF_PIN_F))
+
 // ---- UFP_D pin assignments (bits 23:16)
 #define DP_UFP_PIN_A          (1UL << (16+0))
 #define DP_UFP_PIN_B          (1UL << (16+1))
@@ -552,36 +560,47 @@ void user_func_event (void)
             		// ---- DP Configure ----
             		else if ((uVdmhead.bit_s.bCmd == CMD_DP_CONFIGURE) &&
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
-                		// Validate pin assignment and ACK
+                		// Validate pin assignment and ACK only supported 4-lane modes.
                 		uint8_t  cmd;
     				uint8_t  objPos;
-    				UCHAR  ver;
    				USHORT hdr0;
     				USHORT hdr1;
+				USHORT dp_pin_assign;
+				UCHAR dp_config_ok;
 				
 				cmd    = uVdmhead.bit_s.bCmd;      /* should be 0x11 (DP_CONFIGURE) */
     				objPos = uVdmhead.bit_s.bObjPos;   /* usually 0 for DP */
-				ver    = (UCHAR)uVdmhead.bit_s.bVersion;
+				dp_pin_assign = (USHORT)(gRcvMess.uspData[2] & DP_CONF_PIN_MASK);
+				dp_config_ok = 0U;
 				
-				if (uStatus.bit.bPlug){
+				if ((uStatus.bit.bPlug != 0U) &&
+				    ((dp_pin_assign == DP_CONF_PIN_C) || (dp_pin_assign == DP_CONF_PIN_E))) {
+					dp_config_ok = 1U;
 					if (uStatus.bit.bCc == 0U){
                 				tmuxhs4446_request_mode(TMUX_CONF_DP4);
-						// 2-lane staging: tmuxhs4446_request_mode(TMUX_CONF_DP2_USB);
+						// 2-lane staging: if dp_pin_assign is D/F, use TMUX_CONF_DP2_USB.
 						//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
 					}
 					else{
 						tmuxhs4446_request_mode(TMUX_CONF_DP4_FLIP);
-						// 2-lane staging: tmuxhs4446_request_mode(TMUX_CONF_DP2_USB_F);
+						// 2-lane staging: if dp_pin_assign is D/F, use TMUX_CONF_DP2_USB_F.
 						//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
 					}
-					
+				}
+				// 2-lane staging: accept DP_CONF_PIN_D/F with DP_CONF_PIN_DP2_MASK later.
+				
     				/* Start from received header words */
     				hdr0 = uVdmhead.data[0];   /* low 16 bits */
     				hdr1 = uVdmhead.data[1];   /* high 16 bits (contains SVID high part) */
 
-    				/* Set CMDT = ACK (01b) while keeping other fields the same */
+    				/* Set CMDT while keeping other fields the same */
     				hdr0 &= (USHORT)~(0x3U << 6);      /* clear bCmdType bits */
-    				hdr0 |= (USHORT)(1U   << 6);       /* bCmdType = 1 (ACK) */
+				if (dp_config_ok != 0U) {
+    					hdr0 |= (USHORT)(1U << 6);       /* bCmdType = 1 (ACK) */
+				}
+				else {
+    					hdr0 |= (USHORT)(2U << 6);       /* bCmdType = 2 (NACK) */
+				}
 
     				/* (Optional) re-stamp command and objpos so we know they�re correct */
     				hdr0 &= (USHORT)~0x1FU;            /* clear bCmd  [4:0]   */
@@ -598,8 +617,8 @@ void user_func_event (void)
 				gSndMess.uInfo.bit.bLen = 4U;	
 				pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
 				g_cmd_queued = 1U;
-				g_dp_mode_configured = 1U;
-					
+				if (dp_config_ok != 0U) {
+					g_dp_mode_configured = 1U;
 				}
             		}
 
