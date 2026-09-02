@@ -473,24 +473,20 @@ void user_func_event (void)
                 		tx[1] = 0xFF01U;  // VESA SVID
                 		
 				// DP Mode VDO
-				// Active profile: 4-lane DP only, pin assignments C/E.
+				// Active profile: receptacle UFP_D, 4-lane DP only, pin assignments C/E.
+				// Expected VDO: 0x001400C5 -> tx[2]=0x00C5, tx[3]=0x0014.
 				// For 2-lane DP + USB later, review DP_USB2_SUPPORTED and add D/F.
 				dp_mode_vdo = ( DP_PORT_CAP_UFP_D | 
 				DP_SIG_DP13 | 
-				DP_PLUG | 
+				DP_RECEPTACLE | 
 				DP_USB2_SUPPORTED | 
 				DP_UFP_PIN_C | 
 				DP_UFP_PIN_E );
 				// 2-lane staging:
 				// dp_mode_vdo |= (DP_UFP_PIN_D | DP_UFP_PIN_F);
                 		
-				//tx[2] = (USHORT)(dp_mode_vdo);                    // low16 of VDO
-    				//tx[3] = (USHORT)(dp_mode_vdo >> 16);            // high16 of VDO
-				
-				// 4-lane DP only: C/E advertised.
-				// 2-lane staging with D/F would require updating these hardcoded words.
-				tx[2] = 0x00C5;
-				tx[3] = 0x0004;
+				tx[2] = (USHORT)(dp_mode_vdo);                    // low16 of VDO
+    				tx[3] = (USHORT)(dp_mode_vdo >> 16);            // high16 of VDO
 
                 		gSndMess.uInfo.bit.bLen = 8U;
 	                	pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
