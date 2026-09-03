@@ -1,13 +1,13 @@
 QualityReport
-Wednesday, September 2, 2026 4:25:36 PM
+Thursday, September 3, 2026 12:47:51 PM
 
 ------ Start build(DRPEVB_with_AltResponder, Release) ------
-C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\ccrl.exe PDC\user_main.c -cpu=S3 -obj_path=Obj\Release "-dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -g -Osame_code -I PDC\subdev -I PDC -I . -I ..\..\PDC\Lib -I ..\..\PDC -I ..\..\Core -D RELEASE_BUILD=1,PPS_SPRT=0 -asm_path=Obj\Release -asmopt=-prn_path=Obj\Release -c -MAKEUD=Obj\Release -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_0f490ded7dc44534aa521ece658c1e19epgxifbe.t52 -msg_lang=english
+C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\ccrl.exe PDC\user_main.c -cpu=S3 -obj_path=Obj\Release "-dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR9A02G011.DVF" -g -Osame_code -I PDC\subdev -I PDC -I . -I ..\..\PDC\Lib -I ..\..\PDC -I ..\..\Core -D RELEASE_BUILD=1,PPS_SPRT=0 -asm_path=Obj\Release -asmopt=-prn_path=Obj\Release -c -MAKEUD=Obj\Release -exec_time=C:\Users\AnthonyRusso\AppData\Local\Temp\CSPlusBuildTool_c89f178b0a9b4116a7c3bbf74e498dff0rdzfyab.2sj -msg_lang=english
 W0511187:The evaluation period for the option "-Odefault" of CC-RL V1 has expired. It is implicitly changed to "-Olite". Please consider purchasing the product to continue using "-Odefault". By explicitly specifying "-Olite" or "-Onothing", this warning message disappears. 
 W0511123:The "-Osame_code" option is ignored when the "-Olite" option is specified at the same time.
-PDC\user_main.c(109):W0520550:Variable "gGetStatLastResult" was set but never used
-PDC\user_main.c(110):W0520177:Variable "g_alert_pending" was declared but never referenced
-PDC\user_main.c(111):W0520550:Variable "g_hpd_irq_flag" was set but never used
+PDC\user_main.c(110):W0520550:Variable "gGetStatLastResult" was set but never used
+PDC\user_main.c(111):W0520177:Variable "g_alert_pending" was declared but never referenced
+PDC\user_main.c(112):W0520550:Variable "g_hpd_irq_flag" was set but never used
 C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.15.00\Bin\rlink.exe -MAKEUD=Obj\Release\DRPEVB_with_AltResponder.lk.ud -subcommand=Obj\Release\DRPEVB_with_AltResponder.clnk
 W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
 W0561017:Paid license of CC-RL V1 is not found, and the evaluation period has expired. Please consider purchasing the product.
@@ -76,9 +76,9 @@ Obj\Release\DRPEVB_with_AltResponder.clnk :
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.abs: 1439734416a21af7e74202cc3c71d8bb4c1700c8
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.hex: f3b4b02131a1f556f2fe5e69a2ca79201d9fb732
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\Release\DRPEVB_with_AltResponder\Main.hex: b1ab72291e228716b778038adae9453759b7dedc
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.abs: aa519296f94b8155e1c5a0eb8a75cd6a00c23a68
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltResponder\Obj\Release\DRPEVB_with_AltResponder.hex: 24da6efc39b6752def14d21a5dc0be1198e06bd4
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\Release\DRPEVB_with_AltResponder\Main.hex: 4e8e0c21e59786191a75ed121522b6abdffae563
 
 
 --- System Information ---
@@ -108,13 +108,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MID
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  414 MB
+  395 MB
  *Number of GDI Objects
-  2364
+  2337
  *Number of USER Objects
-  1254
+  1255
  *Opened Files
-  14 editors, 14 files, 96 KB
+  14 editors, 14 files, 97 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in

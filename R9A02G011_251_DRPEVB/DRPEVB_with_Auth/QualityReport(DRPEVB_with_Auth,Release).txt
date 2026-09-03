@@ -1,5 +1,5 @@
 QualityReport
-Wednesday, September 2, 2026 4:25:39 PM
+Thursday, September 3, 2026 12:47:54 PM
 
 ------ Start build(DRPEVB_with_Auth, Release) ------
 ------ Build ended(Error:0, Warning:0)(DRPEVB_with_Auth, Release) ------
@@ -38,13 +38,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MID
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  414 MB
+  395 MB
  *Number of GDI Objects
-  2364
+  2337
  *Number of USER Objects
-  1254
+  1257
  *Opened Files
-  14 editors, 14 files, 96 KB
+  14 editors, 14 files, 97 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in

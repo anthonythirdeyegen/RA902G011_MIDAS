@@ -52,7 +52,8 @@
 #define DP_CONF_PIN_D         ((USHORT)(1U << (8+3)))
 #define DP_CONF_PIN_E         ((USHORT)(1U << (8+4)))
 #define DP_CONF_PIN_F         ((USHORT)(1U << (8+5)))
-#define DP_CONF_PIN_DP4_MASK  ((USHORT)(DP_CONF_PIN_C | DP_CONF_PIN_E))
+#define DP_CONF_PIN_DP4_MASK  ((USHORT)DP_CONF_PIN_C)
+// #define DP_CONF_PIN_DP4_MASK  ((USHORT)(DP_CONF_PIN_C | DP_CONF_PIN_E))
 #define DP_CONF_PIN_DP2_MASK  ((USHORT)(DP_CONF_PIN_D | DP_CONF_PIN_F))
 
 // ---- UFP_D pin assignments (bits 23:16)
@@ -473,17 +474,18 @@ void user_func_event (void)
                 		tx[1] = 0xFF01U;  // VESA SVID
                 		
 				// DP Mode VDO
-				// Active profile: receptacle UFP_D, 4-lane DP only, pin assignments C/E.
-				// Expected VDO: 0x001400C5 -> tx[2]=0x00C5, tx[3]=0x0014.
-				// For 2-lane DP + USB later, review DP_USB2_SUPPORTED and add D/F.
+				// Active profile: receptacle UFP_D, 4-lane DP only, pin assignment C.
+				// Expected VDO: 0x000400C5 -> tx[2]=0x00C5, tx[3]=0x0004.
+				// For 2-lane DP + USB later, review DP_USB2_SUPPORTED and add D.
 				dp_mode_vdo = ( DP_PORT_CAP_UFP_D | 
 				DP_SIG_DP13 | 
 				DP_RECEPTACLE | 
 				DP_USB2_SUPPORTED | 
-				DP_UFP_PIN_C | 
-				DP_UFP_PIN_E );
+				DP_UFP_PIN_C );
+				// C/E staging, only if the downstream DP sink can handle assignment E:
+				// dp_mode_vdo |= DP_UFP_PIN_E;
 				// 2-lane staging:
-				// dp_mode_vdo |= (DP_UFP_PIN_D | DP_UFP_PIN_F);
+				// dp_mode_vdo |= DP_UFP_PIN_D;
                 		
 				tx[2] = (USHORT)(dp_mode_vdo);                    // low16 of VDO
     				tx[3] = (USHORT)(dp_mode_vdo >> 16);            // high16 of VDO
@@ -569,8 +571,11 @@ void user_func_event (void)
 				dp_pin_assign = (USHORT)(gRcvMess.uspData[2] & DP_CONF_PIN_MASK);
 				dp_config_ok = 0U;
 				
+				// C/E staging, only if the downstream DP sink can handle assignment E:
+				// if ((uStatus.bit.bPlug != 0U) &&
+				//     ((dp_pin_assign == DP_CONF_PIN_C) || (dp_pin_assign == DP_CONF_PIN_E))) {
 				if ((uStatus.bit.bPlug != 0U) &&
-				    ((dp_pin_assign == DP_CONF_PIN_C) || (dp_pin_assign == DP_CONF_PIN_E))) {
+				    (dp_pin_assign == DP_CONF_PIN_C)) {
 					dp_config_ok = 1U;
 					if (uStatus.bit.bCc == 0U){
                 				tmuxhs4446_request_mode(TMUX_CONF_DP4);
