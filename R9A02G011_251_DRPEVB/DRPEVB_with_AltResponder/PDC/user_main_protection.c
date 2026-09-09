@@ -23,14 +23,11 @@ void user_func_intr_timer_thermistor (void);
 
 UCHAR user_func_chk_device (void)
 {
-	static const USHORT temp_table_temp[8] = {   3,   20,   30,   40,   80,   90,  100,  120};
-	static const USHORT temp_table_volt[8] = { 167,  373,  560,  799, 1997, 2257, 2476, 2796};
-	
 	PD_STATUS uStatus   = pdc_get_status();
-	SHORT     sTempVolt = pdc_get_an_volt(AN_CH09);
 	SHORT sVbus = pdc_get_an_volt(AN_CH_VBUS_NO_FILTER);
 	UCHAR ucOTP = 0U, ucOCP = 0U, ucOVP = 0U;
 	UCHAR ucTempStat = PDC_TEMP_STAT_NORMAL;
+	gusTemp = 0U;
 	
 	if ( (uStatus.bit.bPR != 0U) && (pdc_is_pps_mode()==0U) ) { // SRC and Fixed supply
 		if (uStatus.bit.bRdyIdle != 0U) {
@@ -48,40 +45,6 @@ UCHAR user_func_chk_device (void)
 		}
 	}
 
-	if (sTempVolt > 0) {
-		if (sTempVolt > temp_table_volt[7]) {
-			gusTemp = temp_table_volt[7];
-		}
-		else if (sTempVolt < temp_table_volt[0]) {
-			gusTemp = 0U;
-		}
-		else {
-			CHAR i;
-			for (i = 6; i >= 0; i--) {
-				if (sTempVolt > temp_table_volt[i]) {
-					gusTemp =  temp_table_temp[i]
-					         + (ULONG)(sTempVolt              - temp_table_volt[i])
-					         * (ULONG)(temp_table_temp[i + 1] - temp_table_temp[i])
-					         / (ULONG)(temp_table_volt[i + 1] - temp_table_volt[i]);
-					break;
-				}
-			}
-		}
-	}
-
-	if (gusTemp > 80U) {
-		ucTempStat = PDC_TEMP_STAT_OVER_TEMP;
-		ucOTP = 1U;
-		gucVdmFlg = 0U;
-	}
-	else if (gusTemp > 60U) {
-		ucTempStat = PDC_TEMP_STAT_WARNING;
-	}
-	
-	if ((uStatus.bit.bPlug == 0U) && (ucOTP == 0U)) {
-		user_func_stop_timer_thermistor();
-	}
-	
 	pdc_set_dev_stat(ucOCP, ucOTP, ucOVP, ucTempStat, gusTemp);
 
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
@@ -168,26 +131,17 @@ UCHAR user_func_snd_mess (void)
 
 void user_func_start_timer_thermistor (void)
 {
-	pdc_set_int_routine(intID_INTTM03, (ULONG)&user_func_intr_timer_thermistor);
-	
-	TDR03  = 11699U;
-	TPS0  |= (USHORT)(1U << 12U);
-	TMIF03 = 0U;    /* clear INTTM03 interrupt flag */
-	TMMK03 = 0U;    /* enable INTTM03 interrupt */
-	TS0 |= _0008_TAU_CH3_START_TRG_ON;
+	/* AN9/P21 thermistor polling disabled; P21 is repurposed as FPGA_POWER_READY. */
 }
 
 void user_func_stop_timer_thermistor (void)
 {
-	TT0 |= _0008_TAU_CH3_STOP_TRG_ON;
-	TMIF03 = 0U;
-	TMMK03 = 1U;
+	/* AN9/P21 thermistor polling disabled; P21 is repurposed as FPGA_POWER_READY. */
 }
 
 void user_func_intr_timer_thermistor (void)
 {
-	pdc_req_update_an(AN_CH09);
-	pdc_timer_active();
+	/* AN9/P21 thermistor polling disabled; P21 is repurposed as FPGA_POWER_READY. */
 }
 
 UCHAR user_func_snd_attention (void)

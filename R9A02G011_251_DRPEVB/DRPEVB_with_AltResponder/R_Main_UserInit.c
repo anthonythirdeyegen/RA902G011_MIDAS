@@ -22,7 +22,7 @@ void R_MAIN_UserInit(void)
 	pdc_set_pwr_stat(0x00U);
 	gRcvMess.uspData = gusRcvMess;
 	gSndMess.uspData = gusSndMess;
-	pd_core_init(1, 0);
+	pd_core_init(0, 0);
 	user_init();
 	
 	EI();

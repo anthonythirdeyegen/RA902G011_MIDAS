@@ -19,6 +19,7 @@
 #define CHARGER_SYSTEM_RESERVE_MA  ((USHORT)500U)
 #define CHARGER_MAX_CHARGE_MA      ((USHORT)2000U)
 #define BB_EXTVCC_STARTUP_DELAY_MS ((USHORT)10U)
+#define FPGA_POWER_READY_DELAY_MS  ((USHORT)10U)
 
 // DP Alt Mode Discover Modes VDO
 // ---- Port capability (bits 1:0)
@@ -117,6 +118,8 @@ static UCHAR g_cmd_queued = 0U;
 static UCHAR g_power_negotiated = 0U;
 static UCHAR g_bb_power_good_pending = 0U;
 static UCHAR g_bb_extvcc_delay_done = 0U;
+static UCHAR g_fpga_power_ready_pending = 0U;
+static UCHAR g_fpga_power_ready_delay_done = 0U;
 
 volatile UCHAR r_dbg;
 volatile UCHAR enter_dbg;
@@ -126,6 +129,16 @@ void user_func_stop_timer_thermistor (void);
 void user_func_intr_timer_thermistor (void);
 static void bb_extvcc_delay_done(void);
 static void charger_current_update(void);
+static void fpga_power_ready_delay_done(void);
+static void fpga_power_ready_task(void);
+
+static void fpga_power_ready_start_delay(void)
+{
+	P2_bit.no1 = 0U; // FPGA_POWER_READY:OFF
+	g_fpga_power_ready_delay_done = 0U;
+	g_fpga_power_ready_pending = 1U;
+	tm2_start_gtimer(FPGA_POWER_READY_DELAY_MS, (ULONG)&fpga_power_ready_delay_done);
+}
 
 static void charge_en_update(void)
 {
@@ -142,6 +155,7 @@ static void bb_power_good_complete(void)
 	charge_en_update();
 	charger_current_update();
 	P2_bit.no2 = 1U; // POWER_GOOD:ON
+	fpga_power_ready_start_delay();
 	g_bb_power_good_pending = 0U;
 }
 
@@ -150,6 +164,9 @@ static void bb_power_good_cancel(void)
 	tm2_stop_gtimer();
 	g_bb_power_good_pending = 0U;
 	g_bb_extvcc_delay_done = 0U;
+	g_fpga_power_ready_pending = 0U;
+	g_fpga_power_ready_delay_done = 0U;
+	P2_bit.no1 = 0U; // FPGA_POWER_READY:OFF
 }
 
 static void bb_power_good_task(void)
@@ -169,6 +186,21 @@ static void bb_extvcc_delay_done(void)
 {
 	tm2_stop_gtimer();
 	g_bb_extvcc_delay_done = 1U;
+}
+
+static void fpga_power_ready_task(void)
+{
+	if ((g_fpga_power_ready_pending != 0U) && (g_fpga_power_ready_delay_done != 0U)) {
+		g_fpga_power_ready_delay_done = 0U;
+		g_fpga_power_ready_pending = 0U;
+		P2_bit.no1 = ((g_power_negotiated != 0U) && (P2_bit.no2 != 0U)) ? 1U : 0U;
+	}
+}
+
+static void fpga_power_ready_delay_done(void)
+{
+	tm2_stop_gtimer();
+	g_fpga_power_ready_delay_done = 1U;
 }
 
 static void charger_current_update(void)
@@ -246,6 +278,7 @@ void user_init(void)
 	
 	// Output Port Setting
 	                   P1_bit.no6 = 0U; PM1_bit.no6 = 0U; // CHARGE_EN :P16
+	PMC2_bit.no1 = 0U; P2_bit.no1 = 0U; PM2_bit.no1 = 0U; // FPGA_POWER_READY :P21
 	PMC2_bit.no2 = 0U; P2_bit.no2 = 0U; PM2_bit.no2 = 0U; // POWER_GOOD: P22
 	                   //P1_bit.no7 = 0U; PM1_bit.no7 = 0U; // VC_DRV2   :P17
 			   PM1_bit.no7 = 1U; // P17 = input
@@ -303,6 +336,7 @@ void user_func_event (void)
 	bb_extvcc_update();
 	charge_en_update();
 	bb_power_good_task();
+	fpga_power_ready_task();
 	
 	//tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON); //for testing
 	//g_hpd_toggled =0; //for testing
@@ -346,7 +380,7 @@ void user_func_event (void)
 			pdc_set_pps_stat(0x02, 0xFF, 0xFFFFU);
 #endif
 			//P7_bit.no1 = 0U; // DISCHG:OFF
-			user_func_start_timer_thermistor();
+			// AN9/P21 thermistor polling disabled; P21 is FPGA_POWER_READY now.
 			if (uStatus.bit.bPR != 0U) { // ATT.SRC
 				gLed.uReq.bits.bSrcEn = 1U;
 			}
