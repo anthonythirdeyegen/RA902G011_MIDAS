@@ -18,6 +18,7 @@
 
 #define CHARGER_SYSTEM_RESERVE_MA  ((USHORT)500U)
 #define CHARGER_MAX_CHARGE_MA      ((USHORT)2000U)
+#define CHARGER_VINDPM_MARGIN_MV   ((USHORT)500U)
 #define BB_EXTVCC_STARTUP_DELAY_MS ((USHORT)10U)
 #define FPGA_POWER_READY_DELAY_MS  ((USHORT)10U)
 
@@ -205,11 +206,17 @@ static void fpga_power_ready_delay_done(void)
 
 static void charger_current_update(void)
 {
+	USHORT usInputMv = pdc_get_req_volt();
 	USHORT usInputMa = (USHORT)(pdc_get_req_cur() * 10U);
+	USHORT usVindpmMv = 0U;
 	USHORT usChargeMa = 0U;
 
-	if ((has_charger == 0U) || (g_power_negotiated == 0U) || (usInputMa <= CHARGER_SYSTEM_RESERVE_MA)) {
+	if ((has_charger == 0U) || (g_power_negotiated == 0U) || (usInputMv == 0U) || (usInputMa <= CHARGER_SYSTEM_RESERVE_MA)) {
 		return;
+	}
+
+	if (usInputMv > CHARGER_VINDPM_MARGIN_MV) {
+		usVindpmMv = (USHORT)(usInputMv - CHARGER_VINDPM_MARGIN_MV);
 	}
 
 	usChargeMa = (USHORT)(usInputMa - CHARGER_SYSTEM_RESERVE_MA);
@@ -217,7 +224,9 @@ static void charger_current_update(void)
 		usChargeMa = CHARGER_MAX_CHARGE_MA;
 	}
 
+	bq25798_request_evm_defaults();
 	bq25798_request_use_iindpm_register();
+	bq25798_request_input_voltage(usVindpmMv);
 	bq25798_request_input_current(usInputMa);
 	bq25798_request_charge_current(usChargeMa);
 	bq25798_request_charge_enable(1U);
