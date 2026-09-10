@@ -23,6 +23,9 @@
 #define BQ25798_REG_CHARGER_CTRL1      ((UCHAR)0x10U)
 #define BQ25798_REG_CHARGER_CTRL2      ((UCHAR)0x11U)
 #define BQ25798_REG_CHARGER_CTRL5      ((UCHAR)0x14U)
+#define BQ25798_REG_NTC_CTRL0          ((UCHAR)0x17U)
+#define BQ25798_REG_NTC_CTRL1          ((UCHAR)0x18U)
+#define BQ25798_REG_STATUS_BASE        ((UCHAR)0x1BU)
 
 #define BQ25798_EN_CHG                 ((UCHAR)0x20U)
 #define BQ25798_WATCHDOG_MASK          ((UCHAR)0x07U)
@@ -38,6 +41,15 @@
 #define BQ25798_EN_IINDPM              ((UCHAR)0x04U)
 #define BQ25798_EN_EXTILIM             ((UCHAR)0x02U)
 #define BQ25798_ITERM_MASK             ((UCHAR)0x1FU)
+#define BQ25798_JEITA_VSET_MASK        ((UCHAR)0xE0U)
+#define BQ25798_JEITA_ISETH_MASK       ((UCHAR)0x18U)
+#define BQ25798_JEITA_ISETC_MASK       ((UCHAR)0x06U)
+#define BQ25798_JEITA_SUSPEND          ((UCHAR)0x00U)
+#define BQ25798_TS_COOL_MASK           ((UCHAR)0xC0U)
+#define BQ25798_TS_COOL_10C            ((UCHAR)0x40U)
+#define BQ25798_TS_WARM_MASK           ((UCHAR)0x30U)
+#define BQ25798_TS_WARM_45C            ((UCHAR)0x10U)
+#define BQ25798_TS_IGNORE              ((UCHAR)0x01U)
 
 #define BQ25798_EVM_VSYSMIN_MV         ((USHORT)7000U)
 #define BQ25798_EVM_VREG_MV            ((USHORT)8400U)
@@ -60,6 +72,15 @@
 #define BQ25798_STEP_RMW_READ          ((UCHAR)0x03U)
 #define BQ25798_STEP_RMW_WRITE         ((UCHAR)0x04U)
 #define BQ25798_STEP_BYTE              ((UCHAR)0x05U)
+#define BQ25798_STEP_STATUS_READ       ((UCHAR)0x06U)
+
+#define BQ25798_STATUS_CHARGER0        ((UCHAR)0x00U)
+#define BQ25798_STATUS_CHARGER1        ((UCHAR)0x01U)
+#define BQ25798_STATUS_FAULT0          ((UCHAR)0x05U)
+#define BQ25798_STATUS_FAULT1          ((UCHAR)0x06U)
+#define BQ25798_STATUS0_PG_STAT        ((UCHAR)0x08U)
+#define BQ25798_STATUS1_CHG_STAT_MASK  ((UCHAR)0xE0U)
+#define BQ25798_STATUS1_CHG_STAT_SHIFT ((UCHAR)5U)
 
 #define BQ25798_CFG_BYTE               ((UCHAR)0x00U)
 #define BQ25798_CFG_WORD               ((UCHAR)0x01U)
@@ -77,7 +98,8 @@ static const BQ25798_CFG gBq25798EvmDefaults[] = {
 	/* TI SLUUCB5E section 2.4.2/2.4.3 charge-mode setup:
 	   watchdog disabled, ShipFET present, VSYSMIN 7V, VREG 8.4V,
 	   BC1.2/HVDCP detection disabled, precharge 240mA,
-	   termination 200mA, VINDPM 4.0V, startup IINDPM 500mA, ICHG 500mA.
+	   termination 200mA, TS charge window +10C to +45C,
+	   VINDPM 4.0V, startup IINDPM 500mA, ICHG 500mA.
 	   REG10 VAC_OVP is set to 12V per SLUUCB5E's >8V input-voltage hint. */
 	{ BQ25798_REG_CHARGER_CTRL0,   BQ25798_CFG_RMW,  BQ25798_EN_CHG, 0U },
 	{ BQ25798_REG_CHARGER_CTRL1,   BQ25798_CFG_RMW,  (UCHAR)(BQ25798_WATCHDOG_MASK | BQ25798_WD_RST | BQ25798_VAC_OVP_MASK), BQ25798_VAC_OVP_12V },
@@ -86,6 +108,8 @@ static const BQ25798_CFG gBq25798EvmDefaults[] = {
 	{ BQ25798_REG_CHG_VOLTAGE,     BQ25798_CFG_WORD, 0U, (USHORT)(BQ25798_EVM_VREG_MV / 10U) },
 	{ BQ25798_REG_PRECHG_CTRL,     BQ25798_CFG_RMW,  (UCHAR)0x3FU, (USHORT)(BQ25798_EVM_PRECHG_MA / 40U) },
 	{ BQ25798_REG_TERMINATION_CTRL, BQ25798_CFG_RMW, BQ25798_ITERM_MASK, (USHORT)(BQ25798_EVM_ITERM_MA / 40U) },
+	{ BQ25798_REG_NTC_CTRL0,       BQ25798_CFG_RMW,  (UCHAR)(BQ25798_JEITA_VSET_MASK | BQ25798_JEITA_ISETH_MASK | BQ25798_JEITA_ISETC_MASK), BQ25798_JEITA_SUSPEND },
+	{ BQ25798_REG_NTC_CTRL1,       BQ25798_CFG_RMW,  (UCHAR)(BQ25798_TS_COOL_MASK | BQ25798_TS_WARM_MASK | BQ25798_TS_IGNORE), (USHORT)(BQ25798_TS_COOL_10C | BQ25798_TS_WARM_45C) },
 	{ BQ25798_REG_INPUT_VOLTAGE,   BQ25798_CFG_BYTE, 0U, (USHORT)(BQ25798_EVM_VINDPM_MV / 100U) },
 	{ BQ25798_REG_INPUT_CURRENT,   BQ25798_CFG_WORD, 0U, (USHORT)(BQ25798_STARTUP_IINDPM_MA / 10U) },
 	{ BQ25798_REG_CHG_CURRENT,     BQ25798_CFG_WORD, 0U, (USHORT)(BQ25798_EVM_ICHG_MA / 10U) },
@@ -115,11 +139,17 @@ void init_bq25798(void)
 	gBq25798Info.ucReqFlags = 0U;
 	gBq25798Info.ucEnable = 0U;
 	gBq25798Info.ucCfgIndex = 0U;
+	gBq25798Info.ucStatusIndex = 0U;
+	gBq25798Info.ucStatusValid = 0U;
 	gBq25798Info.usData = 0U;
 	gBq25798Info.usInputVoltageMv = 0U;
 	gBq25798Info.usInputCurrentMa = 0U;
 	gBq25798Info.usChargeCurrentMa = 0U;
 	gBq25798Info.usRegData = 0U;
+	for (gBq25798Info.ucStatusIndex = 0U; gBq25798Info.ucStatusIndex < BQ25798_STATUS_COUNT; gBq25798Info.ucStatusIndex++) {
+		gBq25798Info.ucStatus[gBq25798Info.ucStatusIndex] = 0U;
+	}
+	gBq25798Info.ucStatusIndex = 0U;
 	return;
 }
 
@@ -167,6 +197,9 @@ static void bq25798_cmd_handler(void)
 		else if ((gBq25798Info.ucReqFlags & BQ25798_REQ_SET_CHG_EN) != 0U) {
 			gBq25798Info.ucCmd = BQ25798_CMD_SET_CHG_EN;
 		}
+		else if ((gBq25798Info.ucReqFlags & BQ25798_REQ_READ_STATUS) != 0U) {
+			gBq25798Info.ucCmd = BQ25798_CMD_READ_STATUS;
+		}
 		else {
 			gSubdevInfo.ucSubdevFlag &= ~BQ25798_DEVICE_ID;
 			return;
@@ -213,6 +246,12 @@ static void bq25798_start_cmd(void)
 			gBq25798Info.ucCfgIndex = 0U;
 			bq25798_start_cfg_entry();
 			break;
+		case BQ25798_CMD_READ_STATUS:
+			gBq25798Info.ucStatusIndex = 0U;
+			gBq25798Info.ucStatusValid = 0U;
+			gBq25798Info.ucStep = BQ25798_STEP_STATUS_READ;
+			bq25798_start_byte_read(BQ25798_REG_STATUS_BASE);
+			break;
 		default:
 			gBq25798Info.ucCmd = BQ25798_CMD_NONE;
 			gBq25798Info.ucStep = BQ25798_STEP_IDLE;
@@ -254,6 +293,8 @@ static void bq25798_end_processing(void)
 		gBq25798Info.ucStep = BQ25798_STEP_IDLE;
 		gBq25798Info.ucCmd = BQ25798_CMD_NONE;
 		gBq25798Info.ucCfgIndex = 0U;
+		gBq25798Info.ucStatusIndex = 0U;
+		gBq25798Info.ucStatusValid = 0U;
 		gBq25798Info.ucReqFlags = 0U;
 		gSubdevInfo.ucSubdevFlag &= ~BQ25798_DEVICE_ID;
 		return;
@@ -304,6 +345,17 @@ static void bq25798_end_processing(void)
 		return;
 	}
 
+	if (gBq25798Info.ucStep == BQ25798_STEP_STATUS_READ) {
+		gBq25798Info.ucStatus[gBq25798Info.ucStatusIndex] = (UCHAR)gBq25798Info.usRegData;
+		gBq25798Info.ucStatusIndex++;
+		if (gBq25798Info.ucStatusIndex < BQ25798_STATUS_COUNT) {
+			smbm_clr_status();
+			smbm_set_subdev(VAL_I2C_CLK, VAL_I2C_SLAVEADDR);
+			bq25798_start_byte_read((UCHAR)(BQ25798_REG_STATUS_BASE + gBq25798Info.ucStatusIndex));
+			return;
+		}
+	}
+
 	smbm_clr_status();
 	if (gBq25798Info.ucCmd == BQ25798_CMD_APPLY_EVM_DEFAULTS) {
 		gBq25798Info.ucCfgIndex++;
@@ -329,11 +381,16 @@ static void bq25798_end_processing(void)
 	else if (gBq25798Info.ucCmd == BQ25798_CMD_SET_CHG_EN) {
 		gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_SET_CHG_EN;
 	}
+	else if (gBq25798Info.ucCmd == BQ25798_CMD_READ_STATUS) {
+		gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_READ_STATUS;
+		gBq25798Info.ucStatusValid = 1U;
+	}
 
 	gBq25798Info.ucSt = SUBDEV_DRV_STATE_IDLE;
 	gBq25798Info.ucStep = BQ25798_STEP_IDLE;
 	gBq25798Info.ucCmd = BQ25798_CMD_NONE;
 	gBq25798Info.ucCfgIndex = 0U;
+	gBq25798Info.ucStatusIndex = 0U;
 	if (gBq25798Info.ucReqFlags == 0U) {
 		gSubdevInfo.ucSubdevFlag &= ~BQ25798_DEVICE_ID;
 	}
@@ -411,6 +468,9 @@ static void bq25798_request_cmd(UCHAR ucCmd)
 	else if (ucCmd == BQ25798_CMD_APPLY_EVM_DEFAULTS) {
 		gBq25798Info.ucReqFlags |= BQ25798_REQ_APPLY_EVM_DEFAULTS;
 	}
+	else if (ucCmd == BQ25798_CMD_READ_STATUS) {
+		gBq25798Info.ucReqFlags |= BQ25798_REQ_READ_STATUS;
+	}
 	gSubdevInfo.ucSubdevFlag |= BQ25798_DEVICE_ID;
 	return;
 }
@@ -456,6 +516,36 @@ void bq25798_request_evm_defaults(void)
 {
 	bq25798_request_cmd(BQ25798_CMD_APPLY_EVM_DEFAULTS);
 	return;
+}
+
+void bq25798_request_status_read(void)
+{
+	bq25798_request_cmd(BQ25798_CMD_READ_STATUS);
+	return;
+}
+
+UCHAR bq25798_get_charge_state(void)
+{
+	if (gBq25798Info.ucStatusValid == 0U) {
+		return BQ25798_CHG_STAT_NOT_CHARGING;
+	}
+	return (UCHAR)((gBq25798Info.ucStatus[BQ25798_STATUS_CHARGER1] & BQ25798_STATUS1_CHG_STAT_MASK) >> BQ25798_STATUS1_CHG_STAT_SHIFT);
+}
+
+UCHAR bq25798_is_power_good(void)
+{
+	if (gBq25798Info.ucStatusValid == 0U) {
+		return 0U;
+	}
+	return ((gBq25798Info.ucStatus[BQ25798_STATUS_CHARGER0] & BQ25798_STATUS0_PG_STAT) != 0U) ? 1U : 0U;
+}
+
+UCHAR bq25798_has_fault(void)
+{
+	if (gBq25798Info.ucStatusValid == 0U) {
+		return 0U;
+	}
+	return ((gBq25798Info.ucStatus[BQ25798_STATUS_FAULT0] != 0U) || (gBq25798Info.ucStatus[BQ25798_STATUS_FAULT1] != 0U)) ? 1U : 0U;
 }
 
 void bq25798_alert(void)

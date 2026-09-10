@@ -19,7 +19,7 @@
 #define CHARGER_MIN_INPUT_POWER_MW ((ULONG)5000UL)
 #define CHARGER_MIN_INPUT_MA       ((USHORT)1500U)
 #define CHARGER_SYSTEM_RESERVE_MA  ((USHORT)1000U)
-#define CHARGER_MAX_CHARGE_MA      ((USHORT)1000U)
+#define CHARGER_MAX_CHARGE_MA      ((USHORT)800U)
 #define CHARGER_VINDPM_MARGIN_MV   ((USHORT)500U)
 #define BB_EXTVCC_STARTUP_DELAY_MS ((USHORT)10U)
 #define FPGA_POWER_READY_DELAY_MS  ((USHORT)10U)
@@ -247,6 +247,7 @@ static void charger_current_update(void)
 	bq25798_request_input_current(usInputMa);
 	bq25798_request_charge_current(usChargeMa);
 	bq25798_request_charge_enable(1U);
+	bq25798_request_status_read();
 }
 
 void hpd_int_init(void)
@@ -423,6 +424,7 @@ void user_func_event (void)
 			charge_en_update();
 			if (has_charger != 0U) {
 				bq25798_request_charge_enable(0U);
+				bq25798_request_status_read();
 			}
 			P2_bit.no2 = 0U; // POWER_GOOD:OFF
 			if (gucWaiCmp == 0U) {
@@ -802,6 +804,7 @@ void user_func_event (void)
 		charge_en_update();
 		if (has_charger != 0U) {
 			bq25798_request_charge_enable(0U);
+			bq25798_request_status_read();
 		}
 		P2_bit.no2 = 0U; // POWER_GOOD:OFF
 		if (gucWaiCmp == 0U) {
@@ -841,6 +844,7 @@ void user_func_event (void)
 		charge_en_update();
 		if (has_charger != 0U) {
 			bq25798_request_charge_enable(0U);
+			bq25798_request_status_read();
 		}
 		P2_bit.no2 = 0U; // POWER_GOOD:OFF
 		if (uStatus.bit.bPlug == 0U) { // Unplug
