@@ -16,8 +16,10 @@
 #define CMD_DP_STATUS     0x10U   // �Status Update�
 #define CMD_DP_CONFIGURE  0x11U   // �Configure�
 
-#define CHARGER_SYSTEM_RESERVE_MA  ((USHORT)500U)
-#define CHARGER_MAX_CHARGE_MA      ((USHORT)2000U)
+#define CHARGER_MIN_INPUT_POWER_MW ((ULONG)5000UL)
+#define CHARGER_MIN_INPUT_MA       ((USHORT)1500U)
+#define CHARGER_SYSTEM_RESERVE_MA  ((USHORT)1000U)
+#define CHARGER_MAX_CHARGE_MA      ((USHORT)1000U)
 #define CHARGER_VINDPM_MARGIN_MV   ((USHORT)500U)
 #define BB_EXTVCC_STARTUP_DELAY_MS ((USHORT)10U)
 #define FPGA_POWER_READY_DELAY_MS  ((USHORT)10U)
@@ -129,6 +131,7 @@ void user_func_start_timer_thermistor(void);
 void user_func_stop_timer_thermistor (void);
 void user_func_intr_timer_thermistor (void);
 static void bb_extvcc_delay_done(void);
+static UCHAR charger_contract_allows_charge(void);
 static void charger_current_update(void);
 static void fpga_power_ready_delay_done(void);
 static void fpga_power_ready_task(void);
@@ -143,7 +146,7 @@ static void fpga_power_ready_start_delay(void)
 
 static void charge_en_update(void)
 {
-	P1_bit.no6 = ((has_charger != 0U) && (g_power_negotiated != 0U)) ? 1U : 0U;
+	P1_bit.no6 = (charger_contract_allows_charge() != 0U) ? 1U : 0U;
 }
 
 static void bb_extvcc_update(void)
@@ -204,6 +207,20 @@ static void fpga_power_ready_delay_done(void)
 	g_fpga_power_ready_delay_done = 1U;
 }
 
+static UCHAR charger_contract_allows_charge(void)
+{
+	ULONG ulInputMw = 0UL;
+	USHORT usInputMv = pdc_get_req_volt();
+	USHORT usInputMa = (USHORT)(pdc_get_req_cur() * 10U);
+
+	if ((has_charger == 0U) || (g_power_negotiated == 0U) || (usInputMv == 0U) || (usInputMa < CHARGER_MIN_INPUT_MA)) {
+		return 0U;
+	}
+
+	ulInputMw = ((ULONG)usInputMv * (ULONG)usInputMa) / 1000UL;
+	return (ulInputMw > CHARGER_MIN_INPUT_POWER_MW) ? 1U : 0U;
+}
+
 static void charger_current_update(void)
 {
 	USHORT usInputMv = pdc_get_req_volt();
@@ -211,7 +228,7 @@ static void charger_current_update(void)
 	USHORT usVindpmMv = 0U;
 	USHORT usChargeMa = 0U;
 
-	if ((has_charger == 0U) || (g_power_negotiated == 0U) || (usInputMv == 0U) || (usInputMa <= CHARGER_SYSTEM_RESERVE_MA)) {
+	if (charger_contract_allows_charge() == 0U) {
 		return;
 	}
 
