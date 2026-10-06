@@ -20,7 +20,7 @@ const UCHAR PD_IS_USB_HOST         = 0x00U;
 const UCHAR PD_IS_USB_DEVICE       = 0x00U;
 const UCHAR PD_USB_SUSPEND_SUPPORT = 0x00U;
 const UCHAR PD_NO_USB_SUSPEND      = 0x00U;
-const UCHAR PD_PRODUCT_TYPE_UFP    = 0x03U;
+const UCHAR PD_PRODUCT_TYPE_UFP    = 0x02U; // Peripheral (0x03 = PSD in PD3, reserved in PD2)
 const UCHAR PD_PRODUCT_TYPE_DFP    = 0x00U;
 const UCHAR PD_MODAL_OPE_SUPPORT   = 0x01U;
 

@@ -117,6 +117,9 @@ static UCHAR g_hpd_irq_flag = 1U;
 static UCHAR g_dp_mode_configured = 0U;
 static UCHAR g_hpd_toggled = 0U;
 static UCHAR g_hpd_state = 0U;
+static UCHAR g_hpd_reported_state = 0U;
+static UCHAR g_hpd_attn_pending = 0U;  // Attention handed to the PD core, result not known yet
+static UCHAR g_hpd_attn_value   = 0U;  // HPD level carried by that Attention
 static UCHAR g_cmd_queued = 0U;
 static UCHAR g_power_negotiated = 0U;
 static UCHAR g_bb_power_good_pending = 0U;
@@ -126,6 +129,12 @@ static UCHAR g_fpga_power_ready_delay_done = 0U;
 
 volatile UCHAR r_dbg;
 volatile UCHAR enter_dbg;
+volatile UCHAR hpd_pin_dbg;
+volatile UCHAR hpd_state_dbg;
+volatile UCHAR hpd_reported_dbg;
+volatile UCHAR hpd_pending_dbg;
+volatile UCHAR hpd_config_dbg;
+volatile UCHAR hpd_send_result_dbg;
 
 void user_func_start_timer_thermistor(void);
 void user_func_stop_timer_thermistor (void);
@@ -285,13 +294,36 @@ void hpd_poll_task(void)
 {
     	static UCHAR prev = 0x00;  
     	UCHAR curr = hpd_get_level();
+
+	g_hpd_state = curr;
+	hpd_pin_dbg = curr;
+	hpd_state_dbg = g_hpd_state;
+	hpd_reported_dbg = g_hpd_reported_state;
+	hpd_config_dbg = ((g_dp_mode_configured != 0U) ? 1U : 0U) |
+	                 ((gucEnterModeEnable != 0U) ? 2U : 0U);
 	
     	if (curr != prev)
     	{
         	g_hpd_toggled = 1U;   // HPD edge occurred
-		g_hpd_state = curr;
         	prev = curr;          // update stored value
     	}	
+}
+
+UCHAR user_func_hpd_pending(void)
+{
+	hpd_poll_task();
+	hpd_pending_dbg = ((g_hpd_state != g_hpd_reported_state) &&
+	                   (g_dp_mode_configured != 0U) &&
+	                   (gucEnterModeEnable != 0U)) ? 1U : 0U;
+
+	return hpd_pending_dbg;
+}
+
+UCHAR user_func_hpd_monitoring(void)
+{
+	// Keep the core awake (and HPD polled) from Enter Mode on, not only after
+	// Configure, so HPD is tracked even before/without a successful Configure.
+	return (gucEnterModeEnable != 0U) ? 1U : 0U;
 }
 
 void user_init(void)
@@ -435,6 +467,11 @@ void user_func_event (void)
 				gLed.uReq.bits.bDis = 1U;
 				pd_tm_stop_user_cnt(TM_ID_USER2);
 				gucEnterModeEnable = 0U;
+				g_dp_mode_configured = 0U;
+				g_hpd_toggled = 0U;
+				g_hpd_state = 0U;
+				g_hpd_reported_state = 0U;
+				g_hpd_attn_pending = 0U;
 				gucLEDStatus = 0U;
 				if (gPdc.uPdReq.bit.bSrcOff == 0U) {
 					pd_tm_start_user_cnt(TM_ID_USER2);
@@ -525,6 +562,7 @@ void user_func_event (void)
 				tx[3] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 8U; // 4 halfwords
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+				g_cmd_queued = 1U;
 				//PDC_CMD_SND_VDM = (0x2FU)  PDC_TARGET_SOP = (0U)
             		}
 
@@ -561,7 +599,8 @@ void user_func_event (void)
             		else if ((uVdmhead.bit_s.bCmd == SVDM_VDMH_CMD_ENTER_MODE) &&
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
                 		gucEnterModeEnable = 1U;
-                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA144U : 0x8144U;
+                		// ACK echoes the request header: SVDM version + object position must match
+				tx[0] = (USHORT)((uVdmhead.data[0] & (USHORT)~(0x3U << 6)) | (USHORT)(SVDM_VDMH_CMD_RESP_ACK << 6));
                 		tx[1] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 4U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
@@ -572,13 +611,18 @@ void user_func_event (void)
             		else if ((uVdmhead.bit_s.bCmd == SVDM_VDMH_CMD_EXIT_MODE) &&
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
                 		gucEnterModeEnable = 0U;
-                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA045U : 0x8045U;
+                		// ACK echoes the request header: SVDM version + object position must match
+				tx[0] = (USHORT)((uVdmhead.data[0] & (USHORT)~(0x3U << 6)) | (USHORT)(SVDM_VDMH_CMD_RESP_ACK << 6));
                 		tx[1] = 0xFF01U;
                 		gSndMess.uInfo.bit.bLen = 4U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
 				g_cmd_queued = 1U;
 				tmuxhs4446_request_mode(TMUX_CONF_OPEN_ON);
 				g_dp_mode_configured = 0U;
+				g_hpd_toggled = 0U;
+				g_hpd_state = 0U;
+				g_hpd_reported_state = 0U;
+				g_hpd_attn_pending = 0U;
             		}
 
            		/*// ---- DP Status Update ----
@@ -598,9 +642,16 @@ void user_func_event (void)
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
 				USHORT dp_status = 0;
 				P7_bit.no0 = 1U; //We are ready for for device Configuration.
+				hpd_poll_task();
     				// Always report �UFP_D connected� in bits 7:6
     				dp_status |= DP_STATUS_CONN_UFP_D;
-				dp_status |= DP_STATUS_ENABLED;
+				dp_status |= DP_STATUS_ENABLED; // adapter functional, not just configured
+				if (g_dp_mode_configured != 0U) {
+					dp_status |= ((USHORT)g_hpd_state << 7);
+					// HPD is reported here, so record it; otherwise the Attention path
+					// sees a stale mismatch and sends a duplicate Attention.
+					g_hpd_reported_state = g_hpd_state;
+				}
     				// If HPD GPIO is high, set HPD bit
     				//if (hpd_get_level()) {
         			//dp_status |= DP_STATUS_HPD_HIGH;
@@ -608,9 +659,12 @@ void user_func_event (void)
 				//dp_status |= DP_STATUS_HPD_HIGH;
 				
 				
-    				tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA050U : 0x8050U;
+    				// ACK must echo the request's object position (1). It was hard-coded
+				// to 0 (0x8050), so Linux tcpm (Pixel) could not match it to the DP
+				// alt mode, dropped it, and never sent DP Configure.
+				tx[0] = (USHORT)((uVdmhead.data[0] & (USHORT)~(0x3U << 6)) | (USHORT)(SVDM_VDMH_CMD_RESP_ACK << 6));
     				tx[1] = 0xFF01U;
-    				tx[2] = dp_status; // At this stage this should be Low status
+    				tx[2] = dp_status;
     				tx[3] = 0x0000;
                 		gSndMess.uInfo.bit.bLen = 8U;
                 		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
@@ -687,9 +741,10 @@ void user_func_event (void)
 
             		// ---- Default: NACK ----
             		else {
-                	uVdmhead.bit_s.bCmdType = SVDM_VDMH_CMD_RESP_NACK;
-                		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? uVdmhead.data[0] : uVdmhead.data[1];
-                		tx[1] = 0xFF01U;
+                	// NACK echoes the request header (cmd, SVID, version, object position)
+                		uVdmhead.bit_s.bCmdType = SVDM_VDMH_CMD_RESP_NACK;
+                		tx[0] = uVdmhead.data[0];
+                		tx[1] = uVdmhead.data[1];
                 		gSndMess.uInfo.bit.bLen = 4U;
                			pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
 				g_cmd_queued = 1U;
@@ -742,47 +797,55 @@ void user_func_event (void)
 		gPdc.uPdEvent.bit.bErr = 0U;
 	}
 	
-	if (!g_cmd_queued && (g_hpd_toggled && g_dp_mode_configured)) {
-        	UCHAR r = pdc_get_cmd_result();
-		
-        	// Only send if no other PD command is in progress
-        	if (r != PDC_CMD_RSLT_PROGRESS && gucEnterModeEnable) {
-			
-			
-            		USHORT *tx = gSndMess.uspData;
-            		USHORT dp_status = 0;
-			
-			//g_hpd_toggled = 0U;  //clear toggled
-            		g_hpd_irq_flag = 0U; // clear the flag
-
-            		// Always report �UFP_D connected� in bits 7:6
-            		dp_status |= DP_STATUS_CONN_UFP_D;
-			dp_status |= DP_STATUS_ENABLED;
-                	dp_status |= g_hpd_state << 7;
-
-
-            		tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA106U : 0x8106U; // DP_STATUS header
-            		tx[1] = 0xFF01U;                                            // VESA SVID
-            		tx[2] = dp_status;                                          // DP Status VDO
-            		tx[3] = 0x0000;                                             // reserved
-
-            		gSndMess.uInfo.bit.bLen = 8U; // 4 halfwords
-			
-			r_dbg = pdc_get_cmd_result();
-			enter_dbg = gucEnterModeEnable;
-            		pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
-			
-			r_dbg = pdc_get_cmd_result();
-			
-			if ((r_dbg == PDC_CMD_RSLT_PROGRESS) || (r_dbg == PDC_CMD_RSLT_SUCCESS)){
-				g_hpd_toggled = 0U;  //clear toggled
-				g_cmd_queued = 1U;
+	// ---- HPD Attention: completion of one already handed to the PD core ----
+	if (g_hpd_attn_pending != 0U) {
+		UCHAR r = pdc_get_cmd_result();
+		hpd_send_result_dbg = r;
+		if (r != PDC_CMD_RSLT_PROGRESS) {
+			if (r == PDC_CMD_RSLT_SUCCESS) {
+				// Host has it (GoodCRC received): only now is it "reported"
+				g_hpd_reported_state = g_hpd_attn_value;
 			}
-			
-        	}
-        	
-    	}
-	
+			// Any other result: leave reported_state alone -> retried next pass
+			g_hpd_attn_pending = 0U;
+		}
+	}
+	// ---- HPD Attention: start a new one ----
+	else if (!g_cmd_queued &&
+	         (g_dp_mode_configured != 0U) &&
+	         (gucEnterModeEnable != 0U) &&
+	         (uStatus.bit.bRdyIdle != 0U) &&          // PD core in Ready (as the Renesas sample requires)
+	         (g_hpd_state != g_hpd_reported_state)) {
+		UCHAR r = pdc_get_cmd_result();
+		hpd_send_result_dbg = r;
+
+		if (r != PDC_CMD_RSLT_PROGRESS) {         // no other PD command in flight
+			USHORT *tx = gSndMess.uspData;
+			USHORT dp_status = 0U;
+
+			g_hpd_irq_flag = 0U;
+
+			dp_status |= DP_STATUS_CONN_UFP_D;
+			dp_status |= DP_STATUS_ENABLED;
+			dp_status |= (USHORT)g_hpd_state << 7;
+
+			tx[0] = (uStatus.bit.bComRevPDC != 0U) ? 0xA106U : 0x8106U; // Attention, obj pos 1
+			tx[1] = 0xFF01U;                                            // VESA SVID
+			tx[2] = dp_status;                                          // DP Status VDO
+			tx[3] = 0x0000U;
+			gSndMess.uInfo.bit.bLen = 8U;
+
+			enter_dbg = gucEnterModeEnable;
+			pdc_set_cmd(PDC_CMD_SND_VDM, PDC_TARGET_SOP);
+			r_dbg = pdc_get_cmd_result();
+
+			g_hpd_toggled      = 0U;
+			g_hpd_attn_value   = g_hpd_state;  // what this Attention says
+			g_hpd_attn_pending = 1U;           // NOT reported until SUCCESS
+			g_cmd_queued       = 1U;
+		}
+	}
+
 	if (gPdc.uPdReq.bit.bVconnDis != 0U) {
 		//P1_bit.no6 = 0U; // VC_DRV1:OFF
 		P1_bit.no7 = 0U; // VC_DRV2:OFF

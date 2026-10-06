@@ -1,12 +1,12 @@
 QualityReport
-Thursday, September 10, 2026 3:04:04 PM
+Friday, October 2, 2026 11:13:04 AM
 
 ------ Start build(DRPEVB_with_PPSsink, Release) ------
 ------ Build ended(Error:0, Warning:0)(DRPEVB_with_PPSsink, Release) ------
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_PPSsink\Obj\Release\DRPEVB_with_PPSsink.abs: b1319a2a52da20326a7822128d03c6251a9c599a
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_PPSsink\Obj\Release\DRPEVB_with_PPSsink.abs: b88d3ea93b3d74c5298a971b48885bfe021b1b69
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_PPSsink\Obj\Release\DRPEVB_with_PPSsink.hex: 47cae30e5d1fa5f1c63dda687eefc2086f14c2fd
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\Release\DRPEVB_with_PPSsink\Main.hex: df4abfd6c8517a2fa02fdeb7ac18be14fd729e0d
 
@@ -19,7 +19,7 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MID
 *.NET Framework Version
  Microsoft .NET Framework 4 [.NET 4.8 or later] (533509)
 *WebView2 Version
- 151.0.4129.107
+ 154.0.4258.48
 
 --- Application Information ---
 *Product Name
@@ -38,13 +38,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MID
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  414 MB
+  259 MB
  *Number of GDI Objects
-  2353
+  2000
  *Number of USER Objects
-  1275
+  971
  *Opened Files
-  15 editors, 15 files, 117 KB
+  2 editors, 2 files, 38 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in

@@ -1,12 +1,12 @@
 QualityReport
-Thursday, September 10, 2026 3:04:09 PM
+Friday, October 2, 2026 11:13:03 AM
 
 ------ Start build(DRPEVB_with_SMBS, Release) ------
 ------ Build ended(Error:0, Warning:0)(DRPEVB_with_SMBS, Release) ------
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\Obj\Release\DRPEVB_with_SMBS.abs: b3a3c4e7ba38698fbbbc2dd6b00dcbfd51b5ea33
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\Obj\Release\DRPEVB_with_SMBS.abs: 6e9994ad163520decdb9aebe5a37fb933f584a7e
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_SMBS\Obj\Release\DRPEVB_with_SMBS.hex: 759b999afa2e9245eb2288ce5365e9f8cc781afd
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\Release\DRPEVB_with_SMBS\Main.hex: b358ccd3f810548839a01d3977e1e747e9fb09cd
 
@@ -19,7 +19,7 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MID
 *.NET Framework Version
  Microsoft .NET Framework 4 [.NET 4.8 or later] (533509)
 *WebView2 Version
- 151.0.4129.107
+ 154.0.4258.48
 
 --- Application Information ---
 *Product Name
@@ -38,13 +38,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MID
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  414 MB
+  259 MB
  *Number of GDI Objects
-  2353
+  2000
  *Number of USER Objects
-  1277
+  971
  *Opened Files
-  15 editors, 15 files, 117 KB
+  2 editors, 2 files, 38 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in

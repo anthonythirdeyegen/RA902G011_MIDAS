@@ -89,7 +89,8 @@ void main(void)
 		    || (gDCInfo.uReq.usData  != 0U)
 		    || ((gDCInfo.uNtfy.usData & DCDC_NOTIFY_MASK) != 0U)
 		    || (gDCInfo.uSt.bit.bDcSt == DCDC_INIT)
-			|| (gSubdevInfo.ucSubdevAlertFlag != 0U)) {
+			|| (gSubdevInfo.ucSubdevAlertFlag != 0U)
+		    || (user_func_hpd_pending() != 0U)) {
 			user_func_event();
 		}
 		else {
@@ -98,6 +99,9 @@ void main(void)
 			ucMode &= user_func_snd_mess();
 #endif
 			ucMode &= user_func_snd_attention();
+			if (user_func_hpd_monitoring() != 0U) {
+				ucMode = PD_CORE_ACTIVE;
+			}
 			switch (ucMode) {
 				case PD_CORE_LOW  :
 					HALT();

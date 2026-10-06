@@ -1563,6 +1563,8 @@
             <Path>PDC\subdev\subdev_ctrl.h</Path>
             <Path>PDC\subdev\tmuxhs4446.c</Path>
             <Path>PDC\subdev\tmuxhs4446.h</Path>
+            <Path>PDC\subdev\bq25798.c</Path>
+            <Path>PDC\subdev\bq25798.h</Path>
           </Category>
         </Category>
       </Category>
@@ -1593,6 +1595,7 @@
           <Path>Obj\DefaultBuild\isl95338.obj</Path>
           <Path>Obj\DefaultBuild\subdev_ctrl.obj</Path>
           <Path>Obj\DefaultBuild\tmuxhs4446.obj</Path>
+          <Path>Obj\DefaultBuild\bq25798.obj</Path>
           <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
         </LinkOrder>
         <CommonOptions>
@@ -1702,6 +1705,7 @@
           <Path>Obj\Release\isl95338.obj</Path>
           <Path>Obj\Release\subdev_ctrl.obj</Path>
           <Path>Obj\Release\tmuxhs4446.obj</Path>
+          <Path>Obj\Release\bq25798.obj</Path>
           <Path>..\..\PDC\Lib\R9A02G011PDC.lib</Path>
         </LinkOrder>
         <CommonOptions>

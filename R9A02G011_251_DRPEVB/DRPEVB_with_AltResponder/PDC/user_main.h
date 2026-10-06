@@ -41,6 +41,8 @@ USHORT data[2];
 }SVDM_HEADER;
 
 void  user_func_event(void);
+UCHAR user_func_hpd_pending(void);
+UCHAR user_func_hpd_monitoring(void);
 UCHAR user_func_chk_device(void);
 UCHAR user_func_snd_mess  (void);
 UCHAR user_func_snd_attention (void);

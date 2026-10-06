@@ -1,12 +1,12 @@
 QualityReport
-Thursday, September 10, 2026 3:04:07 PM
+Friday, October 2, 2026 11:13:03 AM
 
 ------ Start build(DRPEVB_with_AltInitiator, Release) ------
 ------ Build ended(Error:0, Warning:0)(DRPEVB_with_AltInitiator, Release) ------
 
 
 --- SHA1 hash value of output files ---
-C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltInitiator\Obj\Release\DRPEVB_with_AltInitiator.abs: b90297804884cb645d57f72be82e12692f864518
+C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltInitiator\Obj\Release\DRPEVB_with_AltInitiator.abs: a18248725efd2c487c50fec4710bced00282c500
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\DRPEVB_with_AltInitiator\Obj\Release\DRPEVB_with_AltInitiator.hex: acd354652df95576d30322f92df43807e4ea8b89
 C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MIDAS\R9A02G011_251_DRPEVB\Release\DRPEVB_with_AltInitiator\Main.hex: b3a29d7e810d52b2c514e5e652be84894eb83a6c
 
@@ -19,7 +19,7 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MID
 *.NET Framework Version
  Microsoft .NET Framework 4 [.NET 4.8 or later] (533509)
 *WebView2 Version
- 151.0.4129.107
+ 154.0.4258.48
 
 --- Application Information ---
 *Product Name
@@ -38,13 +38,13 @@ C:\Users\AnthonyRusso\OneDrive - Banc3 Federal\Documents\Workspace\RA902G011_MID
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
-  414 MB
+  259 MB
  *Number of GDI Objects
-  2353
+  2000
  *Number of USER Objects
-  1276
+  971
  *Opened Files
-  15 editors, 15 files, 117 KB
+  2 editors, 2 files, 38 KB
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in
