@@ -18,8 +18,11 @@
 
 #define CHARGER_MIN_INPUT_POWER_MW ((ULONG)5000UL)
 #define CHARGER_MIN_INPUT_MA       ((USHORT)1500U)
-#define CHARGER_SYSTEM_RESERVE_MA  ((USHORT)1000U)
+#define CHARGER_SYSTEM_RESERVE_MW  ((ULONG)5000UL)
+#define CHARGER_EFFICIENCY_PERCENT ((ULONG)90UL)
 #define CHARGER_MAX_CHARGE_MA      ((USHORT)800U)
+#define CHARGER_MAX_INPUT_MV       ((USHORT)15000U)
+#define CHARGER_POLL_PERIOD_MS     ((USHORT)1000U)
 #define CHARGER_VINDPM_MARGIN_MV   ((USHORT)500U)
 #define BB_EXTVCC_STARTUP_DELAY_MS ((USHORT)10U)
 #define FPGA_POWER_READY_DELAY_MS  ((USHORT)10U)
@@ -107,7 +110,7 @@ UCHAR  gucOmfData;
 UCHAR  gucReserved;
 UCHAR  gucEnterModeEnable;
 UCHAR  gucLEDStatus;
-UCHAR  has_charger = 0U;
+UCHAR  has_charger = 1U;
 UCHAR  bb_extvcc = 0U;
 
 static UCHAR gGetStatPending = 0;
@@ -126,6 +129,7 @@ static UCHAR g_bb_power_good_pending = 0U;
 static UCHAR g_bb_extvcc_delay_done = 0U;
 static UCHAR g_fpga_power_ready_pending = 0U;
 static UCHAR g_fpga_power_ready_delay_done = 0U;
+static UCHAR g_charger_poll_started = 0U;
 
 volatile UCHAR r_dbg;
 volatile UCHAR enter_dbg;
@@ -155,7 +159,7 @@ static void fpga_power_ready_start_delay(void)
 
 static void charge_en_update(void)
 {
-	P1_bit.no6 = (charger_contract_allows_charge() != 0U) ? 1U : 0U;
+	P1_bit.no6 = ((charger_contract_allows_charge() != 0U) && (gBq25798Info.ucConfigValid != 0U)) ? 1U : 0U;
 }
 
 static void bb_extvcc_update(void)
@@ -222,7 +226,7 @@ static UCHAR charger_contract_allows_charge(void)
 	USHORT usInputMv = pdc_get_req_volt();
 	USHORT usInputMa = (USHORT)(pdc_get_req_cur() * 10U);
 
-	if ((has_charger == 0U) || (g_power_negotiated == 0U) || (usInputMv == 0U) || (usInputMa < CHARGER_MIN_INPUT_MA)) {
+	if ((has_charger == 0U) || (g_power_negotiated == 0U) || (usInputMv == 0U) || (usInputMv > CHARGER_MAX_INPUT_MV) || (usInputMa < CHARGER_MIN_INPUT_MA)) {
 		return 0U;
 	}
 
@@ -236,6 +240,7 @@ static void charger_current_update(void)
 	USHORT usInputMa = (USHORT)(pdc_get_req_cur() * 10U);
 	USHORT usVindpmMv = 0U;
 	USHORT usChargeMa = 0U;
+	ULONG ulChargeMw;
 
 	if (charger_contract_allows_charge() == 0U) {
 		return;
@@ -245,18 +250,60 @@ static void charger_current_update(void)
 		usVindpmMv = (USHORT)(usInputMv - CHARGER_VINDPM_MARGIN_MV);
 	}
 
-	usChargeMa = (USHORT)(usInputMa - CHARGER_SYSTEM_RESERVE_MA);
+	/* Budget watts across the converter; use full-pack voltage conservatively. */
+	if (usInputMa > 3300U) {
+		usInputMa = 3300U;
+	}
+	ulChargeMw = ((ULONG)usInputMv * usInputMa) / 1000UL;
+	ulChargeMw = ((ulChargeMw - CHARGER_SYSTEM_RESERVE_MW) * CHARGER_EFFICIENCY_PERCENT) / 100UL;
+	usChargeMa = (USHORT)((ulChargeMw * 1000UL) / BQ25798_BATTERY_VREG_MV);
 	if (usChargeMa > CHARGER_MAX_CHARGE_MA) {
 		usChargeMa = CHARGER_MAX_CHARGE_MA;
 	}
 
-	bq25798_request_evm_defaults();
+	if (gBq25798Info.ucConfigValid == 0U) {
+		bq25798_request_evm_defaults();
+	}
 	bq25798_request_use_iindpm_register();
 	bq25798_request_input_voltage(usVindpmMv);
 	bq25798_request_input_current(usInputMa);
 	bq25798_request_charge_current(usChargeMa);
 	bq25798_request_charge_enable(1U);
 	bq25798_request_status_read();
+}
+
+UCHAR user_func_charger_poll(void)
+{
+	if (has_charger == 0U) {
+		if (g_charger_poll_started != 0U) {
+			pd_tm_stop_user_cnt(TM_ID_USER3);
+			g_charger_poll_started = 0U;
+		}
+		return PD_CORE_STOP;
+	}
+
+	/* USER3 is reserved for charger polling; led_ctrl is disabled in r_main. */
+	if ((g_charger_poll_started == 0U) ||
+	    (pd_tm_chk_user_stat(TM_ID_USER3, CHARGER_POLL_PERIOD_MS) == TM_ST_OVR)) {
+		pd_tm_start_user_cnt(TM_ID_USER3);
+		g_charger_poll_started = 1U;
+		if (bq25798_is_busy() == 0U) {
+			if (gBq25798Info.ucConfigValid == 0U) {
+				if (charger_contract_allows_charge() != 0U) {
+					charger_current_update();
+				}
+				else {
+					bq25798_request_evm_defaults();
+					bq25798_request_status_read();
+				}
+			}
+			else {
+				bq25798_request_status_read();
+			}
+		}
+	}
+	charge_en_update();
+	return PD_CORE_IDLE;
 }
 
 void hpd_int_init(void)
@@ -375,6 +422,7 @@ void user_init(void)
 	//dcdc_init();
 	subdev_init();
 	smbm_init();
+	g_charger_poll_started = 0U;
 	//led_init();
 	sw_init();
 	hpd_int_init();

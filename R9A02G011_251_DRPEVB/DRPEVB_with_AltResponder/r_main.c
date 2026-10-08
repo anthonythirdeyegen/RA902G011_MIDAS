@@ -79,6 +79,7 @@ void main(void)
 		
 		//ucMode &= led_ctrl();
 		ucMode &= sw_ctrl();
+		ucMode &= user_func_charger_poll();
 		
 		if (gPdc.uPdReq.bit.bExitMain != 0U) {
 			break;

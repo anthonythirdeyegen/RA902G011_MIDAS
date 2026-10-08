@@ -19,19 +19,32 @@
 #define BQ25798_REG_INPUT_CURRENT      ((UCHAR)0x06U)
 #define BQ25798_REG_PRECHG_CTRL        ((UCHAR)0x08U)
 #define BQ25798_REG_TERMINATION_CTRL   ((UCHAR)0x09U)
+#define BQ25798_REG_RECHARGE_CTRL      ((UCHAR)0x0AU)
+#define BQ25798_REG_IOTG               ((UCHAR)0x0DU)
+#define BQ25798_REG_TIMER_CTRL         ((UCHAR)0x0EU)
 #define BQ25798_REG_CHARGER_CTRL0      ((UCHAR)0x0FU)
 #define BQ25798_REG_CHARGER_CTRL1      ((UCHAR)0x10U)
 #define BQ25798_REG_CHARGER_CTRL2      ((UCHAR)0x11U)
 #define BQ25798_REG_CHARGER_CTRL5      ((UCHAR)0x14U)
+#define BQ25798_REG_MPPT_CTRL          ((UCHAR)0x15U)
+#define BQ25798_REG_TEMP_CTRL          ((UCHAR)0x16U)
 #define BQ25798_REG_NTC_CTRL0          ((UCHAR)0x17U)
 #define BQ25798_REG_NTC_CTRL1          ((UCHAR)0x18U)
 #define BQ25798_REG_STATUS_BASE        ((UCHAR)0x1BU)
+#define BQ25798_REG_ADC_CTRL           ((UCHAR)0x2EU)
+#define BQ25798_REG_ADC_DISABLE0       ((UCHAR)0x2FU)
+#define BQ25798_REG_ADC_DISABLE1       ((UCHAR)0x30U)
+#define BQ25798_REG_ADC_BASE           ((UCHAR)0x31U)
 
 #define BQ25798_EN_CHG                 ((UCHAR)0x20U)
 #define BQ25798_WATCHDOG_MASK          ((UCHAR)0x07U)
 #define BQ25798_WD_RST                 ((UCHAR)0x08U)
 #define BQ25798_VAC_OVP_MASK           ((UCHAR)0x30U)
-#define BQ25798_VAC_OVP_12V            ((UCHAR)0x20U)
+#define BQ25798_VAC_OVP_22V            ((UCHAR)0x10U)
+#define BQ25798_EN_TERM               ((UCHAR)0x02U)
+#define BQ25798_EN_ICO                ((UCHAR)0x10U)
+#define BQ25798_FORCE_ICO             ((UCHAR)0x08U)
+#define BQ25798_EN_BACKUP             ((UCHAR)0x01U)
 #define BQ25798_FORCE_INDET            ((UCHAR)0x80U)
 #define BQ25798_AUTO_INDET_EN          ((UCHAR)0x40U)
 #define BQ25798_EN_12V                 ((UCHAR)0x20U)
@@ -52,7 +65,7 @@
 #define BQ25798_TS_IGNORE              ((UCHAR)0x01U)
 
 #define BQ25798_EVM_VSYSMIN_MV         ((USHORT)7000U)
-#define BQ25798_EVM_VREG_MV            ((USHORT)8400U)
+#define BQ25798_EVM_VREG_MV            BQ25798_BATTERY_VREG_MV
 #define BQ25798_EVM_PRECHG_MA          ((USHORT)240U)
 #define BQ25798_EVM_VINDPM_MV          ((USHORT)4000U)
 #define BQ25798_STARTUP_IINDPM_MA      ((USHORT)500U)
@@ -67,12 +80,14 @@
 #define BQ25798_VINDPM_MAX_MV          ((USHORT)22000U)
 
 #define BQ25798_STEP_IDLE              ((UCHAR)0x00U)
-#define BQ25798_STEP_WORD_MSB          ((UCHAR)0x01U)
-#define BQ25798_STEP_WORD_LSB          ((UCHAR)0x02U)
+#define BQ25798_STEP_WORD_WRITE        ((UCHAR)0x01U)
 #define BQ25798_STEP_RMW_READ          ((UCHAR)0x03U)
 #define BQ25798_STEP_RMW_WRITE         ((UCHAR)0x04U)
 #define BQ25798_STEP_BYTE              ((UCHAR)0x05U)
 #define BQ25798_STEP_STATUS_READ       ((UCHAR)0x06U)
+#define BQ25798_STEP_VERIFY_WRITE      ((UCHAR)0x07U)
+#define BQ25798_STEP_ADC_READ          ((UCHAR)0x08U)
+#define BQ25798_STEP_CHECK_CONFIG      ((UCHAR)0x09U)
 
 #define BQ25798_STATUS_CHARGER0        ((UCHAR)0x00U)
 #define BQ25798_STATUS_CHARGER1        ((UCHAR)0x01U)
@@ -100,20 +115,34 @@ static const BQ25798_CFG gBq25798EvmDefaults[] = {
 	   BC1.2/HVDCP detection disabled, precharge 240mA,
 	   termination 200mA, TS charge window +10C to +45C,
 	   VINDPM 4.0V, startup IINDPM 500mA, ICHG 500mA.
-	   REG10 VAC_OVP is set to 12V per SLUUCB5E's >8V input-voltage hint. */
-	{ BQ25798_REG_CHARGER_CTRL0,   BQ25798_CFG_RMW,  BQ25798_EN_CHG, 0U },
-	{ BQ25798_REG_CHARGER_CTRL1,   BQ25798_CFG_RMW,  (UCHAR)(BQ25798_WATCHDOG_MASK | BQ25798_WD_RST | BQ25798_VAC_OVP_MASK), BQ25798_VAC_OVP_12V },
+	   Explicit 2S profile, recharge at VREG-200mV after 1024ms,
+	   2h precharge / 12h fast-charge timers, top-off disabled.
+	   22V VAC_OVP supports the board's maximum 15V PD contract. */
+	{ BQ25798_REG_CHARGER_CTRL0,   BQ25798_CFG_RMW,  (UCHAR)(BQ25798_EN_CHG | BQ25798_EN_TERM | BQ25798_EN_ICO | BQ25798_FORCE_ICO | BQ25798_EN_BACKUP), BQ25798_EN_TERM },
+	{ BQ25798_REG_CHARGER_CTRL1,   BQ25798_CFG_RMW,  (UCHAR)(BQ25798_WATCHDOG_MASK | BQ25798_WD_RST | BQ25798_VAC_OVP_MASK), BQ25798_VAC_OVP_22V },
 	{ BQ25798_REG_CHARGER_CTRL2,   BQ25798_CFG_RMW,  (UCHAR)(BQ25798_FORCE_INDET | BQ25798_AUTO_INDET_EN | BQ25798_EN_12V | BQ25798_EN_9V | BQ25798_HVDCP_EN), 0U },
+	/* CELL must precede VSYSMIN/VREG/ICHG: changing it resets those registers. */
+	{ BQ25798_REG_RECHARGE_CTRL,   BQ25798_CFG_BYTE, 0U, 0x63U },
+	{ BQ25798_REG_IOTG,           BQ25798_CFG_RMW,  0x80U, 0U },
+	{ BQ25798_REG_TIMER_CTRL,     BQ25798_CFG_BYTE, 0U, 0x3DU },
+	{ BQ25798_REG_MPPT_CTRL,      BQ25798_CFG_RMW,  0x01U, 0U },
+	{ BQ25798_REG_TEMP_CTRL,      BQ25798_CFG_RMW,  0xF0U, 0xC0U },
 	{ BQ25798_REG_MIN_SYS_VOLTAGE, BQ25798_CFG_BYTE, 0U, (USHORT)((BQ25798_EVM_VSYSMIN_MV - 2500U) / 250U) },
 	{ BQ25798_REG_CHG_VOLTAGE,     BQ25798_CFG_WORD, 0U, (USHORT)(BQ25798_EVM_VREG_MV / 10U) },
-	{ BQ25798_REG_PRECHG_CTRL,     BQ25798_CFG_RMW,  (UCHAR)0x3FU, (USHORT)(BQ25798_EVM_PRECHG_MA / 40U) },
+	/* Precharge below 71.4% of VREG; 240mA precharge current. */
+	{ BQ25798_REG_PRECHG_CTRL,     BQ25798_CFG_BYTE, 0U, (USHORT)(0xC0U | (BQ25798_EVM_PRECHG_MA / 40U)) },
 	{ BQ25798_REG_TERMINATION_CTRL, BQ25798_CFG_RMW, BQ25798_ITERM_MASK, (USHORT)(BQ25798_EVM_ITERM_MA / 40U) },
 	{ BQ25798_REG_NTC_CTRL0,       BQ25798_CFG_RMW,  (UCHAR)(BQ25798_JEITA_VSET_MASK | BQ25798_JEITA_ISETH_MASK | BQ25798_JEITA_ISETC_MASK), BQ25798_JEITA_SUSPEND },
 	{ BQ25798_REG_NTC_CTRL1,       BQ25798_CFG_RMW,  (UCHAR)(BQ25798_TS_COOL_MASK | BQ25798_TS_WARM_MASK | BQ25798_TS_IGNORE), (USHORT)(BQ25798_TS_COOL_10C | BQ25798_TS_WARM_45C) },
+	/* Remove the external ILIM clamp before programming/verifying IINDPM. */
+	{ BQ25798_REG_CHARGER_CTRL5,   BQ25798_CFG_RMW,  (UCHAR)(BQ25798_SFET_PRESENT | BQ25798_EN_IINDPM | BQ25798_EN_EXTILIM), (USHORT)(BQ25798_SFET_PRESENT | BQ25798_EN_IINDPM) },
 	{ BQ25798_REG_INPUT_VOLTAGE,   BQ25798_CFG_BYTE, 0U, (USHORT)(BQ25798_EVM_VINDPM_MV / 100U) },
 	{ BQ25798_REG_INPUT_CURRENT,   BQ25798_CFG_WORD, 0U, (USHORT)(BQ25798_STARTUP_IINDPM_MA / 10U) },
 	{ BQ25798_REG_CHG_CURRENT,     BQ25798_CFG_WORD, 0U, (USHORT)(BQ25798_EVM_ICHG_MA / 10U) },
-	{ BQ25798_REG_CHARGER_CTRL5,   BQ25798_CFG_RMW,  (UCHAR)(BQ25798_SFET_PRESENT | BQ25798_EN_IINDPM | BQ25798_EN_EXTILIM), (USHORT)(BQ25798_SFET_PRESENT | BQ25798_EN_IINDPM) }
+	{ BQ25798_REG_ADC_DISABLE0,   BQ25798_CFG_RMW,  0xFEU, 0U },
+	{ BQ25798_REG_ADC_DISABLE1,   BQ25798_CFG_RMW,  0xF0U, 0xC0U },
+	/* Continuous, 15-bit effective resolution, no averaging. */
+	{ BQ25798_REG_ADC_CTRL,       BQ25798_CFG_RMW,  0xFCU, 0x80U }
 };
 
 #define BQ25798_EVM_DEFAULTS_COUNT     ((UCHAR)(sizeof(gBq25798EvmDefaults) / sizeof(gBq25798EvmDefaults[0])))
@@ -125,7 +154,9 @@ static void bq25798_end_processing(void);
 static void bq25798_start_cmd(void);
 static void bq25798_start_cfg_entry(void);
 static void bq25798_start_byte_write(UCHAR ucReg, UCHAR ucData);
+static void bq25798_start_word_write(UCHAR ucReg);
 static void bq25798_start_byte_read(UCHAR ucReg);
+static void bq25798_start_adc_read(void);
 static USHORT bq25798_clamp_ma(USHORT usCurrentMa, USHORT usMinMa, USHORT usMaxMa);
 static USHORT bq25798_clamp_mv(USHORT usVoltageMv, USHORT usMinMv, USHORT usMaxMv);
 static void bq25798_request_cmd(UCHAR ucCmd);
@@ -141,6 +172,16 @@ void init_bq25798(void)
 	gBq25798Info.ucCfgIndex = 0U;
 	gBq25798Info.ucStatusIndex = 0U;
 	gBq25798Info.ucStatusValid = 0U;
+	gBq25798Info.ucConfigValid = 0U;
+	gBq25798Info.ucAdcValid = 0U;
+	gBq25798Info.ucAdcIndex = 0U;
+	gBq25798Info.ucVerifyStep = 0U;
+	gBq25798Info.ucWriteReg = 0U;
+	gBq25798Info.ucWriteData = 0U;
+	for (gBq25798Info.ucAdcIndex = 0U; gBq25798Info.ucAdcIndex < BQ25798_ADC_COUNT; gBq25798Info.ucAdcIndex++) {
+		gBq25798Info.usAdc[gBq25798Info.ucAdcIndex] = 0U;
+	}
+	gBq25798Info.ucAdcIndex = 0U;
 	gBq25798Info.usData = 0U;
 	gBq25798Info.usInputVoltageMv = 0U;
 	gBq25798Info.usInputCurrentMa = 0U;
@@ -223,16 +264,14 @@ static void bq25798_start_cmd(void)
 {
 	switch (gBq25798Info.ucCmd) {
 		case BQ25798_CMD_SET_IINDPM:
-			gBq25798Info.ucStep = BQ25798_STEP_WORD_MSB;
-			bq25798_start_byte_write(BQ25798_REG_INPUT_CURRENT, (UCHAR)(gBq25798Info.usData >> 8));
+			bq25798_start_word_write(BQ25798_REG_INPUT_CURRENT);
 			break;
 		case BQ25798_CMD_SET_VINDPM:
 			gBq25798Info.ucStep = BQ25798_STEP_BYTE;
 			bq25798_start_byte_write(BQ25798_REG_INPUT_VOLTAGE, (UCHAR)gBq25798Info.usData);
 			break;
 		case BQ25798_CMD_SET_ICHG:
-			gBq25798Info.ucStep = BQ25798_STEP_WORD_MSB;
-			bq25798_start_byte_write(BQ25798_REG_CHG_CURRENT, (UCHAR)(gBq25798Info.usData >> 8));
+			bq25798_start_word_write(BQ25798_REG_CHG_CURRENT);
 			break;
 		case BQ25798_CMD_SET_CHG_EN:
 			gBq25798Info.ucStep = BQ25798_STEP_RMW_READ;
@@ -249,8 +288,9 @@ static void bq25798_start_cmd(void)
 		case BQ25798_CMD_READ_STATUS:
 			gBq25798Info.ucStatusIndex = 0U;
 			gBq25798Info.ucStatusValid = 0U;
-			gBq25798Info.ucStep = BQ25798_STEP_STATUS_READ;
-			bq25798_start_byte_read(BQ25798_REG_STATUS_BASE);
+			gBq25798Info.ucAdcValid = 0U;
+			gBq25798Info.ucStep = BQ25798_STEP_CHECK_CONFIG;
+			bq25798_start_byte_read(BQ25798_REG_CHARGER_CTRL1);
 			break;
 		default:
 			gBq25798Info.ucCmd = BQ25798_CMD_NONE;
@@ -267,8 +307,7 @@ static void bq25798_start_cfg_entry(void)
 
 	gBq25798Info.usData = pCfg->usData;
 	if (pCfg->ucType == BQ25798_CFG_WORD) {
-		gBq25798Info.ucStep = BQ25798_STEP_WORD_MSB;
-		bq25798_start_byte_write(pCfg->ucReg, (UCHAR)(gBq25798Info.usData >> 8));
+		bq25798_start_word_write(pCfg->ucReg);
 	}
 	else if (pCfg->ucType == BQ25798_CFG_RMW) {
 		gBq25798Info.ucStep = BQ25798_STEP_RMW_READ;
@@ -284,10 +323,38 @@ static void bq25798_start_cfg_entry(void)
 static void bq25798_end_processing(void)
 {
 	const BQ25798_CFG *pCfg = (const BQ25798_CFG *)0;
+	UCHAR ucVerifyError = 0U;
 
-	if (gSmbmInfo.ucSmbmStatus == SMBM_CTRL_STATE_ERROR) {
+	if ((gSmbmInfo.ucSmbmStatus != SMBM_CTRL_STATE_ERROR) && (gBq25798Info.ucStep == BQ25798_STEP_VERIFY_WRITE)) {
+		if (gBq25798Info.ucVerifyStep == BQ25798_STEP_WORD_WRITE) {
+			ucVerifyError = (gBq25798Info.usRegData != (USHORT)((gBq25798Info.usData << 8) | (gBq25798Info.usData >> 8))) ? 1U : 0U;
+		}
+		else {
+			ucVerifyError = ((UCHAR)gBq25798Info.usRegData != gBq25798Info.ucWriteData) ? 1U : 0U;
+		}
+		gBq25798Info.ucStep = gBq25798Info.ucVerifyStep;
+	}
+	else if ((gSmbmInfo.ucSmbmStatus != SMBM_CTRL_STATE_ERROR) &&
+	         ((gBq25798Info.ucStep == BQ25798_STEP_WORD_WRITE) ||
+	          (gBq25798Info.ucStep == BQ25798_STEP_RMW_WRITE) ||
+	          (gBq25798Info.ucStep == BQ25798_STEP_BYTE))) {
+		gBq25798Info.ucVerifyStep = gBq25798Info.ucStep;
+		gBq25798Info.ucStep = BQ25798_STEP_VERIFY_WRITE;
+		smbm_clr_status();
+		smbm_set_subdev(VAL_I2C_CLK, VAL_I2C_SLAVEADDR);
+		if (gBq25798Info.ucVerifyStep == BQ25798_STEP_WORD_WRITE) {
+			smbm_set_protocol(gBq25798Info.ucWriteReg, SMBM_WORD_READ, 0U,
+			                  SMBM_SMB_START, &gBq25798Info.usRegData, 2U, 1U);
+		}
+		else {
+			bq25798_start_byte_read(gBq25798Info.ucWriteReg);
+		}
+		return;
+	}
+
+	if ((gSmbmInfo.ucSmbmStatus == SMBM_CTRL_STATE_ERROR) || (ucVerifyError != 0U)) {
 		gSubDevErr.ucSubdev |= BQ25798_DEVICE_ID;
-		gSubDevErr.ucError = gSmbmInfo.ucSmbmError;
+		gSubDevErr.ucError = (ucVerifyError != 0U) ? 0x80U : gSmbmInfo.ucSmbmError;
 		smbm_clr_status();
 		gBq25798Info.ucSt = SUBDEV_DRV_STATE_IDLE;
 		gBq25798Info.ucStep = BQ25798_STEP_IDLE;
@@ -295,26 +362,36 @@ static void bq25798_end_processing(void)
 		gBq25798Info.ucCfgIndex = 0U;
 		gBq25798Info.ucStatusIndex = 0U;
 		gBq25798Info.ucStatusValid = 0U;
+		gBq25798Info.ucConfigValid = 0U;
+		gBq25798Info.ucAdcValid = 0U;
 		gBq25798Info.ucReqFlags = 0U;
 		gSubdevInfo.ucSubdevFlag &= ~BQ25798_DEVICE_ID;
 		return;
 	}
 
-	if (gBq25798Info.ucStep == BQ25798_STEP_WORD_MSB) {
+	if (gBq25798Info.ucStep == BQ25798_STEP_CHECK_CONFIG) {
+		/* A POR restores watchdog/OVP defaults; reapply the profile on the next poll. */
+		if ((gBq25798Info.usRegData & (BQ25798_WATCHDOG_MASK | BQ25798_VAC_OVP_MASK)) != BQ25798_VAC_OVP_22V) {
+			gBq25798Info.ucConfigValid = 0U;
+		}
 		smbm_clr_status();
 		smbm_set_subdev(VAL_I2C_CLK, VAL_I2C_SLAVEADDR);
-		gBq25798Info.ucStep = BQ25798_STEP_WORD_LSB;
-		if (gBq25798Info.ucCmd == BQ25798_CMD_APPLY_EVM_DEFAULTS) {
-			pCfg = &gBq25798EvmDefaults[gBq25798Info.ucCfgIndex];
-			bq25798_start_byte_write((UCHAR)(pCfg->ucReg + 1U), (UCHAR)gBq25798Info.usData);
-		}
-		else if (gBq25798Info.ucCmd == BQ25798_CMD_SET_IINDPM) {
-			bq25798_start_byte_write((UCHAR)(BQ25798_REG_INPUT_CURRENT + 1U), (UCHAR)gBq25798Info.usData);
-		}
-		else {
-			bq25798_start_byte_write((UCHAR)(BQ25798_REG_CHG_CURRENT + 1U), (UCHAR)gBq25798Info.usData);
-		}
+		gBq25798Info.ucStep = BQ25798_STEP_STATUS_READ;
+		bq25798_start_byte_read(BQ25798_REG_STATUS_BASE);
 		return;
+	}
+
+	if (gBq25798Info.ucStep == BQ25798_STEP_ADC_READ) {
+		/* SMBus stores the first wire byte in bits 7:0; BQ words are MSB first. */
+		gBq25798Info.usAdc[gBq25798Info.ucAdcIndex] = (USHORT)((gBq25798Info.usRegData << 8) | (gBq25798Info.usRegData >> 8));
+		gBq25798Info.ucAdcIndex++;
+		if (gBq25798Info.ucAdcIndex < BQ25798_ADC_COUNT) {
+			smbm_clr_status();
+			smbm_set_subdev(VAL_I2C_CLK, VAL_I2C_SLAVEADDR);
+			bq25798_start_adc_read();
+			return;
+		}
+		gBq25798Info.ucAdcValid = 1U;
 	}
 
 	if (gBq25798Info.ucStep == BQ25798_STEP_RMW_READ) {
@@ -354,6 +431,15 @@ static void bq25798_end_processing(void)
 			bq25798_start_byte_read((UCHAR)(BQ25798_REG_STATUS_BASE + gBq25798Info.ucStatusIndex));
 			return;
 		}
+		gBq25798Info.ucStatusValid = 1U;
+		if (gBq25798Info.ucConfigValid != 0U) {
+			gBq25798Info.ucAdcIndex = 0U;
+			gBq25798Info.ucStep = BQ25798_STEP_ADC_READ;
+			smbm_clr_status();
+			smbm_set_subdev(VAL_I2C_CLK, VAL_I2C_SLAVEADDR);
+			bq25798_start_adc_read();
+			return;
+		}
 	}
 
 	smbm_clr_status();
@@ -365,6 +451,7 @@ static void bq25798_end_processing(void)
 			return;
 		}
 		gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_APPLY_EVM_DEFAULTS;
+		gBq25798Info.ucConfigValid = 1U;
 	}
 	else if (gBq25798Info.ucCmd == BQ25798_CMD_USE_IINDPM_REG) {
 		gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_USE_IINDPM_REG;
@@ -399,6 +486,8 @@ static void bq25798_end_processing(void)
 
 static void bq25798_start_byte_write(UCHAR ucReg, UCHAR ucData)
 {
+	gBq25798Info.ucWriteReg = ucReg;
+	gBq25798Info.ucWriteData = ucData;
 	gBq25798Info.usRegData = (USHORT)ucData;
 	smbm_set_protocol(
 		ucReg,
@@ -410,6 +499,16 @@ static void bq25798_start_byte_write(UCHAR ucReg, UCHAR ucData)
 		1
 	);
 	return;
+}
+
+static void bq25798_start_word_write(UCHAR ucReg)
+{
+	gBq25798Info.ucStep = BQ25798_STEP_WORD_WRITE;
+	gBq25798Info.ucWriteReg = ucReg;
+	/* The SMBus engine sends the low byte first; BQ expects MSB first. */
+	gBq25798Info.usRegData = (USHORT)((gBq25798Info.usData << 8) | (gBq25798Info.usData >> 8));
+	smbm_set_protocol(ucReg, SMBM_WORD_WRITE, 0U, SMBM_SMB_START,
+	                  &gBq25798Info.usRegData, 2U, 1U);
 }
 
 static void bq25798_start_byte_read(UCHAR ucReg)
@@ -424,6 +523,12 @@ static void bq25798_start_byte_read(UCHAR ucReg)
 		1
 	);
 	return;
+}
+
+static void bq25798_start_adc_read(void)
+{
+	smbm_set_protocol((UCHAR)(BQ25798_REG_ADC_BASE + 2U * gBq25798Info.ucAdcIndex),
+	                  SMBM_WORD_READ, 0U, SMBM_SMB_START, &gBq25798Info.usRegData, 2U, 1U);
 }
 
 static USHORT bq25798_clamp_ma(USHORT usCurrentMa, USHORT usMinMa, USHORT usMaxMa)
@@ -514,6 +619,7 @@ void bq25798_request_use_iindpm_register(void)
 
 void bq25798_request_evm_defaults(void)
 {
+	gBq25798Info.ucConfigValid = 0U;
 	bq25798_request_cmd(BQ25798_CMD_APPLY_EVM_DEFAULTS);
 	return;
 }
@@ -522,6 +628,11 @@ void bq25798_request_status_read(void)
 {
 	bq25798_request_cmd(BQ25798_CMD_READ_STATUS);
 	return;
+}
+
+UCHAR bq25798_is_busy(void)
+{
+	return ((gBq25798Info.ucCmd != BQ25798_CMD_NONE) || (gBq25798Info.ucReqFlags != 0U)) ? 1U : 0U;
 }
 
 UCHAR bq25798_get_charge_state(void)

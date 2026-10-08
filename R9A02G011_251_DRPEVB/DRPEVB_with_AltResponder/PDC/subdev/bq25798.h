@@ -23,6 +23,8 @@
 #define BQ25798_REQ_READ_STATUS        ((UCHAR)0x40U)
 
 #define BQ25798_STATUS_COUNT           ((UCHAR)7U)
+#define BQ25798_ADC_COUNT              ((UCHAR)9U)
+#define BQ25798_BATTERY_VREG_MV        ((USHORT)8400U)
 
 #define BQ25798_CHG_STAT_NOT_CHARGING  ((UCHAR)0x00U)
 #define BQ25798_CHG_STAT_TRICKLE       ((UCHAR)0x01U)
@@ -43,7 +45,17 @@ typedef struct
 	UCHAR ucCfgIndex;
 	UCHAR ucStatusIndex;
 	UCHAR ucStatusValid;
+	UCHAR ucConfigValid;
+	UCHAR ucAdcValid;
+	UCHAR ucAdcIndex;
+	UCHAR ucVerifyStep;
+	UCHAR ucWriteReg;
+	UCHAR ucWriteData;
 	UCHAR ucStatus[BQ25798_STATUS_COUNT];
+	/* REG31..REG42: IBUS, IBAT, VBUS, VAC1, VAC2, VBAT, VSYS, TS, TDIE.
+	   Currents are signed mA; voltages mV; TS is %REGN / 0.09765625;
+	   TDIE is signed degrees C / 0.5. */
+	USHORT usAdc[BQ25798_ADC_COUNT];
 	USHORT usData;
 	USHORT usInputVoltageMv;
 	USHORT usInputCurrentMa;
@@ -64,6 +76,7 @@ void bq25798_request_charge_enable(UCHAR ucEnable);
 void bq25798_request_use_iindpm_register(void);
 void bq25798_request_evm_defaults(void);
 void bq25798_request_status_read(void);
+UCHAR bq25798_is_busy(void);
 UCHAR bq25798_get_charge_state(void);
 UCHAR bq25798_is_power_good(void);
 UCHAR bq25798_has_fault(void);
