@@ -50,6 +50,7 @@ UCHAR user_func_snd_attention (void);
 void  user_init(void);
 
 extern UCHAR has_charger;
+extern volatile UCHAR charger_mcu_control;
 extern UCHAR bb_extvcc;
 
 #endif // ___USER_MAIN_H

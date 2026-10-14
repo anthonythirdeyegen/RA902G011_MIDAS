@@ -173,6 +173,7 @@ void init_bq25798(void)
 	gBq25798Info.ucStatusIndex = 0U;
 	gBq25798Info.ucStatusValid = 0U;
 	gBq25798Info.ucConfigValid = 0U;
+	gBq25798Info.ucControlEnabled = 1U;
 	gBq25798Info.ucAdcValid = 0U;
 	gBq25798Info.ucAdcIndex = 0U;
 	gBq25798Info.ucVerifyStep = 0U;
@@ -205,13 +206,38 @@ void bq25798_ctrl(void)
 			if (   (gSmbmInfo.ucSmbmStatus == SMBM_CTRL_STATE_STRETCH)
 				|| (gSmbmInfo.ucSmbmStatus == SMBM_CTRL_STATE_COMPLETE)
 				|| (gSmbmInfo.ucSmbmStatus == SMBM_CTRL_STATE_ERROR)) {
-				bq25798_end_processing();
+				if (gBq25798Info.ucControlEnabled == 0U) {
+					smbm_clr_status();
+					gBq25798Info.ucSt = SUBDEV_DRV_STATE_IDLE;
+					bq25798_set_control_enabled(0U);
+				}
+				else {
+					bq25798_end_processing();
+				}
 			}
 			break;
 		default:
 			break;
 	}
 	return;
+}
+
+void bq25798_set_control_enabled(UCHAR ucEnabled)
+{
+	gBq25798Info.ucControlEnabled = (ucEnabled != 0U) ? 1U : 0U;
+	if (gBq25798Info.ucControlEnabled == 0U) {
+		gBq25798Info.ucConfigValid = 0U;
+		gBq25798Info.ucStatusValid = 0U;
+		gBq25798Info.ucAdcValid = 0U;
+		/* Do not interrupt a transaction already owned by the SMBus engine. */
+		if (gBq25798Info.ucSt != SUBDEV_DRV_STATE_ACTIVE) {
+			gBq25798Info.ucSt = SUBDEV_DRV_STATE_IDLE;
+			gBq25798Info.ucCmd = BQ25798_CMD_NONE;
+			gBq25798Info.ucStep = BQ25798_STEP_IDLE;
+			gBq25798Info.ucReqFlags = 0U;
+			gSubdevInfo.ucSubdevFlag &= ~BQ25798_DEVICE_ID;
+		}
+	}
 }
 
 static void bq25798_cmd_handler(void)
@@ -555,6 +581,9 @@ static USHORT bq25798_clamp_mv(USHORT usVoltageMv, USHORT usMinMv, USHORT usMaxM
 
 static void bq25798_request_cmd(UCHAR ucCmd)
 {
+	if (gBq25798Info.ucControlEnabled == 0U) {
+		return;
+	}
 	if (ucCmd == BQ25798_CMD_SET_IINDPM) {
 		gBq25798Info.ucReqFlags |= BQ25798_REQ_SET_IINDPM;
 	}
@@ -633,6 +662,16 @@ void bq25798_request_status_read(void)
 UCHAR bq25798_is_busy(void)
 {
 	return ((gBq25798Info.ucCmd != BQ25798_CMD_NONE) || (gBq25798Info.ucReqFlags != 0U)) ? 1U : 0U;
+}
+
+UCHAR bq25798_is_charge_ready(void)
+{
+	/* Read-only status/ADC polling must not toggle CE or restart charge timers. */
+	return ((gBq25798Info.ucControlEnabled != 0U) &&
+	        (gBq25798Info.ucConfigValid != 0U) && (gBq25798Info.ucEnable != 0U) &&
+	        ((gBq25798Info.ucReqFlags & (UCHAR)~BQ25798_REQ_READ_STATUS) == 0U) &&
+	        ((gBq25798Info.ucCmd == BQ25798_CMD_NONE) ||
+	         (gBq25798Info.ucCmd == BQ25798_CMD_READ_STATUS))) ? 1U : 0U;
 }
 
 UCHAR bq25798_get_charge_state(void)

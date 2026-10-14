@@ -18,8 +18,10 @@
 
 #define CHARGER_MIN_INPUT_POWER_MW ((ULONG)5000UL)
 #define CHARGER_MIN_INPUT_MA       ((USHORT)1500U)
-#define CHARGER_SYSTEM_RESERVE_MW  ((ULONG)5000UL)
+/* Combined VSYS power for both FPGAs and the wireless power solution. */
+#define CHARGER_SYSTEM_RESERVE_MW  ((ULONG)11000UL)
 #define CHARGER_EFFICIENCY_PERCENT ((ULONG)90UL)
+#define CHARGER_MIN_CHARGE_MA      ((USHORT)250U)
 #define CHARGER_MAX_CHARGE_MA      ((USHORT)800U)
 #define CHARGER_MAX_INPUT_MV       ((USHORT)15000U)
 #define CHARGER_POLL_PERIOD_MS     ((USHORT)1000U)
@@ -111,6 +113,8 @@ UCHAR  gucReserved;
 UCHAR  gucEnterModeEnable;
 UCHAR  gucLEDStatus;
 UCHAR  has_charger = 1U;
+/* 1: firmware owns charger; 0: bqStudio owns registers, CE is permitted low. */
+volatile UCHAR charger_mcu_control = 1U;
 UCHAR  bb_extvcc = 0U;
 
 static UCHAR gGetStatPending = 0;
@@ -144,7 +148,9 @@ void user_func_start_timer_thermistor(void);
 void user_func_stop_timer_thermistor (void);
 void user_func_intr_timer_thermistor (void);
 static void bb_extvcc_delay_done(void);
+static UCHAR charger_contract_is_valid(void);
 static UCHAR charger_contract_allows_charge(void);
+static ULONG charger_available_power_mw(USHORT usInputMv, USHORT usInputMa);
 static void charger_current_update(void);
 static void fpga_power_ready_delay_done(void);
 static void fpga_power_ready_task(void);
@@ -159,7 +165,15 @@ static void fpga_power_ready_start_delay(void)
 
 static void charge_en_update(void)
 {
-	P1_bit.no6 = ((charger_contract_allows_charge() != 0U) && (gBq25798Info.ucConfigValid != 0U)) ? 1U : 0U;
+	if ((has_charger != 0U) && (charger_mcu_control == 0U)) {
+		/* Keep CE inhibited until the last MCU transaction has finished. */
+		P1_bit.no6 = (bq25798_is_busy() == 0U) ? 0U : 1U;
+	}
+	else {
+		/* P16 connects directly to active-low CE. */
+		P1_bit.no6 = ((charger_contract_allows_charge() != 0U) &&
+		             (bq25798_is_charge_ready() != 0U)) ? 0U : 1U;
+	}
 }
 
 static void bb_extvcc_update(void)
@@ -207,7 +221,9 @@ static void bb_extvcc_delay_done(void)
 
 static void fpga_power_ready_task(void)
 {
-	if ((g_fpga_power_ready_pending != 0U) && (g_fpga_power_ready_delay_done != 0U)) {
+	if ((g_fpga_power_ready_pending != 0U) && (g_fpga_power_ready_delay_done != 0U) &&
+	    ((has_charger == 0U) || (charger_mcu_control == 0U) ||
+	     ((gBq25798Info.ucConfigValid != 0U) && (bq25798_is_busy() == 0U)))) {
 		g_fpga_power_ready_delay_done = 0U;
 		g_fpga_power_ready_pending = 0U;
 		P2_bit.no1 = ((g_power_negotiated != 0U) && (P2_bit.no2 != 0U)) ? 1U : 0U;
@@ -220,18 +236,42 @@ static void fpga_power_ready_delay_done(void)
 	g_fpga_power_ready_delay_done = 1U;
 }
 
-static UCHAR charger_contract_allows_charge(void)
+static UCHAR charger_contract_is_valid(void)
 {
 	ULONG ulInputMw = 0UL;
 	USHORT usInputMv = pdc_get_req_volt();
 	USHORT usInputMa = (USHORT)(pdc_get_req_cur() * 10U);
 
-	if ((has_charger == 0U) || (g_power_negotiated == 0U) || (usInputMv == 0U) || (usInputMv > CHARGER_MAX_INPUT_MV) || (usInputMa < CHARGER_MIN_INPUT_MA)) {
+	if ((has_charger == 0U) || (charger_mcu_control == 0U) || (g_power_negotiated == 0U) || (usInputMv == 0U) || (usInputMv > CHARGER_MAX_INPUT_MV) || (usInputMa < CHARGER_MIN_INPUT_MA)) {
 		return 0U;
 	}
 
 	ulInputMw = ((ULONG)usInputMv * (ULONG)usInputMa) / 1000UL;
 	return (ulInputMw > CHARGER_MIN_INPUT_POWER_MW) ? 1U : 0U;
+}
+
+static ULONG charger_available_power_mw(USHORT usInputMv, USHORT usInputMa)
+{
+	ULONG ulOutputMw;
+
+	if (usInputMa > 3300U) {
+		usInputMa = 3300U;
+	}
+	ulOutputMw = (((ULONG)usInputMv * usInputMa) / 1000UL) * CHARGER_EFFICIENCY_PERCENT / 100UL;
+	if (ulOutputMw <= CHARGER_SYSTEM_RESERVE_MW) {
+		return 0UL;
+	}
+	return ulOutputMw - CHARGER_SYSTEM_RESERVE_MW;
+}
+
+static UCHAR charger_contract_allows_charge(void)
+{
+	ULONG ulMinimumChargeMw = ((ULONG)BQ25798_BATTERY_VREG_MV * CHARGER_MIN_CHARGE_MA) / 1000UL;
+
+	if (charger_contract_is_valid() == 0U) {
+		return 0U;
+	}
+	return (charger_available_power_mw(pdc_get_req_volt(), (USHORT)(pdc_get_req_cur() * 10U)) >= ulMinimumChargeMw) ? 1U : 0U;
 }
 
 static void charger_current_update(void)
@@ -242,7 +282,7 @@ static void charger_current_update(void)
 	USHORT usChargeMa = 0U;
 	ULONG ulChargeMw;
 
-	if (charger_contract_allows_charge() == 0U) {
+	if (charger_contract_is_valid() == 0U) {
 		return;
 	}
 
@@ -254,8 +294,7 @@ static void charger_current_update(void)
 	if (usInputMa > 3300U) {
 		usInputMa = 3300U;
 	}
-	ulChargeMw = ((ULONG)usInputMv * usInputMa) / 1000UL;
-	ulChargeMw = ((ulChargeMw - CHARGER_SYSTEM_RESERVE_MW) * CHARGER_EFFICIENCY_PERCENT) / 100UL;
+	ulChargeMw = charger_available_power_mw(usInputMv, usInputMa);
 	usChargeMa = (USHORT)((ulChargeMw * 1000UL) / BQ25798_BATTERY_VREG_MV);
 	if (usChargeMa > CHARGER_MAX_CHARGE_MA) {
 		usChargeMa = CHARGER_MAX_CHARGE_MA;
@@ -267,19 +306,31 @@ static void charger_current_update(void)
 	bq25798_request_use_iindpm_register();
 	bq25798_request_input_voltage(usVindpmMv);
 	bq25798_request_input_current(usInputMa);
-	bq25798_request_charge_current(usChargeMa);
-	bq25798_request_charge_enable(1U);
+	/* Input power remains available to VSYS even when charging must be suspended. */
+	if (usChargeMa >= CHARGER_MIN_CHARGE_MA) {
+		bq25798_request_charge_current(usChargeMa);
+		bq25798_request_charge_enable(1U);
+	}
+	else {
+		bq25798_request_charge_enable(0U);
+	}
 	bq25798_request_status_read();
 }
 
 UCHAR user_func_charger_poll(void)
 {
-	if (has_charger == 0U) {
+	bq25798_set_control_enabled(((has_charger != 0U) && (charger_mcu_control != 0U)) ? 1U : 0U);
+	charge_en_update();
+	/* Service startup delays even when there is no new PD event. */
+	bb_power_good_task();
+	fpga_power_ready_task();
+
+	if ((has_charger == 0U) || (charger_mcu_control == 0U)) {
 		if (g_charger_poll_started != 0U) {
 			pd_tm_stop_user_cnt(TM_ID_USER3);
 			g_charger_poll_started = 0U;
 		}
-		return PD_CORE_STOP;
+		return (bq25798_is_busy() != 0U) ? PD_CORE_IDLE : PD_CORE_STOP;
 	}
 
 	/* USER3 is reserved for charger polling; led_ctrl is disabled in r_main. */
@@ -289,7 +340,7 @@ UCHAR user_func_charger_poll(void)
 		g_charger_poll_started = 1U;
 		if (bq25798_is_busy() == 0U) {
 			if (gBq25798Info.ucConfigValid == 0U) {
-				if (charger_contract_allows_charge() != 0U) {
+				if (charger_contract_is_valid() != 0U) {
 					charger_current_update();
 				}
 				else {
@@ -383,7 +434,7 @@ void user_init(void)
 	// If ucAn10 = 1 at pd_core_init() -> PM2_bit.no2, PMC2_bit.no2
 	
 	// Output Port Setting
-	                   P1_bit.no6 = 0U; PM1_bit.no6 = 0U; // CHARGE_EN :P16
+	                   P1_bit.no6 = 1U; PM1_bit.no6 = 0U; // CE :P16, high inhibits charging
 	PMC2_bit.no1 = 0U; P2_bit.no1 = 0U; PM2_bit.no1 = 0U; // FPGA_POWER_READY :P21
 	PMC2_bit.no2 = 0U; P2_bit.no2 = 0U; PM2_bit.no2 = 0U; // POWER_GOOD: P22
 	                   //P1_bit.no7 = 0U; PM1_bit.no7 = 0U; // VC_DRV2   :P17
@@ -422,6 +473,8 @@ void user_init(void)
 	//dcdc_init();
 	subdev_init();
 	smbm_init();
+	bq25798_set_control_enabled(((has_charger != 0U) && (charger_mcu_control != 0U)) ? 1U : 0U);
+	charge_en_update();
 	g_charger_poll_started = 0U;
 	//led_init();
 	sw_init();
@@ -502,7 +555,7 @@ void user_func_event (void)
 			bb_power_good_cancel();
 			bb_extvcc_update();
 			charge_en_update();
-			if (has_charger != 0U) {
+			if ((has_charger != 0U) && (charger_mcu_control != 0U)) {
 				bq25798_request_charge_enable(0U);
 				bq25798_request_status_read();
 			}
@@ -913,7 +966,7 @@ void user_func_event (void)
 		bb_power_good_cancel();
 		bb_extvcc_update();
 		charge_en_update();
-		if (has_charger != 0U) {
+		if ((has_charger != 0U) && (charger_mcu_control != 0U)) {
 			bq25798_request_charge_enable(0U);
 			bq25798_request_status_read();
 		}
@@ -953,7 +1006,7 @@ void user_func_event (void)
 		bb_power_good_cancel();
 		bb_extvcc_update();
 		charge_en_update();
-		if (has_charger != 0U) {
+		if ((has_charger != 0U) && (charger_mcu_control != 0U)) {
 			bq25798_request_charge_enable(0U);
 			bq25798_request_status_read();
 		}

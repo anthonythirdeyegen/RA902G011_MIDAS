@@ -46,6 +46,7 @@ typedef struct
 	UCHAR ucStatusIndex;
 	UCHAR ucStatusValid;
 	UCHAR ucConfigValid;
+	UCHAR ucControlEnabled;
 	UCHAR ucAdcValid;
 	UCHAR ucAdcIndex;
 	UCHAR ucVerifyStep;
@@ -67,6 +68,7 @@ extern BQ25798_INFO gBq25798Info;
 
 void init_bq25798(void);
 void bq25798_ctrl(void);
+void bq25798_set_control_enabled(UCHAR ucEnabled);
 void bq25798_alert(void);
 
 void bq25798_request_input_current(USHORT usCurrentMa);
@@ -77,6 +79,7 @@ void bq25798_request_use_iindpm_register(void);
 void bq25798_request_evm_defaults(void);
 void bq25798_request_status_read(void);
 UCHAR bq25798_is_busy(void);
+UCHAR bq25798_is_charge_ready(void);
 UCHAR bq25798_get_charge_state(void);
 UCHAR bq25798_is_power_good(void);
 UCHAR bq25798_has_fault(void);

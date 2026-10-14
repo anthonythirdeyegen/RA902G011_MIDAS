@@ -6,6 +6,43 @@ USB PD input up to 15V. Charger INT is currently unconnected.
 The bqStudio screenshot represents power-on settings, not the firmware profile.
 Firmware enables the installed charger with `has_charger = 1`.
 
+## Charger Ownership and CE
+
+P16 (`CHARGE_EN`) connects directly to the BQ25798 active-low CE pin.
+High inhibits charging; low permits charging when EN_CHG and hardware
+conditions allow it. Firmware initializes P16 high before enabling its output.
+In firmware mode it remains high until configuration and requested limit
+writes are verified, charging is requested, and the power budget permits it.
+Read-only status/ADC polling does not toggle CE.
+
+`charger_mcu_control` is a volatile global, default 1, adjustable in the debugger
+or by changing its initializer in `PDC/user_main.c`:
+
+- `1`: MCU owns charger configuration, negotiated limits, polling, and CE.
+- `0`: bqStudio mode. MCU stops charger polling and PD-triggered charger writes,
+  finishes any in-flight bus transaction, discards queued charger work, and
+  holds CE low so bqStudio can control charging with EN_CHG. FPGA readiness
+  bypasses the firmware charger-configuration check in this mode.
+
+Keep `has_charger = 1` for bqStudio mode. `has_charger = 0` means the charger
+is absent and keeps CE high. When returning to MCU mode, CE is inhibited and
+the firmware profile and negotiated limits are reapplied on the next poll.
+
+Before connecting the bqStudio adapter, set `charger_mcu_control = 0` and
+confirm `bq25798_is_busy() == 0`. Disconnect the adapter before returning
+the flag to 1. The flag stops MCU transactions to the charger; other devices
+on the shared MCU I2C bus may still be active, so isolate the adapter's charger
+segment from the MCU bus during manual access.
+
+bqStudio mode intentionally allows charging without the firmware PD power
+budget. Configure EN_CHG, ICHG, IINDPM, VREG, watchdog, and TS protection in
+bqStudio before enabling charging. Set EN_CHG=0 before releasing firmware
+control if charging should remain stopped during the handoff.
+
+Firmware cannot control CE while the MCU is in reset or before user_init.
+A hardware pull-up to an appropriate CE logic rail is required to inhibit
+power-on default charging during that interval.
+
 ## Programmed Profile
 
 | Setting | Value |
@@ -34,19 +71,73 @@ TS ADC is retained as a percentage of REGN, not converted to pack temperature.
 
 ## Negotiated Limits
 
-Charging requires a completed PD contract, at least 1500mA available,
+A usable contract requires completed PD negotiation, at least 1500mA available,
 more than 5W input power, and input voltage no greater than 15V.
-The CHARGE_EN output is also gated by successful profile programming.
+Input limits are programmed for usable contracts even if charging is suspended.
+Charging additionally requires at least 250mA of battery charge-current budget,
+above the 240mA precharge and 200mA termination settings. The CHARGE_EN output
+is also gated by successful profile programming.
 
 - VINDPM: negotiated voltage minus 500mV.
 - IINDPM: negotiated current, capped at the charger's 3300mA limit.
-- ICHG: reserve 5W for the system, assume 90% conversion efficiency,
-  divide the remaining battery-side power by 8.4V, then cap at 800mA.
+- ICHG: convert available input power to output power at an assumed 90%
+  efficiency, subtract an 11W VSYS reserve, divide the remaining power by
+  8.4V, then cap at 800mA. Suspend charging below a 250mA budget.
 - Current registers round down to their 10mA steps.
 
-The 5W system reserve and 90% efficiency are firmware budgeting assumptions.
-For example, 5V/1.5A requests 260mA, while 5V/3A or 15V/1.5A requests 800mA.
+The system reserve uses the confirmed 11W combined VSYS load for both FPGAs
+and the wireless power solution. This replaces the earlier 2500mA load
+estimate and its derived 22.5W reserve. The 90% efficiency remains an estimate.
+FPGA_POWER_READY waits for verified charger configuration and completion of
+pending charger transactions before asserting after the existing startup delay.
+
+| PD contract | Estimated output power | Charge behavior |
+| --- | --- | --- |
+| 5V/2A | 9W | Disabled; source alone cannot sustain the estimated VSYS load |
+| 5V/3A | 13.5W | 290mA charge limit after reserving 11W for VSYS |
+| 9V/3A | 24.3W | Up to the current 800mA cap |
+| 15V/3A | 40.5W | Up to the current 800mA cap |
+
+These rows assume the firmware reports the stated negotiated input current.
+The PD sink currently has 15V disabled in `pd_defs.c`; changing the charger
+budget does not enable a 15V contract or control the source's advertised PDOs.
 The 240mA precharge and 200mA termination values remain the existing EVM profile.
+
+## Charge Current Rationale
+
+The 800mA limit was retained as a conservative bring-up setting to reduce
+battery charging power and heat while validating TS, input limits, and PD
+behavior. It is not a battery datasheet requirement.
+
+The local pack datasheet `3350mah_-_li18650jp_2s1p_2_wires_70mm.pdf`
+identifies Jauch 246480, LI NCR18650-BF 2S1P: 3350mAh typical, 3250mAh
+minimum, 8.4V charge voltage, 0.2C standard charge current, 0.5C maximum
+charge current, and +10C to +45C charging temperature.
+The 0.5C maximum corresponds to 1675mA using typical capacity, or 1625mA
+using minimum capacity. A proposed 1500mA charge cap is below both.
+
+A 3.5-hour empty-to-full target is plausible at 1500mA but requires
+measurement: capacity/current alone gives 2.23 hours, excluding precharge
+and the constant-voltage taper. Input power, system load, temperature, and
+starting state of charge affect the actual time. The firmware cap remains
+800mA until explicitly changed.
+
+## FPGA Power Budget Validation
+
+The combined load of both FPGAs and the wireless power solution is 11W
+at VSYS. Confirm sustained power and startup peaks on hardware. At the
+assumed 90% charger efficiency, a 5V/2A source provides only 9W to the
+outputs and cannot sustain that load alone. A 5V/3A source provides 13.5W,
+leaving an estimated 2.5W for battery charging.
+
+IINDPM limits source-side input current; ICHG separately limits battery
+charging current. Keep IINDPM within the negotiated source allowance and
+the charger's 3300mA range. Brownout mitigation must budget system power
+before charging power and account for transient response and battery state.
+The previous 5W reserve was insufficient and has been replaced with an
+11W output-side reserve based on the clarified combined load. This does not
+guarantee brownout prevention when the source cannot sustain the system load;
+battery supplement requires a connected, sufficiently charged pack.
 
 ## Polling and Debugging
 
@@ -56,7 +147,7 @@ do not re-enable that task without allocating a different timer.
 
 The driver verifies byte and word writes. Word transfers preserve the BQ's
 MSB-first byte order. A failed transaction or readback invalidates the profile
-and drops CHARGE_EN; the next idle polling interval retries the profile and
+and drives CE high; the next idle polling interval retries the profile and
 the currently allowed negotiated limits. REG10 is checked on each poll to
 detect restored power-on watchdog/OVP settings.
 
