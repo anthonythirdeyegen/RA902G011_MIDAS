@@ -61,13 +61,49 @@ power-on default charging during that interval.
 | ShipFET | Present |
 | TS protection | Enabled; suspend in cool/warm JEITA bands |
 | Die thermal regulation / shutdown | 120C / 150C |
-| BC1.2 / HVDCP / ICO / MPPT / backup | Disabled; PD owns input selection |
+| BC1.2 / HVDCP / ICO / MPPT / backup / OTG | Disabled; PD owns input selection |
 | ADC | Continuous, 15-bit effective resolution, no averaging |
 
 The nominal TS window is +10C to +45C for TI's 103AT thermistor with
 RT1=5.24k and RT2=30.31k. A 10k nominal resistance alone does not establish
 these temperatures: confirm the installed NTC curve and divider values.
 TS ADC is retained as a percentage of REGN, not converted to pack temperature.
+
+The profile explicitly clears REG12 bit 6 (EN_OTG), preserving the other
+REG12 settings. REG0F EN_BACKUP is also cleared to disable automatic reverse
+operation. OTG voltage/current limits and VBAT-for-OTG status can still appear
+in bqStudio while OTG is disabled; they do not set forward charging current.
+This does not disable battery supplement of VSYS or resolve a VBAT OVP fault.
+
+## Display Board Power Sequence
+
+P22 is BB_EN for external boards that do not manage the DP link. It is not
+a measured power-good input, and a PD contract alone no longer asserts it.
+P21 is FPGA_POWER_READY.
+
+1. On startup, keep BB_EN and FPGA_POWER_READY low. Initialize the charger
+   and negotiate PD independently of the external display-board power.
+2. On a new PD contract, update charger limits and charging enable normally.
+   Charging-only operation leaves the display boards off.
+3. Enter DP mode, accept the supported DP Configure pin assignment C, and
+   send its ACK. Only successful ACK command completion authorizes BB_EN.
+4. If `bb_extvcc = 1`, allow the existing additional 10ms startup delay.
+   Then assert BB_EN and start the 10ms FPGA readiness delay.
+5. Assert FPGA_POWER_READY after the delay and after verified charger
+   configuration and completion of pending charger transactions. bqStudio
+   mode and `has_charger = 0` bypass only that charger check, not DP gating.
+6. DP Exit Mode, cable removal, or a PD power-off request clears the outputs
+   and cancels startup timers. Hard reset requires another successful DP
+   Configure ACK before the display boards can be enabled again.
+
+The 10ms delay is a settling allowance, not a measured VSYS or regulator
+power-good qualification. Charger settings continue to update on a new PD
+contract; an already configured display is not deliberately power-cycled
+merely because its PD contract is renegotiated.
+
+The 11W reserve is retained for both display and charging-only operation
+until the charging-only load is measured; a lower idle reserve is not yet
+implemented.
 
 ## Negotiated Limits
 
@@ -88,8 +124,9 @@ is also gated by successful profile programming.
 The system reserve uses the confirmed 11W combined VSYS load for both FPGAs
 and the wireless power solution. This replaces the earlier 2500mA load
 estimate and its derived 22.5W reserve. The 90% efficiency remains an estimate.
-FPGA_POWER_READY waits for verified charger configuration and completion of
-pending charger transactions before asserting after the existing startup delay.
+After successful DP configuration, FPGA_POWER_READY waits for verified charger
+configuration and completion of pending charger transactions before asserting
+after the existing startup delay.
 
 | PD contract | Estimated output power | Charge behavior |
 | --- | --- | --- |

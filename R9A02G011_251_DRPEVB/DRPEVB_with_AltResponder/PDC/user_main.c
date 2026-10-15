@@ -122,6 +122,8 @@ static UCHAR gGetStatLastResult = 0xFF;
 static UCHAR g_alert_pending = 0;
 static UCHAR g_hpd_irq_flag = 1U;
 static UCHAR g_dp_mode_configured = 0U;
+static UCHAR g_dp_config_ack_pending = 0U;
+static UCHAR g_dp_config_acknowledged = 0U;
 static UCHAR g_hpd_toggled = 0U;
 static UCHAR g_hpd_state = 0U;
 static UCHAR g_hpd_reported_state = 0U;
@@ -183,9 +185,7 @@ static void bb_extvcc_update(void)
 
 static void bb_power_good_complete(void)
 {
-	charge_en_update();
-	charger_current_update();
-	P2_bit.no2 = 1U; // POWER_GOOD:ON
+	P2_bit.no2 = 1U; // BB_EN: external display boards ON
 	fpga_power_ready_start_delay();
 	g_bb_power_good_pending = 0U;
 }
@@ -198,10 +198,39 @@ static void bb_power_good_cancel(void)
 	g_fpga_power_ready_pending = 0U;
 	g_fpga_power_ready_delay_done = 0U;
 	P2_bit.no1 = 0U; // FPGA_POWER_READY:OFF
+	P2_bit.no2 = 0U; // BB_EN:OFF
 }
 
 static void bb_power_good_task(void)
 {
+	if (g_dp_config_ack_pending != 0U) {
+		UCHAR ucResult = pdc_get_cmd_result();
+		if (ucResult != PDC_CMD_RSLT_PROGRESS) {
+			g_dp_config_ack_pending = 0U;
+			g_dp_config_acknowledged = (ucResult == PDC_CMD_RSLT_SUCCESS) ? 1U : 0U;
+		}
+	}
+
+	/* External boards are not needed for PD or DP negotiation. */
+	if ((g_power_negotiated == 0U) || (gucEnterModeEnable == 0U) ||
+	    (g_dp_mode_configured == 0U) || (g_dp_config_acknowledged == 0U)) {
+		if ((P2_bit.no2 != 0U) || (g_bb_power_good_pending != 0U) ||
+		    (g_fpga_power_ready_pending != 0U)) {
+			bb_power_good_cancel();
+		}
+		return;
+	}
+
+	if ((P2_bit.no2 == 0U) && (g_bb_power_good_pending == 0U)) {
+		if (bb_extvcc != 0U) {
+			g_bb_extvcc_delay_done = 0U;
+			g_bb_power_good_pending = 1U;
+			tm2_start_gtimer(BB_EXTVCC_STARTUP_DELAY_MS, (ULONG)&bb_extvcc_delay_done);
+		}
+		else {
+			bb_power_good_complete();
+		}
+	}
 	if ((g_bb_power_good_pending != 0U) && (g_bb_extvcc_delay_done != 0U)) {
 		g_bb_extvcc_delay_done = 0U;
 		if (g_power_negotiated != 0U) {
@@ -226,7 +255,8 @@ static void fpga_power_ready_task(void)
 	     ((gBq25798Info.ucConfigValid != 0U) && (bq25798_is_busy() == 0U)))) {
 		g_fpga_power_ready_delay_done = 0U;
 		g_fpga_power_ready_pending = 0U;
-		P2_bit.no1 = ((g_power_negotiated != 0U) && (P2_bit.no2 != 0U)) ? 1U : 0U;
+		P2_bit.no1 = ((g_power_negotiated != 0U) && (P2_bit.no2 != 0U) &&
+		             (g_dp_config_acknowledged != 0U) && (gucEnterModeEnable != 0U)) ? 1U : 0U;
 	}
 }
 
@@ -436,7 +466,7 @@ void user_init(void)
 	// Output Port Setting
 	                   P1_bit.no6 = 1U; PM1_bit.no6 = 0U; // CE :P16, high inhibits charging
 	PMC2_bit.no1 = 0U; P2_bit.no1 = 0U; PM2_bit.no1 = 0U; // FPGA_POWER_READY :P21
-	PMC2_bit.no2 = 0U; P2_bit.no2 = 0U; PM2_bit.no2 = 0U; // POWER_GOOD: P22
+	PMC2_bit.no2 = 0U; P2_bit.no2 = 0U; PM2_bit.no2 = 0U; // BB_EN: P22
 	                   //P1_bit.no7 = 0U; PM1_bit.no7 = 0U; // VC_DRV2   :P17
 			   PM1_bit.no7 = 1U; // P17 = input
 			   P1_bit.no7 = 0U; // Clear latch
@@ -464,6 +494,9 @@ void user_init(void)
 	gucWaiCmp = 0U;
 	gucOmfData = 0U;
 	gucEnterModeEnable = 0U;
+	g_dp_mode_configured = 0U;
+	g_dp_config_ack_pending = 0U;
+	g_dp_config_acknowledged = 0U;
 	gucLEDStatus = 0U;
 	
 	init_tau0_channel2();
@@ -552,6 +585,8 @@ void user_func_event (void)
 		}
 		else {
 			g_power_negotiated = 0U;
+			g_dp_config_ack_pending = 0U;
+			g_dp_config_acknowledged = 0U;
 			bb_power_good_cancel();
 			bb_extvcc_update();
 			charge_en_update();
@@ -559,7 +594,7 @@ void user_func_event (void)
 				bq25798_request_charge_enable(0U);
 				bq25798_request_status_read();
 			}
-			P2_bit.no2 = 0U; // POWER_GOOD:OFF
+			P2_bit.no2 = 0U; // BB_EN:OFF
 			if (gucWaiCmp == 0U) {
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
 				pdc_set_pps_stat(0x02, 0xFF, 0xFFFFU);
@@ -612,15 +647,8 @@ void user_func_event (void)
 	else if (gPdc.uPdEvent.bit.bNewContract != 0U) {
 		g_power_negotiated = 1U;
 		bb_extvcc_update();
+		charger_current_update();
 		charge_en_update();
-		if (bb_extvcc != 0U) {
-			g_bb_extvcc_delay_done = 0U;
-			g_bb_power_good_pending = 1U;
-			tm2_start_gtimer(BB_EXTVCC_STARTUP_DELAY_MS, (ULONG)&bb_extvcc_delay_done);
-		}
-		else {
-			bb_power_good_complete();
-		}
 #if PPS_SPRT // If set to 1, need to add APDO to Source PDOs and to enable PD_PDM_SPRT_GET_PPS_STATUS
 		if ((uStatus.bit.bPR   != 0U) && (pdc_is_pps_mode() !=0U)) {
 			pd_tm_start_user_cnt(TM_ID_USER2);
@@ -712,6 +740,9 @@ void user_func_event (void)
             		else if ((uVdmhead.bit_s.bCmd == SVDM_VDMH_CMD_EXIT_MODE) &&
                      	(uVdmhead.bit_s.bSVID == 0xFF01U)) {
                 		gucEnterModeEnable = 0U;
+				g_dp_config_ack_pending = 0U;
+				g_dp_config_acknowledged = 0U;
+				bb_power_good_cancel();
                 		// ACK echoes the request header: SVDM version + object position must match
 				tx[0] = (USHORT)((uVdmhead.data[0] & (USHORT)~(0x3U << 6)) | (USHORT)(SVDM_VDMH_CMD_RESP_ACK << 6));
                 		tx[1] = 0xFF01U;
@@ -791,7 +822,7 @@ void user_func_event (void)
 				// C/E staging, only if the downstream DP sink can handle assignment E:
 				// if ((uStatus.bit.bPlug != 0U) &&
 				//     ((dp_pin_assign == DP_CONF_PIN_C) || (dp_pin_assign == DP_CONF_PIN_E))) {
-				if ((uStatus.bit.bPlug != 0U) &&
+				if ((uStatus.bit.bPlug != 0U) && (gucEnterModeEnable != 0U) &&
 				    (dp_pin_assign == DP_CONF_PIN_C)) {
 					dp_config_ok = 1U;
 					if (uStatus.bit.bCc == 0U){
@@ -837,6 +868,8 @@ void user_func_event (void)
 				g_cmd_queued = 1U;
 				if (dp_config_ok != 0U) {
 					g_dp_mode_configured = 1U;
+					g_dp_config_acknowledged = 0U;
+					g_dp_config_ack_pending = 1U;
 				}
             		}
 
@@ -862,7 +895,7 @@ void user_func_event (void)
     		UCHAR r = pdc_get_cmd_result();
 
     		// Only start a new command if the previous one is not still in progress
-    		if (r != PDC_CMD_RSLT_PROGRESS) {
+		if ((r != PDC_CMD_RSLT_PROGRESS) && (g_cmd_queued == 0U)) {
         	pdc_set_cmd(PDC_CMD_SND_GET_STAT, PDC_TARGET_SOP);
 		//pdc_set_cmd(PDC_CMD_SND_GET_SRC_CAP, PDC_TARGET_SOP);
 
@@ -889,6 +922,9 @@ void user_func_event (void)
 		gPdc.uPdEvent.bit.bVrdChg = 0U;
 	}
 	else if (gPdc.uPdEvent.bit.bHardReset != 0U) {
+		g_dp_config_ack_pending = 0U;
+		g_dp_config_acknowledged = 0U;
+		bb_power_good_cancel();
 		gPdc.uPdEvent.bit.bHardReset = 0U;
 	}
 	else if (gPdc.uPdEvent.bit.bSoftReset != 0U) {
@@ -970,7 +1006,7 @@ void user_func_event (void)
 			bq25798_request_charge_enable(0U);
 			bq25798_request_status_read();
 		}
-		P2_bit.no2 = 0U; // POWER_GOOD:OFF
+		P2_bit.no2 = 0U; // BB_EN:OFF
 		if (gucWaiCmp == 0U) {
 			gDCInfo.uReq.bit.bSrcOff = 1U;
 			gucWaiCmp = 1U;
@@ -1010,7 +1046,7 @@ void user_func_event (void)
 			bq25798_request_charge_enable(0U);
 			bq25798_request_status_read();
 		}
-		P2_bit.no2 = 0U; // POWER_GOOD:OFF
+		P2_bit.no2 = 0U; // BB_EN:OFF
 		if (uStatus.bit.bPlug == 0U) { // Unplug
 			P7_bit.no3 = 0U; // DR_GATE:OFF
 			gDCInfo.uReq.bit.bSnkOff = 1U;
