@@ -159,7 +159,7 @@ static void fpga_power_ready_task(void);
 
 static void fpga_power_ready_start_delay(void)
 {
-	P2_bit.no1 = 0U; // FPGA_POWER_READY:OFF
+	P8_bit.no0 = 0U; // FPGA_POWER_READY:OFF
 	g_fpga_power_ready_delay_done = 0U;
 	g_fpga_power_ready_pending = 1U;
 	tm2_start_gtimer(FPGA_POWER_READY_DELAY_MS, (ULONG)&fpga_power_ready_delay_done);
@@ -186,6 +186,7 @@ static void bb_extvcc_update(void)
 static void bb_power_good_complete(void)
 {
 	P2_bit.no2 = 1U; // BB_EN: external display boards ON
+	P2_bit.no1 = 0U; // FET off: PROGRAM_B pulled high, allow FPGA configuration
 	fpga_power_ready_start_delay();
 	g_bb_power_good_pending = 0U;
 }
@@ -197,7 +198,8 @@ static void bb_power_good_cancel(void)
 	g_bb_extvcc_delay_done = 0U;
 	g_fpga_power_ready_pending = 0U;
 	g_fpga_power_ready_delay_done = 0U;
-	P2_bit.no1 = 0U; // FPGA_POWER_READY:OFF
+	P8_bit.no0 = 0U; // FPGA_POWER_READY:OFF
+	P2_bit.no1 = 1U; // FET on: PROGRAM_B low, hold FPGA unconfigured
 	P2_bit.no2 = 0U; // BB_EN:OFF
 }
 
@@ -255,7 +257,7 @@ static void fpga_power_ready_task(void)
 	     ((gBq25798Info.ucConfigValid != 0U) && (bq25798_is_busy() == 0U)))) {
 		g_fpga_power_ready_delay_done = 0U;
 		g_fpga_power_ready_pending = 0U;
-		P2_bit.no1 = ((g_power_negotiated != 0U) && (P2_bit.no2 != 0U) &&
+		P8_bit.no0 = ((g_power_negotiated != 0U) && (P2_bit.no2 != 0U) &&
 		             (g_dp_config_acknowledged != 0U) && (gucEnterModeEnable != 0U)) ? 1U : 0U;
 	}
 }
@@ -465,7 +467,7 @@ void user_init(void)
 	
 	// Output Port Setting
 	                   P1_bit.no6 = 1U; PM1_bit.no6 = 0U; // CE :P16, high inhibits charging
-	PMC2_bit.no1 = 0U; P2_bit.no1 = 0U; PM2_bit.no1 = 0U; // FPGA_POWER_READY :P21
+	P2_bit.no1 = 1U; PMC2_bit.no1 = 0U; PM2_bit.no1 = 0U; // P21: FET on holds PROGRAM_B low
 	PMC2_bit.no2 = 0U; P2_bit.no2 = 0U; PM2_bit.no2 = 0U; // BB_EN: P22
 	                   //P1_bit.no7 = 0U; PM1_bit.no7 = 0U; // VC_DRV2   :P17
 			   PM1_bit.no7 = 1U; // P17 = input
@@ -476,14 +478,15 @@ void user_init(void)
 	                   P7_bit.no1 = 0U; PM7_bit.no1 = 0U; // DISCHG    :P71
 	                   P7_bit.no2 = 0U; PM7_bit.no2 = 0U; // BB_EXTVCC :P72
 	                   P7_bit.no3 = 0U; PM7_bit.no3 = 0U; // DR_GATE   :P73
-	POM8_bit.no0 = 1U; P8_bit.no0 = 1U; PM8_bit.no0 = 0U; // PUE       :P80(OpenDrain)
+	P8_bit.no0 = 0U; POM8_bit.no0 = 1U; PM8_bit.no0 = 0U; // FPGA_POWER_READY :P80(OpenDrain)
 			   P8_bit.no1 = 0U; PM8_bit.no1 = 0U;
 	//POM8_bit.no2 = 1U; P8_bit.no2 = 1U; PM8_bit.no2 = 0U; // LED       :P82(OpenDrain)
 	{
 		PER2 |= PER2_SMBM;
 		POM3_bit.no0 = 1U; P3_bit.no0 = 1U; PM3_bit.no0= 0U; // MSTSCL
 		POM3_bit.no1 = 1U; P3_bit.no1 = 1U; PM3_bit.no1= 0U; // MSTSDA
-		POM3_bit.no2 = 1U; P3_bit.no2 = 1U; PM3_bit.no2= 0U; // RESET_OUT :P32(OpenDrain)
+		// Charger QON has an internal pull-up; leave released. TODO: evaluate timed QON control.
+		POM3_bit.no2 = 1U; P3_bit.no2 = 1U; PM3_bit.no2= 0U; // CHARGER_QON :P32(OpenDrain)
 	}
 	// Input Port Setting
 	// NOTE:
@@ -573,7 +576,7 @@ void user_func_event (void)
 			pdc_set_pps_stat(0x02, 0xFF, 0xFFFFU);
 #endif
 			//P7_bit.no1 = 0U; // DISCHG:OFF
-			// AN9/P21 thermistor polling disabled; P21 is FPGA_POWER_READY now.
+			// AN9/P21 thermistor polling disabled; P21 controls FPGA PROGRAM_B.
 			if (uStatus.bit.bPR != 0U) { // ATT.SRC
 				gLed.uReq.bits.bSrcEn = 1U;
 			}

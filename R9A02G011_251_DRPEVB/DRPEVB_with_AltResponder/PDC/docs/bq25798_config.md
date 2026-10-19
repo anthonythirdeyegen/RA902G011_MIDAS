@@ -43,6 +43,18 @@ Firmware cannot control CE while the MCU is in reset or before user_init.
 A hardware pull-up to an appropriate CE logic rail is required to inhibit
 power-on default charging during that interval.
 
+## Charger QON Connection
+
+P32 connects to the charger QON pin (formerly labeled RESET_OUT in the code).
+Firmware configures P32 as open-drain with its output latch high, leaving
+the driver high-impedance. The charger's internal pull-up biases the line;
+firmware does not currently generate QON pulses.
+
+Future work: evaluate timed QON control for charger wake/reset functions,
+including the required pulse durations, operating-mode restrictions, and
+effects on VSYS and the MCU power supply. No QON control behavior is enabled
+by this note.
+
 ## Programmed Profile
 
 | Setting | Value |
@@ -79,16 +91,25 @@ This does not disable battery supplement of VSYS or resolve a VBAT OVP fault.
 
 P22 is BB_EN for external boards that do not manage the DP link. It is not
 a measured power-good input, and a PD contract alone no longer asserts it.
-P21 is FPGA_POWER_READY.
+P80 is FPGA_POWER_READY, an open-drain output requiring an external pull-up.
+P21 drives an inverting FET on the FPGA's active-low PROGRAM_B input:
+P21 high turns the FET on and holds PROGRAM_B low (configuration inhibited);
+P21 low turns the FET off and lets the SOM pull-up release PROGRAM_B high.
+P21 stays high until a successful DP Configure ACK authorizes display operation,
+preventing FPGA configuration during charging-only operation. The board must
+bias the FET control high during MCU reset to keep PROGRAM_B low before firmware
+configures P21; a gate pull-down would instead allow configuration during reset.
 
-1. On startup, keep BB_EN and FPGA_POWER_READY low. Initialize the charger
+1. On startup, drive P21 high to hold PROGRAM_B low, and keep BB_EN and
+   FPGA_POWER_READY low. Initialize the charger
    and negotiate PD independently of the external display-board power.
 2. On a new PD contract, update charger limits and charging enable normally.
    Charging-only operation leaves the display boards off.
 3. Enter DP mode, accept the supported DP Configure pin assignment C, and
    send its ACK. Only successful ACK command completion authorizes BB_EN.
 4. If `bb_extvcc = 1`, allow the existing additional 10ms startup delay.
-   Then assert BB_EN and start the 10ms FPGA readiness delay.
+   Then assert BB_EN, drive P21 low to release PROGRAM_B high through its pull-up,
+   and start the 10ms FPGA readiness delay.
 5. Assert FPGA_POWER_READY after the delay and after verified charger
    configuration and completion of pending charger transactions. bqStudio
    mode and `has_charger = 0` bypass only that charger check, not DP gating.
@@ -97,7 +118,7 @@ P21 is FPGA_POWER_READY.
    Configure ACK before the display boards can be enabled again.
 
 The 10ms delay is a settling allowance, not a measured VSYS or regulator
-power-good qualification. Charger settings continue to update on a new PD
+power-good qualification or an FPGA DONE check. Charger settings continue to update on a new PD
 contract; an already configured display is not deliberately power-cycled
 merely because its PD contract is renegotiated.
 
