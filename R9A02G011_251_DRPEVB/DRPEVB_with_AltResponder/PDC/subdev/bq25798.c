@@ -486,16 +486,25 @@ static void bq25798_end_processing(void)
 		gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_USE_IINDPM_REG;
 	}
 	else if (gBq25798Info.ucCmd == BQ25798_CMD_SET_IINDPM) {
-		gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_SET_IINDPM;
+		/* A new contract can replace the requested limit during this write. */
+		if (gBq25798Info.usData == (USHORT)(gBq25798Info.usInputCurrentMa / 10U)) {
+			gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_SET_IINDPM;
+		}
 	}
 	else if (gBq25798Info.ucCmd == BQ25798_CMD_SET_VINDPM) {
-		gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_SET_VINDPM;
+		if (gBq25798Info.usData == (USHORT)(gBq25798Info.usInputVoltageMv / 100U)) {
+			gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_SET_VINDPM;
+		}
 	}
 	else if (gBq25798Info.ucCmd == BQ25798_CMD_SET_ICHG) {
-		gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_SET_ICHG;
+		if (gBq25798Info.usData == (USHORT)(gBq25798Info.usChargeCurrentMa / 10U)) {
+			gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_SET_ICHG;
+		}
 	}
 	else if (gBq25798Info.ucCmd == BQ25798_CMD_SET_CHG_EN) {
-		gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_SET_CHG_EN;
+		if (((gBq25798Info.ucWriteData & BQ25798_EN_CHG) != 0U) == (gBq25798Info.ucEnable != 0U)) {
+			gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_SET_CHG_EN;
+		}
 	}
 	else if (gBq25798Info.ucCmd == BQ25798_CMD_READ_STATUS) {
 		gBq25798Info.ucReqFlags &= (UCHAR)~BQ25798_REQ_READ_STATUS;

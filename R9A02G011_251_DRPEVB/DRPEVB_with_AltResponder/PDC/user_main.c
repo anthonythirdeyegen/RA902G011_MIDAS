@@ -17,7 +17,9 @@
 #define CMD_DP_CONFIGURE  0x11U   // �Configure�
 
 #define CHARGER_MIN_INPUT_POWER_MW ((ULONG)5000UL)
-#define CHARGER_MIN_INPUT_MA       ((USHORT)1500U)
+#define CHARGER_MIN_INPUT_MA       ((USHORT)100U)
+#define CHARGER_MIN_CHARGE_INPUT_MA ((USHORT)1500U)
+#define CHARGER_MIN_INPUT_MV       ((USHORT)3600U)
 /* Combined VSYS power for both FPGAs and the wireless power solution. */
 #define CHARGER_SYSTEM_RESERVE_MW  ((ULONG)11000UL)
 #define CHARGER_EFFICIENCY_PERCENT ((ULONG)90UL)
@@ -115,6 +117,10 @@ UCHAR  gucLEDStatus;
 UCHAR  has_charger = 1U;
 /* 1: firmware owns charger; 0: bqStudio owns registers, CE is permitted low. */
 volatile UCHAR charger_mcu_control = 1U;
+/* Debugger-visible contract inputs; the getter's raw units are not assumed. */
+volatile USHORT charger_pd_current_raw = 0U;
+volatile ULONG charger_pd_rdo = 0UL;
+volatile USHORT charger_pd_input_limit_ma = 0U;
 UCHAR  bb_extvcc = 0U;
 
 static UCHAR gGetStatPending = 0;
@@ -151,6 +157,7 @@ void user_func_stop_timer_thermistor (void);
 void user_func_intr_timer_thermistor (void);
 static void bb_extvcc_delay_done(void);
 static UCHAR charger_contract_is_valid(void);
+static USHORT charger_contract_current_ma(void);
 static UCHAR charger_contract_allows_charge(void);
 static ULONG charger_available_power_mw(USHORT usInputMv, USHORT usInputMa);
 static void charger_current_update(void);
@@ -268,18 +275,38 @@ static void fpga_power_ready_delay_done(void)
 	g_fpga_power_ready_delay_done = 1U;
 }
 
+static USHORT charger_contract_current_ma(void)
+{
+	ULONG ulRdo;
+
+	charger_pd_current_raw = pdc_get_req_cur();
+	charger_pd_rdo = 0UL;
+	charger_pd_input_limit_ma = 0U;
+	/* This board negotiates fixed supplies; PPS requires a different RDO layout. */
+	if ((g_power_negotiated == 0U) || (pdc_is_pps_mode() != 0U)) {
+		return 0U;
+	}
+	ulRdo = pdc_get_rdo(PDC_RDO_NEGO);
+	charger_pd_rdo = ulRdo;
+	if (((ulRdo >> 28) & 0x07UL) == 0UL) {
+		return 0U;
+	}
+	/* Match the SDK forward-input driver: operating current, bits 19:10, 10mA. */
+	charger_pd_input_limit_ma = (USHORT)(((ulRdo >> 10) & 0x03FFUL) * 10UL);
+	return charger_pd_input_limit_ma;
+}
+
 static UCHAR charger_contract_is_valid(void)
 {
-	ULONG ulInputMw = 0UL;
 	USHORT usInputMv = pdc_get_req_volt();
-	USHORT usInputMa = (USHORT)(pdc_get_req_cur() * 10U);
+	USHORT usInputMa = charger_contract_current_ma();
 
-	if ((has_charger == 0U) || (charger_mcu_control == 0U) || (g_power_negotiated == 0U) || (usInputMv == 0U) || (usInputMv > CHARGER_MAX_INPUT_MV) || (usInputMa < CHARGER_MIN_INPUT_MA)) {
+	if ((has_charger == 0U) || (charger_mcu_control == 0U) || (g_power_negotiated == 0U) || (usInputMv < CHARGER_MIN_INPUT_MV) || (usInputMv > CHARGER_MAX_INPUT_MV) || (usInputMa < CHARGER_MIN_INPUT_MA)) {
 		return 0U;
 	}
 
-	ulInputMw = ((ULONG)usInputMv * (ULONG)usInputMa) / 1000UL;
-	return (ulInputMw > CHARGER_MIN_INPUT_POWER_MW) ? 1U : 0U;
+	/* Input limits must follow low-current contracts even when charging is off. */
+	return 1U;
 }
 
 static ULONG charger_available_power_mw(USHORT usInputMv, USHORT usInputMa)
@@ -299,17 +326,23 @@ static ULONG charger_available_power_mw(USHORT usInputMv, USHORT usInputMa)
 static UCHAR charger_contract_allows_charge(void)
 {
 	ULONG ulMinimumChargeMw = ((ULONG)BQ25798_BATTERY_VREG_MV * CHARGER_MIN_CHARGE_MA) / 1000UL;
+	USHORT usInputMv = pdc_get_req_volt();
+	USHORT usInputMa = charger_contract_current_ma();
 
 	if (charger_contract_is_valid() == 0U) {
 		return 0U;
 	}
-	return (charger_available_power_mw(pdc_get_req_volt(), (USHORT)(pdc_get_req_cur() * 10U)) >= ulMinimumChargeMw) ? 1U : 0U;
+	if ((usInputMa < CHARGER_MIN_CHARGE_INPUT_MA) ||
+	    ((((ULONG)usInputMv * usInputMa) / 1000UL) <= CHARGER_MIN_INPUT_POWER_MW)) {
+		return 0U;
+	}
+	return (charger_available_power_mw(usInputMv, usInputMa) >= ulMinimumChargeMw) ? 1U : 0U;
 }
 
 static void charger_current_update(void)
 {
 	USHORT usInputMv = pdc_get_req_volt();
-	USHORT usInputMa = (USHORT)(pdc_get_req_cur() * 10U);
+	USHORT usInputMa = charger_contract_current_ma();
 	USHORT usVindpmMv = 0U;
 	USHORT usChargeMa = 0U;
 	ULONG ulChargeMw;
@@ -339,7 +372,7 @@ static void charger_current_update(void)
 	bq25798_request_input_voltage(usVindpmMv);
 	bq25798_request_input_current(usInputMa);
 	/* Input power remains available to VSYS even when charging must be suspended. */
-	if (usChargeMa >= CHARGER_MIN_CHARGE_MA) {
+	if ((charger_contract_allows_charge() != 0U) && (usChargeMa >= CHARGER_MIN_CHARGE_MA)) {
 		bq25798_request_charge_current(usChargeMa);
 		bq25798_request_charge_enable(1U);
 	}

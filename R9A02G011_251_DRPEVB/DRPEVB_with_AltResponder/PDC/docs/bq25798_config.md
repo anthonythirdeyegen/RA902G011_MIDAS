@@ -128,19 +128,38 @@ implemented.
 
 ## Negotiated Limits
 
-A usable contract requires completed PD negotiation, at least 1500mA available,
-more than 5W input power, and input voltage no greater than 15V.
-Input limits are programmed for usable contracts even if charging is suspended.
-Charging additionally requires at least 250mA of battery charge-current budget,
+A usable input contract requires completed PD negotiation, at least 100mA
+available, and input voltage from 3.6V through 15V. Input limits are programmed
+even for low-power contracts that cannot charge the battery. Battery charging
+separately requires at least 1500mA available, more than 5W input power,
+and at least 250mA of battery charge-current budget,
 above the 240mA precharge and 200mA termination settings. The CHARGE_EN output
 is also gated by successful profile programming.
 
 - VINDPM: negotiated voltage minus 500mV.
-- IINDPM: negotiated current, capped at the charger's 3300mA limit.
+- IINDPM: negotiated fixed-supply RDO operating current (bits 19:10 in
+  10mA units), capped at the charger's 3300mA limit. This matches the SDK's
+  forward-input-current driver; the units of `pdc_get_req_cur()` are not assumed.
 - ICHG: convert available input power to output power at an assumed 90%
   efficiency, subtract an 11W VSYS reserve, divide the remaining power by
   8.4V, then cap at 800mA. Suspend charging below a 250mA budget.
 - Current registers round down to their 10mA steps.
+
+A 5V contract requesting 900mA operating current sets IINDPM to 900mA and
+VINDPM to 4500mV, with battery charging disabled. The Pixel capture's RDO
+`0x1400285A` instead requests 100mA operating and 900mA maximum current;
+firmware conservatively limits IINDPM to 100mA for that request, not 900mA.
+The maximum-current field is not substituted for the operating-current field.
+Renegotiating down from a higher-power contract
+updates these limits rather than leaving the previous limits in place.
+If a new request arrives during a limit or charge-enable write, the driver
+retains it until the latest requested value has been written and verified.
+This path requires a PD contract; non-PD Type-C current advertisement handling
+is not added here. Register updates are asynchronous, not an instantaneous clamp.
+PPS is not supported by this current decoder and charging remains inhibited
+for it. Debugger-visible `charger_pd_current_raw`, `charger_pd_rdo`, and
+`charger_pd_input_limit_ma` expose the raw API value, negotiated RDO, and
+decoded input current before the 3300mA hardware cap.
 
 The system reserve uses the confirmed 11W combined VSYS load for both FPGAs
 and the wireless power solution. This replaces the earlier 2500mA load
@@ -151,6 +170,8 @@ after the existing startup delay.
 
 | PD contract | Estimated output power | Charge behavior |
 | --- | --- | --- |
+| 5V/100mA operating (Pixel capture) | 0.45W | Disabled; IINDPM updated to 100mA |
+| 5V/900mA operating | 4.05W | Disabled; IINDPM updated to 900mA |
 | 5V/2A | 9W | Disabled; source alone cannot sustain the estimated VSYS load |
 | 5V/3A | 13.5W | 290mA charge limit after reserving 11W for VSYS |
 | 9V/3A | 24.3W | Up to the current 800mA cap |
