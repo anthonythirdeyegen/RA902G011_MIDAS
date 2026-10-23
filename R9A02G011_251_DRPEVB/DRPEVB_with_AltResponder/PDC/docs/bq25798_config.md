@@ -142,7 +142,7 @@ is also gated by successful profile programming.
   forward-input-current driver; the units of `pdc_get_req_cur()` are not assumed.
 - ICHG: convert available input power to output power at an assumed 90%
   efficiency, subtract an 11W VSYS reserve, divide the remaining power by
-  8.4V, then cap at 800mA. Suspend charging below a 250mA budget.
+  8.4V, then cap at 1500mA. Suspend charging below a 250mA budget.
 - Current registers round down to their 10mA steps.
 
 A 5V contract requesting 900mA operating current sets IINDPM to 900mA and
@@ -150,6 +150,11 @@ VINDPM to 4500mV, with battery charging disabled. The Pixel capture's RDO
 `0x1400285A` instead requests 100mA operating and 900mA maximum current;
 firmware conservatively limits IINDPM to 100mA for that request, not 900mA.
 The maximum-current field is not substituted for the operating-current field.
+That 100mA request is historical: sink intrusive mode now selects the
+highest-power supported fixed 5V or 9V offer, requests up to the advertised
+source current and the matching 3A sink limit, and sets Capability Mismatch
+when the selected offer cannot supply that sink profile's desired current.
+For a 5V/900mA source, the new RDO is `0x1401685A` (900mA operating and maximum).
 Renegotiating down from a higher-power contract
 updates these limits rather than leaving the previous limits in place.
 If a new request arrives during a limit or charge-enable write, the driver
@@ -174,8 +179,8 @@ after the existing startup delay.
 | 5V/900mA operating | 4.05W | Disabled; IINDPM updated to 900mA |
 | 5V/2A | 9W | Disabled; source alone cannot sustain the estimated VSYS load |
 | 5V/3A | 13.5W | 290mA charge limit after reserving 11W for VSYS |
-| 9V/3A | 24.3W | Up to the current 800mA cap |
-| 15V/3A | 40.5W | Up to the current 800mA cap |
+| 9V/3A | 24.3W | Up to the current 1500mA cap |
+| 15V/3A | 40.5W | Up to the current 1500mA cap |
 
 These rows assume the firmware reports the stated negotiated input current.
 The PD sink currently has 15V disabled in `pd_defs.c`; changing the charger
@@ -184,7 +189,7 @@ The 240mA precharge and 200mA termination values remain the existing EVM profile
 
 ## Charge Current Rationale
 
-The 800mA limit was retained as a conservative bring-up setting to reduce
+The previous 800mA limit was a conservative bring-up setting to reduce
 battery charging power and heat while validating TS, input limits, and PD
 behavior. It is not a battery datasheet requirement.
 
@@ -192,14 +197,16 @@ The local pack datasheet `3350mah_-_li18650jp_2s1p_2_wires_70mm.pdf`
 identifies Jauch 246480, LI NCR18650-BF 2S1P: 3350mAh typical, 3250mAh
 minimum, 8.4V charge voltage, 0.2C standard charge current, 0.5C maximum
 charge current, and +10C to +45C charging temperature.
+The current firmware cap is 1500mA; the negotiated input-power budget can
+reduce it further. The 11W system reserve remains unchanged.
 The 0.5C maximum corresponds to 1675mA using typical capacity, or 1625mA
-using minimum capacity. A proposed 1500mA charge cap is below both.
+using minimum capacity. The 1500mA charge cap is below both.
 
 A 3.5-hour empty-to-full target is plausible at 1500mA but requires
 measurement: capacity/current alone gives 2.23 hours, excluding precharge
 and the constant-voltage taper. Input power, system load, temperature, and
-starting state of charge affect the actual time. The firmware cap remains
-800mA until explicitly changed.
+starting state of charge affect the actual time. The 1500mA cap does not
+guarantee a 3.5-hour charge.
 
 ## FPGA Power Budget Validation
 

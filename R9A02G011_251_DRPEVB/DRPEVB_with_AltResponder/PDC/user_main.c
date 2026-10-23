@@ -10,6 +10,7 @@
 #include "sw_ctrl.h"
 #include "tmuxhs4446.h"
 #include "bq25798.h"
+#include "pd_defs.h"
 #include <stdint.h>
 
 #define DATA_MESSAGE		0x01
@@ -24,7 +25,7 @@
 #define CHARGER_SYSTEM_RESERVE_MW  ((ULONG)11000UL)
 #define CHARGER_EFFICIENCY_PERCENT ((ULONG)90UL)
 #define CHARGER_MIN_CHARGE_MA      ((USHORT)250U)
-#define CHARGER_MAX_CHARGE_MA      ((USHORT)800U)
+#define CHARGER_MAX_CHARGE_MA      ((USHORT)1500U)
 #define CHARGER_MAX_INPUT_MV       ((USHORT)15000U)
 #define CHARGER_POLL_PERIOD_MS     ((USHORT)1000U)
 #define CHARGER_VINDPM_MARGIN_MV   ((USHORT)500U)
@@ -121,6 +122,7 @@ volatile UCHAR charger_mcu_control = 1U;
 volatile USHORT charger_pd_current_raw = 0U;
 volatile ULONG charger_pd_rdo = 0UL;
 volatile USHORT charger_pd_input_limit_ma = 0U;
+volatile ULONG sink_requested_rdo = 0UL;
 UCHAR  bb_extvcc = 0U;
 
 static UCHAR gGetStatPending = 0;
@@ -275,6 +277,61 @@ static void fpga_power_ready_delay_done(void)
 	g_fpga_power_ready_delay_done = 1U;
 }
 
+static ULONG sink_make_rdo(void)
+{
+	UCHAR ucSourceCount = pdc_get_num_of_pdos(PDC_PDO_SRC, PDC_PDO_RCV);
+	UCHAR ucSinkCount = pdc_get_num_of_pdos(PDC_PDO_SNK, PDC_PDO_SND);
+	UCHAR i;
+	UCHAR k;
+	ULONG ulSource;
+	ULONG ulSink;
+	ULONG ulVoltage;
+	ULONG ulCurrent;
+	ULONG ulDesiredCurrent;
+	ULONG ulPower;
+	ULONG ulBestPower = 0UL;
+	ULONG ulBestVoltage = 0UL;
+	ULONG ulRdo = 0UL;
+
+	/* PDO indices are one-based. Only fixed, explicitly supported voltages qualify. */
+	for (i = 1U; (i <= ucSourceCount) && (i <= 7U); i++) {
+		ulSource = pdc_get_pdo(i, PDC_PDO_SRC, PDC_PDO_RCV);
+		if ((ulSource & 0xC0000000UL) != 0UL) {
+			continue;
+		}
+		ulVoltage = (ulSource >> 10) & 0x03FFUL;
+		for (k = 1U; (k <= ucSinkCount) && (k <= 7U); k++) {
+			ulSink = pdc_get_pdo(k, PDC_PDO_SNK, PDC_PDO_SND);
+			if (((ulSink & 0xC0000000UL) != 0UL) || (ulVoltage == 0UL) ||
+			    (ulVoltage != ((ulSink >> 10) & 0x03FFUL))) {
+				continue;
+			}
+			ulDesiredCurrent = ulSink & 0x03FFUL;
+			ulCurrent = ulSource & 0x03FFUL;
+			if (ulCurrent > ulDesiredCurrent) {
+				ulCurrent = ulDesiredCurrent;
+			}
+			/* Common 50mV/10mA units suffice for comparing available power. */
+			ulPower = ulVoltage * ulCurrent;
+			if ((ulCurrent == 0UL) || (ulPower < ulBestPower) ||
+			    ((ulPower == ulBestPower) && (ulVoltage <= ulBestVoltage))) {
+				continue;
+			}
+			ulBestPower = ulPower;
+			ulBestVoltage = ulVoltage;
+			ulRdo = ((ULONG)i << 28) | (ulCurrent << 10) | ulCurrent;
+			if (ulCurrent < ulDesiredCurrent) {
+				ulRdo |= 0x04000000UL; // Capability Mismatch, not a failed contract
+			}
+		}
+	}
+	if (ulRdo != 0UL) {
+		ulRdo |= (PD_USB_COMM_CAPABLE != 0U) ? 0x02000000UL : 0UL;
+		ulRdo |= (PD_NO_USB_SUSPEND != 0U) ? 0x01000000UL : 0UL;
+	}
+	return ulRdo;
+}
+
 static USHORT charger_contract_current_ma(void)
 {
 	ULONG ulRdo;
@@ -424,13 +481,33 @@ UCHAR user_func_charger_poll(void)
 
 void hpd_int_init(void)
 {
+    /* TODO: P82/INTP7 HPD capture (polling on P17 remains active for now).
+       - Verify the P17-to-P82 bridge, voltage levels, and absence of other P82 loads.
+       - Keep both pins as inputs; verify INTP7 mask/flag/priority and edge registers
+         against this device. The disabled register example below is unverified.
+       - Register a handler via pdc_set_int_routine(intID_INTP7, ...), following
+         sw_init(), rather than enabling the legacy direct-vector ISR below.
+       - Capture rising and falling edges with a free-running timer. Check timer
+         resolution, wraparound, and operation during HALT/STOP before decoding.
+       - Keep the ISR short: acknowledge, timestamp, sample level, and queue events.
+         Handle queue overflow and atomic ISR/main-loop access explicitly.
+       - Decode low-pulse widths in the main loop using DP-spec timing/deglitch
+         rules: noise, IRQ pulse, or sustained disconnect. Classify a sustained
+         low with a timeout; do not wait indefinitely for a rising edge.
+       - Track stable HPD separately from IRQ pulses. Preserve queued IRQs across
+         PD busy/retries, send Attention with HPD high plus IRQ, and verify the
+         DP_STATUS_IRQ_HPD bit position before enabling pulse forwarding.
+       - Reconcile polling/capture to avoid duplicate events; clear stale events
+         on DP exit/reset/detach and sample the initial level when capture starts.
+       - Scope-test attach, IRQ bursts, glitches, sustained low, timer wrap, and
+         DP re-entry. Do not enable interrupts until the capture path is complete. */
     	PM8_bit.no2 = 1U;   // P82 = input
 	PM1_bit.no7 = 1U; // P17 = input
 	
 	#ifdef PMC8
     	PMC8_bit.no2 = 0U;    // Use digital input function
 	#endif
-/*	Not using interrupt    
+/*	Legacy, unverified interrupt sketch: do not simply uncomment.
    	// 1. Mask INTP7
 	MK0L_bit.no7 = 1U;
 
@@ -693,8 +770,24 @@ void user_func_event (void)
 		gPdc.uPdEvent.bit.bNewContract = 0U;
 	}
 	else if (gPdc.uPdEvent.bit.bNewSrcCap != 0U) {
-		//Sink intrusive mode
-		gPdc.uPdEvent.bit.bNewSrcCap = 0U;
+		/* Do not overwrite a DP reply or consume another command's completion. */
+		if ((uStatus.bit.bPlug == 0U) || (uStatus.bit.bPR != 0U) ||
+		    (gPdc.uPdEvent.bit.bHardReset != 0U) ||
+		    (gPdc.uPdReq.bit.bSnkOff != 0U)) {
+			gPdc.uPdEvent.bit.bNewSrcCap = 0U;
+		}
+		else if ((pdc_get_cmd_result() != PDC_CMD_RSLT_PROGRESS) &&
+		         (g_dp_config_ack_pending == 0U) && (g_hpd_attn_pending == 0U)) {
+			sink_requested_rdo = sink_make_rdo();
+			if (sink_requested_rdo != 0UL) {
+				gSndMess.uspData[0] = (USHORT)(sink_requested_rdo & 0xFFFFUL);
+				gSndMess.uspData[1] = (USHORT)(sink_requested_rdo >> 16);
+				gSndMess.uInfo.bit.bLen = 4U;
+				pdc_set_cmd(PDC_CMD_SND_REQUEST, PDC_TARGET_SOP);
+				g_cmd_queued = 1U;
+			}
+			gPdc.uPdEvent.bit.bNewSrcCap = 0U;
+		}
 	}
 	else if (gPdc.uPdEvent.bit.bNewRequest != 0U) {
 		gPdc.uPdEvent.bit.bNewRequest = 0U;
@@ -1136,7 +1229,8 @@ void user_func_event (void)
 		gDCInfo.uNtfy.usData = 0U;
 	}
 }
-/*
+/* Legacy ISR sketch only. Future capture uses the registered Renesas handler
+   and timestamped edge events described in hpd_int_init(), not this vector.
 #pragma vector = INTP7_vect
 __interrupt static void hpd_int_isr(void)
 {
